@@ -4,7 +4,7 @@ const config = {
   host: "localhost",
   user: "root",
   password: "Sleeping1!",
-  database: "accounts",
+  database: "trialsnp",
 };
 
 // Create a MySQL pool

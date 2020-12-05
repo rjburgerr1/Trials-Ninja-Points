@@ -5,23 +5,22 @@ import { MessagesPanel } from "./MessagesPanel";
 import socketClient from "socket.io-client";
 
 const SERVER = "http://127.0.0.1:3005";
-var socket;
+
 export class Chat extends React.Component {
   state = {
     channels: null,
     socket: null,
     channel: null,
   };
-  socket = socketClient(SERVER);
+  socket;
   componentDidMount() {
     this.loadChannels();
     this.configureSocket();
   }
 
   configureSocket = () => {
+    var socket = socketClient(SERVER);
     socket.on("connection", () => {
-      console.log(`I'm connected with the back-end`);
-
       if (this.state.channel) {
         this.handleChannelSelect(this.state.channel.id);
       }

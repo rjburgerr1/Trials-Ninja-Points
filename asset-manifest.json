@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/react-frontend/static/css/main.7aa5a2fd.chunk.css",
-    "main.js": "/react-frontend/static/js/main.cf6a5ce0.chunk.js",
-    "main.js.map": "/react-frontend/static/js/main.cf6a5ce0.chunk.js.map",
-    "runtime-main.js": "/react-frontend/static/js/runtime-main.d1c8ff45.js",
-    "runtime-main.js.map": "/react-frontend/static/js/runtime-main.d1c8ff45.js.map",
-    "static/css/2.1a02f21c.chunk.css": "/react-frontend/static/css/2.1a02f21c.chunk.css",
-    "static/js/2.77cb3ecb.chunk.js": "/react-frontend/static/js/2.77cb3ecb.chunk.js",
-    "static/js/2.77cb3ecb.chunk.js.map": "/react-frontend/static/js/2.77cb3ecb.chunk.js.map",
-    "index.html": "/react-frontend/index.html",
-    "static/css/2.1a02f21c.chunk.css.map": "/react-frontend/static/css/2.1a02f21c.chunk.css.map",
-    "static/css/main.7aa5a2fd.chunk.css.map": "/react-frontend/static/css/main.7aa5a2fd.chunk.css.map",
-    "static/js/2.77cb3ecb.chunk.js.LICENSE.txt": "/react-frontend/static/js/2.77cb3ecb.chunk.js.LICENSE.txt",
-    "static/media/index.css": "/react-frontend/static/media/Fusion Title Screen.a91aaa2a.jpg"
+    "main.css": "/static/css/main.e1f6c3df.chunk.css",
+    "main.js": "/static/js/main.cf6a5ce0.chunk.js",
+    "main.js.map": "/static/js/main.cf6a5ce0.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.6097e04a.js",
+    "runtime-main.js.map": "/static/js/runtime-main.6097e04a.js.map",
+    "static/css/2.1a02f21c.chunk.css": "/static/css/2.1a02f21c.chunk.css",
+    "static/js/2.77cb3ecb.chunk.js": "/static/js/2.77cb3ecb.chunk.js",
+    "static/js/2.77cb3ecb.chunk.js.map": "/static/js/2.77cb3ecb.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.1a02f21c.chunk.css.map": "/static/css/2.1a02f21c.chunk.css.map",
+    "static/css/main.e1f6c3df.chunk.css.map": "/static/css/main.e1f6c3df.chunk.css.map",
+    "static/js/2.77cb3ecb.chunk.js.LICENSE.txt": "/static/js/2.77cb3ecb.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/static/media/Fusion Title Screen.a91aaa2a.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.d1c8ff45.js",
+    "static/js/runtime-main.6097e04a.js",
     "static/css/2.1a02f21c.chunk.css",
     "static/js/2.77cb3ecb.chunk.js",
-    "static/css/main.7aa5a2fd.chunk.css",
+    "static/css/main.e1f6c3df.chunk.css",
     "static/js/main.cf6a5ce0.chunk.js"
   ]
 }

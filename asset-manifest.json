@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/rjburgerr1.github.io/Trials.com/react-frontend/public/static/css/main.3dd8dc40.chunk.css",
-    "main.js": "/rjburgerr1.github.io/Trials.com/react-frontend/public/static/js/main.c2ad6a25.chunk.js",
-    "main.js.map": "/rjburgerr1.github.io/Trials.com/react-frontend/public/static/js/main.c2ad6a25.chunk.js.map",
-    "runtime-main.js": "/rjburgerr1.github.io/Trials.com/react-frontend/public/static/js/runtime-main.7b5c9c2f.js",
-    "runtime-main.js.map": "/rjburgerr1.github.io/Trials.com/react-frontend/public/static/js/runtime-main.7b5c9c2f.js.map",
-    "static/css/2.1a02f21c.chunk.css": "/rjburgerr1.github.io/Trials.com/react-frontend/public/static/css/2.1a02f21c.chunk.css",
-    "static/js/2.57c0b9d7.chunk.js": "/rjburgerr1.github.io/Trials.com/react-frontend/public/static/js/2.57c0b9d7.chunk.js",
-    "static/js/2.57c0b9d7.chunk.js.map": "/rjburgerr1.github.io/Trials.com/react-frontend/public/static/js/2.57c0b9d7.chunk.js.map",
-    "index.html": "/rjburgerr1.github.io/Trials.com/react-frontend/public/index.html",
-    "static/css/2.1a02f21c.chunk.css.map": "/rjburgerr1.github.io/Trials.com/react-frontend/public/static/css/2.1a02f21c.chunk.css.map",
-    "static/css/main.3dd8dc40.chunk.css.map": "/rjburgerr1.github.io/Trials.com/react-frontend/public/static/css/main.3dd8dc40.chunk.css.map",
-    "static/js/2.57c0b9d7.chunk.js.LICENSE.txt": "/rjburgerr1.github.io/Trials.com/react-frontend/public/static/js/2.57c0b9d7.chunk.js.LICENSE.txt"
+    "main.css": "/rjburgerr1.github.io/Trials.com/react-frontend/src/index.js/static/css/main.3dd8dc40.chunk.css",
+    "main.js": "/rjburgerr1.github.io/Trials.com/react-frontend/src/index.js/static/js/main.c2ad6a25.chunk.js",
+    "main.js.map": "/rjburgerr1.github.io/Trials.com/react-frontend/src/index.js/static/js/main.c2ad6a25.chunk.js.map",
+    "runtime-main.js": "/rjburgerr1.github.io/Trials.com/react-frontend/src/index.js/static/js/runtime-main.4d302352.js",
+    "runtime-main.js.map": "/rjburgerr1.github.io/Trials.com/react-frontend/src/index.js/static/js/runtime-main.4d302352.js.map",
+    "static/css/2.1a02f21c.chunk.css": "/rjburgerr1.github.io/Trials.com/react-frontend/src/index.js/static/css/2.1a02f21c.chunk.css",
+    "static/js/2.44126341.chunk.js": "/rjburgerr1.github.io/Trials.com/react-frontend/src/index.js/static/js/2.44126341.chunk.js",
+    "static/js/2.44126341.chunk.js.map": "/rjburgerr1.github.io/Trials.com/react-frontend/src/index.js/static/js/2.44126341.chunk.js.map",
+    "index.html": "/rjburgerr1.github.io/Trials.com/react-frontend/src/index.js/index.html",
+    "static/css/2.1a02f21c.chunk.css.map": "/rjburgerr1.github.io/Trials.com/react-frontend/src/index.js/static/css/2.1a02f21c.chunk.css.map",
+    "static/css/main.3dd8dc40.chunk.css.map": "/rjburgerr1.github.io/Trials.com/react-frontend/src/index.js/static/css/main.3dd8dc40.chunk.css.map",
+    "static/js/2.44126341.chunk.js.LICENSE.txt": "/rjburgerr1.github.io/Trials.com/react-frontend/src/index.js/static/js/2.44126341.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.7b5c9c2f.js",
+    "static/js/runtime-main.4d302352.js",
     "static/css/2.1a02f21c.chunk.css",
-    "static/js/2.57c0b9d7.chunk.js",
+    "static/js/2.44126341.chunk.js",
     "static/css/main.3dd8dc40.chunk.css",
     "static/js/main.c2ad6a25.chunk.js"
   ]

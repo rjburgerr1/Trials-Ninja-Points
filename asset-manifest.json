@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/Trials.com/static/css/main.3dd8dc40.chunk.css",
-    "main.js": "/Trials.com/static/js/main.c2ad6a25.chunk.js",
-    "main.js.map": "/Trials.com/static/js/main.c2ad6a25.chunk.js.map",
-    "runtime-main.js": "/Trials.com/static/js/runtime-main.2ba98aa7.js",
-    "runtime-main.js.map": "/Trials.com/static/js/runtime-main.2ba98aa7.js.map",
-    "static/css/2.1a02f21c.chunk.css": "/Trials.com/static/css/2.1a02f21c.chunk.css",
-    "static/js/2.5dbe56ac.chunk.js": "/Trials.com/static/js/2.5dbe56ac.chunk.js",
-    "static/js/2.5dbe56ac.chunk.js.map": "/Trials.com/static/js/2.5dbe56ac.chunk.js.map",
-    "index.html": "/Trials.com/index.html",
-    "static/css/2.1a02f21c.chunk.css.map": "/Trials.com/static/css/2.1a02f21c.chunk.css.map",
-    "static/css/main.3dd8dc40.chunk.css.map": "/Trials.com/static/css/main.3dd8dc40.chunk.css.map",
-    "static/js/2.5dbe56ac.chunk.js.LICENSE.txt": "/Trials.com/static/js/2.5dbe56ac.chunk.js.LICENSE.txt"
+    "main.css": "/Trials.com/react-frontend/static/css/main.3dd8dc40.chunk.css",
+    "main.js": "/Trials.com/react-frontend/static/js/main.c2ad6a25.chunk.js",
+    "main.js.map": "/Trials.com/react-frontend/static/js/main.c2ad6a25.chunk.js.map",
+    "runtime-main.js": "/Trials.com/react-frontend/static/js/runtime-main.139b2847.js",
+    "runtime-main.js.map": "/Trials.com/react-frontend/static/js/runtime-main.139b2847.js.map",
+    "static/css/2.1a02f21c.chunk.css": "/Trials.com/react-frontend/static/css/2.1a02f21c.chunk.css",
+    "static/js/2.844d7477.chunk.js": "/Trials.com/react-frontend/static/js/2.844d7477.chunk.js",
+    "static/js/2.844d7477.chunk.js.map": "/Trials.com/react-frontend/static/js/2.844d7477.chunk.js.map",
+    "index.html": "/Trials.com/react-frontend/index.html",
+    "static/css/2.1a02f21c.chunk.css.map": "/Trials.com/react-frontend/static/css/2.1a02f21c.chunk.css.map",
+    "static/css/main.3dd8dc40.chunk.css.map": "/Trials.com/react-frontend/static/css/main.3dd8dc40.chunk.css.map",
+    "static/js/2.844d7477.chunk.js.LICENSE.txt": "/Trials.com/react-frontend/static/js/2.844d7477.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.2ba98aa7.js",
+    "static/js/runtime-main.139b2847.js",
     "static/css/2.1a02f21c.chunk.css",
-    "static/js/2.5dbe56ac.chunk.js",
+    "static/js/2.844d7477.chunk.js",
     "static/css/main.3dd8dc40.chunk.css",
     "static/js/main.c2ad6a25.chunk.js"
   ]

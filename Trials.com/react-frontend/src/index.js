@@ -3,14 +3,10 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
-import { Chat } from "./chat/Chat";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Chat />
-  </React.StrictMode>,
-  // <BrowserRouter>
-  // <App />
-  //</BrowserRouter>,
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
   document.getElementById("root")
 );

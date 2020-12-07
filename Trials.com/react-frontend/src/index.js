@@ -6,11 +6,8 @@ import App from "./App";
 import { Chat } from "./chat/Chat";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Chat />
-  </React.StrictMode>,
-  // <BrowserRouter>
-  // <App />
-  //</BrowserRouter>,
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
   document.getElementById("root")
 );

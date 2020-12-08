@@ -43,7 +43,7 @@ export default class Submit extends Component {
 
   render() {
     return (
-      <form action="http://localhost:3002/submit-run" method="post">
+      <form action="http://localhost:3002/users" method="get">
         <h3>Submit Your Run</h3>
 
         <div className="form-group">

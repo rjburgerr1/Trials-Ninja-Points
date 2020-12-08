@@ -4,6 +4,15 @@ import npCalc from "../components/ninjapoints.component";
 const pool = require("../data/config");
 
 const router = (app) => {
+  // Display all users
+  app.get("/users", (request, response) => {
+    pool.query("SELECT * FROM information", (error, result) => {
+      if (error) throw error;
+
+      response.send(result);
+    });
+  });
+
   // Add a new user
   //Name attribute in form element sets "'gamertag', and 'rank' etc...."
   //Format:
@@ -11,9 +20,9 @@ const router = (app) => {
 
   app.post("/submit-run", (request, response) => {
     const np = npCalc.calculateNinjaPoints();
-    console.log(np);
+    console.log("HERERERER");
     pool.query(
-      "INSERT INTO runs SET `gamertag` = '" +
+      "INSERT INTO runss SET `gamertag` = '" +
         request.body.gamertag +
         "' , `rank` = '" +
         request.body.rank +
@@ -30,7 +39,7 @@ const router = (app) => {
       (error, result) => {
         if (error) throw error;
 
-        response.status(201).send(`Run ADded `);
+        response.status(201).send(`Run Addded `);
       }
     );
   });

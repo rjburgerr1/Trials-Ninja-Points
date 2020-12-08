@@ -1,11 +1,9 @@
-const routes = require("./routes/routes");
-
 // Require packages and set the port
 const express = require("express");
 const port = 3002;
-const app = express();
-
 const bodyParser = require("body-parser");
+const signUpRoute = require("./routes/signup.routes");
+const app = express();
 
 // Use Node.js body parsing middleware
 app.use(bodyParser.json());
@@ -15,7 +13,7 @@ app.use(
   })
 );
 
-routes(app);
+signUpRoute(app);
 
 // Start the server
 const server = app.listen(port, (error) => {

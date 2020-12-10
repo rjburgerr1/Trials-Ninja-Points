@@ -35,9 +35,9 @@ CREATE TABLE `information` (
   `state` varchar(45) DEFAULT NULL,
   `gamertag` varchar(45) DEFAULT NULL,
   `aliases` varchar(45) DEFAULT NULL,
-  `nickname` varchar(45) DEFAULT NULL,
+  `username` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `information` (
 
 LOCK TABLES `information` WRITE;
 /*!40000 ALTER TABLE `information` DISABLE KEYS */;
-INSERT INTO `information` VALUES ('richardfgefwefergewfwef@piedpifffper.com',1,'2020-12-07 00:45:21','wqdqwd',NULL,NULL,NULL,NULL,NULL,NULL,NULL),('richardfgefugbiubwefergewfwef@piedpifffper.com',2,'2020-12-07 00:45:29','wqdqwd',NULL,NULL,NULL,NULL,NULL,NULL,NULL),('qwdqwd@wefwefwef',3,'2020-12-07 04:30:18','wefwefwef',NULL,NULL,NULL,NULL,NULL,NULL,NULL),('qwdqwd@wefwefwef',4,'2020-12-07 04:35:02','wefwefwef',NULL,NULL,NULL,NULL,NULL,NULL,NULL),('gwweg@wgwg',5,'2020-12-07 19:46:25','wgweg',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `information` VALUES ('Test@test.com',7,'2020-12-10 02:57:31','Test',NULL,NULL,NULL,NULL,NULL,NULL,'Test'),('Test@test.com',8,'2020-12-10 03:00:00','Test',NULL,NULL,NULL,NULL,NULL,NULL,'Test'),('Test@test.com',9,'2020-12-10 21:26:57','testtest',NULL,NULL,NULL,NULL,NULL,NULL,'Test');
 /*!40000 ALTER TABLE `information` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,7 +74,6 @@ CREATE TABLE `runs` (
 
 LOCK TABLES `runs` WRITE;
 /*!40000 ALTER TABLE `runs` DISABLE KEYS */;
-INSERT INTO `runs` VALUES ('23r23r',1231,1212,'12:12:12','undefined',123),('ewfwef',123123123,1313,'12:12:12','undefined',123),('fwefwe',123,123,'12:12:12','undefined',123),('fwefwef',123,123,'12:12:12','undefined',123),('qweqweqwe',1,123,'00:12:12','sfsdfsf',12),('rwgergergerg',1231,123,'12:12:12','undefined',123),('wefwef',123,12,'12:12:12','undefined',123),('wefwefwef',12,123,'12:12:12','undefined',123),('werwer11',12123,123,'12:12:12','undefined',123);
 /*!40000 ALTER TABLE `runs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,4 +114,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-09  5:00:46
+-- Dump completed on 2020-12-10 22:22:36

@@ -32,7 +32,7 @@ export default function signin_signup() {
         </div>
 
         <div class="form-container sign-in-container">
-            <form action="#">
+            <form action="http://localhost:3002/users" method="POST">
               <h1>Sign in</h1>
             
               <div class="social-container"></div>
@@ -48,13 +48,13 @@ export default function signin_signup() {
           <div class="overlay">
 
             <div class="overlay-panel overlay-left">
-              <h1>Welcome Back My Ninja!</h1>
+              <h1>Welcome back!</h1>
               <p>To keep connected with us please login with your personal info</p>
               <button class="ghost" id="signIn" onClick={SignInTransition}>Sign In</button>
             </div>
 
             <div class="overlay-panel overlay-right">
-              <h1>Hi, gaymer!</h1>
+              <h1>Hi, gamer!</h1>
               <p>Enter your personal details and start your ninja journey with us</p>
               <button class="ghost" id="signUp" onClick={SignUpTransition}>Sign Up</button>
             </div>

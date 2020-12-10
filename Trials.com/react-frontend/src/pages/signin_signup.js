@@ -48,7 +48,7 @@ export default function signin_signup() {
           <div class="overlay">
 
             <div class="overlay-panel overlay-left">
-              <h1>Welcome back gamer!</h1>
+              <h1>Welcome back!</h1>
               <p>To keep connected with us please login with your personal info</p>
               <button class="ghost" id="signIn" onClick={SignInTransition}>Sign In</button>
             </div>

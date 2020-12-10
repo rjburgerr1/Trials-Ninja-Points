@@ -34,6 +34,8 @@ const router = (app) => {
         request.body.email +
         "' , `password` = '" +
         request.body.password +
+        "' , `username` = '" +
+        request.body.username +
         "'",
       request.body,
       (error, result) => {

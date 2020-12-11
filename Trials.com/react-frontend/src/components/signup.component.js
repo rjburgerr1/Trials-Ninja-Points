@@ -1,56 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class SignUp extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "",
-      password: "",
-    };
-  }
-
-  handleEmailChange = (event) => {
-    this.setState({ email: event.target.value });
-  };
-
-  handlePasswordChange = (event) => {
-    this.setState({ password: event.target.value });
-  };
-
-  render() {
-    return (
+export default function LoginComponent() {
+  return (
+    <div class="form-container sign-up-container">
       <form action="http://localhost:3002/sign-up-complete" method="POST">
-        <h3>Sign Up</h3>
+        <h1>Create Account</h1>
 
-        <div className="form-group">
-          <label>Email</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Email"
-            name="email"
-            onChange={this.handleEmailChange}
-          />
-        </div>
+        <div class="social-container"></div>
 
-        <div className="form-group">
-          <label>Password</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Password"
-            name="password"
-            onChange={this.handlePasswordChange}
-          />
-        </div>
-
-        <button type="submit" className="btn btn-primary btn-block">
-          Sign Up
-        </button>
-        <p className="forgot-password text-right">
-          Already registered <a href="/#">sign in?</a>
-        </p>
+        <input type="text" placeholder="Username" name="username" />
+        <input type="email" placeholder="Email" name="email" />
+        <input type="password" placeholder="Password" name="password" />
+        <button type="submit">Sign Up</button>
       </form>
-    );
-  }
+    </div>
+  );
 }

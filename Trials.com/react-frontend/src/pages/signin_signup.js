@@ -3,6 +3,8 @@ import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./css/signin_signup.css";
 import Login from "../components/login.component";
 import Signup from "../components/signup.component";
+
+export default function signin_signup() {
   const SignUpTransition = () => {
     const container = document.getElementById("container");
     container.classList.add("right-panel-active");

@@ -1,16 +1,19 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SignInSignUp from "./pages/signin_signup";
-import { Container } from "react-bootstrap";
 import { AuthProvider } from "./contexts/AuthContext";
+import Dashboard from "./pages/dashboard";
 
 function App() {
   return (
-    <AuthProvider>
-      <Container>
-        <SignInSignUp />
-      </Container>
-    </AuthProvider>
+    <Router>
+      <AuthProvider>
+        <Switch>
+          <Route exact path="/" component={Dashboard} />
+          <Route path="/signin" component={SignInSignUp} />
+        </Switch>
+      </AuthProvider>
+    </Router>
   );
 }
 

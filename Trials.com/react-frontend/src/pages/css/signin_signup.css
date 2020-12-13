@@ -7,6 +7,8 @@
 body {
 	background-image: url("../../images/Fusion\ Title\ Screen.jpg");
 	/*background: #f6f5f7;*/
+	background-repeat: no-repeat;
+	background-size: cover;
 	display: flex;
 	justify-content: center;
 	align-items: center;

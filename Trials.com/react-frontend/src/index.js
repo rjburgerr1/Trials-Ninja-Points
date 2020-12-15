@@ -1,5 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import Profile from "./pages/profile-view.jsx";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<Profile />, document.getElementById("root"));

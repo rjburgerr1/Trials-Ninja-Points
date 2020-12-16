@@ -1,6 +1,7 @@
 import React from "react";
 import Icon from "./icon.component";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import Logout from "./logout.component";
 
 export default function NavBar() {
   return (
@@ -15,8 +16,8 @@ export default function NavBar() {
           <Nav.Link href="#submit-run">Submit-Run</Nav.Link>
           <NavDropdown alignRight title={<Icon />} id="basic-nav-dropdown">
             <NavDropdown.Item href="#profile">View Profile</NavDropdown.Item>
-            <NavDropdown.Item href="logout">
-              <b>Log Out</b>
+            <NavDropdown.Item>
+              <Logout />
             </NavDropdown.Item>
           </NavDropdown>
         </Nav>

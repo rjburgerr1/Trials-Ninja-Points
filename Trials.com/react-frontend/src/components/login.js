@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/auth-context";
 import { Alert, Button } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 
@@ -54,8 +54,10 @@ export default function LoginComponent() {
         <button disabled={loading} type="submit">
           Sign In
         </button>
-        <Link to='/forgot-password' className='my-0'>
-          <p role="button" className='btn-link my-1 small'>Forgot Password?</p>
+        <Link to="/forgot-password" className="my-0">
+          <p role="button" className="btn-link my-1 small">
+            Forgot Password?
+          </p>
         </Link>
       </form>
     </div>

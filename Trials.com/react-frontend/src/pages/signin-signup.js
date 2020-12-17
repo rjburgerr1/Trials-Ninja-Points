@@ -1,9 +1,9 @@
 import React from "react";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import "./css/signin_signup.css";
-import Login from "../components/login.component";
-import Signup from "../components/signup.component";
-import ForgotPassword from "../components/forgotPassword.component";
+import "./css/signin-signup.css";
+import Login from "../components/login";
+import Signup from "../components/signup";
+import ForgotPassword from "../components/forgot-password";
 
 export default function signin_signup() {
   const SignUpTransition = () => {

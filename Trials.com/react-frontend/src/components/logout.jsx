@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/auth-context";
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 

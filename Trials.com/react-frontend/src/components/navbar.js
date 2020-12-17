@@ -1,7 +1,7 @@
 import React from "react";
-import Icon from "./icon.component";
+import Icon from "./icon";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-import Logout from "./logout.component";
+import Logout from "./logout";
 
 export default function NavBar() {
   return (

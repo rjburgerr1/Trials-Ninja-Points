@@ -1,9 +1,8 @@
 import React from "react";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import "./css/signin-signup.css";
-import Login from "../components/login";
-import Signup from "../components/signup";
-import ForgotPassword from "../components/forgot-password";
+import "./css/signin_signup.css";
+import Login from "../components/login.component";
+import Signup from "../components/signup.component";
 
 export default function signin_signup() {
   const SignUpTransition = () => {
@@ -20,7 +19,6 @@ export default function signin_signup() {
       <div class="container" id="container">
         <Signup />
         <Login />
-        <ForgotPassword />
         <div class="overlay-container">
           <div class="overlay">
             <div class="overlay-panel overlay-left">

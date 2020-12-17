@@ -44,7 +44,7 @@ a {
 	color: #333;
 	font-size: 14px;
 	text-decoration: none;
-	margin: 15px 0;
+	margin: 15px 0; 
 }
 
 button {
@@ -252,4 +252,9 @@ footer i {
 footer a {
     color: #3c97bf;
     text-decoration: none;
+}
+
+.alert {
+	position: absolute;
+	width:100%;
 }

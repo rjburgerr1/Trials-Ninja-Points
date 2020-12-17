@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
 export default function Logout() {
-  const [setError] = useState("");
+  const [error, setError] = useState("");
   const { logout } = useAuth();
   const history = useHistory();
 

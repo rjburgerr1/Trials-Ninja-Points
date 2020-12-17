@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useTable } from "react-table";
-import MOCKDATA from "./mock-data.json";
-import { COLUMNS } from "./main-lb-columns";
+import MOCKDATA from "../mock-data.json";
+import { COLUMNS } from "./main-leaderboard-columns";
 import "./table.css";
 export const MainLB = () => {
   const columns = useMemo(() => COLUMNS, []);

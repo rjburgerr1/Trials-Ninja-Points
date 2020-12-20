@@ -51,7 +51,7 @@ export default function ResetPassword() {
 		  </div>
 		</Card.Body>
 		<Card.Footer className="w-100 text-center align-bottom">
-			Need an account? <Link className="btn-link" to="/signup">Sign Up</Link>
+			Need an account? <Link className="btn-link" to="/signin">Sign Up</Link>
   		</Card.Footer>
       </Card>
   );

@@ -50,7 +50,7 @@ export default function ResetPassword() {
             <Link className="btn-link" to="/signin">Sign In</Link>
 		  </div>
 		</Card.Body>
-		<Card.Footer className="w-100 text-center align-bottom">
+		<Card.Footer className="text-center">
 			Need an account? <Link className="btn-link" to="/signin">Sign Up</Link>
   		</Card.Footer>
       </Card>

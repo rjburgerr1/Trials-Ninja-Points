@@ -1,8 +1,9 @@
 import React from "react";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import "./css/signin-signup.css";
+import "./css/signin-signup.scss";
 import Login from "../components/login";
 import Signup from "../components/signup";
+import { Card } from "react-bootstrap";
 
 export default function signin_signup() {
   const SignUpTransition = () => {
@@ -15,8 +16,9 @@ export default function signin_signup() {
     container.classList.remove("right-panel-active");
   };
   return (
-    <div class="signin_signup">
-      <div class="container" id="container">
+      //  it'd be nice if we could end up changing this outside div to Card to be consistent, but it breaks right now
+      //  if not, thats fine, since this is a special case we will probably only use once
+      <div class="container signin-signup" id="container">
         <Signup />
         <Login />
         <div class="overlay-container">
@@ -43,6 +45,5 @@ export default function signin_signup() {
           </div>
         </div>
       </div>
-    </div>
   );
 }

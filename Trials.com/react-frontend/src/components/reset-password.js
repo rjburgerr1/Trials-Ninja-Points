@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap";
+import { Form, Button, Card, CardBody, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/auth-context";
 import { Link } from "react-router-dom";
 
@@ -18,38 +18,41 @@ export default function ResetPassword() {
       setError("");
       setLoading(true);
       await resetPassword(emailRef.current.value);
-      setMessage("Check your inbox for further instructions");
+      setMessage("Check your inbox for further instructions.");
     } catch {
-      setError("Failed to reset password");
+      setError("Failed to reset password. Verify entered email.");
     }
 
     setLoading(false);
   }
 
   return (
-    <>
-      <Card>
-        <Card.Body>
-          <h2 className="text-center mb-4">Password Reset</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          {message && <Alert variant="success">{message}</Alert>}
-          <Form onSubmit={handleSubmit}>
-            <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
-            </Form.Group>
-            <Button disabled={loading} className="w-100" type="submit">
+	  <Card className="container px-0">
+	  {error && <Alert variant="danger">{error}</Alert>}
+	  {message && <Alert variant="success">{message}</Alert>}
+        <Card.Body className="mx-5">
+          <h1 className="text-center my-4">Password Reset</h1>
+          <Form onSubmit={handleSubmit} className="px-4">
+			<input
+				id="email"
+				type="email"
+				ref={emailRef}
+				placeholder="Enter your email..."
+				required
+				onSubmit={handleSubmit}
+				className="my-3"
+            />
+            <button disabled={loading} className="w-100" type="submit">
               Reset Password
-            </Button>
+            </button>
           </Form>
           <div className="w-100 text-center mt-3">
-            <Link to="/signin">Signin</Link>
-          </div>
-        </Card.Body>
+            <Link className="btn-link" to="/signin">Sign In</Link>
+		  </div>
+		</Card.Body>
+		<Card.Footer className="text-center">
+			Need an account? <Link className="btn-link" to="/signin">Sign Up</Link>
+  		</Card.Footer>
       </Card>
-      <div className="w-100 text-center mt-2">
-        Need an account? <Link to="/signup">Sign Up</Link>
-      </div>
-    </>
   );
 }

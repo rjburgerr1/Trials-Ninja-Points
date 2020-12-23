@@ -1,7 +1,5 @@
-import npCalc from "../components/ninjapoints.component";
-
 // Load the MySQL pool connection
-const pool = require("../data/config");
+const pool = require("../data/database-config");
 
 const router = (app) => {
   // Display all users
@@ -14,28 +12,28 @@ const router = (app) => {
   });
 
   // Add a new user
-  //Name attribute in form element sets "'gamertag', and 'rank' etc...."
+  // ` (grave) for column and ' (apostrophe) for values for syntax fun :)
+  //Name attribute in form element sets "'gamertag', and 'rank' etc...." name = ninjaLevel === request.body.ninjaLevel
   //Format:
   //sql: "INSERT INTO runs SET `gamertag` = 'efwef', `rank` = 'wefwef', `faults` = 'wefwe', `time` = 'fwefwef', `track-name` = 'wefwef', `ninja-points` = 'wefwef'"
 
-  app.post("/submit-run", (request, response) => {
-    const np = npCalc.calculateNinjaPoints();
+  app.post("/submitted-run", (request, response) => {
     console.log("HERERERER");
     pool.query(
-      "INSERT INTO runss SET `gamertag` = '" +
-        request.body.gamertag +
-        "' , `rank` = '" +
-        request.body.rank +
-        "' , `faults` = '" +
+      "INSERT INTO runs SET `gamertag` = 'placeholder for now' , `rank` = '1' , `faults` = '" +
         request.body.faults +
         "', `time` = '" +
         request.body.time +
         "', `track-name` = '" +
-        request.body.trackname +
-        "', `ninja-points` = '" +
-        np +
+        request.body.trackName +
+        "', `ninja-points` = '123" +
+        "', `ninja-level` = '" +
+        request.body.ninjaLevel +
+        "', `length` = '" +
+        request.body.length +
+        "', `fault-sponginess` = '" +
+        request.body.faultSponginess +
         "'",
-      request.body,
       (error, result) => {
         if (error) throw error;
 

@@ -37,7 +37,7 @@ CREATE TABLE `information` (
   `aliases` varchar(45) DEFAULT NULL,
   `username` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `information` (
 
 LOCK TABLES `information` WRITE;
 /*!40000 ALTER TABLE `information` DISABLE KEYS */;
-INSERT INTO `information` VALUES ('Test@test.com',7,'2020-12-10 02:57:31','Test',NULL,NULL,NULL,NULL,NULL,NULL,'Test'),('Test@test.com',8,'2020-12-10 03:00:00','Test',NULL,NULL,NULL,NULL,NULL,NULL,'Test'),('Test@test.com',9,'2020-12-10 21:26:57','testtest',NULL,NULL,NULL,NULL,NULL,NULL,'Test');
+INSERT INTO `information` VALUES ('Test@test.com',7,'2020-12-10 02:57:31','Test',NULL,NULL,NULL,NULL,NULL,NULL,'Test'),('Test@test.com',8,'2020-12-10 03:00:00','Test',NULL,NULL,NULL,NULL,NULL,NULL,'Test'),('Test@test.com',9,'2020-12-10 21:26:57','testtest',NULL,NULL,NULL,NULL,NULL,NULL,'Test'),('swaefwe@fwef',10,'2020-12-10 06:34:06','ppppp',NULL,NULL,NULL,NULL,NULL,NULL,'wefwef');
 /*!40000 ALTER TABLE `information` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,11 +59,15 @@ DROP TABLE IF EXISTS `runs`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `runs` (
   `gamertag` varchar(45) NOT NULL,
-  `rank` int NOT NULL,
+  `rank` int DEFAULT NULL,
   `faults` int NOT NULL,
-  `time` time NOT NULL,
+  `time` varchar(9) NOT NULL,
   `track-name` varchar(45) NOT NULL,
-  `ninja-points` decimal(10,0) NOT NULL,
+  `ninja-points` decimal(10,0) DEFAULT NULL,
+  `ninja-level` decimal(10,0) NOT NULL,
+  `length` enum('Short','Medium','Long') NOT NULL,
+  `fault-sponginess` enum('Not At All','Not Very','Moderately','Very','Extremely') NOT NULL,
+  `rating` decimal(10,0) DEFAULT NULL,
   PRIMARY KEY (`gamertag`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -74,6 +78,7 @@ CREATE TABLE `runs` (
 
 LOCK TABLES `runs` WRITE;
 /*!40000 ALTER TABLE `runs` DISABLE KEYS */;
+INSERT INTO `runs` VALUES ('placeholder for now',1,123,'12:31:231','Luscious',123,4,'Medium','Not Very',NULL);
 /*!40000 ALTER TABLE `runs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,4 +119,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-10 22:22:36
+-- Dump completed on 2020-12-22 19:57:50

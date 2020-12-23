@@ -6,6 +6,7 @@ import Dashboard from "./pages/dashboard";
 import PrivateRoute from "./components/private-route";
 import ResetPassword from "./components/reset-password";
 import UpdateProfile from "./components/update-profile";
+import SubmitRun from "./components/submit-run.jsx";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/signin" component={SignInSignUp} />
           <Route path="/forgot-password" component={ResetPassword} />
           <Route path="/update-profile" component={UpdateProfile} />
+          <Route path="/submit-run" component={SubmitRun} />
         </Switch>
       </AuthProvider>
     </Router>

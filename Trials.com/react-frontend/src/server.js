@@ -2,7 +2,7 @@
 const express = require("express");
 const port = 3002;
 const bodyParser = require("body-parser");
-const signUpRoute = require("./routes/signup.routes");
+const SubmitRoute = require("./routes/submit");
 const app = express();
 
 // Use Node.js body parsing middleware
@@ -13,7 +13,7 @@ app.use(
   })
 );
 
-signUpRoute(app);
+SubmitRoute(app);
 
 // Start the server
 const server = app.listen(port, (error) => {

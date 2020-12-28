@@ -1,12 +1,12 @@
 import React, { useMemo } from "react";
-import { useTable, useSortBy } from "react-table";
+import { useTable, useSortBy, Column, HeaderGroup } from "react-table";
 import MOCKDATA from "../mock-data.json";
 import { COLUMNS } from "./main-leaderboard-columns";
 import "./table.css";
 
 export const SortMainLB = () => {
-  const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => MOCKDATA, []);
+  const columns: Array<Column> = useMemo(() => COLUMNS, []);
+  const data: Array<any> = useMemo(() => MOCKDATA, []);
 
   const {
     getTableProps,
@@ -27,7 +27,7 @@ export const SortMainLB = () => {
     <>
       <table {...getTableProps()}>
         <thead>
-          {headerGroups.map((headerGroup) => (
+          {headerGroups.map((headerGroup: HeaderGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>

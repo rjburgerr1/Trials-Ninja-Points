@@ -6,11 +6,13 @@ type ChildrenProps = {
 };
 
 const defaultUser = {
-  currentUser: {},
+  currentUser: { email: "" },
   signup: (email: string, password: string) => {},
   login: (email: string, password: string) => {},
   resetPassword: (email: string) => {},
   logout: () => {},
+  updateEmail: (email: string) => {},
+  updatePassword: (password: string) => {},
 };
 
 const AuthContext = React.createContext(defaultUser);

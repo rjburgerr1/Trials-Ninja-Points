@@ -8,7 +8,7 @@ import "./table.css";
 
 export const StickyTable = () => {
   const columns: Array<Column> = useMemo(() => COLUMNS, []);
-  const data: Array<any>  = useMemo(() => MOCK_DATA, []);
+  const data: Array<any> = useMemo(() => MOCK_DATA, []);
 
   const {
     getTableProps,

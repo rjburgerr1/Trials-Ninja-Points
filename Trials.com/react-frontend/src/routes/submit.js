@@ -18,22 +18,29 @@ const router = (app) => {
   //sql: "INSERT INTO runs SET `gamertag` = 'efwef', `rank` = 'wefwef', `faults` = 'wefwe', `time` = 'fwefwef', `track-name` = 'wefwef', `ninja-points` = 'wefwef'"
 
   app.post("/submitted-run", (request, response) => {
-    console.log("HERERERER");
+    console.log(request.body);
     pool.query(
-      "INSERT INTO runs SET `gamertag` = 'placeholder for now' , `rank` = '1' , `faults` = '" +
+      "INSERT INTO runs SET `rider` = '" +
+        request.body.rider +
+        "', `rank` = '" +
+        request.body.rank +
+        "' , `faults` = '" +
         request.body.faults +
         "', `time` = '" +
         request.body.time +
         "', `track-name` = '" +
         request.body.trackName +
-        "', `ninja-points` = '123" +
+        "', `ninja-points` = '" +
+        request.body.ninjaPoints +
         "', `ninja-level` = '" +
         request.body.ninjaLevel +
         "', `length` = '" +
         request.body.length +
         "', `fault-sponginess` = '" +
         request.body.faultSponginess +
-        "'",
+        "', `rating` = '" +
+        request.body.rating +
+        " '",
       (error, result) => {
         if (error) throw error;
 

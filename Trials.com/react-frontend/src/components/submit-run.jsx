@@ -7,8 +7,12 @@ import InputMask from "react-input-mask";
 import Slider from "@material-ui/core/Slider";
 import ReactStars from "react-rating-stars-component";
 import NavBar from "./navbar";
+import { CalcNP } from "./calculate-ninja-points";
 
 const SubmitRun = () => {
+  // According to formkik documentation, use formik values in place of props to prevent bugs with formik and also prevent having two versions of the same prop
+  // needing to be maintained inside props and formik values
+
   const formik = useFormik({
     initialValues: {
       trackName: "",
@@ -19,6 +23,9 @@ const SubmitRun = () => {
       faultSponginess: "",
       ninjaLevel: "",
       rating: "",
+      rank: "",
+      rider: "",
+      ninjaPoints: "", // NinjaPoints are not inside the form but these initial values act as props for this component so storing ninjapoints here feels right
     },
   });
 
@@ -33,10 +40,20 @@ const SubmitRun = () => {
   };
 
   return (
-    <div>
+    <>
       <NavBar />
       <Formik>
-        <form action="http://localhost:3002/submitted-run" method="post">
+        <form action="http://localhost:3002/submitted-run" method="POST">
+          <label>Rider</label>
+          <input
+            placeholder="RJ Burgerr1"
+            id="rider"
+            name="rider"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.rider}
+            autoFocus
+          />
           <label>Track Name</label>
           <input
             placeholder="Turbine Terror"
@@ -55,6 +72,16 @@ const SubmitRun = () => {
             type="text"
             onChange={formik.handleChange}
             value={formik.values.creator}
+          />
+          <label>Rank</label>
+          <input
+            placeholder="7"
+            id="rank"
+            name="rank"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.rank}
+            autoFocus
           />
           <label>Ninja Level</label>
           <Slider
@@ -93,10 +120,9 @@ const SubmitRun = () => {
             value={formik.values.faults}
           />
           <label>Time</label>
-
           <InputMask
             placeholder="12:33.677"
-            mask="99:99:999"
+            mask="99:99.999"
             name="time"
             type="text"
             onChange={formik.handleChange}
@@ -130,10 +156,36 @@ const SubmitRun = () => {
           </select>
           <label>How did you like the track? (optional)</label>
           <ReactStars {...Stars} onChange={setRating} />
-          <button type="submit">Submit</button>
+          <input
+            type="hidden"
+            name="rating"
+            id="rating"
+            value={formik.values.rating}
+          />
+          <input
+            type="hidden"
+            name="ninjaPoints"
+            id="ninjaPoints"
+            value={formik.values.ninjaPoints}
+          />
+          <button
+            type="submit"
+            onClick={() => {
+              // This onClick is formatted in such a way to prevent stale values being sent to database.
+              // when formik values such as ninjaPoints are set with setFieldValue, the component will not rerender after submit.
+              // This is why we have to calculate the NP value and inject it into formiks values inside the onClick signature.
+              // This could be avoided with a change from using formik.values to useing props. However, there are benefits to using formik.values as "props" with forms
+              const ninjaPoints = CalcNP({ ...formik.values });
+              const payload = { ...formik.values, ninjaPoints: ninjaPoints }; // Construct the new payload, inject ninjaPoints that have just been calculated
+              formik.setValues(payload); // Updates Formik's internal state
+              formik.setSubmitting(false);
+            }}
+          >
+            Submit
+          </button>
         </form>
       </Formik>
-    </div>
+    </>
   );
 };
 

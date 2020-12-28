@@ -58,7 +58,7 @@ DROP TABLE IF EXISTS `runs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `runs` (
-  `gamertag` varchar(45) NOT NULL,
+  `rider` varchar(45) NOT NULL,
   `rank` int DEFAULT NULL,
   `faults` int NOT NULL,
   `time` varchar(9) NOT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE `runs` (
   `length` enum('Short','Medium','Long') NOT NULL,
   `fault-sponginess` enum('Not At All','Not Very','Moderately','Very','Extremely') NOT NULL,
   `rating` decimal(10,0) DEFAULT NULL,
-  PRIMARY KEY (`gamertag`)
+  PRIMARY KEY (`rider`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -78,7 +78,7 @@ CREATE TABLE `runs` (
 
 LOCK TABLES `runs` WRITE;
 /*!40000 ALTER TABLE `runs` DISABLE KEYS */;
-INSERT INTO `runs` VALUES ('placeholder for now',1,123,'12:31:231','Luscious',123,4,'Medium','Not Very',NULL);
+INSERT INTO `runs` VALUES ('',1,123,'12:31.231','',22,6,'Medium','Not Very',3),('placeholder for now',1,123,'12:31:231','Luscious',123,4,'Medium','Not Very',NULL),('rj',1,123,'21:31.231','track',123,6,'Medium','Moderately',NULL),('RJ burgerr1',1,0,'04:22.111','Luscious',123,7,'Medium','Moderately',NULL);
 /*!40000 ALTER TABLE `runs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -119,4 +119,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-22 19:57:50
+-- Dump completed on 2020-12-25 21:14:57

@@ -34,7 +34,7 @@ const SubmitRun = () => {
   };
 
   const restrictFaults = (value) => {
-    if (value < 500) {
+    if ((value < 500 && value >= 0) || value === "") {
       formik.setFieldValue("faults", value);
     }
   };

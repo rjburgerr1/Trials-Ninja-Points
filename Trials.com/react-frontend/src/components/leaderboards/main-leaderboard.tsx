@@ -1,11 +1,12 @@
 import React, { useMemo } from "react";
-import { useTable } from "react-table";
+import { useTable, Column } from "react-table";
 import MOCKDATA from "../mock-data.json";
 import { COLUMNS } from "./main-leaderboard-columns";
 import "./table.css";
 export const MainLB = () => {
-  const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => MOCKDATA, []);
+
+  const data: Array<any> = useMemo(() => MOCKDATA, []);
+  const columns: Array<any> = useMemo(() => COLUMNS, []);
 
   const {
     getTableProps,
@@ -16,7 +17,7 @@ export const MainLB = () => {
     prepareRow,
   } = useTable({
     columns,
-    data,
+    data
   });
 
   return (

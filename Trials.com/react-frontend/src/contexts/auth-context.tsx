@@ -10,6 +10,7 @@ const defaultUser = {
   signup: (email: string, password: string) => {},
   login: (email: string, password: string) => {},
   resetPassword: (email: string) => {},
+  logout: () => {},
 };
 
 const AuthContext = React.createContext(defaultUser);

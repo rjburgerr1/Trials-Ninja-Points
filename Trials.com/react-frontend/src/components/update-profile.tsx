@@ -4,31 +4,33 @@ import { useAuth } from "../contexts/auth-context";
 import { Link, useHistory } from "react-router-dom";
 
 export default function UpdateProfile() {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const passwordConfirmRef = useRef<HTMLInputElement>(null);
   const { currentUser, updatePassword, updateEmail } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match");
+  function handleSubmit(event: any) {
+    event.preventDefault();
+    if (passwordRef.current != null && passwordConfirmRef.current != null) {
+      if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+        return setError("Passwords do not match");
+      }
     }
 
     const promises = [];
     setLoading(true);
     setError("");
-
-    if (emailRef.current.value !== currentUser.email) {
-      promises.push(updateEmail(emailRef.current.value));
+    if (emailRef.current != null && passwordRef.current != null) {
+      if (emailRef.current.value !== currentUser.email) {
+        promises.push(updateEmail(emailRef.current.value));
+      }
+      if (passwordRef.current.value) {
+        promises.push(updatePassword(passwordRef.current.value));
+      }
     }
-    if (passwordRef.current.value) {
-      promises.push(updatePassword(passwordRef.current.value));
-    }
-
     Promise.all(promises)
       .then(() => {
         history.push("/");

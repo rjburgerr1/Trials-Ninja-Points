@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { useTable, useBlockLayout } from "react-table";
+import { useTable, useBlockLayout, Column } from "react-table";
 import { useSticky } from "react-table-sticky";
 import { Styles } from "./TableStyles";
 import MOCK_DATA from "../mock-data.json";
@@ -7,8 +7,8 @@ import { COLUMNS } from "./main-leaderboard-columns";
 import "./table.css";
 
 export const StickyTable = () => {
-  const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => MOCK_DATA, []);
+  const columns: Array<Column> = useMemo(() => COLUMNS, []);
+  const data: Array<any> = useMemo(() => MOCK_DATA, []);
 
   const {
     getTableProps,

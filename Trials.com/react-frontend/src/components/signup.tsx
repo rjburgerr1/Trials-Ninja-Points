@@ -3,22 +3,24 @@ import { useAuth } from "../contexts/auth-context";
 import { Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
-export default function SignupComponent() {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const usernameRef = useRef();
+const SignupComponent = () => {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const usernameRef = useRef<HTMLInputElement>(null);
   const { signup } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit(event: any) {
+    event.preventDefault();
 
     try {
       setError("");
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
+      if (emailRef.current != null && passwordRef.current != null) {
+        await signup(emailRef.current.value, passwordRef.current.value);
+      }
       history.push("/");
     } catch {}
 
@@ -26,7 +28,7 @@ export default function SignupComponent() {
   }
 
   return (
-    <div class="form-container sign-up-container">
+    <div className="form-container sign-up-container">
       {error && <Alert variant="danger">{error}</Alert>}
       <form
         //action="http://localhost:3002/sign-up-complete"
@@ -35,7 +37,7 @@ export default function SignupComponent() {
       >
         <h1>Create Account</h1>
 
-        <div class="social-container"></div>
+        <div className="social-container"></div>
 
         <input
           type="text"
@@ -56,4 +58,6 @@ export default function SignupComponent() {
       </form>
     </div>
   );
-}
+};
+
+export default SignupComponent;

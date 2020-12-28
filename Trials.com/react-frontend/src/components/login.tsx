@@ -4,21 +4,23 @@ import { Alert, Button } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 
 export default function LoginComponent() {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  //const usernameRef = useRef();
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const usernameRef = useRef<HTMLInputElement>(null); // Keep for later
   const { login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit(event: any) {
+    event.preventDefault();
 
     try {
       setError("");
       setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
+      if (emailRef.current != null && passwordRef.current != null) {
+        await login(emailRef.current.value, passwordRef.current.value);
+      }
       history.push("/");
     } catch {
       setError("Failed to log in");
@@ -28,7 +30,7 @@ export default function LoginComponent() {
   }
 
   return (
-    <div class="form-container sign-in-container">
+    <div className="form-container sign-in-container">
       {error && <Alert variant="danger">{error}</Alert>}
       <form
         //action="http://localhost:3002/sign-up-complete"
@@ -37,7 +39,7 @@ export default function LoginComponent() {
       >
         <h1>Sign In</h1>
 
-        <div class="social-container"></div>
+        <div className="social-container"></div>
 
         <input
           type="text"

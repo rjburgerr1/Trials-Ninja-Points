@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model information {
+  email       String
+  id          Int      @id @default(autoincrement())
+  create_date DateTime @default(now())
+  password    String
+  last_name   String?
+  first_name  String?
+  country     String?
+  state       String?
+  gamertag    String?
+  aliases     String?
+  username    String
+}
+
+model runs {
+  rider            String                @id
+  rank             Int?
+  faults           Int
+  time             String
+  track_name       String                @map("track-name")
+  ninja_points     Float?                @map("ninja-points")
+  ninja_level      Float                 @map("ninja-level")
+  length           runs_length
+  fault_sponginess runs_fault_sponginess @map("fault-sponginess")
+  rating           Float?
+}
+
+model tracks {
+  track_name       String                   @map("track-name")
+  id               Int                      @id @default(autoincrement())
+  creator          String
+  ninja_level      String?                  @map("ninja-level")
+  length           tracks_length?
+  average_faults   Int?                     @map("average-faults")
+  fault_sponginess tracks_fault_sponginess? @map("fault-sponginess")
+}
+
+enum runs_length {
+  Short
+  Medium
+  Long
+}
+
+enum runs_fault_sponginess {
+  Not_At_All @map("Not At All")
+  Not_Very @map("Not Very")
+  Moderately
+  Very
+  Extremely
+
+   @@map("runs_fault-sponginess")
+}
+
+enum tracks_length {
+  short
+  medium
+  long
+}
+
+enum tracks_fault_sponginess {
+  not_at_all @map("not at all")
+  not_very @map("not very")
+  moderately
+  very
+  extremely
+
+   @@map("tracks_fault-sponginess")
+}

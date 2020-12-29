@@ -25,15 +25,18 @@ const SubmitRun = () => {
       rating: "",
       rank: "",
       rider: "",
-      ninjaPoints: "", // NinjaPoints are not inside the form but these initial values act as props for this component so storing ninjapoints here feels right
+      ninjaPoints: 0, // NinjaPoints are not inside the form but these initial values act as props for this component so storing ninjapoints here feels right
+    },
+    onSubmit() {
+      console.log(formik.values);
     },
   });
 
-  const setRating = (ratingValue) => {
+  const setRating = (ratingValue: number) => {
     formik.setFieldValue("rating", ratingValue);
   };
 
-  const restrictFaults = (value) => {
+  const restrictFaults = (value: any) => {
     if ((value < 500 && value >= 0) || value === "") {
       formik.setFieldValue("faults", value);
     }
@@ -42,7 +45,14 @@ const SubmitRun = () => {
   return (
     <>
       <NavBar />
-      <Formik>
+      <Formik
+        initialValues={formik.initialValues}
+        onSubmit={(values, actions) => {
+          console.log({ values, actions });
+          alert(JSON.stringify(values, null, 2));
+          actions.setSubmitting(false);
+        }}
+      >
         <form action="http://localhost:3002/submitted-run" method="POST">
           <label>Rider</label>
           <input
@@ -112,9 +122,9 @@ const SubmitRun = () => {
                 evt.key === ".") &&
               evt.preventDefault()
             }
-            onChange={(e) => {
-              e.preventDefault();
-              const { value } = e.target;
+            onChange={(event) => {
+              event.preventDefault();
+              const { value } = event.target;
               restrictFaults(value);
             }}
             value={formik.values.faults}
@@ -131,7 +141,6 @@ const SubmitRun = () => {
           <label>Length</label>
           <select
             name="length"
-            type="text"
             onChange={formik.handleChange}
             value={formik.values.length}
           >
@@ -143,7 +152,6 @@ const SubmitRun = () => {
           <label>Fault Sponginess</label>
           <select
             name="faultSponginess"
-            type="text"
             onChange={formik.handleChange}
             value={formik.values.faultSponginess}
           >
@@ -243,44 +251,8 @@ const Stars = {
   activeColor: "blue",
 };
 
-function valuetext(value) {
+function valuetext(value: number) {
   return `${value}`;
 }
-
-SubmitRun.propTypes = {
-  length: PropTypes.oneOf(["Short"], ["Medium"], ["Long"]).isRequired,
-  faultSponginess: PropTypes.oneOf(
-    ["Not At All"],
-    ["Not Very"],
-    ["Moderately"],
-    ["Very"],
-    ["Extremely"]
-  ).isRequired,
-  ninjaLevel: PropTypes.oneOf(
-    [0.5],
-    [1],
-    [1.5],
-    [2],
-    [2.5],
-    [3],
-    [3.5],
-    [4],
-    [4.5],
-    [5],
-    [5.5],
-    [6],
-    [6.5],
-    [7],
-    [7.5],
-    [8],
-    [8.5],
-    [9]
-  ).isRequired,
-  time: PropTypes.instanceOf(Moment).isRequired,
-  faults: PropTypes.number.isRequired,
-  creator: PropTypes.string.isRequired,
-  rating: PropTypes.instanceOf(Star),
-  trackName: PropTypes.string.isRequired,
-};
 
 export default SubmitRun;

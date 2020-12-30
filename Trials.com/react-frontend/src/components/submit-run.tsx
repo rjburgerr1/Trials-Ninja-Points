@@ -9,24 +9,40 @@ import ReactStars from "react-rating-stars-component";
 import NavBar from "./navbar";
 import { CalcNP } from "./calculate-ninja-points";
 
+// Shape of form values
+interface FormValues {
+  trackName: string;
+  creator: string;
+  faults: number;
+  time: string;
+  length: string;
+  faultSponginess: string;
+  ninjaLevel: number;
+  rating: number;
+  rank: number;
+  rider: string;
+  ninjaPoints: number;
+}
+
 const SubmitRun = () => {
   // According to formkik documentation, use formik values in place of props to prevent bugs with formik and also prevent having two versions of the same prop
   // needing to be maintained inside props and formik values
+  const initialValues: FormValues = {
+    trackName: "",
+    creator: "",
+    faults: 0,
+    time: "",
+    length: "",
+    faultSponginess: "",
+    ninjaLevel: 0,
+    rating: 0,
+    rank: 0,
+    rider: "",
+    ninjaPoints: 0, // NinjaPoints are not inside the form but these initial values act as props for this component so storing ninjapoints here feels right
+  };
 
   const formik = useFormik({
-    initialValues: {
-      trackName: "",
-      creator: "",
-      faults: "",
-      time: "",
-      length: "",
-      faultSponginess: "",
-      ninjaLevel: "",
-      rating: "",
-      rank: "",
-      rider: "",
-      ninjaPoints: 0, // NinjaPoints are not inside the form but these initial values act as props for this component so storing ninjapoints here feels right
-    },
+    initialValues: { ...initialValues },
     onSubmit() {
       console.log(formik.values);
     },

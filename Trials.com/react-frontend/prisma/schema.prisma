@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  url      = "mysql://root:pass@localhost:3306/trialsnp"
 }
 
 model information {
@@ -26,11 +26,11 @@ model runs {
   rank             Int?
   faults           Int
   time             String
-  track_name       String                @map("track-name")
-  ninja_points     Float?                @map("ninja-points")
-  ninja_level      Float                 @map("ninja-level")
-  length           runs_length
-  fault_sponginess runs_fault_sponginess @map("fault-sponginess")
+  trackName        String                @map("track-name")
+  ninjaPoints      Float?                @map("ninja-points")
+  ninjaLevel       Float                 @map("ninja-level")
+  length           String
+  faultSponginess  String @map("fault-sponginess")
   rating           Float?
 }
 

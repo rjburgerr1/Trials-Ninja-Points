@@ -189,14 +189,15 @@ const SubmitRun = () => {
                 <option value="Extremely" label="Extremely" />
               </select>
             </div>
-
-            <label>How did you like the track? (optional)</label>
+            <label id="star-rating">How much did you like the track?</label>
             <ReactStars
               {...Stars}
+              id="star-rating"
               color="#5d737eff"
               activeColor="#fdd643ff"
               onChange={setRating}
             />
+
             <input
               type="hidden"
               name="rating"

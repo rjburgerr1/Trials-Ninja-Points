@@ -13,13 +13,15 @@ form {
     color: black;
     font-size: 20px;
     border: 3px solid black;
+    margin: 10px;
   }
   button:hover {
     background-color: lighten($mustard, 10%);
   }
 
   .MuiSlider-thumbColorPrimary,
-  .MuiSlider-track {
+  .MuiSlider-track,
+  label {
     color: $mustard;
   }
 
@@ -65,11 +67,9 @@ form {
     height: 25px;
     border-radius: 10px;
     width: 100%;
-
     color: $mustard;
     background-color: $cadet;
     text-align: center;
-    margin-bottom: 10px;
   }
   input:hover,
   select:hover {
@@ -82,23 +82,24 @@ form {
     box-shadow: 0 0 0 2px lighten($cadet, 20%);
   }
 
-  label {
-    margin-top: 3px;
-    margin-bottom: 0px;
-    color: $mustard;
-  }
-
   div.form-inline-group {
     display: grid;
     grid-template-columns: max-content max-content;
-    grid-column-gap: 100px;
-    grid-row-gap: 30px;
-    margin-bottom: 20px;
+    grid-column-gap: 80px;
+    grid-row-gap: 25px;
+    margin-bottom: 10px;
+    align-content: start;
+    padding-bottom: 20px;
+
+    label {
+      text-align: center;
+    }
   }
 
-  div.form-inline-group label {
-    text-align: center;
+  #star-rating {
+    margin-bottom: -10px;
   }
+
   input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }

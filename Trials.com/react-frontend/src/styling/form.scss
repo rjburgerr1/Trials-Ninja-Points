@@ -2,15 +2,9 @@
 
 form {
   background-color: $oxford-blue;
-}
-
-#form-button {
-  background-color: $mustard;
-}
-
-#submit-run-form {
   button {
     color: black;
+    background-color: $mustard;
     font-size: 20px;
     border: 3px solid black;
     margin: 10px;
@@ -18,7 +12,13 @@ form {
   button:hover {
     background-color: lighten($mustard, 10%);
   }
+}
 
+#form-button {
+  background-color: $mustard;
+}
+
+#submit-run-form {
   .MuiSlider-thumbColorPrimary,
   .MuiSlider-track,
   label {

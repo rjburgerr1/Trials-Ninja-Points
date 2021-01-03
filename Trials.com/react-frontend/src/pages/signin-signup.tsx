@@ -1,6 +1,6 @@
 import React from "react";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import "./css/signin-signup.scss";
+import "../styling/signin-signup.scss";
 import Login from "../components/login";
 import Signup from "../components/signup";
 import { Card } from "react-bootstrap";

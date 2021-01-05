@@ -51,6 +51,29 @@ INSERT INTO `information` VALUES ('Test@test.com',7,'2020-12-10 02:57:31','Test'
 UNLOCK TABLES;
 
 --
+-- Table structure for table `riders`
+--
+
+DROP TABLE IF EXISTS `riders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `riders` (
+  `rider` varchar(45) NOT NULL,
+  PRIMARY KEY (`rider`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `riders`
+--
+
+LOCK TABLES `riders` WRITE;
+/*!40000 ALTER TABLE `riders` DISABLE KEYS */;
+INSERT INTO `riders` VALUES ('RJ Burgerr1'),('Slikscythez');
+/*!40000 ALTER TABLE `riders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `runs`
 --
 
@@ -68,7 +91,9 @@ CREATE TABLE `runs` (
   `length` enum('Short','Medium','Long') NOT NULL,
   `fault-sponginess` enum('Not At All','Not Very','Moderately','Very','Extremely') NOT NULL,
   `rating` decimal(10,0) DEFAULT NULL,
-  PRIMARY KEY (`rider`)
+  PRIMARY KEY (`rider`,`track-name`),
+  KEY `rider_idx` (`rider`),
+  CONSTRAINT `rider` FOREIGN KEY (`rider`) REFERENCES `riders` (`rider`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -78,7 +103,7 @@ CREATE TABLE `runs` (
 
 LOCK TABLES `runs` WRITE;
 /*!40000 ALTER TABLE `runs` DISABLE KEYS */;
-INSERT INTO `runs` VALUES ('',1,123,'12:31.231','',22,6,'Medium','Not Very',3),('placeholder for now',1,123,'12:31:231','Luscious',123,4,'Medium','Not Very',NULL),('rj',1,123,'21:31.231','track',123,6,'Medium','Moderately',NULL),('RJ burgerr1',1,0,'04:22.111','Luscious',123,7,'Medium','Moderately',NULL);
+INSERT INTO `runs` VALUES ('RJ Burgerr1',2,20,'12:12.123','Final Sorrow',1100,7,'Short','Moderately',3),('RJ Burgerr1',2,20,'12:12.123','Luscious',540,7,'Short','Moderately',3),('RJ Burgerr1',2,20,'12:12.123','Wraith',220,7,'Short','Moderately',3),('Slikscythez',2,20,'12:12.123','Annihilation',980,7,'Short','Moderately',3),('Slikscythez',2,20,'12:12.123','luscious',780,7,'Short','Moderately',3),('Slikscythez',2,20,'12:12.123','Wraith',220,7,'Short','Moderately',3);
 /*!40000 ALTER TABLE `runs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,6 +134,38 @@ LOCK TABLES `tracks` WRITE;
 /*!40000 ALTER TABLE `tracks` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tracks` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `weightage`
+--
+
+DROP TABLE IF EXISTS `weightage`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `weightage` (
+  `rider` varchar(45) NOT NULL,
+  `rank` int DEFAULT NULL,
+  `faults` int NOT NULL,
+  `time` varchar(9) NOT NULL,
+  `track-name` varchar(45) NOT NULL,
+  `ninja-points` decimal(10,0) DEFAULT NULL,
+  `ninja-level` decimal(10,0) NOT NULL,
+  `length` enum('Short','Medium','Long') NOT NULL,
+  `fault-sponginess` enum('Not At All','Not Very','Moderately','Very','Extremely') NOT NULL,
+  `rating` decimal(10,0) DEFAULT NULL,
+  `nHighestRun` bigint unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `weightage`
+--
+
+LOCK TABLES `weightage` WRITE;
+/*!40000 ALTER TABLE `weightage` DISABLE KEYS */;
+INSERT INTO `weightage` VALUES ('RJ Burgerr1',2,20,'12:12.123','Final Sorrow',1100,7,'Short','Moderately',3,1),('RJ Burgerr1',2,20,'12:12.123','Luscious',513,7,'Short','Moderately',3,2),('RJ Burgerr1',2,20,'12:12.123','Wraith',199,7,'Short','Moderately',3,3),('Slikscythez',2,20,'12:12.123','Annihilation',980,7,'Short','Moderately',3,1),('Slikscythez',2,20,'12:12.123','luscious',741,7,'Short','Moderately',3,2),('Slikscythez',2,20,'12:12.123','Wraith',199,7,'Short','Moderately',3,3);
+/*!40000 ALTER TABLE `weightage` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -119,4 +176,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-25 21:14:57
+-- Dump completed on 2021-01-04  4:28:13

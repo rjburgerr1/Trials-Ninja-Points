@@ -2,15 +2,37 @@ import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/auth-context";
 import { Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+
+import SignupRoute from "../routes/signup";
 
 const SignupComponent = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const usernameRef = useRef<HTMLInputElement>(null);
+
+  const { currentUser } = useAuth();
   const { signup } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+
+  function signupPrisma(email: string, username: string, userid: string) {
+    axios
+      .post("/sign-up-complete", {
+        email,
+        username, // + any other parameters you want to send in the POST request
+        userid,
+      })
+      .then((response) => {
+        console.log(response);
+        // do something with response, and on response
+      })
+      .catch((error) => {
+        console.log(error);
+        // do something when request was unsuccessful
+      });
+  }
 
   async function handleSubmit(event: any) {
     event.preventDefault();
@@ -18,11 +40,23 @@ const SignupComponent = () => {
     try {
       setError("");
       setLoading(true);
-      if (emailRef.current != null && passwordRef.current != null) {
+      if (
+        emailRef.current != null &&
+        usernameRef.current != null &&
+        passwordRef.current != null
+      ) {
         await signup(emailRef.current.value, passwordRef.current.value);
+        signupPrisma(
+          emailRef.current.value,
+          usernameRef.current.value,
+          currentUser.uid
+        );
       }
+
       history.push("/");
-    } catch {}
+    } catch {
+      setError("Failed to create an account");
+    }
 
     setLoading(false);
   }

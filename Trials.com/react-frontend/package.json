@@ -1,6 +1,7 @@
 {
   "homepage": "http://rjburgerr1.github.io",
   "name": "test-app",
+  "proxy": "http://localhost:3002",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,6 +17,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "@types/firebase": "^3.2.1",
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.5.3",
     "express": "^4.17.1",

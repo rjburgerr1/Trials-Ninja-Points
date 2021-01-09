@@ -15,7 +15,7 @@ export default function NavBar() {
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="submit-run">Submit-Run</Nav.Link>
           <NavDropdown alignRight title={<Icon />} id="basic-nav-dropdown">
-            <NavDropdown.Item href="#profile">View Profile</NavDropdown.Item>
+            <NavDropdown.Item href="profile">View Profile</NavDropdown.Item>
             <NavDropdown.Item>
               <Logout />
             </NavDropdown.Item>

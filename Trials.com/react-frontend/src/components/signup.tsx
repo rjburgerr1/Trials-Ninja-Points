@@ -4,8 +4,6 @@ import { Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-import SignupRoute from "../routes/signup";
-
 const SignupComponent = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -54,8 +52,9 @@ const SignupComponent = () => {
       }
 
       history.push("/");
-    } catch {
-      setError("Failed to create an account");
+    } catch (err) {
+      console.log(err);
+      setError(err.message);
     }
 
     setLoading(false);

@@ -7,31 +7,21 @@ datasource db {
   url      = "mysql://root:pass@localhost:3306/trialsnp"
 }
 
-model information {
-  email       String
-  id          Int      @id @default(autoincrement())
-  create_date DateTime @default(now())
-  password    String
-  last_name   String?
-  first_name  String?
-  country     String?
-  state       String?
-  gamertag    String?
-  aliases     String?
-  username    String
-}
-
 model runs {
-  rider            String                @id
-  rank             Int?
-  faults           Int
-  time             String
-  trackName        String                @map("track-name")
-  ninjaPoints      Float?                @map("ninja-points")
-  ninjaLevel       Float                 @map("ninja-level")
-  length           String
-  faultSponginess  String @map("fault-sponginess")
-  rating           Float?
+  rider           String
+  rank            Int?
+  faults          Int
+  time            String
+  trackName       String                @map("track-name")
+  ninjaPoints     Float?                @map("ninja-points")
+  ninjaLevel      Float                 @map("ninja-level")
+  length          runs_length
+  faultSponginess runs_fault_sponginess @map("fault-sponginess")
+  rating          Float?
+  riders          riders                @relation(fields: [rider], references: [rider])
+
+  @@id([rider, trackName])
+  @@index([rider], name: "rider_idx")
 }
 
 model tracks {
@@ -43,6 +33,43 @@ model tracks {
   average_faults   Int?                     @map("average-faults")
   fault_sponginess tracks_fault_sponginess? @map("fault-sponginess")
 }
+
+model riders {
+  rider String @id
+  runs  runs[]
+}
+
+model profiles {
+  email              String
+  id                 String   @id
+  create_date        DateTime @default(now())
+  country            String?
+  state              String?
+  gamertag           String?
+  aliases            String?
+  username           String
+  highest_np_run     Int?     @map("highest-np-run")
+  runs               Int?
+  total_ninja_points Int?     @map("total-ninja-points")
+  highest_level_pass Int?     @map("highest-level-pass")
+  rank               Int?
+  bio                String?
+}
+
+// The underlying table does not contain a valid unique identifier and can therefore currently not be handled.
+// model weightage {
+  // rider            String
+  // rank             Int?
+  // faults           Int
+  // time             String
+  // track_name       String                     @map("track-name")
+  // ninja_points     Float?                     @map("ninja-points")
+  // ninja_level      Float                      @map("ninja-level")
+  // length           weightage_length
+  // fault_sponginess weightage_fault_sponginess @map("fault-sponginess")
+  // rating           Float?
+  // nHighestRun      Int                        @default(0)
+// }
 
 enum runs_length {
   Short
@@ -74,4 +101,20 @@ enum tracks_fault_sponginess {
   extremely
 
    @@map("tracks_fault-sponginess")
+}
+
+enum weightage_length {
+  Short
+  Medium
+  Long
+}
+
+enum weightage_fault_sponginess {
+  Not_At_All @map("Not At All")
+  Not_Very @map("Not Very")
+  Moderately
+  Very
+  Extremely
+
+   @@map("weightage_fault-sponginess")
 }

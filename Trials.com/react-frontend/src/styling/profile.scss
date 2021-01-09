@@ -1,0 +1,28 @@
+@import "palette";
+
+.profile-banner {
+  height: 100%;
+  width: 100%;
+}
+
+.grid-container {
+  display: grid;
+  padding-left: 15%;
+  padding-right: 15%;
+  margin-top: 150px;
+  border-radius: 30px;
+}
+
+.grid-item {
+  background-color: $oxford-blue;
+  padding-right: 5%;
+  padding-left: 5%;
+
+  border-radius: 30px;
+  color: $mustard;
+
+  font-size: 30px;
+  text-align: left;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}

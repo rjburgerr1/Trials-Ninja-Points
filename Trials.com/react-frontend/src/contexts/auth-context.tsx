@@ -6,7 +6,7 @@ type ChildrenProps = {
 };
 
 const defaultUser = {
-  currentUser: { email: "" },
+  currentUser: { email: "", displayName: "", uid: "" },
   signup: (email: string, password: string) => {},
   login: (email: string, password: string) => {},
   resetPassword: (email: string) => {},
@@ -24,8 +24,8 @@ export function AuthProvider({ children }: ChildrenProps) {
   const [currentUser, setCurrentUser] = useState<any>();
   const [loading, setLoading] = useState(true);
 
-  const signup = (email: string, password: string) => {
-    return auth.createUserWithEmailAndPassword(email, password);
+  const signup = async (email: string, password: string) => {
+    return await auth.createUserWithEmailAndPassword(email, password);
   };
 
   function login(email: string, password: string) {

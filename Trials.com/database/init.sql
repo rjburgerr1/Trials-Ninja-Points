@@ -107,7 +107,7 @@ CREATE TABLE `runs` (
 
 LOCK TABLES `runs` WRITE;
 /*!40000 ALTER TABLE `runs` DISABLE KEYS */;
-INSERT INTO `runs` VALUES ('RJ Burgerr1',2,20,'12:12.123','Final Sorrow',1100,7,'Short','Moderately',3),('RJ Burgerr1',2,20,'12:12.123','Luscious',540,7,'Short','Moderately',3),('RJ Burgerr1',2,20,'12:12.123','Wraith',220,7,'Short','Moderately',3),('Slikscythez',2,20,'12:12.123','Annihilation',980,7,'Short','Moderately',3),('Slikscythez',2,20,'12:12.123','luscious',780,7,'Short','Moderately',3),('Slikscythez',2,20,'12:12.123','Wraith',220,7,'Short','Moderately',3);
+INSERT INTO `runs` VALUES ('RJ Burgerr1',2,20,'12:12.123','Final Sorrow',1100,7,'Short','Moderately',3),('RJ Burgerr1',2,20,'12:12.123','Luscious',540,7,'Short','Moderately',3),('RJ Burgerr1',2,20,'12:12.123','Wraith',220,7,'Short','Moderately',3),('Slikscythez',2,20,'12:12.123','Annihilation',980,7,'Short','Moderately',3),('Slikscythez',2,20,'12:12.123','luscious',780,7,'Short','Moderately',3),('slikscythez',2,29,'2:12.123','Veni Vidi Vici',800,2,'Short','Extremely',4),('Slikscythez',2,20,'12:12.123','Wraith',220,7,'Short','Moderately',3);
 /*!40000 ALTER TABLE `runs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,4 +180,6 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+
 -- Dump completed on 2021-01-09 10:35:30
+

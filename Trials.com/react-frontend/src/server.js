@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const SubmitRoute = require("./routes/submit");
 const SignupRoute = require("./routes/signup");
 const ProfileRoute = require("./routes/profile");
+const DataRoute = require("./routes/data");
 const app = express();
 
 // Use Node.js body parsing middleware
@@ -15,6 +16,7 @@ app.use(
   })
 );
 
+DataRoute(app);
 SubmitRoute(app);
 SignupRoute(app);
 ProfileRoute(app);

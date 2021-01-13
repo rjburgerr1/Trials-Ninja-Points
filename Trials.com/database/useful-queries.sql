@@ -16,6 +16,9 @@ VALUES ('RJ Burgerr1', 2, 20, '12:12.123', 'Final Sorrow',1100, 7, 'Short', 'Mod
 
 INSERT INTO trialsnp.runs (`rider`, `rank`, `faults`, `time`, `track-name`, `ninja-points`, `ninja-level`, `length`, `fault-sponginess`, `rating` ) 
 VALUES ('Slikscythez', 2, 20, '12:12.123', 'Annihilation',980, 7, 'Short', 'Moderately',3);
+
+INSERT INTO trialsnp.runs (`rider`, `rank`, `faults`, `time`, `track-name`, `ninja-points`, `ninja-level`, `length`, `fault-sponginess`, `rating` ) 
+VALUES ('slikscythez', 2, 29, '2:12.123', 'Veni Vidi Vici',800, 2, 'Short', 'Extremely',3.5);
 -- ------------------------------------
 
 

@@ -15,12 +15,11 @@ function App() {
       <AuthProvider>
         <Switch>
           <PrivateRoute exact path="/" component={Dashboard} />
-
           <Route path="/signin" component={SignInSignUp} />
           <Route path="/forgot-password" component={ResetPassword} />
           <PrivateRoute path="/update-profile" component={UpdateProfile} />
           <PrivateRoute path="/submit-run" component={SubmitRun} />
-          <PrivateRoute path="/profile" component={Profile} />
+          <PrivateRoute path="/profile/:user?" component={Profile} />
         </Switch>
       </AuthProvider>
     </Router>

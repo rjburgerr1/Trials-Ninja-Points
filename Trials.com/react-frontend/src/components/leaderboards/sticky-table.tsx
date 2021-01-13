@@ -39,7 +39,6 @@ export const StickyTable = () => {
     useSticky
   );
   const firstPageRows = rows.slice(0, 50);
-
   return (
     <Styles>
       <div
@@ -61,11 +60,18 @@ export const StickyTable = () => {
         <div {...getTableBodyProps()} className="body">
           {firstPageRows.map((row) => {
             prepareRow(row);
+
             return (
               <div {...row.getRowProps()} className="tr">
                 {row.cells.map((cell) => (
                   <div {...cell.getCellProps()} className="td">
-                    {cell.render("Cell")}
+                    {cell.column.Header === "Username" ? (
+                      <a href={"profile/" + row.values.username}>
+                        {cell.render("Cell")}
+                      </a>
+                    ) : (
+                      <div>{cell.render("Cell")}</div>
+                    )}
                   </div>
                 ))}
               </div>

@@ -1,5 +1,4 @@
 const { PrismaClient } = require("@prisma/client");
-
 const prisma = new PrismaClient();
 
 const router = (app) => {
@@ -161,7 +160,7 @@ const router = (app) => {
     try {
       let result = await prisma.profiles.findUnique({
         where: {
-          id: request.query.uid,
+          username: request.query.username,
         },
       });
       return response.status(200).send(result);

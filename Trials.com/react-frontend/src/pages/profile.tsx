@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import NavBar from "../components/navbar";
 
 import "../styling/profile.scss";
-import { useAuth } from "../contexts/auth-context";
 import axios from "axios";
 import Icon from "../components/icon";
+import { useAuth } from "../contexts/auth-context";
 
 const getUsername = async (userID: string) => {
   // Currently only work for retrieving the current users data
@@ -105,19 +105,35 @@ const getAliases = async (userID: string) => {
   return result.data.aliases;
 };
 
-const getProfileInfo = async (userID: string) => {
-  // Currently only work for retrieving the current users data
-  const result = await axios.get("/profile-info", {
-    params: {
-      uid: userID,
-    },
-  });
+const getProfileInfo = async (user: string, currentUser: any) => {
+  let result;
+  if (user === undefined) {
+    const currentUsersUsername = await axios.get("/username", {
+      params: {
+        uid: currentUser.uid,
+      },
+    });
+    result = await axios.get("/profile-info", {
+      params: {
+        username: currentUsersUsername.data.username,
+      },
+    });
+  } else {
+    // Currently only work for retrieving the current users data
+    result = await axios.get("/profile-info", {
+      params: {
+        username: user,
+      },
+    });
+  }
   //result returns object with all relevant profile info fields
   return result.data;
 };
-const Profile: React.FC<boolean> = (isCurrentUser: boolean) => {
+const Profile: React.FC = (props: any) => {
   const { currentUser } = useAuth();
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(
+    props.match.params.user ? props.match.params.user : ""
+  );
   const [bio, setBio] = useState("");
   const [country, setCountry] = useState("");
   const [runs, setRuns] = useState(0);
@@ -139,7 +155,8 @@ const Profile: React.FC<boolean> = (isCurrentUser: boolean) => {
     setCreateDate,
     setHighestLevelPass,
     setAliases,
-    currentUser
+    currentUser,
+    username
   );
 
   return (
@@ -178,9 +195,10 @@ const setProfileValuesInOne = (
   setCreateDate: any,
   setHighestLevelPass: any,
   setAliases: any,
-  currentUser: any
+  currentUser: any,
+  user: string
 ) => {
-  getProfileInfo(currentUser.uid).then((value) => {
+  getProfileInfo(user, currentUser).then((value) => {
     setRuns(value.runs);
     setBio(value.bio);
     setUsername(value.username);

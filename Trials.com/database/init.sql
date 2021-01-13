@@ -18,36 +18,40 @@ USE `trialsnp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `information`
+-- Table structure for table `profiles`
 --
 
-DROP TABLE IF EXISTS `information`;
+DROP TABLE IF EXISTS `profiles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `information` (
+CREATE TABLE `profiles` (
   `email` varchar(255) NOT NULL,
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `id` varchar(29) NOT NULL,
   `create_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `password` varchar(255) NOT NULL,
-  `last_name` varchar(45) DEFAULT NULL,
-  `first_name` varchar(45) DEFAULT NULL,
   `country` varchar(45) DEFAULT NULL,
   `state` varchar(45) DEFAULT NULL,
   `gamertag` varchar(45) DEFAULT NULL,
   `aliases` varchar(45) DEFAULT NULL,
   `username` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `highest-np-run` int DEFAULT NULL,
+  `runs` int DEFAULT NULL,
+  `total-ninja-points` int DEFAULT NULL,
+  `highest-level-pass` int DEFAULT NULL,
+  `rank` int DEFAULT NULL,
+  `bio` varchar(300) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `information`
+-- Dumping data for table `profiles`
 --
 
-LOCK TABLES `information` WRITE;
-/*!40000 ALTER TABLE `information` DISABLE KEYS */;
-INSERT INTO `information` VALUES ('Test@test.com',7,'2020-12-10 02:57:31','Test',NULL,NULL,NULL,NULL,NULL,NULL,'Test'),('Test@test.com',8,'2020-12-10 03:00:00','Test',NULL,NULL,NULL,NULL,NULL,NULL,'Test'),('Test@test.com',9,'2020-12-10 21:26:57','testtest',NULL,NULL,NULL,NULL,NULL,NULL,'Test'),('swaefwe@fwef',10,'2020-12-10 06:34:06','ppppp',NULL,NULL,NULL,NULL,NULL,NULL,'wefwef');
-/*!40000 ALTER TABLE `information` ENABLE KEYS */;
+LOCK TABLES `profiles` WRITE;
+/*!40000 ALTER TABLE `profiles` DISABLE KEYS */;
+INSERT INTO `profiles` VALUES ('fourthuser@gmail.com','HlLKkTLUAeghI3AEGAmRrL7zWDh1','2021-01-08 07:12:13','USA',NULL,NULL,'rj burger','fourthUser',213,12,213,8,4,'here is a bio'),('rjburgerr12@gmail.com','sD3puzO3CZPv89BI78DZUvO5Eai2','2021-01-12 10:43:37',NULL,NULL,NULL,NULL,'rjburgerr12',NULL,NULL,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -103,7 +107,7 @@ CREATE TABLE `runs` (
 
 LOCK TABLES `runs` WRITE;
 /*!40000 ALTER TABLE `runs` DISABLE KEYS */;
-INSERT INTO `runs` VALUES ('RJ Burgerr1',2,20,'12:12.123','Final Sorrow',1100,7,'Short','Moderately',3),('RJ Burgerr1',2,20,'12:12.123','Luscious',540,7,'Short','Moderately',3),('RJ Burgerr1',2,20,'12:12.123','Wraith',220,7,'Short','Moderately',3),('Slikscythez',2,20,'12:12.123','Annihilation',980,7,'Short','Moderately',3),('Slikscythez',2,20,'12:12.123','luscious',780,7,'Short','Moderately',3),('Slikscythez',2,20,'12:12.123','Wraith',220,7,'Short','Moderately',3);
+INSERT INTO `runs` VALUES ('RJ Burgerr1',2,20,'12:12.123','Final Sorrow',1100,7,'Short','Moderately',3),('RJ Burgerr1',2,20,'12:12.123','Luscious',540,7,'Short','Moderately',3),('RJ Burgerr1',2,20,'12:12.123','Wraith',220,7,'Short','Moderately',3),('Slikscythez',2,20,'12:12.123','Annihilation',980,7,'Short','Moderately',3),('Slikscythez',2,20,'12:12.123','luscious',780,7,'Short','Moderately',3),('slikscythez',2,29,'2:12.123','Veni Vidi Vici',800,2,'Short','Extremely',4),('Slikscythez',2,20,'12:12.123','Wraith',220,7,'Short','Moderately',3);
 /*!40000 ALTER TABLE `runs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,4 +180,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-04  4:28:13
+-- Dump completed on 2021-01-12 21:26:52

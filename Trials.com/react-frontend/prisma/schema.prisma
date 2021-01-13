@@ -47,7 +47,7 @@ model profiles {
   state              String?
   gamertag           String?
   aliases            String?
-  username           String
+  username           String   @unique
   highest_np_run     Int?     @map("highest-np-run")
   runs               Int?
   total_ninja_points Int?     @map("total-ninja-points")

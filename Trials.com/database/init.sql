@@ -50,7 +50,7 @@ CREATE TABLE `profiles` (
 
 LOCK TABLES `profiles` WRITE;
 /*!40000 ALTER TABLE `profiles` DISABLE KEYS */;
-INSERT INTO `profiles` VALUES ('fourthuser@gmail.com','HlLKkTLUAeghI3AEGAmRrL7zWDh1','2021-01-08 07:12:13','USA',NULL,NULL,'rj burger','fourthUser',213,12,213,8,4,'here is a bio'),('rjburgerr12@gmail.com','sD3puzO3CZPv89BI78DZUvO5Eai2','2021-01-12 10:43:37',NULL,NULL,NULL,NULL,'rjburgerr12',NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `profiles` VALUES ('fourthuser@gmail.com','HlLKkTLUAeghI3AEGAmRrL7zWDh1','2021-01-08 07:12:13','USA',NULL,NULL,'rj burger','fourthUser',213,12,213,8,4,'here is a bio');
 /*!40000 ALTER TABLE `profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,4 +180,6 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-12 21:26:52
+
+-- Dump completed on 2021-01-09 10:35:30
+

@@ -5,17 +5,7 @@ type ChildrenProps = {
   children: React.ReactNode;
 };
 
-const defaultUser = {
-  currentUser: { email: "", displayName: "", uid: "" },
-  signup: (email: string, password: string) => {},
-  login: (email: string, password: string) => {},
-  resetPassword: (email: string) => {},
-  logout: () => {},
-  updateEmail: (email: string) => {},
-  updatePassword: (password: string) => {},
-};
-
-const AuthContext = React.createContext(defaultUser);
+const AuthContext = React.createContext<any>({} as any);
 export function useAuth() {
   return useContext(AuthContext);
 }

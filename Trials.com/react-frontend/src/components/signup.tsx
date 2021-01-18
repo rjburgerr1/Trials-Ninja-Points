@@ -43,11 +43,14 @@ const SignupComponent = () => {
         usernameRef.current != null &&
         passwordRef.current != null
       ) {
-        await signup(emailRef.current.value, passwordRef.current.value);
+        const response = await signup(
+          emailRef.current.value,
+          passwordRef.current.value
+        );
         signupPrisma(
           emailRef.current.value,
           usernameRef.current.value,
-          currentUser.uid
+          response.user.uid
         );
       }
 

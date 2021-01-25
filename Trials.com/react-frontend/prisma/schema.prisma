@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://root:pass@localhost:3306/trialsnp"
+  url      = "mysql://rj:5!LjEG*bsJSxBuTV@66.42.118.153:3306/trialsnp"
 }
 
 model runs {
@@ -54,6 +54,20 @@ model profiles {
   highest_level_pass Int?     @map("highest-level-pass")
   rank               Int?
   bio                String?
+}
+
+model information {
+  email       String
+  id          Int      @id @default(autoincrement())
+  create_date DateTime @default(now())
+  password    String
+  last_name   String?
+  first_name  String?
+  country     String?
+  state       String?
+  gamertag    String?
+  aliases     String?
+  username    String
 }
 
 // The underlying table does not contain a valid unique identifier and can therefore currently not be handled.

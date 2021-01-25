@@ -1,6 +1,3 @@
-// Load the MySQL pool connection
-const pool = require("../data/database-config");
-
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 // const { request } = require("express"); Keep for now, might need later

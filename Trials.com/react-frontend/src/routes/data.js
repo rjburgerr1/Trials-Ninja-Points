@@ -16,7 +16,7 @@ const router = (app) => {
 
       return response.status(200).send(result);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
       return response.status(400).send("BAD REQUEST");
     }
   });

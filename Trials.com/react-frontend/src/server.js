@@ -15,6 +15,15 @@ app.use(
     extended: true,
   })
 );
+app.use(function (req, res, next) {
+  console.log(JSON.stringify(req.headers));
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 DataRoute(app);
 SubmitRoute(app);

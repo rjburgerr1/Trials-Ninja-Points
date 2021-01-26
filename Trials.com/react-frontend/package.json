@@ -1,6 +1,5 @@
 {
   "name": "test-app",
-	"proxy": "http://66.42.118.153/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

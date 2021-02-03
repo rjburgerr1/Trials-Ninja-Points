@@ -1,5 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useTable, useBlockLayout, usePagination, Column } from "react-table";
+import {
+  useTable,
+  useBlockLayout,
+  usePagination,
+  Column,
+  useSortBy,
+} from "react-table";
 import { useSticky } from "react-table-sticky";
 import { Styles } from "./TableStyles";
 
@@ -45,6 +51,7 @@ export const StickyTable = () => {
       data,
       initialState: { pageIndex: 0 },
     },
+    useSortBy,
     useBlockLayout,
     useSticky,
     usePagination
@@ -107,8 +114,18 @@ export const StickyTable = () => {
             {headerGroups.map((headerGroup) => (
               <div {...headerGroup.getHeaderGroupProps()} className="tr">
                 {headerGroup.headers.map((column) => (
-                  <div {...column.getHeaderProps()} className="th">
+                  <div
+                    {...column.getHeaderProps(column.getSortByToggleProps())}
+                    className="th"
+                  >
                     {column.render("Header")}
+                    <span>
+                      {column.isSorted
+                        ? column.isSortedDesc
+                          ? "\\/"
+                          : "^"
+                        : ""}
+                    </span>
                   </div>
                 ))}
               </div>

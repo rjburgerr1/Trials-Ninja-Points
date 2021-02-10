@@ -16,6 +16,7 @@ export default function NavBar() {
         <Nav className="ml-auto">
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/submit-run">Submit-Run</Nav.Link>
+          <Nav.Link href="/runs">Runs</Nav.Link>
           <NavDropdown alignRight title={<Icon />} id="basic-nav-dropdown">
             <NavDropdown.Item href="profile/">View Profile</NavDropdown.Item>
             <NavDropdown.Item>

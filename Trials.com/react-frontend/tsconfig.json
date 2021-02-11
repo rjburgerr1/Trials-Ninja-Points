@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-  ]
+, "../node-server/server.js", "../node-server/routes", "../node-server/server.js", "../node-server/routes"  ]
 }

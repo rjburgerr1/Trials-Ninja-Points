@@ -1,134 +1,122 @@
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "mysql"
-    url      = "mysql://root:pass@localhost:3306/trialsnp"
+  provider = "mysql"
+  url      = "mysql://root:pass@localhost:3306/trialsnp"
 }
 
 model runs {
-    rider           String
-    rank            Int?
-    faults          Int
-    time            String
-    trackName       String                @map("track-name")
-    ninjaPoints     Float?                @map("ninja-points")
-    ninjaLevel      Float                 @map("ninja-level")
-    length          runs_length
-    faultSponginess runs_fault_sponginess @map("fault-sponginess")
-    rating          Float?
-    riders          riders                @relation(fields: [rider], references: [rider])
+  rider           String                @db.VarChar(45)
+  rank            Int?
+  faults          Int
+  time            String                @db.VarChar(9)
+  trackName       String                @map("track-name") @db.VarChar(45)
+  ninjaPoints     Decimal?              @map("ninja-points") @db.Decimal(10, 0)
+  ninjaLevel      Decimal               @map("ninja-level") @db.Decimal(10, 0)
+  length          runs_length
+  faultSponginess runs_fault_sponginess @map("fault-sponginess")
+  rating          Decimal?              @db.Decimal(10, 0)
+  riders          riders                @relation(fields: [rider], references: [rider])
 
-    @@id([rider, trackName])
-    @@index([rider], name: "rider_idx")
+  @@id([rider, trackName])
+  @@index([rider], name: "rider_idx")
 }
 
 model tracks {
-    track_name       String                   @map("track-name")
-    id               Int                      @id @default(autoincrement())
-    creator          String
-    ninja_level      String?                  @map("ninja-level")
-    length           tracks_length?
-    average_faults   Int?                     @map("average-faults")
-    fault_sponginess tracks_fault_sponginess? @map("fault-sponginess")
+  track_name       String                   @map("track-name") @db.VarChar(45)
+  id               Int                      @id @default(autoincrement())
+  creator          String                   @db.VarChar(45)
+  ninja_level      String?                  @map("ninja-level") @db.VarChar(45)
+  length           tracks_length?
+  average_faults   Int?                     @map("average-faults")
+  fault_sponginess tracks_fault_sponginess? @map("fault-sponginess")
 }
 
 model riders {
-    rider String @id
-    runs  runs[]
+  rider String @id @db.VarChar(45)
+  runs  runs[]
 }
 
 model profiles {
-    email              String
-    id                 String   @id
-    create_date        DateTime @default(now())
-    country            String?
-    state              String?
-    gamertag           String?
-    aliases            String?
-    username           String   @unique
-    highest_np_run     Int?     @map("highest-np-run")
-    runs               Int?
-    total_ninja_points Int?     @map("total-ninja-points")
-    highest_level_pass Int?     @map("highest-level-pass")
-    rank               Int?
-    bio                String?
+  email              String   @db.VarChar(255)
+  id                 String   @id @db.VarChar(29)
+  create_date        DateTime @default(now()) @db.DateTime(0)
+  country            String?  @db.VarChar(45)
+  state              String?  @db.VarChar(45)
+  gamertag           String?  @db.VarChar(45)
+  aliases            String?  @db.VarChar(45)
+  username           String   @unique @db.VarChar(45)
+  highest_np_run     Int?     @map("highest-np-run")
+  runs               Int?
+  total_ninja_points Int?     @map("total-ninja-points")
+  highest_level_pass Int?     @map("highest-level-pass")
+  rank               Int?
+  bio                String?  @db.VarChar(300)
 }
 
-model information {
-    email       String
-    id          Int      @id @default(autoincrement())
-    create_date DateTime @default(now())
-    password    String
-    last_name   String?
-    first_name  String?
-    country     String?
-    state       String?
-    gamertag    String?
-    aliases     String?
-    username    String
-}
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model weightage {
+  rider            String                     @db.VarChar(45)
+  rank             Int?
+  faults           Int
+  time             String                     @db.VarChar(9)
+  track_name       String                     @map("track-name") @db.VarChar(45)
+  ninja_points     Decimal?                   @map("ninja-points") @db.Decimal(10, 0)
+  ninja_level      Decimal                    @map("ninja-level") @db.Decimal(10, 0)
+  length           weightage_length
+  fault_sponginess weightage_fault_sponginess @map("fault-sponginess")
+  rating           Decimal?                   @db.Decimal(10, 0)
+  nHighestRun      BigInt                     @default(0) @db.UnsignedBigInt
 
-// The underlying table does not contain a valid unique identifier and can therefore currently not be handled.
-// model weightage {
-// rider            String
-// rank             Int?
-// faults           Int
-// time             String
-// track_name       String                     @map("track-name")
-// ninja_points     Float?                     @map("ninja-points")
-// ninja_level      Float                      @map("ninja-level")
-// length           weightage_length
-// fault_sponginess weightage_fault_sponginess @map("fault-sponginess")
-// rating           Float?
-// nHighestRun      Int                        @default(0)
-// }
+  @@ignore
+}
 
 enum runs_length {
-    Short
-    Medium
-    Long
+  Short
+  Medium
+  Long
 }
 
 enum runs_fault_sponginess {
-    Not_At_All  @map("Not At All")
-    Not_Very    @map("Not Very")
-    Moderately
-    Very
-    Extremely
+  Not_At_All @map("Not At All")
+  Not_Very @map("Not Very")
+  Moderately
+  Very
+  Extremely
 
-    @@map("runs_fault-sponginess")
+   @@map("runs_fault-sponginess")
 }
 
 enum tracks_length {
-    short
-    medium
-    long
+  short
+  medium
+  long
 }
 
 enum tracks_fault_sponginess {
-    not_at_all  @map("not at all")
-    not_very    @map("not very")
-    moderately
-    very
-    extremely
+  not_at_all @map("not at all")
+  not_very @map("not very")
+  moderately
+  very
+  extremely
 
-    @@map("tracks_fault-sponginess")
+   @@map("tracks_fault-sponginess")
 }
 
 enum weightage_length {
-    Short
-    Medium
-    Long
+  Short
+  Medium
+  Long
 }
 
 enum weightage_fault_sponginess {
-    Not_At_All  @map("Not At All")
-    Not_Very    @map("Not Very")
-    Moderately
-    Very
-    Extremely
+  Not_At_All @map("Not At All")
+  Not_Very @map("Not Very")
+  Moderately
+  Very
+  Extremely
 
-    @@map("weightage_fault-sponginess")
+   @@map("weightage_fault-sponginess")
 }

@@ -1,28 +1,83 @@
+@import "~bootstrap/scss/bootstrap";
 @import "palette";
 
-.profile-banner {
-  height: 100%;
-  width: 100%;
-}
+.profile > .profile-info {
+    background-color: $oxford-blue;
+    height: 100%;
 
-.grid-container {
-  display: grid;
-  padding-left: 15%;
-  padding-right: 15%;
-  margin-top: 150px;
-  border-radius: 30px;
-}
+    // Overline from Left Effect on Profile-Info Card
+    .id-card {
+        -webkit-transform: perspective(1px) translateZ(0);
+        overflow: hidden;
+        position: relative;
+        transform: perspective(1px) translateZ(0);
+        vertical-align: middle;
+    }
 
-.grid-item {
-  background-color: $oxford-blue;
-  padding-right: 5%;
-  padding-left: 5%;
+    .id-card:before {
+        -webkit-transition-duration: 0.3s;
+        -webkit-transition-property: left, right;
+        -webkit-transition-timing-function: ease-out;
+        background: lighten($oxford-blue, 70%);
+        content: "";
+        height: 4px;
+        left: 51%;
+        position: absolute;
+        right: 51%;
+        top: 0;
+        transition-property: left, right;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-out;
+        z-index: -1;
+    }
 
-  border-radius: 30px;
-  color: $mustard;
+    .id-card:active:before,
+    .id-card:focus:before,
+    .id-card:hover:before {
+        left: 0;
+        right: 0;
+    }
 
-  font-size: 30px;
-  text-align: left;
-  margin-bottom: 5px;
-  margin-top: 5px;
+    // Main Style //
+
+    > .id-card {
+        background-color: $oxford-blue;
+        margin-bottom: 2px;
+        margin-left: 2%;
+        margin-right: 2%;
+
+        > .id-card-body {
+            color: white;
+            text-align: center;
+            > .profilefieldkey {
+                margin-right: 1%;
+                padding-bottom: 3px;
+                text-decoration: underline $mustard;
+            }
+        }
+    }
+
+    > .profileicon {
+        background-image: url("../images/defaultProfileBanner.png");
+        background-position: center;
+        border-bottom: 1px solid $cadet;
+        display: flex;
+        justify-content: left;
+
+        > .iconavatar {
+            background-color: darken($oxford-blue, 10%);
+            height: 70px;
+            margin-bottom: 10%;
+            width: 70px;
+        }
+
+        > .profilebanner {
+            z-index: -4;
+        }
+
+        > .ridername {
+            color: $mustard;
+            font-size: 50px;
+        }
+    }
 }

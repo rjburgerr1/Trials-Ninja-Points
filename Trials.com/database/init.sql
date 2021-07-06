@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `trialsnp` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `trialsnp`;
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: trialsnp
 -- ------------------------------------------------------
--- Server version	8.0.22
+-- Server version	8.0.25
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -51,7 +51,7 @@ CREATE TABLE `profiles` (
 
 LOCK TABLES `profiles` WRITE;
 /*!40000 ALTER TABLE `profiles` DISABLE KEYS */;
-INSERT INTO `profiles` VALUES ('rjburgerr11@gmail.com','CDgOZZfpotQhJoYKcyh7mX4wdxv1','2021-01-13 06:47:24',NULL,NULL,NULL,NULL,'RJ Burgerr1',NULL,NULL,NULL,NULL,NULL,NULL),('fourthuser@gmail.com','HlLKkTLUAeghI3AEGAmRrL7zWDh1','2021-01-08 07:12:13','USA',NULL,NULL,'rj burger','fourthUser',213,12,213,8,4,'here is a bio'),('rjburgerr12@gmail.com','sD3puzO3CZPv89BI78DZUvO5Eai2','2021-01-12 10:43:37',NULL,NULL,NULL,NULL,'rjburgerr12',NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `profiles` VALUES ('testuser3@email.com','BPiY0XXhLBPwPIxVCExxuADYBO93','2021-07-06 06:18:08','USA','MN','RJ Burgerr1','N/A','testuser3',1302,98,231323,8,2,'Some Level 8 Rider with Some Lofty Goals'),('rjburgerr11@gmail.com','CDgOZZfpotQhJoYKcyh7mX4wdxv1','2021-01-13 06:47:24',NULL,NULL,NULL,NULL,'RJ Burgerr1',NULL,NULL,NULL,NULL,NULL,NULL),('fourthuser@gmail.com','HlLKkTLUAeghI3AEGAmRrL7zWDh1','2021-01-08 07:12:13','USA',NULL,NULL,'rj burger','fourthUser',213,12,213,8,4,'here is a bio'),('testuser4@email.com','NPhzbZMQOJUcjTKryrETLRaD1D23','2021-07-06 10:37:55',NULL,NULL,NULL,NULL,'testuser4',NULL,NULL,NULL,NULL,NULL,NULL),('rjburgerr12@gmail.com','sD3puzO3CZPv89BI78DZUvO5Eai2','2021-01-12 10:43:37',NULL,NULL,NULL,NULL,'rjburgerr12',NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -181,4 +181,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-13  3:03:35
+-- Dump completed on 2021-07-06  6:07:00

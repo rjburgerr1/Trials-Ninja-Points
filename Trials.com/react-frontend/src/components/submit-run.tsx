@@ -23,7 +23,7 @@ interface FormValues {
     ninjaPoints: number;
 }
 
-const SubmitRun = () => {
+const SubmitRun = (props: any) => {
     // According to formkik documentation, use formik values in place of props to prevent bugs with formik and also prevent having two versions of the same prop
     // needing to be maintained inside props and formik values
     const initialValues: FormValues = {
@@ -62,7 +62,7 @@ const SubmitRun = () => {
 
     return (
         <>
-            <NavBar />
+            <NavBar {...props} />
             <div id="submit-run-form">
                 <Formik
                     initialValues={formik.initialValues}

@@ -61,7 +61,7 @@ const Profile: React.FC = (props: any) => {
 
     return (
         <div className="profile">
-            <NavBar />
+            <NavBar {...props} />
             <div className="profile-info">
                 <div className="profileicon">
                     <Avatar className="iconavatar">

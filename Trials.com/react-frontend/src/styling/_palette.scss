@@ -36,80 +36,83 @@ $white: rgba(254, 252, 253, 1);
 $cadet: rgba(93, 115, 126, 1);
 
 $oxford-blue-gradient: linear-gradient(
-  160deg,
-  rgba(0, 16, 37, 1) 85%,
-  rgba(93, 115, 126, 1) 100%
+    160deg,
+    rgba(0, 16, 37, 1) 85%,
+    rgba(93, 115, 126, 1) 100%
 );
 
 /* SCSS Gradient */
 $gradient-top: linear-gradient(
-  0deg,
-  #001025ff,
-  #af7a6dff,
-  #fdd643ff,
-  #fefcfdff,
-  #5d737eff
+    0deg,
+    #001025ff,
+    #af7a6dff,
+    #fdd643ff,
+    #fefcfdff,
+    #5d737eff
 );
 $gradient-right: linear-gradient(
-  90deg,
-  #001025ff,
-  #af7a6dff,
-  #fdd643ff,
-  #fefcfdff,
-  #5d737eff
+    90deg,
+    #001025ff,
+    #af7a6dff,
+    #fdd643ff,
+    #fefcfdff,
+    #5d737eff
 );
 $gradient-bottom: linear-gradient(
-  180deg,
-  #001025ff,
-  #af7a6dff,
-  #fdd643ff,
-  #fefcfdff,
-  #5d737eff
+    180deg,
+    #001025ff,
+    #af7a6dff,
+    #fdd643ff,
+    #fefcfdff,
+    #5d737eff
 );
 $gradient-left: linear-gradient(
-  270deg,
-  #001025ff,
-  #af7a6dff,
-  #fdd643ff,
-  #fefcfdff,
-  #5d737eff
+    270deg,
+    #001025ff,
+    #af7a6dff,
+    #fdd643ff,
+    #fefcfdff,
+    #5d737eff
 );
 $gradient-top-right: linear-gradient(
-  45deg,
-  #001025ff,
-  #af7a6dff,
-  #fdd643ff,
-  #fefcfdff,
-  #5d737eff
+    45deg,
+    #001025ff,
+    #af7a6dff,
+    #fdd643ff,
+    #fefcfdff,
+    #5d737eff
 );
 $gradient-bottom-right: linear-gradient(
-  135deg,
-  #001025ff,
-  #af7a6dff,
-  #fdd643ff,
-  #fefcfdff,
-  #5d737eff
+    135deg,
+    #001025ff,
+    #af7a6dff,
+    #fdd643ff,
+    #fefcfdff,
+    #5d737eff
 );
 $gradient-top-left: linear-gradient(
-  225deg,
-  #001025ff,
-  #af7a6dff,
-  #fdd643ff,
-  #fefcfdff,
-  #5d737eff
+    225deg,
+    #001025ff,
+    #af7a6dff,
+    #fdd643ff,
+    #fefcfdff,
+    #5d737eff
 );
 $gradient-bottom-left: linear-gradient(
-  315deg,
-  #001025ff,
-  #af7a6dff,
-  #fdd643ff,
-  #fefcfdff,
-  #5d737eff
+    315deg,
+    #001025ff,
+    #af7a6dff,
+    #fdd643ff,
+    #fefcfdff,
+    #5d737eff
 );
 $gradient-radial: radial-gradient(
-  #001025ff,
-  #af7a6dff,
-  #fdd643ff,
-  #fefcfdff,
-  #5d737eff
+    #001025ff,
+    #af7a6dff,
+    #fdd643ff,
+    #fefcfdff,
+    #5d737eff
 );
+
+// Custom Vars
+$oxford-blue-accent: lighten($oxford-blue, 70%);

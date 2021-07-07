@@ -1,0 +1,84 @@
+@import "~bootstrap/scss/bootstrap";
+@import "palette";
+
+// Override react bootstrap components classNames by using ids instead, if necessary
+.appbar {
+    background-color: $oxford-blue;
+
+    // React Bootstraps class for dropdown menus
+    .dropdown-menu {
+        background-color: $oxford-blue;
+        margin: 10%;
+
+        > .navbar-dropdown-item {
+            align-items: center;
+            color: $white;
+            display: flex;
+            justify-content: center;
+
+            &:hover {
+                background-color: transparent;
+            }
+
+            > .btn {
+                background-color: transparent;
+                border: 1px solid transparent;
+                color: $oxford-blue-accent;
+
+                &:hover {
+                    border: 1px solid $mustard;
+                }
+
+                &:focus {
+                    border: 1px solid lighten($mustard, 30%);
+                    color: lighten($oxford-blue-accent, 10%);
+                }
+            }
+        }
+    }
+
+    .navbar {
+        #navbar-dropdown:focus {
+            color: $mustard;
+        }
+
+        // All NavBar Elements have same style
+        #navbar-dropdown,
+        > .navbar-brand,
+        > .nav > .navbar-link {
+            color: $white;
+
+            &:hover {
+                color: $oxford-blue-accent;
+                transition: 0.4s;
+            }
+        }
+
+        // NavBar Links have a different specific style on top of the general overall styling of navbar elements
+        > .nav {
+            justify-content: center;
+            width: 100%;
+
+            > .navbar-link {
+                border-bottom: 1px solid transparent;
+                padding-left: 3%;
+                padding-right: 3%;
+
+                // .active and not :active since react bootstrap styling is weird 1)
+                &.active {
+                    color: $mustard;
+                    transition: 0.4s;
+                }
+
+                &:focus {
+                    border-bottom: 1px solid lighten($mustard, 30%);
+                    color: lighten($oxford-blue-accent, 10%);
+                }
+
+                &:hover {
+                    border-bottom: 1px solid $mustard;
+                }
+            }
+        }
+    }
+}

@@ -18,9 +18,12 @@ model runs {
   length          runs_length
   faultSponginess runs_fault_sponginess @map("fault-sponginess")
   rating          Decimal?              @db.Decimal(10, 0)
+  creator         String                @db.VarChar(45)
+  creators        creators              @relation(fields: [creator], references: [creator])
   riders          riders                @relation(fields: [rider], references: [rider])
 
   @@id([rider, trackName])
+  @@index([creator], name: "creator_idx")
   @@index([rider], name: "rider_idx")
 }
 
@@ -71,6 +74,11 @@ model weightage {
   nHighestRun      BigInt                     @default(0) @db.UnsignedBigInt
 
   @@ignore
+}
+
+model creators {
+  creator String @id @db.VarChar(45)
+  runs    runs[]
 }
 
 enum runs_length {

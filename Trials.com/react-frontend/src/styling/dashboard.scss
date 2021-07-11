@@ -1,0 +1,15 @@
+@import "~bootstrap/scss/bootstrap";
+@import "palette";
+
+.dashboard-container {
+    height: 100vh;
+    background-color: $oxford-blue;
+    > .dashboard-header {
+    }
+    > .dashboard-body {
+        margin-top: 2%;
+
+        display: flex;
+        justify-content: center;
+    }
+}

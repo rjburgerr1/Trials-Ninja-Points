@@ -8,12 +8,15 @@ const router = (app) => {
             let result = await prisma.profiles.findMany({
                 select: {
                     username: true,
+                    country: true,
                     highest_level_pass: true,
                     highest_np_run: true,
                     total_ninja_points: true,
                 },
+                orderBy: {
+                    total_ninja_points: "desc",
+                },
             });
-
             return response.status(200).send(result);
         } catch (error) {
             console.log(error.message);

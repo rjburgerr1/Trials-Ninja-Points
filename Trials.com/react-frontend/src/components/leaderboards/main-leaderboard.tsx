@@ -1,61 +1,241 @@
-import React, { useMemo } from "react";
-import { useTable, Column } from "react-table";
-import MOCKDATA from "../mock-data.json";
+import React, { useEffect, useMemo, useState } from "react";
+
+import {
+    faSortAmountDown,
+    faSortAmountUpAlt,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "../../styling/main-leaderboard.scss";
+import {
+    useTable,
+    useBlockLayout,
+    usePagination,
+    Column,
+    useSortBy,
+} from "react-table";
+import { useSticky } from "react-table-sticky";
+
 import { COLUMNS } from "./main-leaderboard-columns";
 import "./table.css";
-export const MainLB = () => {
+import getData from "../data";
 
-  const data: Array<any> = useMemo(() => MOCKDATA, []);
-  const columns: Array<any> = useMemo(() => COLUMNS, []);
+const resolveData = async (setData: any) => {
+    try {
+        const data = await getData();
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    footerGroups,
-    rows,
-    prepareRow,
-  } = useTable({
-    columns,
-    data
-  });
+        setData(data);
+    } catch (err) {
+        console.error(err.message);
+    }
+};
 
-  return (
-    <>
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-        <tfoot>
-          {footerGroups.map((footerGroup) => (
-            <tr {...footerGroup.getFooterGroupProps()}>
-              {footerGroup.headers.map((column) => (
-                <td {...column.getFooterProps()}>{column.render("Footer")}</td>
-              ))}
-            </tr>
-          ))}
-        </tfoot>
-      </table>
-    </>
-  );
+export const MainLeaderboard = () => {
+    const columns: Array<Column> = useMemo(() => COLUMNS, []);
+    let [data, setData] = useState([{}]);
+
+    useEffect(() => {
+        resolveData(setData);
+    }, []); // includes empty dependency array
+
+    const {
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        page,
+        nextPage,
+        previousPage,
+        canNextPage,
+        canPreviousPage,
+        pageOptions,
+        gotoPage,
+        pageCount,
+        setPageSize,
+        state,
+        prepareRow,
+    } = useTable(
+        {
+            columns,
+            data,
+            initialState: {
+                pageIndex: 0,
+                pageSize: 50,
+                sortBy: [
+                    {
+                        id: "total_ninja_points",
+                        desc: true,
+                    },
+                ],
+            },
+        },
+        useSortBy,
+        useBlockLayout,
+        useSticky,
+        usePagination
+    );
+
+    const { pageIndex, pageSize } = state;
+
+    return (
+        <div className="main-leaderboard">
+            <div className="leaderboard-info"></div>
+            <div className="leaderboard-container">
+                <div {...getTableProps()} className="leaderboard">
+                    <div className="leaderboard-header">
+                        {headerGroups.map((headerGroup) => (
+                            <div
+                                {...headerGroup.getHeaderGroupProps()}
+                                className="leaderboard-header-row"
+                            >
+                                {headerGroup.headers.map((column) => (
+                                    <div
+                                        {...column.getHeaderProps(
+                                            column.getSortByToggleProps()
+                                        )}
+                                        className="leaderboard-header-row-column"
+                                    >
+                                        <span className="invisible-element">
+                                            <FontAwesomeIcon
+                                                icon={faSortAmountDown}
+                                                size="1x"
+                                            />
+                                        </span>
+                                        <span className="leaderboard-header-row-value">
+                                            {column.render("Header")}
+                                        </span>
+                                        <span className="column-sort-icon">
+                                            {column.isSorted ? (
+                                                column.isSortedDesc ? (
+                                                    <FontAwesomeIcon
+                                                        icon={faSortAmountDown}
+                                                        size="1x"
+                                                    />
+                                                ) : (
+                                                    <FontAwesomeIcon
+                                                        icon={faSortAmountUpAlt}
+                                                        size="1x"
+                                                    />
+                                                )
+                                            ) : (
+                                                <FontAwesomeIcon
+                                                    icon={faSortAmountUpAlt}
+                                                    size="1x"
+                                                    className="column-sort-icon-invisible"
+                                                />
+                                            )}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
+                    </div>
+                    <div {...getTableBodyProps()} className="leaderboard-body">
+                        {page.map((row) => {
+                            prepareRow(row);
+
+                            return (
+                                <div
+                                    {...row.getRowProps()}
+                                    className="leaderboard-body-row"
+                                >
+                                    {row.cells.map((cell) => (
+                                        <div
+                                            {...cell.getCellProps()}
+                                            className="leaderboard-body-row-value"
+                                        >
+                                            {cell.column.Header ===
+                                            "Username" ? (
+                                                <a
+                                                    href={
+                                                        "profile/" +
+                                                        row.values.username
+                                                    }
+                                                >
+                                                    {cell.render("Cell")}
+                                                </a>
+                                            ) : (
+                                                <div>{cell.render("Cell")}</div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
+            <div className="leaderboard-info">
+                <span className="page-number-nav">
+                    <button
+                        className="first-page"
+                        onClick={() => gotoPage(0)}
+                        disabled={!canPreviousPage}
+                    >
+                        {"<<"}
+                    </button>
+                    <button
+                        className="previous-page"
+                        onClick={() => previousPage()}
+                        disabled={!canPreviousPage}
+                    >
+                        Previous
+                    </button>
+                </span>
+
+                <div className="page-info">
+                    <span className="page-number-input-container">
+                        <label className="page-label">Page</label>
+                        <input
+                            type="number"
+                            defaultValue={pageIndex + 1}
+                            onChange={(e) => {
+                                const pageNumber = e.target.value
+                                    ? Number(e.target.value) - 1
+                                    : 0;
+                                gotoPage(pageNumber);
+                            }}
+                            className="page-number-input"
+                        />
+                    </span>
+
+                    <span className="page-number-container">
+                        Page{" "}
+                        <strong className="page-number">{pageIndex + 1}</strong>{" "}
+                        -
+                        <strong className="page-number">
+                            {" "}
+                            {pageOptions.length}
+                        </strong>
+                    </span>
+
+                    <select
+                        className="show-page-size"
+                        value={pageSize}
+                        onChange={(e) => setPageSize(Number(e.target.value))}
+                    >
+                        {[50, 100, 250].map((pageSize) => (
+                            <option key={pageSize} value={pageSize}>
+                                Show {pageSize}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <span className="page-number-nav">
+                    <button
+                        className="next-page"
+                        onClick={() => nextPage()}
+                        disabled={!canNextPage}
+                    >
+                        Next
+                    </button>
+                    <button
+                        className="last-page"
+                        onClick={() => gotoPage(pageCount - 1)}
+                        disabled={!canNextPage}
+                    >
+                        {">>"}
+                    </button>
+                </span>
+            </div>
+        </div>
+    );
 };

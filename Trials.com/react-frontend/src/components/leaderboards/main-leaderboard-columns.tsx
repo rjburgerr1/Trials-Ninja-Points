@@ -3,6 +3,7 @@ import { Cell } from "react-table";
 export const COLUMNS = [
     {
         Header: "Rank",
+        accessor: "rank",
         id: "row",
         filterable: false,
         Cell: (cell: Cell) => {
@@ -29,5 +30,6 @@ export const COLUMNS = [
     {
         Header: "Highest Level Pass",
         accessor: "highest_level_pass",
+        width: 190,
     },
 ];

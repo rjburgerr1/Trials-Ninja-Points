@@ -5,9 +5,11 @@
 .appbar {
     background-color: $oxford-blue;
 
+    border-bottom: 1px solid $mustard;
     // React Bootstraps class for dropdown menus
     .dropdown-menu {
         background-color: $oxford-blue;
+        border: 1px solid $mustard;
         margin: 10%;
 
         > .navbar-dropdown-item {

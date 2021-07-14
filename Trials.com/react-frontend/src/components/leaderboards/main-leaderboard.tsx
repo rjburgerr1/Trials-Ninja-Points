@@ -16,7 +16,7 @@ import {
 import { useSticky } from "react-table-sticky";
 
 import { COLUMNS } from "./main-leaderboard-columns";
-import "./table.css";
+
 import getData from "../data";
 
 const resolveData = async (setData: any) => {

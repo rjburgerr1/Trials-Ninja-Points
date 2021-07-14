@@ -8,8 +8,24 @@
     }
     > .dashboard-body {
         margin-top: 2%;
-
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
+
+        > .dashboard-chat {
+            width: 26em;
+
+            margin-left: 1%;
+            margin-right: auto;
+        }
+
+        > .dashboard-leaderboard {
+        }
+
+        > .dashboard-space-element {
+            width: 26em;
+            margin-left: auto;
+            margin-right: 1%;
+            visibility: hidden;
+        }
     }
 }

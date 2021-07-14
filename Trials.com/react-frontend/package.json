@@ -74,6 +74,7 @@
     },
     "devDependencies": {
         "@prisma/cli": "^2.14.0",
+        "@types/date-and-time": "^0.13.0",
         "@types/react-bootstrap": "^0.32.25",
         "@types/react-dom": "^17.0.0",
         "@types/react-input-mask": "^3.0.0",

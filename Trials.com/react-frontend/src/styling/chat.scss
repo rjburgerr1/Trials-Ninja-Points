@@ -1,0 +1,84 @@
+@import "~bootstrap/scss/bootstrap";
+@import "palette";
+
+.chat {
+    -ms-overflow-style: none; // Hide Scrollbar Internet Explorer 10+
+    border: 1px solid $mustard;
+    height: 600px;
+    overflow-y: scroll; // Hide Scrollbar for table, with browser compatibility
+    scrollbar-width: none; // Hide Scrollbar Firefox
+
+    &::-webkit-scrollbar {
+        // Hide Scrollbar
+        height: 0;
+        width: 0;
+    }
+
+    > .chat-message-body {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+
+        > .chat-message-container {
+            flex: 0 0 100%; // Prevent flex items from shrinking to fit more messages on one line
+            margin-top: 0.8em;
+            word-break: break-word;
+
+            > .chat-message {
+                color: $oxford-blue-accent;
+                font-size: 12px;
+                margin-left: 1em;
+                transition: 0.3s;
+
+                &:hover {
+                    color: lighten($oxford-blue-accent, 10%);
+                }
+            }
+
+            > .chat-time {
+                align-self: flex-end;
+                color: $white;
+                font-size: 10px;
+                margin-left: 80%;
+            }
+
+            > .chat-username {
+                color: $white;
+                border: 2px solid $mustard;
+                border-radius: 10px;
+                font-weight: bold;
+                margin-left: 0.2em;
+                padding: 0.3em;
+                transition: 0.4s;
+
+                &:hover {
+                    background-color: $oxford-blue-accent;
+                    color: $black;
+                }
+            }
+        }
+    }
+    > .chat-send-message {
+        display: flex;
+        position: sticky; // Keeps Top bar in chat windows always on top
+        top: 0; // Goes with position:sticky
+
+        > .chat-send-message-button {
+            background-color: $oxford-blue-accent;
+            border: 1px solid $black;
+            transition: 0.4s;
+
+            &:hover {
+                background-color: lighten($oxford-blue-accent, 10%);
+            }
+
+            &:active {
+                background-color: lighten($oxford-blue-accent, 20%);
+            }
+        }
+
+        > .chat-send-message-input {
+            flex-grow: 1;
+        }
+    }
+}

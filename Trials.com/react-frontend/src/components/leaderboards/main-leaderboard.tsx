@@ -195,6 +195,7 @@ export const MainLeaderboard = () => {
                         <input
                             className="page-number-input"
                             defaultValue={pageIndex + 1}
+                            max={pageOptions.length}
                             min="1"
                             onChange={(e) => {
                                 validatePageNumber(

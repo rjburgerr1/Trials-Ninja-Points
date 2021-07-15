@@ -40,12 +40,11 @@
                         display: flex !important; // Override element.style because JS is injecting inline-block as the style
                         justify-content: center;
                         height: 24px; // Size of table cells
+                        transition: 0.4s;
                         width: 200px;
-                        //z-index: 1;
 
                         &:hover {
                             color: $cadet;
-                            transition: 0.4s;
                         }
 
                         > .column-sort-icon {
@@ -96,6 +95,7 @@
                     > .leaderboard-body-row-value {
                         color: $white;
                         height: 100%;
+                        transition: 0.4s;
 
                         > a {
                             color: $mustard;
@@ -103,7 +103,6 @@
 
                         &:hover {
                             color: $mustard;
-                            transition: 0.4s;
                         }
 
                         text-align: center;

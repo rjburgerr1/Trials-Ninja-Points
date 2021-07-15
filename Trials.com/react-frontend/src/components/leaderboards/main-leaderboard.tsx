@@ -75,6 +75,14 @@ export const MainLeaderboard = () => {
 
     const { pageIndex, pageSize } = state;
 
+    const validatePageNumber = (pageNumber: number, maxPageNumber: number) => {
+        console.log(pageNumber);
+        console.log(maxPageNumber);
+        if (pageNumber <= maxPageNumber && pageNumber >= 0) {
+            gotoPage(pageNumber);
+        }
+    };
+
     return (
         <div className="main-leaderboard">
             <div className="leaderboard-info"></div>
@@ -185,15 +193,16 @@ export const MainLeaderboard = () => {
                     <span className="page-number-input-container">
                         <label className="page-label">Page</label>
                         <input
-                            type="number"
-                            defaultValue={pageIndex + 1}
-                            onChange={(e) => {
-                                const pageNumber = e.target.value
-                                    ? Number(e.target.value) - 1
-                                    : 0;
-                                gotoPage(pageNumber);
-                            }}
                             className="page-number-input"
+                            defaultValue={pageIndex + 1}
+                            min="1"
+                            onChange={(e) => {
+                                validatePageNumber(
+                                    Number(e.target.value) - 1,
+                                    pageOptions.length
+                                );
+                            }}
+                            type="number"
                         />
                     </span>
 

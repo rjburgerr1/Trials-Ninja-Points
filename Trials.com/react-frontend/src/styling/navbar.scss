@@ -49,10 +49,10 @@
         > .navbar-brand,
         > .nav > .navbar-link {
             color: $white;
+            transition: 0.4s;
 
             &:hover {
                 color: $oxford-blue-accent;
-                transition: 0.4s;
             }
         }
 
@@ -65,11 +65,11 @@
                 border-bottom: 1px solid transparent;
                 padding-left: 3%;
                 padding-right: 3%;
+                transition: 0.4s;
 
                 // .active and not :active since react bootstrap styling is weird 1)
                 &.active {
                     color: $mustard;
-                    transition: 0.4s;
                 }
 
                 &:focus {

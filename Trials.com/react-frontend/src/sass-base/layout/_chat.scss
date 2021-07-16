@@ -1,5 +1,5 @@
-@import "~bootstrap/scss/bootstrap";
-@import "palette";
+@use "./abstracts/colors" as *;
+@use "../sass-base/components/buttons";
 
 .chat {
     -ms-overflow-style: none; // Hide Scrollbar Internet Explorer 10+
@@ -64,17 +64,7 @@
         top: 0; // Goes with position:sticky
 
         > .chat-send-message-button {
-            background-color: $oxford-blue-accent;
-            border: 1px solid $black;
-            transition: 0.4s;
-
-            &:hover {
-                background-color: lighten($oxford-blue-accent, 10%);
-            }
-
-            &:active {
-                background-color: lighten($oxford-blue-accent, 20%);
-            }
+            @include buttons.button;
         }
 
         > .chat-send-message-input {

@@ -10,7 +10,7 @@ import UpdateProfile from "./components/update-profile";
 import SubmitRun from "./components/submit-run";
 import { Runs } from "./components/leaderboards/runs-leaderboard";
 import Profile from "./pages/profile";
-import "./styling/global.scss";
+import "./sass-base/main.scss";
 
 function App() {
     return (

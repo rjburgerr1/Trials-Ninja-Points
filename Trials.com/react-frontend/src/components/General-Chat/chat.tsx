@@ -2,7 +2,6 @@ import { Field, Form, FormikProvider, useFormik } from "formik";
 import { useEffect, useState, useContext, useRef } from "react";
 import { SocketProvider } from "../../contexts/socket-context";
 import { useAuth } from "../../contexts/auth-context";
-import "../../styling/chat.scss";
 import date from "date-and-time";
 
 interface messages {

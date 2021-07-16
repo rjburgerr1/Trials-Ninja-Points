@@ -1,4 +1,3 @@
-import "../styling/dashboard.scss";
 import { Chat } from "../components/General-Chat/chat";
 import { MainLeaderboard } from "../components/leaderboards/main-leaderboard";
 import NavBar from "../components/navbar";

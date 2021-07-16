@@ -5,7 +5,6 @@ import {
     faSortAmountUpAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../../styling/main-leaderboard.scss";
 import {
     useTable,
     useBlockLayout,
@@ -76,8 +75,6 @@ export const MainLeaderboard = () => {
     const { pageIndex, pageSize } = state;
 
     const validatePageNumber = (pageNumber: number, maxPageNumber: number) => {
-        console.log(pageNumber);
-        console.log(maxPageNumber);
         if (pageNumber <= maxPageNumber && pageNumber >= 0) {
             gotoPage(pageNumber);
         }

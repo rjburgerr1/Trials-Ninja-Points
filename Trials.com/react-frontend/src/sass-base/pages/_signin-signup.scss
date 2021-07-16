@@ -1,9 +1,9 @@
+@use "../abstracts/colors" as *;
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
-@import "palette";
 
 .signin-signup-outer {
     height: 100vh;
-    background-image: url("../images/Fusion\ Title\ Screen.jpg");
+    background-image: url("../../images/Fusion\ Title\ Screen.jpg");
     * {
         box-sizing: border-box;
     }

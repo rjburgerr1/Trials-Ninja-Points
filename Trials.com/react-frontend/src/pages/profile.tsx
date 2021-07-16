@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../components/navbar";
 import { faUserNinja } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../styling/profile.scss";
 import axios from "axios";
 import Avatar from "@material-ui/core/Avatar";
 import { useAuth } from "../contexts/auth-context";

@@ -1,5 +1,6 @@
-@import "~bootstrap/scss/bootstrap";
-@import "palette";
+@use "../sass-base/components/buttons";
+
+@use "./abstracts/colors" as *;
 
 // Create a partial for leaderboards and integrate it with this file instead of current implementation
 
@@ -165,13 +166,7 @@
 
         > .page-number-nav {
             :nth-child(n) {
-                // Applies to each page navigation button
-                background-color: $mustard;
-                border: 1px solid $black;
-            }
-
-            :disabled {
-                background-color: darken($mustard, 50%);
+                @include buttons.button;
             }
         }
     }

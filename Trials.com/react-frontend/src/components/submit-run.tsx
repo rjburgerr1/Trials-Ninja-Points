@@ -1,6 +1,5 @@
 import React from "react";
 
-import "../styling/form.scss";
 import { useFormik, Formik } from "formik";
 import InputMask from "react-input-mask";
 import Slider from "@material-ui/core/Slider";

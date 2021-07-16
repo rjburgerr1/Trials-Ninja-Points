@@ -1,5 +1,4 @@
-@import "~bootstrap/scss/bootstrap";
-@import "palette";
+@use "../abstracts/colors" as *;
 
 .profile > .profile-info {
     background-color: $oxford-blue;
@@ -58,7 +57,7 @@
     }
 
     > .profileicon {
-        background-image: url("../images/defaultProfileBanner.png");
+        background-image: url("../../images/defaultProfileBanner.png");
         background-position: center;
         border-bottom: 1px solid $cadet;
         display: flex;

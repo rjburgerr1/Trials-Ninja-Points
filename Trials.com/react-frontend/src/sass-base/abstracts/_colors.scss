@@ -20,6 +20,12 @@ $blast-off-bronze: #af7a6dff;
 $mustard: #fdd643ff;
 $white: #fefcfdff;
 $cadet: #5d737eff;
+$oxford-blue-monochromatic: #001025;
+$oxford-blue-complement: #250f00;
+$oxford-blue-accent: lighten($oxford-blue, 70%);
+$oxford-blue-accent-light: lighten($oxford-blue-accent, 10%);
+$oxford-blue-accent-lighter: lighten($oxford-blue-accent, 20%);
+$black: black;
 
 /* SCSS HSL */
 $oxford-blue: hsla(214, 100%, 7%, 1);
@@ -113,6 +119,3 @@ $gradient-radial: radial-gradient(
     #fefcfdff,
     #5d737eff
 );
-
-// Custom Vars
-$oxford-blue-accent: lighten($oxford-blue, 70%);

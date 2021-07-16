@@ -1,0 +1,19 @@
+@use "../abstracts/colors" as *;
+
+@mixin button {
+    background-color: $oxford-blue-accent;
+    border: 1px solid $black;
+    transition: 0.3s;
+
+    &:hover {
+        background-color: $oxford-blue-accent-light;
+    }
+
+    &:active {
+        background-color: $oxford-blue-accent-lighter;
+    }
+
+    &:disabled {
+        background-color: desaturate(darken($oxford-blue-accent, 10%), 50%);
+    }
+}

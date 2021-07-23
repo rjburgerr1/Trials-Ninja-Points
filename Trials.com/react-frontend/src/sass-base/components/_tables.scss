@@ -1,0 +1,167 @@
+@use "../sass-base/components/buttons";
+@use "../abstracts/colors" as *;
+@mixin leaderboard {
+    > .leaderboard-table {
+        -ms-overflow-style: none; // Hide Scrollbar Internet Explorer 10+
+        border: 1px solid $mustard;
+        //Specifies the height of the leaderboard. the extra 1px includes the 1px border at the bottom of the lb
+        height: 600px;
+        overflow-y: scroll; // Hide Scrollbar for table, with browser compatibility
+        scrollbar-width: none; // Hide Scrollbar Firefox
+
+        &::-webkit-scrollbar {
+            // Hide Scrollbar
+            height: 0;
+            width: 0;
+        }
+
+        > .leaderboard-header {
+            background-color: $mustard;
+            box-shadow: 0 0.2em 8px $black;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+
+            > .leaderboard-header-row {
+                position: sticky;
+
+                // These columns are weird. Here is the layout for each:
+                // For every header column value, like "Username", there are three elements within that column area.
+                // The three items consist of the column name value, the sorting icon, and an invisible sorting icon.
+                // The point of the three elements is to center the column name in the middle of the parent container.
+                // The invisible sorting icon just matches the width of the sorting icon and makes centering the column
+                // name easy regardless of the width of sorting icon itself.
+                > .leaderboard-header-row-column {
+                    border-right: 1px solid $oxford-blue;
+                    display: flex !important; // Override element.style because JS is injecting inline-block as the style
+                    justify-content: center;
+                    height: 24px; // Size of table cells
+                    transition: 0.4s;
+                    width: 200px;
+
+                    &:hover {
+                        color: $cadet;
+                    }
+
+                    > .column-sort-icon {
+                        margin-left: auto;
+                        margin-right: 2%; // These margins must match .invisible-element
+
+                        > .column-sort-icon-invisible {
+                            visibility: hidden; // When no sorting is active
+                        }
+                    }
+
+                    > .invisible-element {
+                        margin-left: 2%;
+                        margin-right: auto; // These margins must match .column-sort-icon
+                        visibility: hidden;
+                    }
+
+                    > .leaderboard-header-row-value {
+                        text-align: center;
+                        white-space: nowrap;
+                    }
+                }
+            }
+        }
+
+        > .leaderboard-body {
+            > .leaderboard-body-row {
+                align-items: center;
+                border-bottom: 1px solid $black;
+                display: flex;
+
+                &:nth-child(even) {
+                    background-color: lighten($oxford-blue, 20%);
+
+                    &:hover {
+                        background-color: lighten($oxford-blue, 30%);
+                    }
+                }
+
+                &:nth-child(odd) {
+                    background-color: lighten($oxford-blue, 10%);
+
+                    &:hover {
+                        background-color: lighten($oxford-blue, 30%);
+                    }
+                }
+
+                > .leaderboard-body-row-value {
+                    color: $white;
+                    height: 100%;
+                    transition: 0.4s;
+
+                    > a {
+                        color: $mustard;
+                    }
+
+                    &:hover {
+                        color: $mustard;
+                    }
+
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
+
+@mixin leaderboard-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.175rem;
+
+    > .page-info {
+        display: flex;
+        flex-grow: 1;
+        justify-content: center;
+
+        > .page-number-container {
+            color: $white;
+            margin-left: 5%;
+            margin-right: 5%;
+            white-space: nowrap;
+
+            > .page-number {
+                color: $mustard;
+            }
+        }
+
+        > .page-number-input-container {
+            display: flex;
+
+            > .page-number-input {
+                background-color: $oxford-blue-accent;
+                border: none;
+                height: 25px;
+                min-width: 0;
+                text-align: center;
+                width: 50px;
+            }
+
+            > .page-label {
+                background-color: $mustard;
+                border: 1px solid $mustard;
+                color: $black;
+                height: 25px;
+                padding-left: 3%;
+                padding-right: 3%;
+            }
+        }
+
+        > .show-page-size {
+            background-color: $oxford-blue-accent;
+            border: none;
+            height: 25px;
+            text-align: center;
+        }
+    }
+
+    > .page-number-nav {
+        :nth-child(n) {
+            @include buttons.button;
+        }
+    }
+}

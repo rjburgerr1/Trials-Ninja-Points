@@ -1,30 +1,31 @@
-import React, { useEffect, useMemo, useState } from "react";
 import {
-    useTable,
+    Column,
     useBlockLayout,
     usePagination,
-    Column,
     useSortBy,
+    useTable,
 } from "react-table";
-import { useSticky } from "react-table-sticky";
-import { Styles } from "./TableStyles";
-import NavBar from "../navbar";
 import { COLUMNS } from "./runs-leaderboard-columns";
-import "./table.css";
+import {
+    faSortAmountDown,
+    faSortAmountUpAlt,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getRunsLB } from "../data";
+import { useEffect, useMemo, useState } from "react";
+import { useSticky } from "react-table-sticky";
 
 const resolveData = async (setData: any) => {
     try {
         const data = await getRunsLB();
-
         setData(data);
     } catch (err) {
         console.error(err.message);
     }
 };
-export const Runs = (props: any) => {
-    const columns: Array<Column> = useMemo(() => COLUMNS, []);
+export const RunsLeaderboard = (props: any) => {
     let [data, setData] = useState([{}]);
+    const columns: Array<Column> = useMemo(() => COLUMNS, []);
 
     useEffect(() => {
         resolveData(setData);
@@ -59,100 +60,77 @@ export const Runs = (props: any) => {
 
     const { pageIndex, pageSize } = state;
 
+    const validatePageNumber = (pageNumber: number, maxPageNumber: number) => {
+        if (pageNumber <= maxPageNumber && pageNumber >= 0) {
+            gotoPage(pageNumber);
+        }
+    };
+
     return (
-        <>
-            <NavBar {...props} />
-            <div>
-                <span>
-                    Page{" "}
-                    <strong>
-                        {pageIndex + 1} of {pageOptions.length}
-                    </strong>{" "}
-                </span>
-                <span>
-                    | Go to page:{" "}
-                    <input
-                        type="number"
-                        defaultValue={pageIndex + 1}
-                        onChange={(e) => {
-                            const pageNumber = e.target.value
-                                ? Number(e.target.value) - 1
-                                : 0;
-                            gotoPage(pageNumber);
-                        }}
-                    />
-                </span>
-                <select
-                    value={pageSize}
-                    onChange={(e) => setPageSize(Number(e.target.value))}
-                >
-                    {[10, 25, 50].map((pageSize) => (
-                        <option key={pageSize} value={pageSize}>
-                            Show {pageSize}
-                        </option>
-                    ))}
-                </select>
-                <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-                    {"<<"}
-                </button>
-                <button
-                    onClick={() => previousPage()}
-                    disabled={!canPreviousPage}
-                >
-                    Previous
-                </button>
-                <button onClick={() => nextPage()} disabled={!canNextPage}>
-                    Next
-                </button>
-                <button
-                    onClick={() => gotoPage(pageCount - 1)}
-                    disabled={!canNextPage}
-                >
-                    {">>"}
-                </button>
-            </div>
-            <Styles>
-                <div
-                    {...getTableProps()}
-                    className="table sticky"
-                    style={{ borderWidth: 0, height: 500 }}
-                >
-                    <div className="header">
+        <div className="leaderboard">
+            <div className="leaderboard-container">
+                <div {...getTableProps()} className="leaderboard-table">
+                    <div className="leaderboard-header">
                         {headerGroups.map((headerGroup) => (
                             <div
                                 {...headerGroup.getHeaderGroupProps()}
-                                className="tr"
+                                className="leaderboard-header-row"
                             >
                                 {headerGroup.headers.map((column) => (
                                     <div
                                         {...column.getHeaderProps(
                                             column.getSortByToggleProps()
                                         )}
-                                        className="th"
+                                        className="leaderboard-header-row-column"
                                     >
-                                        {column.render("Header")}
-                                        <span>
-                                            {column.isSorted
-                                                ? column.isSortedDesc
-                                                    ? "\\/"
-                                                    : "^"
-                                                : ""}
+                                        <span className="invisible-element">
+                                            <FontAwesomeIcon
+                                                icon={faSortAmountDown}
+                                                size="1x"
+                                            />
+                                        </span>
+                                        <span className="leaderboard-header-row-value">
+                                            {column.render("Header")}
+                                        </span>
+                                        <span className="column-sort-icon">
+                                            {column.isSorted ? (
+                                                column.isSortedDesc ? (
+                                                    <FontAwesomeIcon
+                                                        icon={faSortAmountDown}
+                                                        size="1x"
+                                                    />
+                                                ) : (
+                                                    <FontAwesomeIcon
+                                                        icon={faSortAmountUpAlt}
+                                                        size="1x"
+                                                    />
+                                                )
+                                            ) : (
+                                                <FontAwesomeIcon
+                                                    icon={faSortAmountUpAlt}
+                                                    size="1x"
+                                                    className="column-sort-icon-invisible"
+                                                />
+                                            )}
                                         </span>
                                     </div>
                                 ))}
                             </div>
                         ))}
                     </div>
-                    <div {...getTableBodyProps()} className="body">
+                    <div {...getTableBodyProps()} className="leaderboard-body">
                         {page.map((row) => {
                             prepareRow(row);
 
                             return (
-                                <div {...row.getRowProps()} className="tr">
+                                <div
+                                    {...row.getRowProps()}
+                                    className="leaderboard-body-row"
+                                >
                                     {row.cells.map((cell) => (
                                         <div
                                             {...cell.getCellProps()}
-                                            className="td"
+                                            className="leaderboard-body-row-value"
                                         >
                                             {cell.column.Header ===
                                             "Username" ? (
@@ -174,7 +152,82 @@ export const Runs = (props: any) => {
                         })}
                     </div>
                 </div>
-            </Styles>
-        </>
+            </div>
+            <div className="leaderboard-info">
+                <span className="page-number-nav">
+                    <button
+                        className="first-page"
+                        onClick={() => gotoPage(0)}
+                        disabled={!canPreviousPage}
+                    >
+                        {"<<"}
+                    </button>
+                    <button
+                        className="previous-page"
+                        onClick={() => previousPage()}
+                        disabled={!canPreviousPage}
+                    >
+                        Previous
+                    </button>
+                </span>
+
+                <div className="page-info">
+                    <span className="page-number-input-container">
+                        <label className="page-label">Page</label>
+                        <input
+                            className="page-number-input"
+                            defaultValue={pageIndex + 1}
+                            max={pageOptions.length}
+                            min="1"
+                            onChange={(e) => {
+                                validatePageNumber(
+                                    Number(e.target.value) - 1,
+                                    pageOptions.length
+                                );
+                            }}
+                            type="number"
+                        />
+                    </span>
+
+                    <span className="page-number-container">
+                        Page{" "}
+                        <strong className="page-number">{pageIndex + 1}</strong>{" "}
+                        -
+                        <strong className="page-number">
+                            {" "}
+                            {pageOptions.length}
+                        </strong>
+                    </span>
+
+                    <select
+                        className="show-page-size"
+                        value={pageSize}
+                        onChange={(e) => setPageSize(Number(e.target.value))}
+                    >
+                        {[50, 100, 250].map((pageSize) => (
+                            <option key={pageSize} value={pageSize}>
+                                Show {pageSize}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <span className="page-number-nav">
+                    <button
+                        className="next-page"
+                        onClick={() => nextPage()}
+                        disabled={!canNextPage}
+                    >
+                        Next
+                    </button>
+                    <button
+                        className="last-page"
+                        onClick={() => gotoPage(pageCount - 1)}
+                        disabled={!canNextPage}
+                    >
+                        {">>"}
+                    </button>
+                </span>
+            </div>
+        </div>
     );
 };

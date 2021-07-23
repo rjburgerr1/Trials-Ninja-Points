@@ -1,21 +1,18 @@
-import React, { useEffect, useMemo, useState } from "react";
-
+import { COLUMNS } from "./main-leaderboard-columns";
+import {
+    Column,
+    useBlockLayout,
+    usePagination,
+    useSortBy,
+    useTable,
+} from "react-table";
 import {
     faSortAmountDown,
     faSortAmountUpAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    useTable,
-    useBlockLayout,
-    usePagination,
-    Column,
-    useSortBy,
-} from "react-table";
+import { useEffect, useMemo, useState } from "react";
 import { useSticky } from "react-table-sticky";
-
-import { COLUMNS } from "./main-leaderboard-columns";
-
 import getData from "../data";
 
 const resolveData = async (setData: any) => {
@@ -29,8 +26,8 @@ const resolveData = async (setData: any) => {
 };
 
 export const MainLeaderboard = () => {
-    const columns: Array<Column> = useMemo(() => COLUMNS, []);
     let [data, setData] = useState([{}]);
+    const columns: Array<Column> = useMemo(() => COLUMNS, []);
 
     useEffect(() => {
         resolveData(setData);
@@ -81,10 +78,9 @@ export const MainLeaderboard = () => {
     };
 
     return (
-        <div className="main-leaderboard">
-            <div className="leaderboard-info"></div>
+        <div className="leaderboard">
             <div className="leaderboard-container">
-                <div {...getTableProps()} className="leaderboard">
+                <div {...getTableProps()} className="leaderboard-table">
                     <div className="leaderboard-header">
                         {headerGroups.map((headerGroup) => (
                             <div

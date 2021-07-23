@@ -1,0 +1,14 @@
+@use "../sass-base/components/tables";
+@use "./abstracts/colors" as *;
+
+// Create a partial for leaderboards and integrate it with this file instead of current implementation
+
+.leaderboard {
+    > .leaderboard-container {
+        @include tables.leaderboard;
+    }
+
+    > .leaderboard-info {
+        @include tables.leaderboard-info;
+    }
+}

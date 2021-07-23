@@ -8,7 +8,7 @@ import PrivateRoute from "./components/private-route";
 import ResetPassword from "./components/Authentication/reset-password";
 import UpdateProfile from "./components/update-profile";
 import SubmitRun from "./components/submit-run";
-import { Runs } from "./components/leaderboards/runs-leaderboard";
+import Runs from "./pages/runs";
 import Profile from "./pages/profile";
 import "./sass-base/main.scss";
 

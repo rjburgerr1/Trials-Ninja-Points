@@ -11,6 +11,7 @@ import SubmitRun from "./components/submit-run";
 import Runs from "./pages/runs";
 import Profile from "./pages/profile";
 import "./sass-base/main.scss";
+import Tracks from "./pages/tracks";
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                             component={ResetPassword}
                         />
                         <Route path="/runs" component={Runs} />
+                        <Route path="/tracks" component={Tracks} />
                         <PrivateRoute
                             path="/update-profile"
                             component={UpdateProfile}

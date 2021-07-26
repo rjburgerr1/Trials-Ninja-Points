@@ -1,3 +1,4 @@
+import { COLUMNS } from "./tracks-leaderboard-columns";
 import {
     Column,
     useBlockLayout,
@@ -5,30 +6,33 @@ import {
     useSortBy,
     useTable,
 } from "react-table";
-import { COLUMNS } from "./runs-leaderboard-columns";
 import {
     faSortAmountDown,
     faSortAmountUpAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getRunsLB } from "../data";
 import { useEffect, useMemo, useState } from "react";
 import { useSticky } from "react-table-sticky";
+import { getTracksLB } from "../data";
 
 const resolveData = async (setData: any) => {
     try {
-        const data = await getRunsLB();
+        console.log("Request Track Data");
+        const data = await getTracksLB();
+
         setData(data);
     } catch (err) {
         console.error(err.message);
     }
 };
-export const RunsLeaderboard = () => {
+
+export const TracksLeaderboard = () => {
     let [data, setData] = useState([{}]);
     const columns: Array<Column> = useMemo(() => COLUMNS, []);
 
     useEffect(() => {
         resolveData(setData);
+        console.log(data);
     }, []); // includes empty dependency array
 
     const {
@@ -50,7 +54,16 @@ export const RunsLeaderboard = () => {
         {
             columns,
             data,
-            initialState: { pageIndex: 0 },
+            initialState: {
+                pageIndex: 0,
+                pageSize: 50,
+                sortBy: [
+                    {
+                        id: "total_ninja_points",
+                        desc: true,
+                    },
+                ],
+            },
         },
         useSortBy,
         useBlockLayout,

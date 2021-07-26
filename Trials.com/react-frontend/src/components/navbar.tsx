@@ -26,6 +26,9 @@ export default function NavBar(props: any) {
                     <Nav.Link href="/runs" className="navbar-link">
                         Runs
                     </Nav.Link>
+                    <Nav.Link href="/tracks" className="navbar-link">
+                        Tracks
+                    </Nav.Link>
                 </Nav>
                 <NavDropdown
                     alignRight

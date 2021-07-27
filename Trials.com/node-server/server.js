@@ -7,6 +7,7 @@ const SignupRoute = require("./routes/signup");
 const ChatRoute = require("./routes/chat");
 const ProfileRoute = require("./routes/profile");
 const DataRoute = require("./routes/data");
+const ImageUpload = require("./routes/image-upload");
 const app = express();
 
 // Use Node.js body parsing middleware
@@ -18,7 +19,7 @@ app.use(
 );
 app.use(function (req, res, next) {
     //console.log(JSON.stringify(req.headers));
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
     res.header(
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept"
@@ -30,6 +31,7 @@ DataRoute(app);
 SubmitRoute(app);
 SignupRoute(app);
 ProfileRoute(app);
+ImageUpload(app);
 
 // Start the server
 const server = app.listen(port, (error) => {

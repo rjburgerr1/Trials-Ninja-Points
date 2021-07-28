@@ -1,5 +1,6 @@
 @use "../sass-base/components/buttons";
 @use "../abstracts/colors" as *;
+
 @mixin leaderboard {
     > .leaderboard-table {
         -ms-overflow-style: none; // Hide Scrollbar Internet Explorer 10+
@@ -92,6 +93,10 @@
                     color: $white;
                     height: 100%;
                     transition: 0.4s;
+
+                    > .country-flag {
+                        font-size: 2em;
+                    }
 
                     > a {
                         color: $mustard;

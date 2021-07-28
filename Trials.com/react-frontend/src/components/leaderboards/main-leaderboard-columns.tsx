@@ -18,6 +18,7 @@ export const COLUMNS = [
     {
         Header: "Origin",
         accessor: "country",
+        width: 90,
     },
     {
         Header: "Total NP",

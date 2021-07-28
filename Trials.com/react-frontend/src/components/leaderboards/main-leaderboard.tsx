@@ -1,6 +1,8 @@
 import { COLUMNS } from "./main-leaderboard-columns";
 import {
+    Cell,
     Column,
+    Row,
     useBlockLayout,
     usePagination,
     useSortBy,
@@ -14,6 +16,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useMemo, useState } from "react";
 import { useSticky } from "react-table-sticky";
 import getData from "../data";
+import ReactCountryFlag from "react-country-flag";
 
 const resolveData = async (setData: any) => {
     try {
@@ -74,6 +77,30 @@ export const MainLeaderboard = () => {
     const validatePageNumber = (pageNumber: number, maxPageNumber: number) => {
         if (pageNumber <= maxPageNumber && pageNumber >= 0) {
             gotoPage(pageNumber);
+        }
+    };
+
+    const setTableBodyCell = (cell: Cell, row: Row) => {
+        if (cell.column.Header === "Username") {
+            console.log("Username");
+            return (
+                <a href={"profile/" + row.values.username}>
+                    {cell.render("Cell")}
+                </a>
+            );
+        } else if (cell.column.Header === "Origin") {
+            console.log("Origin");
+            return (
+                <ReactCountryFlag
+                    className="country-flag"
+                    countryCode={cell.value}
+                    svg
+                    title={cell.value}
+                />
+            );
+        } else {
+            console.log("Else");
+            return <div>{cell.render("Cell")}</div>;
         }
     };
 
@@ -143,19 +170,7 @@ export const MainLeaderboard = () => {
                                             {...cell.getCellProps()}
                                             className="leaderboard-body-row-value"
                                         >
-                                            {cell.column.Header ===
-                                            "Username" ? (
-                                                <a
-                                                    href={
-                                                        "profile/" +
-                                                        row.values.username
-                                                    }
-                                                >
-                                                    {cell.render("Cell")}
-                                                </a>
-                                            ) : (
-                                                <div>{cell.render("Cell")}</div>
-                                            )}
+                                            {setTableBodyCell(cell, row)}
                                         </div>
                                     ))}
                                 </div>

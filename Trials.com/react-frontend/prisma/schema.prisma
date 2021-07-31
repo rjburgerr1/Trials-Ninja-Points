@@ -7,39 +7,9 @@ datasource db {
   url      = "mysql://root:pass@localhost:3306/trialsnp"
 }
 
-model runs {
-  rider           String                @db.VarChar(45)
-  rank            Int?
-  faults          Int
-  time            String                @db.VarChar(9)
-  trackName       String                @map("track-name") @db.VarChar(45)
-  ninjaPoints     Decimal?              @map("ninja-points") @db.Decimal(10, 0)
-  ninjaLevel      Decimal               @map("ninja-level") @db.Decimal(10, 0)
-  length          runs_length
-  faultSponginess runs_fault_sponginess @map("fault-sponginess")
-  rating          Decimal?              @db.Decimal(10, 0)
-  creator         String                @db.VarChar(45)
-  creators        creators              @relation(fields: [creator], references: [creator])
-  riders          riders                @relation(fields: [rider], references: [rider])
-
-  @@id([rider, trackName])
-  @@index([creator], name: "creator_idx")
-  @@index([rider], name: "rider_idx")
-}
-
-model tracks {
-  track_name       String                   @map("track-name") @db.VarChar(45)
-  id               Int                      @id @default(autoincrement())
-  creator          String                   @db.VarChar(45)
-  ninja_level      String?                  @map("ninja-level") @db.VarChar(45)
-  length           tracks_length?
-  average_faults   Int?                     @map("average-faults")
-  fault_sponginess tracks_fault_sponginess? @map("fault-sponginess")
-}
-
-model riders {
-  rider String @id @db.VarChar(45)
-  runs  runs[]
+model creators {
+  creator String @id @db.VarChar(45)
+  runs    runs[]
 }
 
 model profiles {
@@ -59,6 +29,45 @@ model profiles {
   bio                String?  @db.VarChar(300)
 }
 
+model riders {
+  rider String @id @db.VarChar(45)
+  runs  runs[]
+}
+
+model runs {
+  rider            String                @db.VarChar(45)
+  rank             Int?
+  faults           Int
+  time             String                @db.VarChar(9)
+  track_name       String                @map("track-name") @db.VarChar(45)
+  ninja_points     Decimal?              @map("ninja-points") @db.Decimal(10, 0)
+  ninja_level      Decimal               @map("ninja-level") @db.Decimal(10, 0)
+  length           runs_length
+  fault_sponginess runs_fault_sponginess @map("fault-sponginess")
+  rating           Decimal?              @db.Decimal(10, 0)
+  creator          String                @db.VarChar(45)
+  creators         creators              @relation(fields: [creator], references: [creator])
+  riders           riders                @relation(fields: [rider], references: [rider])
+  tracks           tracks                @relation(fields: [track_name], references: [track_name])
+
+  @@id([rider, track_name])
+  @@index([creator], name: "creator_idx")
+  @@index([rider], name: "rider_idx")
+  @@index([track_name], name: "track-name_idx")
+}
+
+model tracks {
+  track_name       String                   @map("track-name") @db.VarChar(45)
+  creator          String                   @db.VarChar(45)
+  ninja_level      String?                  @map("ninja-level") @db.VarChar(45)
+  length           tracks_length?
+  average_faults   Int?                     @map("average-faults")
+  fault_sponginess tracks_fault_sponginess? @map("fault-sponginess")
+  runs             runs[]
+
+  @@id([track_name, creator])
+}
+
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model weightage {
   rider            String                     @db.VarChar(45)
@@ -74,11 +83,6 @@ model weightage {
   nHighestRun      BigInt                     @default(0) @db.UnsignedBigInt
 
   @@ignore
-}
-
-model creators {
-  creator String @id @db.VarChar(45)
-  runs    runs[]
 }
 
 enum runs_length {

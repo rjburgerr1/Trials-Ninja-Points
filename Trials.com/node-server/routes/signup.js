@@ -1,4 +1,6 @@
-const { PrismaClient } = require("../../react-frontend/prisma/client");
+const {
+    PrismaClient,
+} = require("../../react-frontend/node_modules/.prisma/client");
 const prisma = new PrismaClient();
 
 const router = (app) => {

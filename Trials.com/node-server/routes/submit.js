@@ -1,4 +1,6 @@
-const { PrismaClient } = require("../../react-frontend/prisma/client");
+const {
+    PrismaClient,
+} = require("../../react-frontend/node_modules/.prisma/client");
 const prisma = new PrismaClient();
 // const { request } = require("express"); Keep for now, might need later
 
@@ -28,11 +30,10 @@ const router = (app) => {
                     rank: run.rank,
                     faults: run.faults,
                     time: run.time,
-                    trackName: run.trackName,
-                    ninjaPoints: run.ninjaPoints,
-                    ninjaLevel: run.ninjaLevel,
+                    ninja_points: run.ninjaPoints,
+                    ninja_level: run.ninjaLevel,
                     length: run.length,
-                    faultSponginess: run.faultSponginess,
+                    fault_sponginess: run.faultSponginess,
                     rating: run.rating,
                     riders: {
                         connectOrCreate: {
@@ -44,6 +45,20 @@ const router = (app) => {
                         connectOrCreate: {
                             where: { creator: run.creator },
                             create: { creator: run.creator },
+                        },
+                    },
+                    tracks: {
+                        connectOrCreate: {
+                            where: {
+                                track_name_creator: {
+                                    track_name: run.trackName,
+                                    creator: run.creator,
+                                },
+                            },
+                            create: {
+                                track_name: run.trackName,
+                                creator: run.creator,
+                            },
                         },
                     },
                 }, // map run fields over data property

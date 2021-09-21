@@ -166,6 +166,7 @@ const Profile: React.FC = (props: any) => {
     );
 };
 
+/* Save these functions for later
 const getUsername = async (userID: string) => {
     // Currently only work for retrieving the current users data
     const result = await axios.get("/username", {
@@ -264,5 +265,6 @@ const getAliases = async (userID: string) => {
     });
     return result.data.aliases;
 };
+*/
 
 export default Profile;

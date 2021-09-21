@@ -9,7 +9,6 @@ const SignupComponent = () => {
     const passwordRef = useRef<HTMLInputElement>(null);
     const usernameRef = useRef<HTMLInputElement>(null);
 
-    const { currentUser } = useAuth();
     const { signup } = useAuth();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);

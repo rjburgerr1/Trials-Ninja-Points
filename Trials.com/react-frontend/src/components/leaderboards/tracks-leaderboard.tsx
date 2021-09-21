@@ -22,7 +22,7 @@ const resolveData = async (setData: any) => {
 
         setData(data);
     } catch (err) {
-        console.error(err.message);
+        console.error(err);
     }
 };
 

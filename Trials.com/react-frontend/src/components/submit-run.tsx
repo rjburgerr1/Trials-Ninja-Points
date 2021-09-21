@@ -4,7 +4,6 @@ import { useFormik, Formik } from "formik";
 import InputMask from "react-input-mask";
 import Slider from "@material-ui/core/Slider";
 import ReactStars from "react-rating-stars-component";
-import NavBar from "./navbar";
 import { CalcNP } from "./calculate-ninja-points";
 
 // Shape of form values
@@ -60,9 +59,8 @@ const SubmitRun = (props: any) => {
     };
 
     return (
-        <>
-            <NavBar {...props} />
-            <div id="submit-run-form">
+        <div className="submit-run-form-container">
+            <div className="submit-run-form" id="submit-run-form">
                 <Formik
                     initialValues={formik.initialValues}
                     onSubmit={(values, actions) => {
@@ -201,13 +199,15 @@ const SubmitRun = (props: any) => {
                         <label id="star-rating">
                             How much did you like the track?
                         </label>
-                        <ReactStars
-                            {...Stars}
-                            id="star-rating"
-                            color="#5d737eff"
-                            activeColor="#fdd643ff"
-                            onChange={setRating}
-                        />
+                        <div id="star-rating">
+                            <ReactStars
+                                {...Stars}
+                                id="star-rating"
+                                color="#5d737eff" // Cadet
+                                activeColor="#fdd643ff" // Yellow
+                                onChange={setRating}
+                            />
+                        </div>
 
                         <input
                             type="hidden"
@@ -221,31 +221,33 @@ const SubmitRun = (props: any) => {
                             id="ninjaPoints"
                             value={formik.values.ninjaPoints}
                         />
-                        <button
-                            id="form-button"
-                            type="submit"
-                            onClick={() => {
-                                // This onClick is formatted in such a way to prevent stale values being sent to database.
-                                // when formik values such as ninjaPoints are set with setFieldValue, the component will not rerender after submit.
-                                // This is why we have to calculate the NP value and inject it into formiks values inside the onClick signature.
-                                // This could be avoided with a change from using formik.values to useing props. However, there are benefits to using formik.values as "props" with forms
-                                const ninjaPoints = CalcNP({
-                                    ...formik.values,
-                                });
-                                const payload = {
-                                    ...formik.values,
-                                    ninjaPoints: ninjaPoints,
-                                }; // Construct the new payload, inject ninjaPoints that have just been calculated
-                                formik.setValues(payload); // Updates Formik's internal state
-                                formik.setSubmitting(false);
-                            }}
-                        >
-                            Submit
-                        </button>
+                        <div className="submit-button">
+                            <button
+                                id="form-button"
+                                type="submit"
+                                onClick={() => {
+                                    // This onClick is formatted in such a way to prevent stale values being sent to database.
+                                    // when formik values such as ninjaPoints are set with setFieldValue, the component will not rerender after submit.
+                                    // This is why we have to calculate the NP value and inject it into formiks values inside the onClick signature.
+                                    // This could be avoided with a change from using formik.values to useing props. However, there are benefits to using formik.values as "props" with forms
+                                    const ninjaPoints = CalcNP({
+                                        ...formik.values,
+                                    });
+                                    const payload = {
+                                        ...formik.values,
+                                        ninjaPoints: ninjaPoints,
+                                    }; // Construct the new payload, inject ninjaPoints that have just been calculated
+                                    formik.setValues(payload); // Updates Formik's internal state
+                                    formik.setSubmitting(false);
+                                }}
+                            >
+                                Submit
+                            </button>
+                        </div>
                     </form>
                 </Formik>
             </div>
-        </>
+        </div>
     );
 };
 

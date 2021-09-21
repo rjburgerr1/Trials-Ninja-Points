@@ -1,7 +1,6 @@
 import React from "react";
 import Login from "../components/Authentication/login";
 import Signup from "../components/Authentication/signup";
-import { Card } from "react-bootstrap";
 
 interface SigninSignupProps {
     container: HTMLElement;

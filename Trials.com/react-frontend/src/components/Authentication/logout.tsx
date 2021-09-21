@@ -15,7 +15,7 @@ export default function Logout() {
             await logout();
             history.push("/signin");
         } catch {
-            setError("Failed to log out");
+            setError("Failed to log out" + error);
         }
     }
 

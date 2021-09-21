@@ -1,0 +1,31 @@
+@use "../abstracts/colors" as *;
+
+.submit-run-container {
+    height: 100vh;
+    background-color: $oxford-blue;
+    overflow: hidden;
+
+    > .submit-run-header {
+    }
+    > .submit-run-body {
+        margin-top: 2%;
+        display: flex;
+        justify-content: space-between;
+
+        > .submit-run-chat {
+            width: 26em;
+            margin-left: 1%;
+            margin-right: auto;
+        }
+
+        > .submit-run-form {
+        }
+
+        > .submit-run-space-element {
+            width: 26em;
+            margin-left: auto;
+            margin-right: 1%;
+            visibility: hidden;
+        }
+    }
+}

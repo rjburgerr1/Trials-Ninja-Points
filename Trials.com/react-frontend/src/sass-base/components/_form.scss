@@ -14,8 +14,15 @@ form {
     }
 }
 
-#form-button {
-    background-color: $mustard;
+.submit-button {
+    display: flex;
+    justify-content: center;
+    #form-button {
+        background-color: $mustard;
+        &:hover {
+            background-color: lighten($mustard, 10%);
+        }
+    }
 }
 
 #submit-run-form {
@@ -26,7 +33,7 @@ form {
     }
 
     .MuiSlider-colorPrimary {
-        color: $blast-off-bronze;
+        color: $oxford-blue-accent;
     }
     .MuiSlider-markLabel {
         color: $cadet;
@@ -41,7 +48,7 @@ form {
     .MuiSlider-valueLabel {
         color: $mustard;
         & * {
-            font-size: 17px;
+            font-size: 15px;
             font-weight: bold;
             background-color: $mustard;
             color: black;
@@ -54,11 +61,7 @@ form {
         text-align: center;
     }
     form {
-        margin-top: 285px;
-        padding-top: 20px;
-        padding-bottom: 20px;
         margin-bottom: 150px;
-        border-radius: 20px;
         height: 60%;
     }
 
@@ -77,19 +80,18 @@ form {
     }
     input:focus,
     select:focus {
-        background-color: $blast-off-bronze;
+        background-color: $oxford-blue;
         outline-width: 0;
-        box-shadow: 0 0 0 2px lighten($cadet, 20%);
+        box-shadow: 0 0 0 2px lighten($oxford-blue-accent, 20%);
     }
 
-    div.form-inline-group {
+    .form-inline-group {
         display: grid;
         grid-template-columns: max-content max-content;
         grid-column-gap: 80px;
         grid-row-gap: 25px;
         margin-bottom: 10px;
         align-content: start;
-        padding-bottom: 20px;
 
         label {
             text-align: center;
@@ -97,7 +99,8 @@ form {
     }
 
     #star-rating {
-        margin-bottom: -10px;
+        display: flex;
+        justify-content: center;
     }
 
     input[type="number"]::-webkit-inner-spin-button {

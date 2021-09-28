@@ -1,4 +1,4 @@
-export function CalcNP(props) {
+export function CalcNP(props: any) {
     const faultSponginessWeight = CalcFaultSponginessWeight(
         props.faultSponginess
     );
@@ -18,13 +18,13 @@ export function CalcNP(props) {
     return ninjaPoints;
 }
 
-const CalcFaultWeight = (faults) => {
+const CalcFaultWeight = (faults: number) => {
     // faults is garnered from calculate-ninja-points props
     let faultWeight = Math.log(Number(faults) + 10) / Math.log(0.2) + 6;
     return faultWeight;
 };
 
-const CalcLengthWeight = (length) => {
+const CalcLengthWeight = (length: string) => {
     // length is garnered from calculate-ninja-points props
     switch (length) {
         case "Short":
@@ -38,13 +38,13 @@ const CalcLengthWeight = (length) => {
     }
 };
 
-const CalcNinjaLevelWeight = (ninjaLevel) => {
+const CalcNinjaLevelWeight = (ninjaLevel: number) => {
     // ninjaLevel is garnered from calculate-ninja-points props
     const ninjaLevelWeight = ninjaLevel * ninjaLevel;
     return ninjaLevelWeight;
 };
 
-const CalcTimeWeight = (time) => {
+const CalcTimeWeight = (time: any) => {
     // time is garnered from calculate-ninja-points props
     const timeMS =
         Number(time.substring(0, 2) * 60000) + // Minutes to seconds
@@ -53,7 +53,7 @@ const CalcTimeWeight = (time) => {
     return Number(-1 * ((1 / 1800000) * timeMS) + 2.3);
 };
 
-const CalcFaultSponginessWeight = (faultSponginess) => {
+const CalcFaultSponginessWeight = (faultSponginess: string) => {
     // faultSponginess is garnered from calculate-ninja-points props
     switch (faultSponginess) {
         case "Not_At_All":

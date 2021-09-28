@@ -1,20 +1,30 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import SignInSignUp from "./pages/signin-signup";
+import React, { useEffect, useState } from "react";
 import { AuthProvider } from "./contexts/auth-context";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { SocketProvider, socket } from "./contexts/socket-context";
 import Dashboard from "./pages/dashboard";
-import PrivateRoute from "./components/private-route";
+import Loading from "./components/loading";
 import ResetPassword from "./components/Authentication/reset-password";
-import UpdateProfile from "./components/update-profile";
-import SubmitRun from "./pages/submit-run";
 import Runs from "./pages/runs";
+import PrivateRoute from "./components/private-route";
 import Profile from "./pages/profile";
-import "./sass-base/main.scss";
+import SignInSignUp from "./pages/signin-signup";
+import SubmitRun from "./pages/submit-run";
+import SubmittedRun from "./pages/submitted-run";
 import Tracks from "./pages/tracks";
+import UpdateProfile from "./components/update-profile";
+import "./sass-base/main.scss";
 
 function App() {
-    return (
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        setIsLoaded(true);
+    }, []); // here
+
+    return !isLoaded ? (
+        <Loading type="spokes" color="green" />
+    ) : (
         <Router>
             <AuthProvider>
                 <SocketProvider.Provider value={socket}>
@@ -34,6 +44,10 @@ function App() {
                         <PrivateRoute
                             path="/submit-run"
                             component={SubmitRun}
+                        />
+                        <PrivateRoute
+                            path="/submitted-run"
+                            component={SubmittedRun}
                         />
                         <PrivateRoute
                             path="/profile/:user?"

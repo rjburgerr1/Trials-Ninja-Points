@@ -82,14 +82,12 @@ export const MainLeaderboard = () => {
 
     const setTableBodyCell = (cell: Cell, row: Row) => {
         if (cell.column.Header === "Username") {
-            console.log("Username");
             return (
                 <a href={"profile/" + row.values.username}>
                     {cell.render("Cell")}
                 </a>
             );
         } else if (cell.column.Header === "Origin") {
-            console.log("Origin");
             return (
                 <ReactCountryFlag
                     className="country-flag"
@@ -99,7 +97,6 @@ export const MainLeaderboard = () => {
                 />
             );
         } else {
-            console.log("Else");
             return <div>{cell.render("Cell")}</div>;
         }
     };

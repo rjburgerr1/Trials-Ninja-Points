@@ -47,7 +47,7 @@ const CalcNinjaLevelWeight = (ninjaLevel) => {
 const CalcTimeWeight = (time) => {
     // time is garnered from calculate-ninja-points props
     const timeMS =
-        Number(time.substring(0, 2) * 60000) + // Minutes to ms
+        Number(time.substring(0, 2) * 60000) + // Minutes to seconds
         Number(time.substring(3, 5) * 1000) + // Seconds to ms
         Number(time.substring(6, 9)); // ms
     return Number(-1 * ((1 / 1800000) * timeMS) + 2.3);
@@ -56,9 +56,9 @@ const CalcTimeWeight = (time) => {
 const CalcFaultSponginessWeight = (faultSponginess) => {
     // faultSponginess is garnered from calculate-ninja-points props
     switch (faultSponginess) {
-        case "Not At All":
+        case "Not_At_All":
             return 0.9;
-        case "Not Very":
+        case "Not_Very":
             return 1.2;
         case "Moderately":
             return 1.6;

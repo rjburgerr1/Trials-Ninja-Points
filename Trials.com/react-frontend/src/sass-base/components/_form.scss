@@ -87,11 +87,24 @@ form {
 
     .form-inline-group {
         display: grid;
-        grid-template-columns: max-content max-content;
-        grid-column-gap: 80px;
-        grid-row-gap: 25px;
+        grid-template-columns: max-content max-content 25em;
+        column-gap: 3em;
+        row-gap: 25px;
         margin-bottom: 10px;
         align-content: start;
+
+        .field-error {
+            color: $mustard;
+            display: inline-block !important;
+            -webkit-transition: opacity 0.5s ease-in;
+            -moz-transition: opacity 0.5s ease-in;
+            -o-transition: opacity 0.5s ease-in;
+            -ms-transition: opacity 0.5s ease-in;
+        }
+
+        .field-error-invisible {
+            opacity: 0;
+        }
 
         label {
             text-align: center;

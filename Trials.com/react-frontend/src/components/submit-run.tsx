@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { CalcNP } from "./calculate-ninja-points";
 import { Form, Field, Formik } from "formik";
@@ -6,7 +6,8 @@ import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import axios from "axios";
 import InputMask from "react-input-mask";
-import ReactStars from "react-rating-stars-component";
+import Ratings from "react-ratings-declarative";
+
 import Slider from "@material-ui/core/Slider";
 
 // Shape of form values
@@ -26,6 +27,7 @@ interface FormValues {
 
 const SubmitRun = () => {
     const history = useHistory();
+    const [rating, setRating] = useState();
 
     // According to formik documentation, use formik values in place of props to prevent bugs with formik and also prevent having two versions of the same prop
     // needing to be maintained inside props and formik values
@@ -58,12 +60,14 @@ const SubmitRun = () => {
         const ninjaPoints = await CalcNP({
             ...values,
         });
-
+        console.log(ninjaPoints);
         const payload = {
             ...values,
             ninjaPoints: ninjaPoints,
+            rating: rating,
         }; // Construct the new payload, inject ninjaPoints that have just been calculated
 
+        console.log(payload);
         try {
             await axios.post("/submitted-run", {
                 ...payload,
@@ -326,20 +330,21 @@ const SubmitRun = () => {
                                     How much did you like the track?
                                 </label>
                                 <div id="star-rating">
-                                    <ReactStars
-                                        {...Stars}
-                                        id="star-rating"
-                                        color="#5d737eff" // Cadet
-                                        activeColor="#fdd643ff" // Yellow
-                                    />
+                                    <Ratings
+                                        rating={rating}
+                                        widgetRatedColors="yellow"
+                                        widgetHoverColors="green"
+                                        widgetEmptyColors="red"
+                                        changeRating={setRating}
+                                    >
+                                        <Ratings.Widget />
+                                        <Ratings.Widget />
+                                        <Ratings.Widget />
+                                        <Ratings.Widget />
+                                        <Ratings.Widget />
+                                    </Ratings>
                                 </div>
                             </div>
-                            <Field
-                                type="hidden"
-                                name="rating"
-                                id="rating"
-                                value={props.values.rating}
-                            />
                             {props.errors.rating && props.touched.rating ? (
                                 <div className="field-error">
                                     {props.errors.rating}
@@ -430,14 +435,6 @@ const marks = [
         label: "9",
     },
 ];
-
-const Stars = {
-    size: 50,
-    value: 0,
-    isHalf: true,
-    a11y: true,
-    activeColor: "blue",
-};
 
 function valuetext(value: number) {
     return `${value}`;

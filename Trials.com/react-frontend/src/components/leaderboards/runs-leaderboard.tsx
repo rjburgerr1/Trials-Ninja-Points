@@ -19,8 +19,8 @@ const resolveData = async (setData: any) => {
     try {
         const data = await getRunsLB();
         setData(data);
-    } catch (err) {
-        console.error(err.message);
+    } catch (error: any) {
+        console.error(error.message);
     }
 };
 export const RunsLeaderboard = () => {
@@ -50,7 +50,7 @@ export const RunsLeaderboard = () => {
         {
             columns,
             data,
-            initialState: { pageIndex: 0 },
+            initialState: { pageIndex: 0, pageSize: 50 },
         },
         useSortBy,
         useBlockLayout,

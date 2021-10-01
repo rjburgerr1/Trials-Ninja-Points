@@ -16,15 +16,15 @@ model profiles {
   email              String   @db.VarChar(255)
   id                 String   @id @db.VarChar(29)
   create_date        DateTime @default(now()) @db.DateTime(0)
-  country            String?  @db.VarChar(45)
-  state              String?  @db.VarChar(45)
+  country            String   @default("N/A") @db.VarChar(45)
+  state              String   @default("N/A") @db.VarChar(30)
   gamertag           String?  @db.VarChar(45)
   aliases            String?  @db.VarChar(45)
   username           String   @unique @db.VarChar(45)
-  highest_np_run     Int?     @map("highest-np-run")
-  runs               Int?
-  total_ninja_points Int?     @map("total-ninja-points")
-  highest_level_pass Int?     @map("highest-level-pass")
+  highest_np_run     Int      @default(0) @map("highest-np-run")
+  runs               Int      @default(0)
+  total_ninja_points Int      @default(0) @map("total-ninja-points")
+  highest_level_pass Int      @default(0) @map("highest-level-pass")
   rank               Int?
   bio                String?  @db.VarChar(300)
 }
@@ -64,6 +64,7 @@ model tracks {
   average_faults   Decimal? @map("average-faults") @db.Decimal(10, 0)
   fault_sponginess Decimal? @map("fault-sponginess") @db.Decimal(10, 0)
   rating           Decimal? @db.Decimal(10, 0)
+  nRuns            Int      @default(0)
   runs             runs[]
 
   @@id([track_name, creator])

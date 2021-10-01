@@ -36,7 +36,7 @@ CREATE TABLE `creators` (
 
 LOCK TABLES `creators` WRITE;
 /*!40000 ALTER TABLE `creators` DISABLE KEYS */;
-INSERT INTO `creators` VALUES ('12123e'),('12312e'),('12e'),('12ev12e'),('12ve'),('23b23r'),('23rb'),('23rv23'),('2v23v2v'),('34b34'),('34tn34'),('dqwdqw'),('ev12ev'),('NEw'),('o12'),('od'),('p,p,p,21,p'),('plpld21'),('qwd'),('qwdbqb'),('qwdq'),('RJ'),('rrwer'),('rv'),('Slik'),('t23n'),('v123v1'),('v12ev12ev'),('v1v1'),('v23rv23r'),('wdvqwdv'),('wef'),('wefwe'),('wefwef'),('werwer'),('wqd');
+INSERT INTO `creators` VALUES ('12123e'),('12312e'),('12e'),('12ev12e'),('12ve'),('23b23r'),('23rb'),('23rv23'),('2v23v2v'),('34b34'),('34tn34'),('Classyfication'),('dqwdqw'),('ev12ev'),('NEw'),('o12'),('od'),('p,p,p,21,p'),('plpld21'),('qwd'),('qwdbqb'),('qwdq'),('RJ'),('rrwer'),('rv'),('Slik'),('t23n'),('v123v1'),('v12ev12ev'),('v1v1'),('v23rv23r'),('wdvqwdv'),('wef'),('wefwe'),('wefwef'),('werwer'),('wqd');
 /*!40000 ALTER TABLE `creators` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,6 +96,7 @@ CREATE TABLE `riders` (
 
 LOCK TABLES `riders` WRITE;
 /*!40000 ALTER TABLE `riders` DISABLE KEYS */;
+INSERT INTO `riders` VALUES ('RJ Burgerr1');
 /*!40000 ALTER TABLE `riders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,6 +135,7 @@ CREATE TABLE `runs` (
 
 LOCK TABLES `runs` WRITE;
 /*!40000 ALTER TABLE `runs` DISABLE KEYS */;
+INSERT INTO `runs` VALUES ('RJ Burgerr1',1,0,'04:00.000','Luscious',1059,7,'Medium','Not Very',5,'Classyfication');
 /*!40000 ALTER TABLE `runs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -152,7 +154,7 @@ CREATE TABLE `tracks` (
   `average-faults` decimal(10,0) DEFAULT NULL,
   `fault-sponginess` decimal(10,0) DEFAULT NULL,
   `rating` decimal(10,0) DEFAULT NULL,
-  `runs` int NOT NULL DEFAULT '0',
+  `nRuns` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`track-name`,`creator`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -163,6 +165,7 @@ CREATE TABLE `tracks` (
 
 LOCK TABLES `tracks` WRITE;
 /*!40000 ALTER TABLE `tracks` DISABLE KEYS */;
+INSERT INTO `tracks` VALUES ('Luscious','Classyfication',7,2,0,2,5,0);
 /*!40000 ALTER TABLE `tracks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -207,4 +210,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-01  5:10:15
+-- Dump completed on 2021-10-01  5:42:18

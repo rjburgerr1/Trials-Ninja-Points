@@ -36,7 +36,7 @@ CREATE TABLE `creators` (
 
 LOCK TABLES `creators` WRITE;
 /*!40000 ALTER TABLE `creators` DISABLE KEYS */;
-INSERT INTO `creators` VALUES ('NEw'),('qwd'),('RJ'),('Slik'),('werwer'),('wqd');
+INSERT INTO `creators` VALUES ('12123e'),('12312e'),('12e'),('12ev12e'),('12ve'),('23b23r'),('23rb'),('23rv23'),('2v23v2v'),('34b34'),('34tn34'),('dqwdqw'),('ev12ev'),('NEw'),('o12'),('od'),('p,p,p,21,p'),('plpld21'),('qwd'),('qwdbqb'),('qwdq'),('RJ'),('rrwer'),('rv'),('Slik'),('t23n'),('v123v1'),('v12ev12ev'),('v1v1'),('v23rv23r'),('wdvqwdv'),('wef'),('wefwe'),('wefwef'),('werwer'),('wqd');
 /*!40000 ALTER TABLE `creators` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,7 +96,6 @@ CREATE TABLE `riders` (
 
 LOCK TABLES `riders` WRITE;
 /*!40000 ALTER TABLE `riders` DISABLE KEYS */;
-INSERT INTO `riders` VALUES ('Benjoid'),('dqwd'),('ewrwe'),('NEW'),('NEW '),('RJ'),('RJ Burgerr1'),('rjeruh'),('Slikscythez');
 /*!40000 ALTER TABLE `riders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,7 +134,6 @@ CREATE TABLE `runs` (
 
 LOCK TABLES `runs` WRITE;
 /*!40000 ALTER TABLE `runs` DISABLE KEYS */;
-INSERT INTO `runs` VALUES ('Benjoid',12,123,'12:31.231','BEN TRACK',101,3,'Medium','Moderately',2,'qwd'),('dqwd',123,123,'12:31.231','ALAKEEEE',0,1,'Medium','Not At All',1,'wqd'),('ewrwe',123,123,'12:31.212','werwer',127,3,'Medium','Very',3,'werwer'),('NEW',0,0,'12:31.231','NEw',157,3,'Medium','Moderately',3,'NEw'),('NEW ',123123,123,'12:31.231','NEw',0,2,'Medium','Not Very',3,'NEw'),('RJ',123,123,'12:31.231','RJ',46,2,'Medium','Very',3,'RJ'),('RJ Burgerr1',41,123,'12:31.231','a track',323,5,'Short','Very',4,'Slik'),('RJ Burgerr1',2,20,'12:12.123','Final Sorrow',1100,7,'Short','Moderately',3,'qwd'),('RJ Burgerr1',2,20,'12:12.123','Luscious',540,7,'Short','Moderately',3,'qwd'),('RJ Burgerr1',12,123,'12:31.231','qweqwe',0,3,'Medium','Not Very',3,'qwd'),('RJ Burgerr1',12,123,'12:31.231','TURB',81,2,'Long','Moderately',4,'Slik'),('RJ Burgerr1',2,20,'12:12.123','Wraith',220,7,'Short','Moderately',3,'qwd'),('rjeruh',123,123,'12:31.231','werojkwerojk',0,3,'Medium','Not Very',1,'Slik'),('Slikscythez',2,20,'12:12.123','Annihilation',980,7,'Short','Moderately',3,'qwd'),('Slikscythez',2,20,'12:12.123','luscious',780,7,'Short','Moderately',3,'qwd'),('slikscythez',2,29,'2:12.123','Veni Vidi Vici',800,2,'Short','Extremely',4,'qwd'),('Slikscythez',2,20,'12:12.123','Wraith',220,7,'Short','Moderately',3,'qwd');
 /*!40000 ALTER TABLE `runs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,10 +147,11 @@ DROP TABLE IF EXISTS `tracks`;
 CREATE TABLE `tracks` (
   `track-name` varchar(45) NOT NULL,
   `creator` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `ninja-level` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `length` enum('short','medium','long') CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `average-faults` int DEFAULT NULL,
-  `fault-sponginess` enum('not at all','not very','moderately','very','extremely') CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ninja-level` decimal(10,0) DEFAULT NULL,
+  `length` decimal(10,0) DEFAULT NULL,
+  `average-faults` decimal(10,0) DEFAULT NULL,
+  `fault-sponginess` decimal(10,0) DEFAULT NULL,
+  `rating` decimal(10,0) DEFAULT NULL,
   PRIMARY KEY (`track-name`,`creator`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -163,7 +162,6 @@ CREATE TABLE `tracks` (
 
 LOCK TABLES `tracks` WRITE;
 /*!40000 ALTER TABLE `tracks` DISABLE KEYS */;
-INSERT INTO `tracks` VALUES ('ALAKEEEE','wqd',NULL,NULL,NULL,NULL),('werojkwerojk','Slik',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `tracks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -208,4 +206,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-31  8:16:47
+-- Dump completed on 2021-10-01  0:47:32

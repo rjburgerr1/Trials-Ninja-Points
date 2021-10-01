@@ -57,12 +57,13 @@ model runs {
 }
 
 model tracks {
-  track_name       String                   @map("track-name") @db.VarChar(45)
-  creator          String                   @db.VarChar(45)
-  ninja_level      String?                  @map("ninja-level") @db.VarChar(45)
-  length           tracks_length?
-  average_faults   Int?                     @map("average-faults")
-  fault_sponginess tracks_fault_sponginess? @map("fault-sponginess")
+  track_name       String   @map("track-name") @db.VarChar(45)
+  creator          String   @db.VarChar(45)
+  ninja_level      Decimal? @map("ninja-level") @db.Decimal(10, 0)
+  length           Decimal? @db.Decimal(10, 0)
+  average_faults   Decimal? @map("average-faults") @db.Decimal(10, 0)
+  fault_sponginess Decimal? @map("fault-sponginess") @db.Decimal(10, 0)
+  rating           Decimal? @db.Decimal(10, 0)
   runs             runs[]
 
   @@id([track_name, creator])
@@ -99,22 +100,6 @@ enum runs_fault_sponginess {
   Extremely
 
    @@map("runs_fault-sponginess")
-}
-
-enum tracks_length {
-  short
-  medium
-  long
-}
-
-enum tracks_fault_sponginess {
-  not_at_all @map("not at all")
-  not_very @map("not very")
-  moderately
-  very
-  extremely
-
-   @@map("tracks_fault-sponginess")
 }
 
 enum weightage_length {

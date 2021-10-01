@@ -152,6 +152,7 @@ CREATE TABLE `tracks` (
   `average-faults` decimal(10,0) DEFAULT NULL,
   `fault-sponginess` decimal(10,0) DEFAULT NULL,
   `rating` decimal(10,0) DEFAULT NULL,
+  `runs` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`track-name`,`creator`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -206,4 +207,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-01  5:04:32
+-- Dump completed on 2021-10-01  5:10:15

@@ -8,6 +8,7 @@ const ChatRoute = require("./routes/chat");
 const ProfileRoute = require("./routes/profile");
 const DataRoute = require("./routes/data");
 const ImageUpload = require("./routes/image-upload");
+const synthesizeTrackData = require("./routes/synthesize-collective-opinions");
 const app = express();
 
 // Use Node.js body parsing middleware
@@ -27,6 +28,7 @@ app.use(function (req, res, next) {
     next();
 });
 
+synthesizeTrackData();
 DataRoute(app);
 SubmitRoute(app);
 SignupRoute(app);

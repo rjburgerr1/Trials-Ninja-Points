@@ -63,6 +63,21 @@ const router = (app) => {
                     },
                 }, // map run fields over data property
             });
+
+            await prisma.tracks.update({
+                where: {
+                    track_name_creator: {
+                        track_name: run.trackName,
+                        creator: run.creator,
+                    },
+                },
+                data: {
+                    nRuns: {
+                        increment: 1,
+                    },
+                },
+            });
+
             return response.sendStatus(200);
         } catch (error) {
             console.log(error);

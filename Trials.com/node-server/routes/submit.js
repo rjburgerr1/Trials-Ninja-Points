@@ -2,15 +2,10 @@ const {
     PrismaClient,
 } = require("../../react-frontend/node_modules/.prisma/client");
 const prisma = new PrismaClient();
+const synthesizeData = require("../synthesize-run-data/synthesize-data");
 // const { request } = require("express"); Keep for now, might need later
 
 const router = (app) => {
-    // Add a new run
-    // ` (grave) for column and ' (apostrophe) for values for syntax fun :)
-    //Name attribute in form element sets "'gamertag', and 'rank' etc...." name = ninjaLevel === request.body.ninjaLevel
-    //Format:
-    //sql: "INSERT INTO runs SET `gamertag` = 'efwef', `rank` = 'wefwef', `faults` = 'wefwe', `time` = 'fwefwef', `track-name` = 'wefwef', `ninja-points` = 'wefwef'"
-
     app.post("/submitted-run", async (request, response) => {
         // For some reason that I cannot seem to figure out. request.body returns an object with key value pairs from the submit form
         // and all of the values are strings even if they were not strings in the form
@@ -64,6 +59,9 @@ const router = (app) => {
                 }, // map run fields over data property
             });
 
+            length = calcLength(run.length);
+            fault_sponginess = calcFaultSponginess(run.faultSponginess);
+
             await prisma.tracks.update({
                 where: {
                     track_name_creator: {
@@ -75,8 +73,25 @@ const router = (app) => {
                     nRuns: {
                         increment: 1,
                     },
+                    total_rating: {
+                        increment: run.rating,
+                    },
+                    total_fault_sponginess: {
+                        increment: fault_sponginess,
+                    },
+                    total_length: {
+                        increment: length,
+                    },
+                    total_faults: {
+                        increment: run.faults,
+                    },
+                    total_ninja_level: {
+                        increment: run.ninjaLevel,
+                    },
                 },
             });
+
+            synthesizeData(run);
 
             return response.sendStatus(200);
         } catch (error) {
@@ -85,5 +100,30 @@ const router = (app) => {
         }
     });
 };
+
+const calcLength = (runLength) => {
+    if (runLength == "Medium") {
+        return 2;
+    } else if (runLength == "Long") {
+        return 3;
+    } else {
+        return 1;
+    }
+};
+
+const calcFaultSponginess = (runFaultSponginess) => {
+    if (runFaultSponginess == "Not_At_All") {
+        return 1;
+    } else if (runFaultSponginess == "Not_Very") {
+        return 2;
+    } else if (runFaultSponginess == "Moderately") {
+        return 3;
+    } else if (runFaultSponginess == "Very") {
+        return 4;
+    } else {
+        return 5;
+    }
+};
+
 // Export the router
 module.exports = router;

@@ -10,10 +10,10 @@ jobs:
         steps:
             - run:
                   name: Building Project
-                  command: npm build
+                  command: npm run build
             - run:
                   name: Testing Project
-                  command: npm test
+                  command: npm run test
             - run:
                   name: Deploying Project
-                  command: npm netlify:deploy
+                  command: npm run netlify:deploy

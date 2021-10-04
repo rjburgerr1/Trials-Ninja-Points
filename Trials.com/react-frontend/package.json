@@ -21,6 +21,7 @@
         "axios": "^0.21.1",
         "body-parser": "^1.19.0",
         "bootstrap": "^4.5.3",
+        "dart-sass": "^1.25.0",
         "date-and-time": "^2.0.1",
         "express": "^4.17.1",
         "firebase": "^8.2.0",
@@ -87,8 +88,6 @@
         "@types/styled-components": "^5.1.7",
         "eslint-plugin-react": "^7.21.5",
         "gh-pages": "^3.1.0",
-        "node-sass": "^6.0.1",
-        "prisma": "^3.1.1",
-        "sass-loader": "^12.1.0"
+        "prisma": "^3.1.1"
     }
 }

@@ -9,6 +9,7 @@ jobs:
 
         steps:
             - checkout
+            - run: echo "$(ls -a)"
             - run:
                   name: Building Project
                   command: npm run build

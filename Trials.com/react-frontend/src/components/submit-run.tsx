@@ -60,14 +60,13 @@ const SubmitRun = () => {
         const ninjaPoints = await CalcNP({
             ...values,
         });
-        console.log(ninjaPoints);
+
         const payload = {
             ...values,
             ninjaPoints: ninjaPoints,
             rating: rating,
         }; // Construct the new payload, inject ninjaPoints that have just been calculated
 
-        console.log(payload);
         try {
             await axios.post("/submitted-run", {
                 ...payload,

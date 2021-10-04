@@ -13,7 +13,7 @@ workflows:
         # Inside the workflow, you define the jobs you want to run.
         jobs:
             - node/test:
-                  app-dir: /Trials.com/react-frontend
+                  app-dir: ../../Trials.com/react-frontend
                   # This is the node version to use for the `cimg/node` tag
                   # Relevant tags can be found on the CircleCI Developer Hub
                   # https://circleci.com/developer/images/image/cimg/node

@@ -3,12 +3,12 @@ version: 2.1
 
 jobs:
     build:
-        working_directory: ./Trials.com/react-frontend
+        working_directory: ~/project/Trials.com/react-frontend
         docker:
             - image: node:latest
 
         steps:
-            - run: echo $pwd
+            - checkout
             - run:
                   name: Building Project
                   command: npm run build

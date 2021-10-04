@@ -4,7 +4,6 @@ const {
 const prisma = new PrismaClient();
 
 const router = () => {
-    console.log("Starting Cron Job");
     var CronJob = require("cron").CronJob;
     var job = new CronJob(
         "0 * * * * *",
@@ -13,7 +12,6 @@ const router = () => {
         true,
         "America/Los_Angeles"
     );
-    job.start();
 };
 
 const synthesizeTrackData = async () => {
@@ -37,22 +35,22 @@ const synthesizeTrackData = async () => {
     setTrackStats(payload);
 };
 
-const setTrackStats = async (stats) => {
-    keys = Object.keys(stats);
-    for (const key in stats) {
-        let track = stats[key][0].track_name;
-        let creator = stats[key][0].creator;
+const setTrackStats = async (data) => {
+    keys = Object.keys(data);
+    for (const key in data) {
+        let track = data[key][0].track_name;
+        let creator = data[key][0].creator;
 
         await prisma.tracks.update({
             where: {
                 track_name_creator: { track_name: track, creator: creator },
             },
             data: {
-                length: stats[key].avgLength,
-                fault_sponginess: stats[key].avgFaultSponginess,
-                average_faults: stats[key].avgFaults,
-                rating: stats[key].avgRating,
-                ninja_level: stats[key].avgNinjaLevel,
+                length: data[key].avgLength,
+                fault_sponginess: data[key].avgFaultSponginess,
+                average_faults: data[key].avgFaults,
+                rating: data[key].avgRating,
+                ninja_level: data[key].avgNinjaLevel,
             },
         });
     }

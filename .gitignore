@@ -6,6 +6,7 @@ Trials.com/.vscode/launch.json
 Trials.com/debug.log
 Trials.com/react-frontend/.env
 Trials.com/react-frontend/.env
+Trials.com/react-frontend/build
 
 # Local Netlify folder
 .netlify

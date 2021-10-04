@@ -44,3 +44,9 @@ jobs:
                       - ~/project/Trials.com/react-frontend/node_modules
                   key: v1-dependencies-{{checksum "~/project/Trials.com/react-frontend/package.json"}}
             - run: ssh root@66.42.118.153
+
+workflows:
+    deploy:
+        jobs:
+            - build-react-app
+            - build-node-server

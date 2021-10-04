@@ -31,7 +31,7 @@ export function AuthProvider({ children }: ChildrenProps) {
                 await user.user.updateProfile({ displayName: username });
             }
             return user;
-        } catch (error) {
+        } catch (error: any) {
             console.log(error.message);
         }
     };
@@ -46,7 +46,7 @@ export function AuthProvider({ children }: ChildrenProps) {
             const response = await auth.signInWithPopup(googleProvider);
 
             return response.user;
-        } catch (error) {
+        } catch (error: any) {
             console.log(error.message);
         }
     };

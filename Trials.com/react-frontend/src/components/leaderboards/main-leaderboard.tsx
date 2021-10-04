@@ -23,8 +23,8 @@ const resolveData = async (setData: any) => {
         const data = await getData();
 
         setData(data);
-    } catch (err) {
-        console.error(err.message);
+    } catch (error: any) {
+        console.error(error.message);
     }
 };
 

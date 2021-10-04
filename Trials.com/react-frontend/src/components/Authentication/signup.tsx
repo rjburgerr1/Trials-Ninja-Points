@@ -39,9 +39,9 @@ const SignupComponent = () => {
             }
 
             history.push("/");
-        } catch (err) {
-            console.log(err);
-            setError(err.message);
+        } catch (error: any) {
+            console.log(error);
+            setError(error.message);
         }
 
         setLoading(false);

@@ -3,7 +3,7 @@ version: 2.1
 
 jobs:
     build:
-        app-dir: ~/project/Trials.com/react-frontend
+        #app-dir: ~/project/Trials.com/react-frontend
         docker:
             - image: node:latest
 

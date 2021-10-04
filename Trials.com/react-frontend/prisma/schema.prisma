@@ -18,14 +18,13 @@ model profiles {
   create_date        DateTime @default(now()) @db.DateTime(0)
   country            String   @default("N/A") @db.VarChar(45)
   state              String   @default("N/A") @db.VarChar(30)
-  gamertag           String?  @db.VarChar(45)
-  aliases            String?  @db.VarChar(45)
-  username           String   @unique @db.VarChar(45)
+  gamertag           String?  @db.VarChar(25)
+  aliases            String?  @db.VarChar(150)
+  username           String   @unique(map: "username_UNIQUE") @db.VarChar(25)
   highest_np_run     Int      @default(0) @map("highest-np-run")
   runs               Int      @default(0)
   total_ninja_points Int      @default(0) @map("total-ninja-points")
   highest_level_pass Int      @default(0) @map("highest-level-pass")
-  rank               Int?
   bio                String?  @db.VarChar(300)
 }
 
@@ -40,32 +39,37 @@ model runs {
   faults           Int
   time             String                @db.VarChar(9)
   track_name       String                @map("track-name") @db.VarChar(45)
-  ninja_points     Decimal?              @map("ninja-points") @db.Decimal(10, 0)
-  ninja_level      Decimal               @map("ninja-level") @db.Decimal(10, 0)
+  ninja_points     Float?                @map("ninja-points") @db.Float
+  ninja_level      Float                 @map("ninja-level") @db.Float
   length           runs_length
   fault_sponginess runs_fault_sponginess @map("fault-sponginess")
-  rating           Decimal?              @db.Decimal(10, 0)
+  rating           Float?                @db.Float
   creator          String                @db.VarChar(45)
-  creators         creators              @relation(fields: [creator], references: [creator])
-  riders           riders                @relation(fields: [rider], references: [rider])
-  tracks           tracks                @relation(fields: [track_name], references: [track_name])
+  creators         creators              @relation(fields: [creator], references: [creator], onDelete: NoAction, onUpdate: NoAction, map: "creator")
+  riders           riders                @relation(fields: [rider], references: [rider], onDelete: NoAction, onUpdate: NoAction, map: "rider")
+  tracks           tracks                @relation(fields: [track_name], references: [track_name], onDelete: NoAction, onUpdate: NoAction, map: "track-name")
 
   @@id([rider, track_name])
-  @@index([creator], name: "creator_idx")
-  @@index([rider], name: "rider_idx")
-  @@index([track_name], name: "track-name_idx")
+  @@index([creator], map: "creator_idx")
+  @@index([rider], map: "rider_idx")
+  @@index([track_name], map: "track-name_idx")
 }
 
 model tracks {
-  track_name       String   @map("track-name") @db.VarChar(45)
-  creator          String   @db.VarChar(45)
-  ninja_level      Decimal? @map("ninja-level") @db.Decimal(10, 0)
-  length           Decimal? @db.Decimal(10, 0)
-  average_faults   Decimal? @map("average-faults") @db.Decimal(10, 0)
-  fault_sponginess Decimal? @map("fault-sponginess") @db.Decimal(10, 0)
-  rating           Decimal? @db.Decimal(10, 0)
-  nRuns            Int      @default(0)
-  runs             runs[]
+  track_name             String   @map("track-name") @db.VarChar(45)
+  creator                String   @db.VarChar(45)
+  ninja_level            Decimal? @map("ninja-level") @db.Decimal(3, 2)
+  length                 Decimal? @db.Decimal(3, 2)
+  average_faults         Decimal? @map("average-faults") @db.Decimal(5, 2)
+  fault_sponginess       Decimal? @map("fault-sponginess") @db.Decimal(3, 2)
+  rating                 Decimal? @db.Decimal(2, 1)
+  nRuns                  Int      @default(0)
+  total_rating           Decimal  @default(0.00) @map("total-rating") @db.Decimal(10, 2)
+  total_fault_sponginess Decimal  @default(0.00) @map("total-fault-sponginess") @db.Decimal(10, 2)
+  total_length           Decimal  @default(0.00) @map("total-length") @db.Decimal(10, 2)
+  total_faults           Int      @default(0) @map("total-faults")
+  total_ninja_level      Decimal  @default(0.00) @map("total-ninja-level") @db.Decimal(10, 2)
+  runs                   runs[]
 
   @@id([track_name, creator])
 }
@@ -100,7 +104,7 @@ enum runs_fault_sponginess {
   Very
   Extremely
 
-   @@map("runs_fault-sponginess")
+  @@map("runs_fault-sponginess")
 }
 
 enum weightage_length {
@@ -116,5 +120,5 @@ enum weightage_fault_sponginess {
   Very
   Extremely
 
-   @@map("weightage_fault-sponginess")
+  @@map("weightage_fault-sponginess")
 }

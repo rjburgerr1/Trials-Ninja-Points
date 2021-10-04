@@ -22,4 +22,16 @@ workflows:
                   pkg-manager: npm
 
 steps:
+    - restore_cache:
+          keys:
+              - v1-dependencies-{{ checksum "package.json" }}
+              - v1-dependencies-
+
+    - run: npm install
+
+    - save_cache:
+          paths:
+              - node-modules
+          key: v1-dependencies-{{checksum "package.json" }}
+
     - run: npm build

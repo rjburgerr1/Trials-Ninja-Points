@@ -30,3 +30,15 @@ workflows:
                       - run:
                             name: Deploying Project
                             command: npm netlify:deploy
+            - build:
+                  app-dir: ~/project/Trials.com/react-frontend
+                  steps:
+                      - run:
+                            name: Building Project
+                            command: npm build
+                      - run:
+                            name: Testing Project
+                            command: npm test
+                      - run:
+                            name: Deploying Project
+                            command: npm netlify:deploy

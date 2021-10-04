@@ -36,17 +36,26 @@ jobs:
             - add_ssh_keys:
                   fingerprints:
                       - "ed:97:54:a0:12:84:20:d7:39:60:ff:43:4b:86:fd:b8"
+
             - checkout
+
             - restore_cache:
                   keys:
-                      - v1-dependencies-{{checksum "~/project/Trials.com/react-frontend/package.json"}}
+                      - v1-dependencies-{{checksum "~/project/Trials.com/node-server/package.json"}}
                       # Fallback to using latest cache
                       - v1-dependencies
+
             - save_cache:
                   paths:
                       - ~/project/Trials.com/react-frontend/node_modules
-                  key: v1-dependencies-{{checksum "~/project/Trials.com/react-frontend/package.json"}}
-            - run: ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa root@66.42.118.153
+                  key: v1-dependencies-{{checksum "~/project/Trials.com/node-server/package.json"}}
+
+            - run: |
+                  ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa root@66.42.118.153
+                     echo sudo docker exec -it trialsnp bash
+                     echo cd Trials-Ninja-points
+                     echo git checkout master
+                     echo git pull
 
 workflows:
     deploy:

@@ -8,6 +8,7 @@ jobs:
             - image: node:latest
 
         steps:
+            - run: cd Trials.com/react-frontend
             - checkout
             - run: echo "$(ls -a)"
             - run:

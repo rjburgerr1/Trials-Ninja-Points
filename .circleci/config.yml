@@ -36,3 +36,4 @@ steps:
 
     - run: npm build
     - run: npm test
+    - run: npm netlify:deploy

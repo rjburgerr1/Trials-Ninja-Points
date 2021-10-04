@@ -1,5 +1,5 @@
-@use "../sass-base/components/tables";
-@use "./abstracts/colors" as *;
+@use "../components/tables";
+@use "../abstracts/colors" as *;
 
 .tracks-container {
     height: 100vh;

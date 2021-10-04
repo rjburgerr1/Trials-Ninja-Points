@@ -1,5 +1,5 @@
-@use "../sass-base/components/tables";
-@use "./abstracts/colors" as *;
+@use "../components/tables";
+@use "../abstracts/colors" as *;
 
 // Create a partial for leaderboards and integrate it with this file instead of current implementation
 

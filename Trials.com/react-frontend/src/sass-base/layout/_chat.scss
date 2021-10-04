@@ -1,5 +1,5 @@
-@use "./abstracts/colors" as *;
-@use "../sass-base/components/buttons";
+@use "../abstracts/colors" as *;
+@use "../components/buttons";
 
 .chat {
     -ms-overflow-style: none; // Hide Scrollbar Internet Explorer 10+

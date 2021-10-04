@@ -3,12 +3,11 @@ version: 2.1
 
 jobs:
     build:
-        working_directory: ~/project/Trials.com/react-frontend
         docker:
             - image: node:latest
 
         steps:
-            - run: cd Trials.com/react-frontend
+            - run: cd Trials.com
             - checkout
             - run: echo "$(ls -a)"
             - run:

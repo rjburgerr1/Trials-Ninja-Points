@@ -36,7 +36,7 @@ CREATE TABLE `creators` (
 
 LOCK TABLES `creators` WRITE;
 /*!40000 ALTER TABLE `creators` DISABLE KEYS */;
-INSERT INTO `creators` VALUES ('12123e'),('12312e'),('12e'),('12ev12e'),('12ve'),('23b23r'),('23rb'),('23rv23'),('2v23v2v'),('34b34'),('34tn34'),('Classyfication'),('dqwdqw'),('ev12ev'),('NEw'),('o12'),('od'),('p,p,p,21,p'),('plpld21'),('qwd'),('qwdbqb'),('qwdq'),('RJ'),('rrwer'),('rv'),('Slik'),('t23n'),('v123v1'),('v12ev12ev'),('v1v1'),('v23rv23r'),('wdvqwdv'),('wef'),('wefwe'),('wefwef'),('werwer'),('wqd');
+INSERT INTO `creators` VALUES ('121'),('12123e'),('12312e'),('123qwd'),('123v12ve'),('12e'),('12ec12e'),('12ev12e'),('12v'),('12v312'),('12ve'),('23b23r'),('23rb'),('23rv23'),('2v23v2v'),('34b34'),('34tn34'),('43b'),('Classyfication'),('crasd'),('dqwdqw'),('ev12ev'),('lala'),('NEw'),('o12'),('od'),('p,p,p,21,p'),('pap'),('plpld21'),('qwd'),('qwdbqb'),('qwdq'),('qwdv'),('qwdvqwd'),('qwv'),('rar'),('RJ'),('rrrrrr'),('rrwer'),('rv'),('Slik'),('someone'),('t23n'),('v123v1'),('v12ev12ev'),('v1v1'),('v23rv23r'),('vqwd1'),('vqwev'),('wdvqwdv'),('wef'),('wefbwe'),('wefvwe1v'),('wefwe'),('wefwef'),('werwer'),('wevqwe'),('wqd');
 /*!40000 ALTER TABLE `creators` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -53,14 +53,13 @@ CREATE TABLE `profiles` (
   `create_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `country` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'N/A',
   `state` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'N/A',
-  `gamertag` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `aliases` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `username` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `gamertag` varchar(25) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `aliases` varchar(150) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `username` varchar(25) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `highest-np-run` int NOT NULL DEFAULT '0',
   `runs` int NOT NULL DEFAULT '0',
   `total-ninja-points` int NOT NULL DEFAULT '0',
   `highest-level-pass` int NOT NULL DEFAULT '0',
-  `rank` int DEFAULT NULL,
   `bio` varchar(300) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
@@ -73,7 +72,7 @@ CREATE TABLE `profiles` (
 
 LOCK TABLES `profiles` WRITE;
 /*!40000 ALTER TABLE `profiles` DISABLE KEYS */;
-INSERT INTO `profiles` VALUES ('rjburgerr@gmail.com','RBBqsYUilDftW7DOorp3oGRmJ7G2','2021-10-01 09:49:57','N/A','N/A',NULL,NULL,'RJ Burgerr1',0,0,0,0,NULL,NULL);
+INSERT INTO `profiles` VALUES ('rjburgerr@gmail.com','RBBqsYUilDftW7DOorp3oGRmJ7G2','2021-10-01 09:49:57','N/A','N/A',NULL,NULL,'RJ Burgerr1',0,0,0,0,NULL);
 /*!40000 ALTER TABLE `profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,7 +95,7 @@ CREATE TABLE `riders` (
 
 LOCK TABLES `riders` WRITE;
 /*!40000 ALTER TABLE `riders` DISABLE KEYS */;
-INSERT INTO `riders` VALUES ('RJ Burgerr1');
+INSERT INTO `riders` VALUES ('12312'),('12ev123'),('1v2v12'),('21ev12ev'),('21ve12evv12'),('c12ec'),('feewfbweb'),('person'),('qdqvqw'),('qqwdvqw'),('qvqwdvqwd'),('qvwdv'),('qvwdvq'),('qvwdvqw'),('qvwevqwev'),('qwdqvqwd'),('qwdv'),('qwdvqv'),('qwdvqwdv'),('qwvdvqwd'),('RJ Burgerr1'),('v123ev12e'),('v12e'),('v12ev12'),('v12ev12e'),('v12v12'),('vqwd'),('vqwdv'),('vqwv'),('wdqv'),('webwefb'),('wefvwef'),('wqvvqvq');
 /*!40000 ALTER TABLE `riders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,11 +112,11 @@ CREATE TABLE `runs` (
   `faults` int NOT NULL,
   `time` varchar(9) NOT NULL,
   `track-name` varchar(45) NOT NULL,
-  `ninja-points` decimal(10,0) DEFAULT NULL,
-  `ninja-level` decimal(10,0) NOT NULL,
+  `ninja-points` float(7,2) DEFAULT NULL,
+  `ninja-level` float(3,2) NOT NULL,
   `length` enum('Short','Medium','Long') NOT NULL,
   `fault-sponginess` enum('Not At All','Not Very','Moderately','Very','Extremely') NOT NULL,
-  `rating` decimal(10,0) DEFAULT NULL,
+  `rating` float(3,2) DEFAULT NULL,
   `creator` varchar(45) NOT NULL,
   PRIMARY KEY (`rider`,`track-name`),
   KEY `rider_idx` (`rider`) /*!80000 INVISIBLE */,
@@ -135,7 +134,7 @@ CREATE TABLE `runs` (
 
 LOCK TABLES `runs` WRITE;
 /*!40000 ALTER TABLE `runs` DISABLE KEYS */;
-INSERT INTO `runs` VALUES ('RJ Burgerr1',1,0,'04:00.000','Luscious',1059,7,'Medium','Not Very',5,'Classyfication');
+INSERT INTO `runs` VALUES ('21ve12evv12',1234,124,'12:41.241','rar',327.00,6.00,'Medium','Not At All',2.00,'rar'),('feewfbweb',123,123,'12:31.231','dvqwdvq',195.00,4.00,'Short','Very',5.00,'wdvqwdv'),('qqwdvqw',12,123,'12:31.231','dvqwdvq',285.00,5.00,'Long','Not At All',2.00,'wdvqwdv'),('qvwdv',123,123,'31:31.231','qwdvqwdv',244.00,6.00,'Medium','Not Very',3.00,'123v12ve'),('qvwdvqw',12,123,'12:31.231','lala',319.00,5.00,'Short','Moderately',3.00,'lala'),('qvwevqwev',3,123,'12:31.231','qwevq',2363.03,9.00,'Long','Extremely',5.00,'wevqwe'),('qwdqvqwd',123,123,'12:31.231','vqwdvqwvq',239.00,5.00,'Short','Not Very',3.00,'12v312'),('qwdv',123,123,'12:31.231','pap',27.00,2.00,'Medium','Not Very',2.00,'pap'),('qwdvqv',2314,124,'12:41.241','rar',404.00,5.00,'Medium','Moderately',4.00,'rar'),('qwvdvqwd',1231,123,'12:31.231','vqwd',289.00,6.00,'Short','Not Very',3.00,'vqwd1'),('vqwd',123,123,'12:31.231','qwdv',406.00,5.00,'Medium','Moderately',3.00,'qwdvqwd'),('wqvvqvq',414,33,'12:31.231','dvqwdvq',185.00,4.00,'Medium','Not Very',3.00,'wdvqwdv');
 /*!40000 ALTER TABLE `runs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,12 +148,17 @@ DROP TABLE IF EXISTS `tracks`;
 CREATE TABLE `tracks` (
   `track-name` varchar(45) NOT NULL,
   `creator` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `ninja-level` decimal(10,0) DEFAULT NULL,
-  `length` decimal(10,0) DEFAULT NULL,
-  `average-faults` decimal(10,0) DEFAULT NULL,
-  `fault-sponginess` decimal(10,0) DEFAULT NULL,
-  `rating` decimal(10,0) DEFAULT NULL,
+  `ninja-level` decimal(3,2) DEFAULT NULL,
+  `length` decimal(3,2) DEFAULT NULL,
+  `average-faults` decimal(5,2) DEFAULT NULL,
+  `fault-sponginess` decimal(3,2) DEFAULT NULL,
+  `rating` decimal(2,1) DEFAULT NULL,
   `nRuns` int NOT NULL DEFAULT '0',
+  `total-rating` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `total-fault-sponginess` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `total-length` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `total-faults` int NOT NULL DEFAULT '0',
+  `total-ninja-level` decimal(10,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`track-name`,`creator`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -165,7 +169,7 @@ CREATE TABLE `tracks` (
 
 LOCK TABLES `tracks` WRITE;
 /*!40000 ALTER TABLE `tracks` DISABLE KEYS */;
-INSERT INTO `tracks` VALUES ('Luscious','Classyfication',7,2,0,2,5,0);
+INSERT INTO `tracks` VALUES ('dvqwdvq','wdvqwdv',4.00,2.00,93.00,2.00,3.0,3,10.00,7.00,6.00,279,13.00),('lala','lala',5.00,1.00,123.00,3.00,3.0,1,3.00,0.00,0.00,0,0.00),('pap','pap',2.00,2.00,123.00,2.00,2.0,1,2.00,0.00,0.00,0,0.00),('qwdv','qwdvqwd',5.00,2.00,123.00,3.00,3.0,1,3.00,0.00,0.00,0,0.00),('qwdvqwdv','123v12ve',6.00,2.00,123.00,2.00,3.0,1,3.00,0.00,0.00,0,0.00),('qwevq','wevqwe',NULL,NULL,NULL,NULL,NULL,1,0.00,0.00,0.00,0,0.00),('rar','rar',6.00,2.00,124.00,2.00,3.0,2,6.00,0.00,0.00,0,0.00),('vqwd','vqwd1',6.00,1.00,123.00,2.00,3.0,0,0.00,0.00,0.00,0,0.00),('vqwdvqwvq','12v312',5.00,1.00,123.00,2.00,3.0,0,0.00,0.00,0.00,0,0.00);
 /*!40000 ALTER TABLE `tracks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,4 +214,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-01  5:42:18
+-- Dump completed on 2021-10-03 19:40:50

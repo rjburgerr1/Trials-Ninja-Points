@@ -10,14 +10,14 @@ jobs:
             - checkout
             - restore_cache:
                   keys:
-                      - v1-dependencies-{{checksum "package.json"}}
+                      - v1-dependencies-{{checksum "~/project/Trials.com/react-frontend/package.json"}}
                       # Fallback to using latest cache
                       - v1-dependencies
             - run: npm install
             - save_cache:
                   paths:
                       - ~/project/Trials.com/react-frontend/node_modules
-                  key: v1-dependencies-{{checksum "package.json"}}
+                  key: v1-dependencies-{{checksum "~/project/Trials.com/react-frontend/package.json"}}
             - run: |
                   echo "$(ls -a)"
                   cd Trials.com/react-frontend

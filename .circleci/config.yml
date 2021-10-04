@@ -13,7 +13,9 @@ jobs:
                       - v1-dependencies-{{checksum "~/project/Trials.com/react-frontend/package.json"}}
                       # Fallback to using latest cache
                       - v1-dependencies
-            - run: npm install
+            - run: |
+                  cd Trials.com/react-frontend
+                  npm install
             - save_cache:
                   paths:
                       - ~/project/Trials.com/react-frontend/node_modules

@@ -48,7 +48,7 @@ jobs:
                   key: v1-dependencies-{{checksum "~/project/Trials.com/react-frontend/package.json"}}
             - run: |
                   ssh-copy-id -i ~/.ssh/id_rsa  root@66.42.118.153
-                  ssh -i ~/.ssh/id_rsa root@66.42.118.153
+                  ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa root@66.42.118.153
 
 workflows:
     deploy:

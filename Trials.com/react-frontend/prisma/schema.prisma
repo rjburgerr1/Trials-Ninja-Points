@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://root:pass@localhost:3306/trialsnp"
+  url      = env("DATABASE_URL")
 }
 
 model creators {

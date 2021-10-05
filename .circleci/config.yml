@@ -52,9 +52,7 @@ jobs:
                   paths:
                       - ~/project/Trials.com/react-frontend/node_modules
                   key: v1-dependencies-{{checksum "~/project/Trials.com/react-frontend/package.json"}}
-            - run: |
-                  cd Trials.com/node-server
-                  node server.js
+
 workflows:
     deploy:
         jobs:

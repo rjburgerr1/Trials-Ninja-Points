@@ -4,7 +4,8 @@ const {
 const prisma = new PrismaClient();
 
 const router = () => {
-    var CronJob = require("cron").CronJob;
+    /*
+    var CronJob = require("../../react-frontend/node_modules/cron").CronJob;
     var job = new CronJob(
         "0 * * * * *",
         synthesizeTrackData(),
@@ -12,6 +13,7 @@ const router = () => {
         true,
         "America/Los_Angeles"
     );
+    */
 };
 
 const synthesizeTrackData = async () => {

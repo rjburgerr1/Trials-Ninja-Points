@@ -10,3 +10,4 @@ Trials.com/react-frontend/build
 
 # Local Netlify folder
 .netlify
+*.node

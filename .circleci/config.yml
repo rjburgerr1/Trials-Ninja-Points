@@ -6,6 +6,7 @@ jobs:
         docker:
             - image: node:latest
 
+        parallelism: 2
         steps:
             - checkout
             - restore_cache:
@@ -32,6 +33,7 @@ jobs:
         docker:
             - image: node:latest
 
+        parallelism: 2
         steps:
             - add_ssh_keys:
                   fingerprints:

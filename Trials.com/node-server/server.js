@@ -1,5 +1,5 @@
 // Require packages and set the port
-const express = require("express");
+const express = require("./node_modules/express");
 const port = 3002;
 const bodyParser = require("body-parser");
 const SubmitRoute = require("./routes/submit");

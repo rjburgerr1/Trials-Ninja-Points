@@ -22,7 +22,6 @@
         "body-parser": "^1.19.0",
         "bootstrap": "^4.5.3",
         "date-and-time": "^2.0.1",
-        "express": "^4.17.1",
         "firebase": "^8.2.0",
         "formik": "^2.2.6",
         "http-proxy-middleware": "^1.0.6",
@@ -89,7 +88,6 @@
         "@types/react-table": "^7.0.26",
         "@types/styled-components": "^5.1.7",
         "eslint-plugin-react": "^7.21.5",
-        "gh-pages": "^3.1.0",
         "prisma": "^3.1.1"
     }
 }

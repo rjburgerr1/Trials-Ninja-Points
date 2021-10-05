@@ -1,4 +1,4 @@
-const { Server } = require("../../react-frontend/node_modules/socket.io");
+const { Server } = require("../node_modules/socket.io");
 
 const sendMessage = (io, message) => {
     const response = message;

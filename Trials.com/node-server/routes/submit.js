@@ -1,6 +1,4 @@
-const {
-    PrismaClient,
-} = require("../../react-frontend/node_modules/.prisma/client");
+const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const synthesizeData = require("../synthesize-run-data/synthesize-data");
 // const { request } = require("express"); Keep for now, might need later

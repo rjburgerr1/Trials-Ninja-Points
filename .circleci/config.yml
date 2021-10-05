@@ -41,14 +41,16 @@ jobs:
 
             - restore_cache:
                   keys:
-                      - v1-dependencies-{{checksum "~/project/Trials.com/node-server/package.json"}}
+                      - v1-dependencies-{{checksum "~/project/Trials.com/react-frontend/package.json"}}
                       # Fallback to using latest cache
                       - v1-dependencies
-
+            - run: |
+                  cd Trials.com/react-frontend
+                  npm install
             - save_cache:
                   paths:
                       - ~/project/Trials.com/react-frontend/node_modules
-                  key: v1-dependencies-{{checksum "~/project/Trials.com/node-server/package.json"}}
+                  key: v1-dependencies-{{checksum "~/project/Trials.com/react-frontend/package.json"}}
 
             - run: |
                   ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa root@66.42.118.153

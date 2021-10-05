@@ -51,14 +51,9 @@ jobs:
                   paths:
                       - ~/project/Trials.com/react-frontend/node_modules
                   key: v1-dependencies-{{checksum "~/project/Trials.com/react-frontend/package.json"}}
-
             - run: |
-                  ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa root@66.42.118.153
-                     echo sudo docker exec -it trialsnp bash
-                     echo cd Trials-Ninja-points
-                     echo git checkout master
-                     echo git pull
-
+                  cd Trials.com/node-server
+                  node server.js
 workflows:
     deploy:
         jobs:

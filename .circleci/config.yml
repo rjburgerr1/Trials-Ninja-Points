@@ -33,7 +33,7 @@ jobs:
         docker:
             - image: node:latest
 
-        parallelism: 2
+        parallelism: 3
         steps:
             - add_ssh_keys:
                   fingerprints:
@@ -48,6 +48,7 @@ jobs:
                       - v1-dependencies
             - run: |
                   cd Trials.com/react-frontend
+                  npm cache clean
                   npm install
             - save_cache:
                   paths:

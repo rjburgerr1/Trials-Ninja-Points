@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+    database:
+        build: ./database/
+        env_file:
+            - ./database/.env
+        environment:
+            MYSQL_ROOT_PASSWORD: pass
+
+        ports:
+            - 3307:3306
+        volumes:
+            - mysql:/var/lib/mysql
+            - mysql_config:/etc/mysql
+    node-server:
+        build: ./node-server/
+        env_file:
+            - ./node-server/.env
+
+        ports:
+            - 3002:3002
+        depends_on:
+            - database
+        environment:
+            MYSQL_HOST: database
+volumes:
+    mysql:
+    mysql_config:

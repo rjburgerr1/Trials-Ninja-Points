@@ -56,8 +56,9 @@ jobs:
                   key: v1-dependencies-{{ checksum "package.json" }}
 
             # Add potential caching for Docker
-            - setup_remote_docker:
-                  docker_layer_caching: true
+            # - setup_remote_docker:
+            #     docker_layer_caching: true
+            # layer caching not supported on our plan of circleci
 
             - run:
                   name: Install Docker Client

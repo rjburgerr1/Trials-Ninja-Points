@@ -70,6 +70,19 @@ jobs:
 
             - run: npm ci:docker
 
+    build-docker-compose:
+        working_directory: ~/Trials.com
+        docker:
+            - image: ubuntu:latest
+
+        steps:
+            - add_ssh_keys:
+                  fingerprints:
+                      - "ed:97:54:a0:12:84:20:d7:39:60:ff:43:4b:86:fd:b8"
+
+            - checkout
+            - run: docker compose down -v
+            - run: docker-compose up -d
 workflows:
     deploy:
         jobs:

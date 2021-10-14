@@ -83,7 +83,7 @@ jobs:
 
             - checkout
             - run: docker compose down -v
-            - run: docker-compose up -d
+            - run: docker compose up -d
 workflows:
     deploy:
         jobs:

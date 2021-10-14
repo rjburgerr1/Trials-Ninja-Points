@@ -72,7 +72,7 @@ jobs:
             - run: npm ci:docker
 
     build-docker-compose:
-        working_directory: ~/Trials.com
+        working_directory: ~/project/Trials.com
         docker:
             - image: docker/compose
 

@@ -74,7 +74,7 @@ jobs:
     build-docker-compose:
         working_directory: ~/Trials.com
         docker:
-            - image: ubuntu:latest
+            - image: docker
 
         steps:
             - add_ssh_keys:

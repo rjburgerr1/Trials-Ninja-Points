@@ -87,5 +87,7 @@ jobs:
 workflows:
     deploy:
         jobs:
-            - build-react-app
-            - build-node-server
+            #comment out jobs for testing purposes
+            #- build-react-app
+            #- build-node-server
+            - build-docker-compose

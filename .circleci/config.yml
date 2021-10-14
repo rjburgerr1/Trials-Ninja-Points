@@ -74,7 +74,7 @@ jobs:
     build-docker-compose:
         working_directory: ~/Trials.com
         docker:
-            - image: docker
+            - image: docker/compose
 
         steps:
             - add_ssh_keys:
@@ -83,7 +83,7 @@ jobs:
 
             - checkout
             - run: docker compose down -v
-            - run: docker compose up
+            - run: docker compose up -d
 workflows:
     deploy:
         jobs:

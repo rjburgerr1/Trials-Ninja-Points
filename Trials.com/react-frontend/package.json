@@ -57,7 +57,11 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "netlify:deploy": "netlify deploy --dir=./build -p -m \"$(git log -1 --pretty=%B)\""
+        "netlify:deploy": "netlify deploy --dir=./build -p -m \"$(git log -1 --pretty=%B)\"",
+        "docker:deploy": "npm run docker:build -d && npm run docker:push",
+        "docker:build": "docker compose build",
+        "docker:login": "cat ../dockerhub_credentials.txt | docker login --username $DOCKERHUB_USERNAME --password-stdin ",
+        "docker:push": "docker push rjbradach/trialsnp-node:latest"
     },
     "eslintConfig": {
         "extends": [

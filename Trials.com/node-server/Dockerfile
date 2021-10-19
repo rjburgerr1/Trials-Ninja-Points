@@ -1,24 +1,36 @@
 FROM node
 
+RUN apt-get update
+
 # Create app directory
+
 WORKDIR /usr/app
 
-# Install app dependencies
+
+# Install node server dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
-COPY ../react-frontend/package*.json ./
 
-RUN npm install
-# If you are building your code for production
-# RUN npm install --only=production
+COPY package*.json ./
+
+# Prepare for Production Build 
+
+RUN export NODE_ENV=production
+RUN npm install --only=production
 
 # Bundle app source
+
 COPY . .
 
-# for typescript
-RUN npm run build
-COPY .env ./dist/
-WORKDIR ./dist
 
-EXPOSE 4000
-CMD node server.js
+
+
+# Update and Initialize Prisma Client
+
+
+
+
+# Start the node server
+
+
+CMD  ["npm", "run","start"]

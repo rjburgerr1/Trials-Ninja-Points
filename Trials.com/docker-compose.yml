@@ -1,0 +1,68 @@
+version: "3.8"
+services:
+    watchtower:
+        image: containrrr/watchtower
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+    prisma:
+        image: prismagraphql/prisma:1.34.10
+        restart: always
+        ports:
+            - "4466:4466"
+
+        depends_on:
+            - mysql-db
+        env_file: ./node-server/prisma/.env
+
+    mysql-db:
+        build:
+            context: ./database
+            dockerfile: Dockerfile
+        image: rjbradach/trialsnp-sqldb
+        command:
+            [
+                mysqld,
+                --transaction-isolation=REPEATABLE-READ,
+                --default-authentication-plugin=mysql_native_password,
+                --character-set-server=utf8mb4,
+                --collation-server=utf8mb4_unicode_ci,
+                --innodb_monitor_enable=all,
+                --max-connections=1001,
+            ]
+        restart: always
+        ports:
+            - "3306:3306"
+        volumes:
+            - mysql:/var/lib/mysql
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+            timeout: 10s
+            retries: 10
+
+    node-server:
+        build:
+            context: ./node-server
+            dockerfile: Dockerfile
+        image: rjbradach/trialsnp-node
+        restart: always
+        depends_on:
+            - mysql-db
+            - prisma
+        ports:
+            - 3002:3002
+
+    react-frontend:
+        build:
+            context: ./react-frontend
+            dockerfile: Dockerfile
+        image: rjbradach/trialsnp-react
+        restart: always
+        depends_on:
+            - mysql-db
+            - prisma
+            - node-server
+        ports:
+            - 3000:80
+
+volumes:
+    mysql: ~

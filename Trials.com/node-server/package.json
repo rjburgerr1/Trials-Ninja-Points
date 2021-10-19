@@ -5,7 +5,11 @@
     "main": "server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node server.js"
+        "start": "npx prisma db pull &&  npx prisma generate && node server.js",
+        "ci:docker": "npm run docker:build && npm run docker:login && npm run docker:push",
+        "docker:build": "docker build -t rjbradach/trialsnp-node:latest .",
+        "docker:login": "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD",
+        "docker:push": "docker push rjbradach/trialsnp-node:latest"
     },
     "author": "",
     "license": "ISC",

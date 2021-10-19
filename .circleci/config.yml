@@ -39,22 +39,57 @@ jobs:
 
             - checkout
 
+            # Restore existing cache or fallback to downloading node_modules and caching them for the future
             - restore_cache:
                   keys:
-                      - v1-dependencies-{{checksum "~/project/Trials.com/react-frontend/package.json"}}
-                      # Fallback to using latest cache
-                      - v1-dependencies
+                      - v1-dependencies-{{ checksum "package.json" }}
+                      # fallback to using the latest cache if no exact match is found
+                      - v1-dependencies-
+
             - run: |
-                  cd Trials.com/react-frontend
-                  npm cache clean --force
+                  cd Trials.com/node-server
                   npm install
+
             - save_cache:
                   paths:
-                      - ~/project/Trials.com/react-frontend/node_modules
-                  key: v1-dependencies-{{checksum "~/project/Trials.com/react-frontend/package.json"}}
+                      - node_modules
+                  key: v1-dependencies-{{ checksum "package.json" }}
 
+            # Add potential caching for Docker
+            # - setup_remote_docker:
+            #     docker_layer_caching: true
+            # layer caching not supported on our plan of circleci
+
+            - run:
+                  name: Install Docker Client
+                  command: |
+                      set -x
+                      VER="20.10.9"
+                      curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
+                      tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+                      mv /tmp/docker/* /usr/bin
+
+            - run: npm ci:docker
+
+# Keep for future
+# build-docker-compose:
+#     docker:
+#         - image: docker/compose
+
+#     steps:
+#         - add_ssh_keys:
+#               fingerprints:
+#                   - "ed:97:54:a0:12:84:20:d7:39:60:ff:43:4b:86:fd:b8"
+
+#         - checkout
+#         - run: |
+#               cd Trials.com
+#               docker-compose down -v
+#               docker-compose up -d
 workflows:
     deploy:
         jobs:
+            #comment out jobs for testing purposes
             - build-react-app
-            - build-node-server
+            #- build-node-server
+            #- build-docker-compose

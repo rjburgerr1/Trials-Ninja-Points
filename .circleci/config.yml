@@ -71,20 +71,21 @@ jobs:
 
             - run: npm ci:docker
 
-    build-docker-compose:
-        docker:
-            - image: docker/compose
+# Keep for future
+# build-docker-compose:
+#     docker:
+#         - image: docker/compose
 
-        steps:
-            - add_ssh_keys:
-                  fingerprints:
-                      - "ed:97:54:a0:12:84:20:d7:39:60:ff:43:4b:86:fd:b8"
+#     steps:
+#         - add_ssh_keys:
+#               fingerprints:
+#                   - "ed:97:54:a0:12:84:20:d7:39:60:ff:43:4b:86:fd:b8"
 
-            - checkout
-            - run: |
-                  cd Trials.com
-                  docker-compose down -v
-                  docker-compose up -d
+#         - checkout
+#         - run: |
+#               cd Trials.com
+#               docker-compose down -v
+#               docker-compose up -d
 workflows:
     deploy:
         jobs:

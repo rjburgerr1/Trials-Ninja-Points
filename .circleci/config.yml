@@ -90,6 +90,6 @@ workflows:
     deploy:
         jobs:
             #comment out jobs for testing purposes
-            #- build-react-app
+            - build-react-app
             #- build-node-server
-            - build-docker-compose
+            #- build-docker-compose

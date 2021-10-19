@@ -11,3 +11,6 @@ Trials.com/react-frontend/build
 # Local Netlify folder
 .netlify
 *.node
+Trials.com/react-frontend/.env
+Trials.com/node-server/prisma/.env
+Trials.com/database/.env

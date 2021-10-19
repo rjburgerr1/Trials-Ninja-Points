@@ -18,6 +18,7 @@ services:
         build:
             context: ./database
             dockerfile: Dockerfile
+        image: rjbradach/trialsnp-sqldb
         command:
             [
                 mysqld,
@@ -42,6 +43,7 @@ services:
         build:
             context: ./node-server
             dockerfile: Dockerfile
+        image: rjbradach/trialsnp-node
         restart: always
         depends_on:
             - mysql-db
@@ -53,6 +55,7 @@ services:
         build:
             context: ./react-frontend
             dockerfile: Dockerfile
+        image: rjbradach/trialsnp-react
         restart: always
         depends_on:
             - mysql-db

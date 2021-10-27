@@ -9,6 +9,8 @@ const ProfileRoute = require("./routes/profile");
 const DataRoute = require("./routes/data");
 const ImageUpload = require("./routes/image-upload");
 const synthesizeTrackData = require("./routes/synthesize-collective-opinions");
+const cors = require("cors");
+
 const app = express();
 
 // Use Node.js body parsing middleware
@@ -18,11 +20,20 @@ app.use(
         extended: true,
     })
 );
+
+const corsOptions = {
+    origin: ["http://localhost:3000", "http://localhost:3050"],
+    credentials: true, //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
+
 app.use(function (req, res, next) {
     //console.log(JSON.stringify(req.headers));
     res.header(
         "Access-Control-Allow-Origin",
         "http://localhost:3000",
+        "http://localhost:3050",
         "https://trialsnp.netlify.app"
     );
     res.header(

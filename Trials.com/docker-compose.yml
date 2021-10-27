@@ -9,16 +9,25 @@ services:
         restart: always
         ports:
             - "4466:4466"
-
         depends_on:
             - mysql-db
-        env_file: ./node-server/prisma/.env
+        environment:
+            PRISMA_CONFIG: |
+                port: 4466
+                databases:
+                    default:
+                        connector: mysql
+                        database: trialsnp
+                        host: mysql-db
+                        port: 3306
+                        user: root
+                        password: pass
+                        connectionLimit: 2
 
     mysql-db:
         build:
             context: ./database
             dockerfile: Dockerfile
-        image: rjbradach/trialsnp-sqldb
         command:
             [
                 mysqld,
@@ -44,25 +53,43 @@ services:
             context: ./node-server
             dockerfile: Dockerfile
         image: rjbradach/trialsnp-node
+        ports:
+            - "3002:3002"
         restart: always
         depends_on:
             - mysql-db
-            - prisma
-        ports:
-            - 3002:3002
 
     react-frontend:
         build:
             context: ./react-frontend
             dockerfile: Dockerfile
-        image: rjbradach/trialsnp-react
         restart: always
+        volumes:
+            - /app/node_modules
+            - ./react-frontend:/app
+        environment:
+            MYSQL_HOST: mysql-db
+            NODE_ENV: production
+
         depends_on:
             - mysql-db
-            - prisma
             - node-server
         ports:
-            - 3000:80
+            - "3000:3000"
+        command: npm start
+        env_file:
+            - "./react-frontend/.env"
+
+    nginx:
+        depends_on:
+            - node-server
+            - react-frontend
+        restart: always
+        build:
+            dockerfile: Dockerfile
+            context: ./nginx
+        ports:
+            - "3050:80"
 
 volumes:
     mysql: ~

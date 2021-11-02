@@ -16,6 +16,7 @@ import UpdateProfile from "./components/update-profile";
 import "./sass-base/main.scss";
 
 function App() {
+    console.log(process.env.REACT_APP_AXIOS_BASE_URL);
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {

@@ -22,7 +22,11 @@ app.use(
 );
 
 const corsOptions = {
-    origin: ["http://localhost:3000", "http://localhost:3050"],
+    origin: [
+        "http://localhost:3000",
+        "http://localhost:3050",
+        "https://trialsnp.netlify.app",
+    ],
     credentials: true, //access-control-allow-credentials:true
     optionSuccessStatus: 200,
 };

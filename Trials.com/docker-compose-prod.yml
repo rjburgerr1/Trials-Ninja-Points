@@ -6,25 +6,25 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock
 
     #Currently doesn't work with MYSQL 8+, so we don't use it yet...
-    prisma:
-        image: prismagraphql/prisma:1.34.10
-        restart: always
-        ports:
-            - $PRISMA_LOCAL_PORT:$PRISMA_DOCKER_PORT
-        depends_on:
-            - mysql-db
-        environment:
-            PRISMA_CONFIG: |
-                port: 4466
-                databases:
-                    default:
-                        connector: mysql
-                        database: trialsnp
-                        host: mysql-db
-                        port: $MYSQL_DOCKER_PORT
-                        user: root
-                        password: pass
-                        connectionLimit: 2
+    # prisma:
+    #     image: prismagraphql/prisma:1.34.10
+    #     restart: always
+    #     ports:
+    #         - $PRISMA_LOCAL_PORT:$PRISMA_DOCKER_PORT
+    #     depends_on:
+    #         - mysql-db
+    #     environment:
+    #         PRISMA_CONFIG: |
+    #             port: 4466
+    #             databases:
+    #                 default:
+    #                     connector: mysql
+    #                     database: trialsnp
+    #                     host: mysql-db
+    #                     port: $MYSQL_DOCKER_PORT
+    #                     user: root
+    #                     password: pass
+    #                     connectionLimit: 2
 
     mysql-db:
         build:

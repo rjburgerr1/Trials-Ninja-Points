@@ -84,16 +84,36 @@ services:
         env_file:
             - "./react-frontend/.env"
 
-    nginx:
-        depends_on:
-            - node-server
-        image: rjbradach/trialsnp-nginx
-        restart: always
-        build:
-            dockerfile: Dockerfile
-            context: ./nginx
-        ports:
-            - $NGINX_LOCAL_PORT:$NGINX_DOCKER_PORT
+    # nginx:
+    #     depends_on:
+    #         - node-server
+    #     image: rjbradach/trialsnp-nginx
+    #     restart: always
+    #     build:
+    #         dockerfile: Dockerfile
+    #         context: ./nginx
+    #     ports:
+    #         - $NGINX_LOCAL_PORT:$NGINX_DOCKER_PORT
+
+    # nginx:
+    #     image: nginx:1.15-alpine
+    #     restart: unless-stopped
+    #     ports:
+    #         - "80:80"
+    #         - "443:443"
+    #     volumes:
+    #         - ./certbot-nginx/data/nginx:/etc/nginx/conf.d
+    #         - ./certbot-nginx/data/certbot/conf:/etc/letsencrypt
+    #         - ./certbot-nginx/data/certbot/www:/var/www/certbot
+    #     command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
+
+    # certbot:
+    #     image: certbot/certbot
+    #     restart: unless-stopped
+    #     volumes:
+    #         - ./certbot-nginx/data/certbot/conf:/etc/letsencrypt
+    #         - ./certbot-nginx/data/certbot/www:/var/www/certbot
+    #     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
 volumes:
     mysql: ~

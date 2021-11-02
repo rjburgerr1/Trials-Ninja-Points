@@ -62,27 +62,27 @@ services:
         depends_on:
             - mysql-db
 
-    react-frontend:
-        build:
-            context: ./react-frontend
-            dockerfile: Dockerfile
-        image: rjbradach/trialsnp-react
-        restart: always
-        volumes:
-            - /app/node_modules
-            - ./react-frontend:/app
-        environment:
-            MYSQL_HOST: mysql-db
-            NODE_ENV: production
+    # react-frontend:
+    #     build:
+    #         context: ./react-frontend
+    #         dockerfile: Dockerfile
+    #     image: rjbradach/trialsnp-react
+    #     restart: always
+    #     volumes:
+    #         - /app/node_modules
+    #         - ./react-frontend:/app
+    #     environment:
+    #         MYSQL_HOST: mysql-db
+    #         NODE_ENV: production
 
-        depends_on:
-            - mysql-db
-            - node-server
-        ports:
-            - $REACT_LOCAL_PORT:$REACT_DOCKER_PORT
-        command: npm start
-        env_file:
-            - "./react-frontend/.env"
+    #     depends_on:
+    #         - mysql-db
+    #         - node-server
+    #     ports:
+    #         - $REACT_LOCAL_PORT:$REACT_DOCKER_PORT
+    #     command: npm start
+    #     env_file:
+    #         - "./react-frontend/.env"
 
     # nginx:
     #     depends_on:

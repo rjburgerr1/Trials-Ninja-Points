@@ -41,7 +41,7 @@ services:
                 --innodb_monitor_enable=all,
                 --max-connections=1001,
             ]
-        restart: always
+        restart: unless-stopped
         ports:
             - $MYSQL_LOCAL_PORT:$MYSQL_DOCKER_PORT
         volumes:
@@ -58,9 +58,11 @@ services:
         image: rjbradach/trialsnp-node
         ports:
             - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
-        restart: always
+        restart: unless-stopped
         depends_on:
             - mysql-db
+        env_file:
+            - "./node-server/.env.production"
 
     # react-frontend:
     #     build:

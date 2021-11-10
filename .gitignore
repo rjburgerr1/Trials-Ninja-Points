@@ -20,3 +20,5 @@ Trials.com/node-server/.env
 Trials.com/database/.env
 .env
 .env
+Trials.com/node-server/.env
+Trials.com/node-server/.env.production

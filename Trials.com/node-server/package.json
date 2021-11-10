@@ -5,7 +5,7 @@
     "main": "server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": " npx prisma db pull && npx prisma generate && NODE_ENV=development &&  node server.js",
+        "start": " cross-env NODE_ENV=development && npx prisma db pull && npx prisma generate &&   node server.js",
         "ci:docker": "npm run docker:build && npm run docker:login && npm run docker:push",
         "docker:build": "docker build -t rjbradach/trialsnp-node:latest .",
         "docker:login": "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD",
@@ -16,6 +16,7 @@
     "dependencies": {
         "@prisma/client": "^3.1.1",
         "cors": "^2.8.5",
+        "cross-env": "^7.0.3",
         "dotenv-cli": "^4.1.0",
         "express": "^4.17.1",
         "react-s3-uploader": "^5.0.0",

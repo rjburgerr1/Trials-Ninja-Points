@@ -58,22 +58,23 @@ services:
         image: rjbradach/trialsnp-node
         ports:
             - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
-        restart: always
+        restart: unless-stopped
         depends_on:
             - mysql-db
+        env_file:
+            - "./node-server/.env.development"
 
     react-frontend:
         build:
             context: ./react-frontend
             dockerfile: Dockerfile
         image: rjbradach/trialsnp-react
-        restart: always
+        restart: unless-stopped
         volumes:
             - /app/node_modules
             - ./react-frontend:/app
         environment:
             MYSQL_HOST: mysql-db
-            NODE_ENV: production
 
         depends_on:
             - mysql-db
@@ -82,7 +83,7 @@ services:
             - $REACT_LOCAL_PORT:$REACT_DOCKER_PORT
         command: npm start
         env_file:
-            - "./react-frontend/.env"
+            - "./react-frontend/.env.development"
 
     nginx:
         depends_on:

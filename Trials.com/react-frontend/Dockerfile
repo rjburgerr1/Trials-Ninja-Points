@@ -20,14 +20,14 @@
 # CMD nginx -g 'daemon off;'
 
 
-FROM node:alpine
+FROM node:16-alpine
 WORKDIR /app
 RUN export NODE_OPTIONS=--openssl-legacy-provider
 COPY package.json ./
 COPY package-lock.json ./
 COPY ./ ./
 RUN npm i
-CMD ["npm", "run", "start-compose"]
+CMD ["npm", "run", "start"]
 
 
 

@@ -22,15 +22,5 @@ RUN npm install --only=production
 
 COPY . .
 
-
-
-
-# Update and Initialize Prisma Client
-
-
-
-
 # Start the node server
-
-
-CMD  ["npm", "run","start"]
+CMD  [ "npm", "run","start"]

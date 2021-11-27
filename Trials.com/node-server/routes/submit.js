@@ -86,6 +86,9 @@ const router = (app) => {
                     total_ninja_level: {
                         increment: run.ninjaLevel,
                     },
+                    total_np: {
+                        increment: run.ninjaPoints,
+                    },
                 },
             });
 

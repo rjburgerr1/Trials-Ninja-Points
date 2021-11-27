@@ -18,6 +18,7 @@ const synthesizeData = async (newRun) => {
             total_faults: true,
             total_length: true,
             total_ninja_level: true,
+            total_np: true,
             nRuns: true,
         },
     });
@@ -56,6 +57,13 @@ const synthesizeData = async (newRun) => {
         currentTrackData,
         "average_faults",
         currentTrackData.total_faults
+    );
+    // Update Average NP
+    mergeNewRunData(
+        newRun,
+        currentTrackData,
+        "average_np",
+        currentTrackData.total_np
     );
 };
 

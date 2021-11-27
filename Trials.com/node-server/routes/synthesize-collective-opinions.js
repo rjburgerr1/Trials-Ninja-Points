@@ -1,6 +1,11 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
+/**
+ * OLD FILE, POSSIBLY USEFUL FOR REFERENCE IN THE FUTURE.
+ * CHANGED TO MORE EFFICIENT WAY OF UPDATING AGGREGATE VALUES -> synthesize-data.js
+ */
+
 const router = () => {
     /*
     var CronJob = require("../../react-frontend/node_modules/cron").CronJob;
@@ -31,6 +36,7 @@ const synthesizeTrackData = async () => {
     payload = await avgFaults(groupedData);
     payload = await avgRating(groupedData);
     payload = await avgNJLevel(groupedData);
+    payload = await avgNP(groupedData);
 
     setTrackStats(payload);
 };
@@ -51,6 +57,7 @@ const setTrackStats = async (data) => {
                 average_faults: data[key].avgFaults,
                 rating: data[key].avgRating,
                 ninja_level: data[key].avgNinjaLevel,
+                average_np: data[key].avgNinjaPoints,
             },
         });
     }
@@ -96,6 +103,7 @@ const avgFaultSponginess = async (data) => {
         });
 
         let avgFaultSponginess = sum / count;
+
         data[key].avgFaultSponginess = avgFaultSponginess;
     });
     return data;
@@ -140,9 +148,26 @@ const avgNJLevel = async (data) => {
             sum += Number(obj.ninja_level);
         });
 
-        let avgNJLevel = sum / count;
+        let avgNinjaLevel = sum / count;
 
-        data[key].avgNinjaLevel = avgNJLevel;
+        data[key].avgNinjaLevel = avgNinjaLevel;
+    });
+
+    return data;
+};
+
+const avgNP = async (data) => {
+    Object.keys(data).forEach((key) => {
+        let count = data[key].ninjaPoints;
+        let sum = 0;
+
+        data[key].forEach((obj) => {
+            sum += Number(obj.ninja_points);
+        });
+
+        let avgNinjaPoints = sum / count;
+
+        data[key].avgNinjaPoints = avgNinjaPoints;
     });
 
     return data;

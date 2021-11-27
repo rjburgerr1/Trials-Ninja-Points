@@ -1,10 +1,10 @@
-CREATE DATABASE  IF NOT EXISTS `trialsnp` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `trialsnp` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `trialsnp`;
 -- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: trialsnp
 -- ------------------------------------------------------
--- Server version	8.0.25
+-- Server version	8.0.26
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -159,6 +159,7 @@ CREATE TABLE `tracks` (
   `total-length` decimal(10,2) NOT NULL DEFAULT '0.00',
   `total-faults` int NOT NULL DEFAULT '0',
   `total-ninja-level` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `average-np` float(7,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`track-name`,`creator`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -169,40 +170,8 @@ CREATE TABLE `tracks` (
 
 LOCK TABLES `tracks` WRITE;
 /*!40000 ALTER TABLE `tracks` DISABLE KEYS */;
-INSERT INTO `tracks` VALUES ('12ev12ve12e','v12ev12ev12ev1',6.00,1.00,123.00,2.00,3.0,1,3.00,2.00,1.00,123,6.00),('12evqwvq','v12ev1',5.50,2.00,142.00,2.00,3.0,1,3.00,2.00,2.00,142,5.50),('adww','`wqedv',4.50,1.00,123.00,5.00,3.0,1,3.00,5.00,1.00,123,4.50),('b23rb','b23b23r',2.00,2.00,232.00,2.00,3.0,1,3.00,2.00,2.00,232,2.00),('b23rb23r','b23rb23b2',6.00,2.00,234.00,1.00,3.0,1,3.00,1.00,2.00,234,6.00),('dvqwdvq','wdvqwdv',4.33,2.00,93.00,2.33,3.3,3,10.00,7.00,6.00,279,13.00),('lala','lala',5.00,1.00,123.00,3.00,3.0,1,3.00,0.00,0.00,0,0.00),('pap','pap',2.00,2.00,123.00,2.00,2.0,1,2.00,0.00,0.00,0,0.00),('qwdv','qwdvqwd',5.00,2.00,123.00,3.00,3.0,1,3.00,0.00,0.00,0,0.00),('qwdvqwdv','123v12ve',6.00,2.00,123.00,2.00,3.0,1,3.00,0.00,0.00,0,0.00),('qwdvqwdvqwd','vqwdvqwdvq',5.00,2.00,123.00,2.00,3.0,0,0.00,0.00,0.00,0,0.00),('qwevq','wevqwe',9.00,3.00,123.00,5.00,5.0,1,0.00,0.00,0.00,0,0.00),('rar','rar',5.50,2.00,124.00,2.00,3.0,2,6.00,0.00,0.00,0,0.00),('v12ev12e1','e12ev12',4.50,2.00,123.00,3.00,3.0,1,3.00,3.00,2.00,123,4.50),('vqwd','vqwd1',6.00,1.00,123.00,2.00,3.0,0,0.00,0.00,0.00,0,0.00),('vqwdvqwvq','12v312',5.00,1.00,123.00,2.00,3.0,0,0.00,0.00,0.00,0,0.00);
+INSERT INTO `tracks` VALUES ('12ev12ve12e','v12ev12ev12ev1',6.00,1.00,123.00,2.00,3.0,1,3.00,2.00,1.00,123,6.00,0.00),('12evqwvq','v12ev1',5.50,2.00,142.00,2.00,3.0,1,3.00,2.00,2.00,142,5.50,0.00),('adww','`wqedv',4.50,1.00,123.00,5.00,3.0,1,3.00,5.00,1.00,123,4.50,0.00),('b23rb','b23b23r',2.00,2.00,232.00,2.00,3.0,1,3.00,2.00,2.00,232,2.00,0.00),('b23rb23r','b23rb23b2',6.00,2.00,234.00,1.00,3.0,1,3.00,1.00,2.00,234,6.00,0.00),('dvqwdvq','wdvqwdv',4.33,2.00,93.00,2.33,3.3,3,10.00,7.00,6.00,279,13.00,0.00),('lala','lala',5.00,1.00,123.00,3.00,3.0,1,3.00,0.00,0.00,0,0.00,0.00),('pap','pap',2.00,2.00,123.00,2.00,2.0,1,2.00,0.00,0.00,0,0.00,0.00),('qwdv','qwdvqwd',5.00,2.00,123.00,3.00,3.0,1,3.00,0.00,0.00,0,0.00,0.00),('qwdvqwdv','123v12ve',6.00,2.00,123.00,2.00,3.0,1,3.00,0.00,0.00,0,0.00,0.00),('qwdvqwdvqwd','vqwdvqwdvq',5.00,2.00,123.00,2.00,3.0,0,0.00,0.00,0.00,0,0.00,0.00),('qwevq','wevqwe',9.00,3.00,123.00,5.00,5.0,1,0.00,0.00,0.00,0,0.00,0.00),('rar','rar',5.50,2.00,124.00,2.00,3.0,2,6.00,0.00,0.00,0,0.00,0.00),('v12ev12e1','e12ev12',4.50,2.00,123.00,3.00,3.0,1,3.00,3.00,2.00,123,4.50,0.00),('vqwd','vqwd1',6.00,1.00,123.00,2.00,3.0,0,0.00,0.00,0.00,0,0.00,0.00),('vqwdvqwvq','12v312',5.00,1.00,123.00,2.00,3.0,0,0.00,0.00,0.00,0,0.00,0.00);
 /*!40000 ALTER TABLE `tracks` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `weightage`
---
-
-DROP TABLE IF EXISTS `weightage`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `weightage` (
-  `rider` varchar(45) NOT NULL,
-  `rank` int DEFAULT NULL,
-  `faults` int NOT NULL,
-  `time` varchar(9) NOT NULL,
-  `track-name` varchar(45) NOT NULL,
-  `ninja-points` decimal(10,0) DEFAULT NULL,
-  `ninja-level` decimal(10,0) NOT NULL,
-  `length` enum('Short','Medium','Long') NOT NULL,
-  `fault-sponginess` enum('Not At All','Not Very','Moderately','Very','Extremely') NOT NULL,
-  `rating` decimal(10,0) DEFAULT NULL,
-  `nHighestRun` bigint unsigned NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `weightage`
---
-
-LOCK TABLES `weightage` WRITE;
-/*!40000 ALTER TABLE `weightage` DISABLE KEYS */;
-INSERT INTO `weightage` VALUES ('RJ Burgerr1',2,20,'12:12.123','Final Sorrow',1100,7,'Short','Moderately',3,1),('RJ Burgerr1',2,20,'12:12.123','Luscious',513,7,'Short','Moderately',3,2),('RJ Burgerr1',2,20,'12:12.123','Wraith',199,7,'Short','Moderately',3,3),('Slikscythez',2,20,'12:12.123','Annihilation',980,7,'Short','Moderately',3,1),('Slikscythez',2,20,'12:12.123','luscious',741,7,'Short','Moderately',3,2),('Slikscythez',2,20,'12:12.123','Wraith',199,7,'Short','Moderately',3,3);
-/*!40000 ALTER TABLE `weightage` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -214,4 +183,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-04 23:26:58
+-- Dump completed on 2021-11-26 23:54:51

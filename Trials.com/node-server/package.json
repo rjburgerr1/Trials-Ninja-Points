@@ -5,7 +5,7 @@
     "main": "server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "dotenv -e .env.development -- npx prisma db pull && npx prisma generate && dotenv -e .env.development -- node server.js",
+        "start": "dotenv -e .env.development -- npx prisma db pull && npx prisma generate && dotenv -e .env.development -- nodemon server.js",
         "prisma:pull-gen": "dotenv -e .env.development -- npx prisma db pull && npx prisma generate",
         "ci:docker": "npm run docker:build && npm run docker:login && npm run docker:push",
         "docker:build": "docker build -t rjbradach/trialsnp-node:latest .",

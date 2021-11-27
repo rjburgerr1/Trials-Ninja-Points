@@ -16,6 +16,10 @@ export const COLUMNS = [
         accessor: "length",
     },
     {
+        Header: "Average NP Run",
+        accessor: "average_np",
+    },
+    {
         Header: "Avg Faults",
         accessor: "average_faults",
     },

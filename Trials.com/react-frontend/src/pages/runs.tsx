@@ -13,7 +13,7 @@ export default function Runs(props: any) {
                     <Chat />
                 </div>
                 <div className="runs-leaderboard">
-                    <RunsLeaderboard />
+                    <RunsLeaderboard {...props} />
                 </div>
 
                 <div className="runs-space-element"></div>

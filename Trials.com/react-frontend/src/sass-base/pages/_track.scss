@@ -1,0 +1,68 @@
+@use "../components/tables";
+@use "../abstracts/colors" as *;
+
+.runs-container {
+    > .track-body {
+        > .runs-leaderboard {
+            position: absolute;
+            top: 30em;
+            left: 80em;
+            transform: translate(
+                -50%,
+                -50%
+            ); /* This is a shorthand of
+			translateX(-50%) and translateY(-50%) */
+            background-color: $oxford-blue;
+        }
+
+        .track-info {
+            position: absolute;
+            top: 30em;
+            left: 15em;
+            transform: translate(
+                -50%,
+                -50%
+            ); /* This is a shorthand of
+			translateX(-50%) and translateY(-50%) */
+            height: 100%;
+
+            #track-thumbnail {
+                position: relative;
+                z-index: -10;
+            }
+
+            #kitchen-sink-card {
+                position: absolute;
+                top: 50%; /* position the top  edge of the element at the middle of the parent */
+                left: 50%; /* position the left edge of the element at the middle of the parent */
+                transform: translate(
+                    -50%,
+                    -50%
+                ); /* This is a shorthand of
+				translateX(-50%) and translateY(-50%) */
+                text-align: center;
+
+                #track-creator {
+                    color: $oxford-blue-accent-light;
+                }
+                .list-groups {
+                    .kitchen-sink-group-item {
+                        background-color: $oxford-blue-accent-light;
+                        display: flex;
+                        justify-content: space-between;
+                        color: black;
+                        .track-kitchen-sink-label {
+                            padding: 0.5em;
+                            color: $oxford-blue;
+                        }
+                        .track-kitchen-sink-value {
+                            align-self: center;
+                        }
+                    }
+                }
+                background-color: $oxford-blue;
+                color: $mustard;
+            }
+        }
+    }
+}

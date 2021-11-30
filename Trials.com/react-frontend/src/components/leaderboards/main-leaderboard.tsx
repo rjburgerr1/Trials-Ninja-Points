@@ -15,7 +15,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useMemo, useState } from "react";
 import { useSticky } from "react-table-sticky";
-import getData from "../data";
+import getData from "../leaderboard-requests";
 import ReactCountryFlag from "react-country-flag";
 
 const resolveData = async (setData: any) => {

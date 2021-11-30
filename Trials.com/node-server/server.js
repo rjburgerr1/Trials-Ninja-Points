@@ -1,15 +1,16 @@
 // Require packages and set the port
-const express = require("./node_modules/express");
-const port = 3002;
 const bodyParser = require("body-parser");
-const SubmitRoute = require("./routes/submit");
-const SignupRoute = require("./routes/signup");
-const ChatRoute = require("./routes/chat");
-const ProfileRoute = require("./routes/profile");
-const DataRoute = require("./routes/data");
-const ImageUpload = require("./routes/image-upload");
-const synthesizeTrackData = require("./routes/synthesize-collective-opinions");
 const cors = require("cors");
+const ChatRoute = require("./routes/chat");
+const DataRoute = require("./routes/leaderboards");
+const express = require("./node_modules/express");
+const ImageUpload = require("./routes/image-upload");
+const SignupRoute = require("./routes/signup");
+const SubmitRoute = require("./routes/submit");
+const TrackRoute = require("./routes/track");
+const port = 3002;
+const ProfileRoute = require("./routes/profile");
+const synthesizeTrackData = require("./routes/synthesize-collective-opinions");
 
 const app = express();
 
@@ -53,6 +54,7 @@ SubmitRoute(app);
 SignupRoute(app);
 ProfileRoute(app);
 ImageUpload(app);
+TrackRoute(app);
 
 // Start the server
 const server = app.listen(port, (error) => {

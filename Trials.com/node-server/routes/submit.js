@@ -1,6 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const synthesizeData = require("../synthesize-run-data/synthesize-data");
+const getTopRuns = require("../synthesize-run-data/get-top-runs");
 // const { request } = require("express"); Keep for now, might need later
 
 const router = (app) => {
@@ -28,12 +29,8 @@ const router = (app) => {
                     length: run.length,
                     fault_sponginess: run.faultSponginess,
                     rating: run.rating,
-                    riders: {
-                        connectOrCreate: {
-                            where: { rider: run.rider },
-                            create: { rider: run.rider },
-                        },
-                    },
+                    rider: run.rider.displayName,
+                    id: run.rider.uid,
                     creators: {
                         connectOrCreate: {
                             where: { creator: run.creator },
@@ -89,6 +86,20 @@ const router = (app) => {
                     total_np: {
                         increment: run.ninjaPoints,
                     },
+                },
+            });
+
+            const totalNP = await getTopRuns(run.rider.uid);
+
+            await prisma.profiles.update({
+                where: {
+                    id: run.rider.uid,
+                },
+                data: {
+                    runs: {
+                        increment: 1,
+                    },
+                    total_ninja_points: totalNP,
                 },
             });
 

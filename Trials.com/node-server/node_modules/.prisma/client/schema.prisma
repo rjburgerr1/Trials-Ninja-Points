@@ -28,11 +28,6 @@ model profiles {
   bio                String?  @db.VarChar(300)
 }
 
-model riders {
-  rider String @id @db.VarChar(45)
-  runs  runs[]
-}
-
 model runs {
   rider            String                @db.VarChar(45)
   rank             Int?
@@ -45,11 +40,11 @@ model runs {
   fault_sponginess runs_fault_sponginess @map("fault-sponginess")
   rating           Float?                @db.Float
   creator          String                @db.VarChar(45)
+  id               String                @db.VarChar(29)
   creators         creators              @relation(fields: [creator], references: [creator], onDelete: NoAction, onUpdate: NoAction, map: "creator")
-  riders           riders                @relation(fields: [rider], references: [rider], onDelete: NoAction, onUpdate: NoAction, map: "rider")
   tracks           tracks                @relation(fields: [track_name], references: [track_name], onDelete: NoAction, onUpdate: NoAction, map: "track-name")
 
-  @@id([rider, track_name])
+  @@id([track_name, id])
   @@index([creator], map: "creator_idx")
   @@index([rider], map: "rider_idx")
   @@index([track_name], map: "track-name_idx")

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../components/navbar";
 import axios from "axios";
 import img from "../images/Fusion Title Screen.jpg";
-import { getRunsLB } from "../components/data";
+import { getRunsLB } from "../components/leaderboard-requests";
 import { TrackInfo } from "../components/track-info";
 
 import { RunsLeaderboard } from "../components/leaderboards/runs-leaderboard";

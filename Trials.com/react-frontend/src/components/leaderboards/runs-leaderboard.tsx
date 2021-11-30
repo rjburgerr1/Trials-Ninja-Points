@@ -11,7 +11,7 @@ import {
     faSortAmountUpAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getRunsLB } from "../data";
+import { getRunsLB } from "../leaderboard-requests";
 import { useEffect, useMemo, useState } from "react";
 import { useSticky } from "react-table-sticky";
 

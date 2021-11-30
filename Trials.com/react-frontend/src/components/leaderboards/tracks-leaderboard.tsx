@@ -1,6 +1,8 @@
 import { COLUMNS } from "./tracks-leaderboard-columns";
 import {
+    Cell,
     Column,
+    Row,
     useBlockLayout,
     usePagination,
     useSortBy,
@@ -14,6 +16,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useMemo, useState } from "react";
 import { useSticky } from "react-table-sticky";
 import { getTracksLB } from "../data";
+import ReactCountryFlag from "react-country-flag";
 
 const resolveData = async (setData: any) => {
     try {
@@ -76,6 +79,25 @@ export const TracksLeaderboard = () => {
     const validatePageNumber = (pageNumber: number, maxPageNumber: number) => {
         if (pageNumber <= maxPageNumber && pageNumber >= 0) {
             gotoPage(pageNumber);
+        }
+    };
+
+    const setTableBodyCell = (cell: Cell, row: Row) => {
+        if (cell.column.Header === "Track") {
+            return (
+                <a
+                    href={
+                        "track/name=" +
+                        row.values.track_name +
+                        "&creator=" +
+                        row.values.creator
+                    }
+                >
+                    {cell.render("Cell")}
+                </a>
+            );
+        } else {
+            return <div>{cell.render("Cell")}</div>;
         }
     };
 
@@ -145,19 +167,7 @@ export const TracksLeaderboard = () => {
                                             {...cell.getCellProps()}
                                             className="leaderboard-body-row-value"
                                         >
-                                            {cell.column.Header ===
-                                            "Username" ? (
-                                                <a
-                                                    href={
-                                                        "profile/" +
-                                                        row.values.username
-                                                    }
-                                                >
-                                                    {cell.render("Cell")}
-                                                </a>
-                                            ) : (
-                                                <div>{cell.render("Cell")}</div>
-                                            )}
+                                            {setTableBodyCell(cell, row)}
                                         </div>
                                     ))}
                                 </div>

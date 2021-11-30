@@ -70,7 +70,7 @@ model tracks {
   total_faults           Int      @default(0) @map("total-faults")
   total_ninja_level      Decimal  @default(0.00) @map("total-ninja-level") @db.Decimal(10, 2)
   average_np             Float    @default(0.00) @map("average-np") @db.Float
-  total_np               String   @default("0") @map("total-np") @db.VarChar(45)
+  total_np               Float    @default(0.00) @map("total-np") @db.Float
   runs                   runs[]
 
   @@id([track_name, creator])

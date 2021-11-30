@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { CalcNP } from "./calculate-ninja-points";
 import { Form, Field, Formik } from "formik";
+import { useAuth } from "../contexts/auth-context";
 import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import axios from "axios";
@@ -26,6 +27,7 @@ interface FormValues {
 }
 
 const SubmitRun = () => {
+    const { currentUser } = useAuth();
     const history = useHistory();
     const [rating, setRating] = useState();
 
@@ -41,7 +43,7 @@ const SubmitRun = () => {
         ninjaLevel: NaN,
         rating: NaN,
         rank: NaN,
-        rider: "",
+        rider: currentUser.displayName,
         ninjaPoints: 0, // NinjaPoints are not inside the form but these initial values act as props for this component so storing ninjapoints here feels right
     };
 
@@ -95,7 +97,6 @@ const SubmitRun = () => {
         ninjaLevel: Yup.number().required("Required"),
         rating: Yup.string().required("Required"),
         rank: Yup.number().min(1, "Minimum rank is 1!").required("Required"),
-        rider: Yup.string().required("Required"),
     });
 
     return (
@@ -109,28 +110,11 @@ const SubmitRun = () => {
                     {(props) => (
                         <Form>
                             <div className="form-inline-group">
-                                <label>Rider</label>
-                                <Field
-                                    autoFocus
-                                    id="rider"
-                                    name="rider"
-                                    onChange={props.handleChange}
-                                    placeholder="RJ Burgerr1"
-                                    type="text"
-                                    value={props.values.rider}
-                                />
-                                {props.errors.rider && props.touched.rider ? (
-                                    <div className="field-error">
-                                        {props.errors.rider}
-                                    </div>
-                                ) : (
-                                    <div className="field-error-invisible">
-                                        {props.errors.rider}
-                                    </div>
-                                )}
+                                <Field id="rider" name="rider" type="hidden" />
 
                                 <label>Track Name</label>
                                 <Field
+                                    autoFocus
                                     id="trackName"
                                     name="trackName"
                                     onChange={props.handleChange}
@@ -387,6 +371,18 @@ const SubmitRun = () => {
                                                 console.log(props.values);
                                             }
                                         });
+*/
+
+/* Save this for later in case we can allow people to submit runs for others in the future
+ {props.errors.rider && props.touched.rider ? (
+                                    <div className="field-error">
+                                        {props.errors.rider}
+                                    </div>
+                                ) : (
+                                    <div className="field-error-invisible">
+                                        {props.errors.rider}
+                                    </div>
+                                )}
 */
 
 const marks = [

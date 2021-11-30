@@ -43,7 +43,7 @@ const SubmitRun = () => {
         ninjaLevel: NaN,
         rating: NaN,
         rank: NaN,
-        rider: currentUser.displayName,
+        rider: currentUser,
         ninjaPoints: 0, // NinjaPoints are not inside the form but these initial values act as props for this component so storing ninjapoints here feels right
     };
 

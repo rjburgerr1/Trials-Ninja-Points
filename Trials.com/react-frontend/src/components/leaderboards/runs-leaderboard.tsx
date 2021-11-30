@@ -11,24 +11,34 @@ import {
     faSortAmountUpAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getRunsLB } from "../data";
+import { getRunsLB } from "../leaderboard-requests";
 import { useEffect, useMemo, useState } from "react";
 import { useSticky } from "react-table-sticky";
 
-const resolveData = async (setData: any) => {
+const resolveData = async (setData: any, runs?: any) => {
     try {
-        const data = await getRunsLB();
-        setData(data);
+        // If runs argument is provided, use that instead
+        if (runs) {
+            setData(runs);
+        } else {
+            const data = await getRunsLB();
+            setData(data);
+        }
     } catch (error: any) {
         console.error(error.message);
     }
 };
-export const RunsLeaderboard = () => {
+
+export const RunsLeaderboard = (props?: any) => {
     let [data, setData] = useState([{}]);
     const columns: Array<Column> = useMemo(() => COLUMNS, []);
 
     useEffect(() => {
-        resolveData(setData);
+        // Check if there are already runs provided to fill the leaderboard component, if so,
+        // use those in place of getting all runs
+        props.runs !== 0
+            ? resolveData(setData, props.runs)
+            : resolveData(setData);
     }, []); // includes empty dependency array
 
     const {
@@ -121,7 +131,6 @@ export const RunsLeaderboard = () => {
                     <div {...getTableBodyProps()} className="leaderboard-body">
                         {page.map((row) => {
                             prepareRow(row);
-
                             return (
                                 <div
                                     {...row.getRowProps()}

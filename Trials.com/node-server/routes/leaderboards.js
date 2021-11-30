@@ -24,8 +24,16 @@ const router = (app) => {
     });
     app.get("/runs-leaderboard", async (request, response) => {
         try {
-            let result = await prisma.runs.findMany({});
-
+            let result = await prisma.runs.findMany(
+                request.query.trackName
+                    ? {
+                          where: {
+                              track_name: request.query.trackName,
+                              creator: request.query.creator,
+                          },
+                      }
+                    : {}
+            );
             return response.status(200).send(result);
         } catch (error) {
             console.log(error.message);

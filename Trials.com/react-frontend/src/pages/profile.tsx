@@ -34,7 +34,6 @@ const Profile: React.FC = (props: any) => {
                         },
                     });
                 } else {
-                    // Currently only work for retrieving the current users data
                     profile = await axios.get("/profile-info", {
                         params: {
                             username: user,

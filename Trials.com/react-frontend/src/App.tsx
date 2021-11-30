@@ -8,6 +8,7 @@ import ResetPassword from "./components/Authentication/reset-password";
 import Runs from "./pages/runs";
 import PrivateRoute from "./components/private-route";
 import Profile from "./pages/profile";
+import Track from "./pages/track";
 import SignInSignUp from "./pages/signin-signup";
 import SubmitRun from "./pages/submit-run";
 import SubmittedRun from "./pages/submitted-run";
@@ -16,7 +17,6 @@ import UpdateProfile from "./components/update-profile";
 import "./sass-base/main.scss";
 
 function App() {
-    console.log(process.env.REACT_APP_AXIOS_BASE_URL);
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
@@ -38,6 +38,10 @@ function App() {
                         />
                         <Route path="/runs" component={Runs} />
                         <Route path="/tracks" component={Tracks} />
+                        <PrivateRoute
+                            path="/track/name=:name?&creator=:creator?"
+                            component={Track}
+                        />
                         <PrivateRoute
                             path="/update-profile"
                             component={UpdateProfile}

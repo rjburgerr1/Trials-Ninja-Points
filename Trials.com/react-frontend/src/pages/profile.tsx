@@ -7,6 +7,12 @@ import Avatar from "@material-ui/core/Avatar";
 import { useAuth } from "../contexts/auth-context";
 import { Card } from "react-bootstrap";
 
+const formatCreateDate = (createDate: string) => {
+    // Create Dates come in the form "YYYY-MM-DDTHH:MM:SS.sssZ"
+    // We split by "T" to get only the day of the year
+    return createDate.split("T")[0];
+};
+
 const Profile: React.FC = (props: any) => {
     const { currentUser } = useAuth();
     const [username, setUsername] = useState(
@@ -43,7 +49,7 @@ const Profile: React.FC = (props: any) => {
                 setAliases(profile.data.aliases);
                 setBio(profile.data.bio);
                 setCountry(profile.data.country);
-                setCreateDate(profile.data.create_date);
+                setCreateDate(formatCreateDate(profile.data.create_date));
                 setHighestLevelPass(profile.data.highest_level_pass);
                 setHighestNPRun(profile.data.highest_np_run);
                 setRank(profile.data.rank);

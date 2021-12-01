@@ -53,7 +53,7 @@
     },
     "prisma.schema": "react-frontend/prisma/schema.prisma",
     "scripts": {
-        "start": "NODE_ENV=development react-scripts start",
+        "start": "SET NODE_ENV=development && react-scripts start",
         "start-prod": "SET NODE_ENV=production & react-scripts start",
         "build-dev": "SET NODE_ENV=development & react-scripts build",
         "build-prod": "SET NODE_ENV=production & react-scripts build",

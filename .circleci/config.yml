@@ -25,7 +25,7 @@ jobs:
                   cd Trials.com/react-frontend
                   echo "$(ls -a)"
                   CI= npm run build-prod
-                  npm run test --passWithNoTests
+                  npm run test
                   npm run netlify:deploy
 
     build-node-server:

@@ -16,6 +16,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getRunsLB } from "../leaderboard-requests";
 import { useEffect, useMemo, useState } from "react";
 import { useSticky } from "react-table-sticky";
+import { infoTip } from "../help-info/info-tips";
 
 const resolveData = async (setData: any, runs?: any) => {
     try {
@@ -93,6 +94,21 @@ export const RunsLeaderboard = (props?: any) => {
         }
     };
 
+    const setTableHeaderInfoTip = (column: Column) => {
+        if (column.Header === "Fault Sponginess") {
+            return infoTip(
+                "fault-sponginess",
+                "This describes how consistent a track is, in other words how 'luck'-based it is"
+            );
+        } else {
+            return (
+                <span className="invisible-element">
+                    <FontAwesomeIcon icon={faSortAmountDown} size="1x" />
+                </span>
+            );
+        }
+    };
+
     const validatePageNumber = (pageNumber: number, maxPageNumber: number) => {
         if (pageNumber <= maxPageNumber && pageNumber >= 0) {
             gotoPage(pageNumber);
@@ -116,12 +132,7 @@ export const RunsLeaderboard = (props?: any) => {
                                         )}
                                         className="leaderboard-header-row-column"
                                     >
-                                        <span className="invisible-element">
-                                            <FontAwesomeIcon
-                                                icon={faSortAmountDown}
-                                                size="1x"
-                                            />
-                                        </span>
+                                        {setTableHeaderInfoTip(column)}
                                         <span className="leaderboard-header-row-value">
                                             {column.render("Header")}
                                         </span>

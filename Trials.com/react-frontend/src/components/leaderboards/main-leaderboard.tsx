@@ -13,6 +13,7 @@ import {
     faSortAmountUpAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { infoTip } from "../help-info/info-tips";
 import { useEffect, useMemo, useState } from "react";
 import { useSticky } from "react-table-sticky";
 import getData from "../leaderboard-requests";
@@ -25,6 +26,27 @@ const resolveData = async (setData: any) => {
         setData(data);
     } catch (error: any) {
         console.error(error.message);
+    }
+};
+
+const setTableBodyCell = (cell: Cell, row: Row) => {
+    if (cell.column.Header === "Username") {
+        return (
+            <a href={"profile/" + row.values.username}>{cell.render("Cell")}</a>
+        );
+    } else if (cell.column.Header === "Origin") {
+        return cell.value !== "N/A" ? (
+            <ReactCountryFlag
+                className="country-flag"
+                countryCode={cell.value}
+                svg
+                title={cell.value}
+            />
+        ) : (
+            "N/A"
+        );
+    } else {
+        return <div>{cell.render("Cell")}</div>;
     }
 };
 
@@ -80,26 +102,30 @@ export const MainLeaderboard = () => {
         }
     };
 
-    const setTableBodyCell = (cell: Cell, row: Row) => {
-        if (cell.column.Header === "Username") {
-            return (
-                <a href={"profile/" + row.values.username}>
-                    {cell.render("Cell")}
-                </a>
+    const setTableHeaderInfoTip = (column: Column) => {
+        if (column.Header === "Total NP") {
+            return infoTip(
+                "total-np",
+                "Total Ninja Points summed from the rider's top 100 runs"
             );
-        } else if (cell.column.Header === "Origin") {
-            return cell.value !== "N/A" ? (
-                <ReactCountryFlag
-                    className="country-flag"
-                    countryCode={cell.value}
-                    svg
-                    title={cell.value}
-                />
-            ) : (
-                "N/A"
+        } else if (column.Header === "Origin") {
+            return infoTip(
+                "origin",
+                "Country from which the rider is originally from"
             );
+        } else if (column.Header === "Best Run (NP)") {
+            return infoTip(
+                "best-run",
+                "Ninja points for the rider's best run they have submitted"
+            );
+        } else if (column.Header === "Highest Level Pass") {
+            return infoTip("highest-level", "The rider's highest level passed");
         } else {
-            return <div>{cell.render("Cell")}</div>;
+            return (
+                <span className="invisible-element">
+                    <FontAwesomeIcon icon={faSortAmountDown} size="1x" />
+                </span>
+            );
         }
     };
 
@@ -120,12 +146,8 @@ export const MainLeaderboard = () => {
                                         )}
                                         className="leaderboard-header-row-column"
                                     >
-                                        <span className="invisible-element">
-                                            <FontAwesomeIcon
-                                                icon={faSortAmountDown}
-                                                size="1x"
-                                            />
-                                        </span>
+                                        {setTableHeaderInfoTip(column)}
+
                                         <span className="leaderboard-header-row-value">
                                             {column.render("Header")}
                                         </span>

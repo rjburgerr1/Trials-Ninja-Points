@@ -17,6 +17,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useSticky } from "react-table-sticky";
 import { getTracksLB } from "../leaderboard-requests";
 import ReactCountryFlag from "react-country-flag";
+import { infoTip } from "../help-info/info-tips";
 
 const resolveData = async (setData: any) => {
     try {
@@ -101,6 +102,31 @@ export const TracksLeaderboard = () => {
         }
     };
 
+    const setTableHeaderInfoTip = (column: Column) => {
+        if (column.Header === "Average NP Run") {
+            return infoTip(
+                "average-np-run",
+                "This column lists the ninja point averages of all runs on the given track"
+            );
+        } else if (column.Header === "Avg Faults") {
+            return infoTip(
+                "average-faults",
+                "This column lists the average faults for a run on the given track"
+            );
+        } else if (column.Header === "Fault Sponginess") {
+            return infoTip(
+                "fault-sponginess",
+                "This describes how consistent a track is, in other words how 'luck'-based it is"
+            );
+        } else {
+            return (
+                <span className="invisible-element">
+                    <FontAwesomeIcon icon={faSortAmountDown} size="1x" />
+                </span>
+            );
+        }
+    };
+
     return (
         <div className="leaderboard">
             <div className="leaderboard-container">
@@ -118,12 +144,7 @@ export const TracksLeaderboard = () => {
                                         )}
                                         className="leaderboard-header-row-column"
                                     >
-                                        <span className="invisible-element">
-                                            <FontAwesomeIcon
-                                                icon={faSortAmountDown}
-                                                size="1x"
-                                            />
-                                        </span>
+                                        {setTableHeaderInfoTip(column)}
                                         <span className="leaderboard-header-row-value">
                                             {column.render("Header")}
                                         </span>

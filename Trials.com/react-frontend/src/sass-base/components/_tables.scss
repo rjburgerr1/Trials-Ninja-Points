@@ -59,6 +59,16 @@
                         visibility: hidden;
                     }
 
+                    > .table-header-info-tip {
+                        margin-left: 2%;
+                        margin-right: auto; // These margins must match .column-sort-icon
+
+                        > .info-tip {
+                            background-color: $oxford-blue-accent-light;
+                            color: $black;
+                        }
+                    }
+
                     > .leaderboard-header-row-value {
                         text-align: center;
                         white-space: nowrap;

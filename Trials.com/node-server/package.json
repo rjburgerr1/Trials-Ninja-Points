@@ -10,7 +10,8 @@
         "ci:docker": "npm run docker:build && npm run docker:login && npm run docker:push",
         "docker:build": "docker build -t rjbradach/trialsnp-node:latest .",
         "docker:login": "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD",
-        "docker:push": "docker push rjbradach/trialsnp-node:latest"
+        "docker:push": "docker push rjbradach/trialsnp-node:latest",
+        "docker-compose:deploy-test": "Docker-compose -f docker-compose-prod.yml build mysql-db node-server"
     },
     "author": "",
     "license": "ISC",

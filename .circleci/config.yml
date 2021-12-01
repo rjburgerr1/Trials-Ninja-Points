@@ -4,7 +4,7 @@ version: 2.1
 jobs:
     build-react-app:
         docker:
-            - image: node:latest
+            - image: node:16
 
         steps:
             - checkout
@@ -24,7 +24,7 @@ jobs:
                   echo "$(ls -a)"
                   cd Trials.com/react-frontend
                   echo "$(ls -a)"
-                  CI= npm run build
+                  CI= npm run build-prod
                   npm run test
                   npm run netlify:deploy
 
@@ -69,7 +69,7 @@ jobs:
                       tar -xz -C /tmp -f /tmp/docker-$VER.tgz
                       mv /tmp/docker/* /usr/bin
 
-            - run: npm ci:docker
+            - run: npm docker-compose:deploy-test
 
 # Keep for future
 # build-docker-compose:

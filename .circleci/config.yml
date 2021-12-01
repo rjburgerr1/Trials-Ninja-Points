@@ -24,7 +24,7 @@ jobs:
                   echo "$(ls -a)"
                   cd Trials.com/react-frontend
                   echo "$(ls -a)"
-                  CI= npm run build
+                  CI= npm run build-prod
                   npm run test
                   npm run netlify:deploy
 

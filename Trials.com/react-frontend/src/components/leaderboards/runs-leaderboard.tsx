@@ -62,7 +62,16 @@ export const RunsLeaderboard = (props?: any) => {
         {
             columns,
             data,
-            initialState: { pageIndex: 0, pageSize: 50 },
+            initialState: {
+                pageIndex: 0,
+                pageSize: 50,
+                sortBy: [
+                    {
+                        id: "ninja_points",
+                        desc: true,
+                    },
+                ],
+            },
         },
         useSortBy,
         useBlockLayout,

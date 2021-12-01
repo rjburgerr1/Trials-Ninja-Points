@@ -32,7 +32,7 @@
         "react": "^17.0.1",
         "react-avatar": "^3.9.7",
         "react-bootstrap": "^1.4.0",
-        "react-country-flag": "^2.3.1",
+        "react-country-flag": "^3.0.2",
         "react-dom": "^17.0.1",
         "react-input-mask": "^2.0.4",
         "react-loading": "^2.0.3",

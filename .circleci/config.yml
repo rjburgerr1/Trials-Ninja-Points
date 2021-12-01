@@ -24,6 +24,7 @@ jobs:
                   echo "$(ls -a)"
                   cd Trials.com/react-frontend
                   echo "$(ls -a)"
+                  echo "$(export NODE_OPTIONS=--openssl-legacy-provider)"
                   CI= npm run build-prod
                   npm run test
                   npm run netlify:deploy

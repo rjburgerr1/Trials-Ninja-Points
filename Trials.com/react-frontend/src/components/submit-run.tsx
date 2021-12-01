@@ -158,6 +158,14 @@ const SubmitRun = () => {
                                     id="rank"
                                     name="rank"
                                     onChange={props.handleChange}
+                                    onKeyDown={(event: any) =>
+                                        (event.key === "e" ||
+                                            event.key === "E" ||
+                                            event.key === "-" ||
+                                            event.key === "+" ||
+                                            event.key === ".") &&
+                                        event.preventDefault()
+                                    }
                                     placeholder="7"
                                     type="number"
                                     value={props.values.rank}

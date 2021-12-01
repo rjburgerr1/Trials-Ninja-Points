@@ -1,5 +1,7 @@
 import {
+    Cell,
     Column,
+    Row,
     useBlockLayout,
     usePagination,
     useSortBy,
@@ -69,6 +71,18 @@ export const RunsLeaderboard = (props?: any) => {
     );
 
     const { pageIndex, pageSize } = state;
+
+    const setTableBodyCell = (cell: Cell, row: Row) => {
+        if (cell.column.Header === "Rider") {
+            return (
+                <a href={"profile/" + row.values.rider}>
+                    {cell.render("Cell")}
+                </a>
+            );
+        } else {
+            return <div>{cell.render("Cell")}</div>;
+        }
+    };
 
     const validatePageNumber = (pageNumber: number, maxPageNumber: number) => {
         if (pageNumber <= maxPageNumber && pageNumber >= 0) {
@@ -141,19 +155,7 @@ export const RunsLeaderboard = (props?: any) => {
                                             {...cell.getCellProps()}
                                             className="leaderboard-body-row-value"
                                         >
-                                            {cell.column.Header ===
-                                            "Username" ? (
-                                                <a
-                                                    href={
-                                                        "profile/" +
-                                                        row.values.username
-                                                    }
-                                                >
-                                                    {cell.render("Cell")}
-                                                </a>
-                                            ) : (
-                                                <div>{cell.render("Cell")}</div>
-                                            )}
+                                            {setTableBodyCell(cell, row)}
                                         </div>
                                     ))}
                                 </div>

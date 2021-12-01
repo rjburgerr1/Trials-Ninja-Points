@@ -88,13 +88,15 @@ export const MainLeaderboard = () => {
                 </a>
             );
         } else if (cell.column.Header === "Origin") {
-            return (
+            return cell.value !== "N/A" ? (
                 <ReactCountryFlag
                     className="country-flag"
                     countryCode={cell.value}
                     svg
                     title={cell.value}
                 />
+            ) : (
+                "N/A"
             );
         } else {
             return <div>{cell.render("Cell")}</div>;

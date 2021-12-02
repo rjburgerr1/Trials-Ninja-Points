@@ -36,7 +36,7 @@ const Track: React.FC = (props: any) => {
     const [ninjaLevel, setNinjaLevel] = useState(0);
     const [length, setLength] = useState("");
     const [averageFaults, setAverageFaults] = useState(0);
-    const [faultSponginess, setFaultSponginess] = useState("");
+    const [consistency, setConsistency] = useState("");
     const [rating, setRating] = useState(0);
     const [nRuns, setNRuns] = useState(0);
     const [averageNP, setAverageNP] = useState(0);
@@ -60,7 +60,7 @@ const Track: React.FC = (props: any) => {
                 setNinjaLevel(track.data.ninja_level);
                 setLength(track.data.length);
                 setAverageFaults(track.data.average_faults);
-                setFaultSponginess(track.data.fault_sponginess);
+                setConsistency(track.data.consistency);
                 setRating(track.data.rating);
                 setNRuns(track.data.nRuns);
                 setAverageNP(track.data.average_np);
@@ -95,7 +95,7 @@ const Track: React.FC = (props: any) => {
                         ninjaLevel={ninjaLevel}
                         length={length}
                         averageFaults={averageFaults}
-                        faultSponginess={faultSponginess}
+                        consistency={consistency}
                         rating={rating}
                         nRuns={nRuns}
                         averageNP={averageNP}

@@ -32,7 +32,7 @@ const synthesizeTrackData = async () => {
 
     // Probably not the best way to go about synthesizing this data. Will probably have to change it in a long time from now...
     payload = await avgLength(groupedData);
-    payload = await avgFaultSponginess(groupedData);
+    payload = await avgConsistency(groupedData);
     payload = await avgFaults(groupedData);
     payload = await avgRating(groupedData);
     payload = await avgNJLevel(groupedData);
@@ -53,7 +53,7 @@ const setTrackStats = async (data) => {
             },
             data: {
                 length: data[key].avgLength,
-                fault_sponginess: data[key].avgFaultSponginess,
+                consistency: data[key].avgConsistency,
                 average_faults: data[key].avgFaults,
                 rating: data[key].avgRating,
                 ninja_level: data[key].avgNinjaLevel,
@@ -84,27 +84,27 @@ const avgLength = async (data) => {
     return data;
 };
 
-const avgFaultSponginess = async (data) => {
+const avgConsistency = async (data) => {
     Object.keys(data).forEach((key) => {
         let count = data[key].length;
         let sum = 0;
         data[key].forEach((obj) => {
-            if (obj.fault_sponginess == "Not_At_All") {
+            if (obj.consistency == "Not_At_All") {
                 sum += 1;
-            } else if (obj.fault_sponginess == "Not_Very") {
+            } else if (obj.consistency == "Not_Very") {
                 sum += 2;
-            } else if (obj.fault_sponginess == "Moderately") {
+            } else if (obj.consistency == "Moderately") {
                 sum += 3;
-            } else if (obj.fault_sponginess == "Very") {
+            } else if (obj.consistency == "Very") {
                 sum += 4;
             } else {
                 sum += 5;
             }
         });
 
-        let avgFaultSponginess = sum / count;
+        let avgConsistency = sum / count;
 
-        data[key].avgFaultSponginess = avgFaultSponginess;
+        data[key].avgConsistency = avgConsistency;
     });
     return data;
 };

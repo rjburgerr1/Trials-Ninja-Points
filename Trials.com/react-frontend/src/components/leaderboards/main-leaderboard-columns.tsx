@@ -21,15 +21,16 @@ export const COLUMNS = [
         width: 90,
     },
     {
-        Header: "Total NP",
+        Header: "Ninja Points (100)",
         accessor: "total_ninja_points",
+        width: 180,
     },
     {
         Header: "Best Run (NP)",
         accessor: "highest_np_run",
     },
     {
-        Header: "Highest Level Pass",
+        Header: "Highest Level Passed",
         accessor: "highest_level_pass",
         width: 190,
     },

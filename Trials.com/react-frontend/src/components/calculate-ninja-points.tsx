@@ -1,14 +1,12 @@
 export function CalcNP(props: any) {
-    const faultSponginessWeight = CalcFaultSponginessWeight(
-        props.faultSponginess
-    );
+    const consistencyWeight = CalcConsistencyWeight(props.consistency);
     const timeWeight = CalcTimeWeight(props.time);
     const ninjaLevelWeight = CalcNinjaLevelWeight(props.ninjaLevel);
     const lengthWeight = CalcLengthWeight(props.length);
     const faultWeight = CalcFaultWeight(props.faults);
 
     const ninjaPoints =
-        faultSponginessWeight *
+        consistencyWeight *
         timeWeight *
         ninjaLevelWeight *
         lengthWeight *
@@ -53,9 +51,9 @@ const CalcTimeWeight = (time: any) => {
     return Number(-1 * ((1 / 1800000) * timeMS) + 2.3);
 };
 
-const CalcFaultSponginessWeight = (faultSponginess: string) => {
-    // faultSponginess is garnered from calculate-ninja-points props
-    switch (faultSponginess) {
+const CalcConsistencyWeight = (consistency: string) => {
+    // consistency is garnered from calculate-ninja-points props
+    switch (consistency) {
         case "Not_At_All":
             return 0.9;
         case "Not_Very":

@@ -27,7 +27,7 @@ const router = (app) => {
                     ninja_points: run.ninjaPoints,
                     ninja_level: run.ninjaLevel,
                     length: run.length,
-                    fault_sponginess: run.faultSponginess,
+                    consistency: run.consistency,
                     rating: run.rating,
                     rider: run.rider.displayName,
                     id: run.rider.uid,
@@ -55,7 +55,7 @@ const router = (app) => {
             });
 
             length = calcLength(run.length);
-            fault_sponginess = calcFaultSponginess(run.faultSponginess);
+            consistency = calcConsistency(run.consistency);
 
             await prisma.tracks.update({
                 where: {
@@ -71,8 +71,8 @@ const router = (app) => {
                     total_rating: {
                         increment: run.rating,
                     },
-                    total_fault_sponginess: {
-                        increment: fault_sponginess,
+                    total_consistency: {
+                        increment: consistency,
                     },
                     total_length: {
                         increment: length,
@@ -123,14 +123,14 @@ const calcLength = (runLength) => {
     }
 };
 
-const calcFaultSponginess = (runFaultSponginess) => {
-    if (runFaultSponginess == "Not_At_All") {
+const calcConsistency = (runConsistency) => {
+    if (runConsistency == "Not_At_All") {
         return 1;
-    } else if (runFaultSponginess == "Not_Very") {
+    } else if (runConsistency == "Not_Very") {
         return 2;
-    } else if (runFaultSponginess == "Moderately") {
+    } else if (runConsistency == "Moderately") {
         return 3;
-    } else if (runFaultSponginess == "Very") {
+    } else if (runConsistency == "Very") {
         return 4;
     } else {
         return 5;

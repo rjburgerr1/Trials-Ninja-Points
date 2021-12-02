@@ -11,10 +11,10 @@ const synthesizeData = async (newRun) => {
             ninja_level: true,
             length: true,
             average_faults: true,
-            fault_sponginess: true,
+            consistency: true,
             rating: true,
             total_rating: true,
-            total_fault_sponginess: true,
+            total_consistency: true,
             total_faults: true,
             total_length: true,
             total_ninja_level: true,
@@ -30,12 +30,12 @@ const synthesizeData = async (newRun) => {
         "rating",
         currentTrackData.total_rating
     );
-    // Update Fault Sponginess
+    // Update Consistency
     mergeNewRunData(
         newRun,
         currentTrackData,
-        "fault_sponginess",
-        currentTrackData.total_fault_sponginess
+        "consistency",
+        currentTrackData.total_consistency
     );
     // Update Length
     mergeNewRunData(

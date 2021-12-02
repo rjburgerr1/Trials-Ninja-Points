@@ -39,8 +39,8 @@ export const COLUMNS = [
         width: 110,
     },
     {
-        Header: "Fault Sponginess",
-        accessor: "fault_sponginess",
+        Header: "Consistency",
+        accessor: "consistency",
         width: 165,
     },
     {

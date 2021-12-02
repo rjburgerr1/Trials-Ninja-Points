@@ -36,10 +36,10 @@ export const TrackInfo = (props: any) => {
                     </ListGroupItem>
                     <ListGroupItem className="kitchen-sink-group-item">
                         <span className="track-kitchen-sink-label">
-                            Fault Sponginess
+                            Consistency
                         </span>
                         <span className="track-kitchen-sink-value">
-                            {props.faultSponginess}
+                            {props.consistency}
                         </span>
                     </ListGroupItem>
                     <ListGroupItem className="kitchen-sink-group-item">

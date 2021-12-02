@@ -29,20 +29,20 @@ model profiles {
 }
 
 model runs {
-  rider            String                @db.VarChar(45)
-  rank             Int?
-  faults           Int
-  time             String                @db.VarChar(9)
-  track_name       String                @map("track-name") @db.VarChar(45)
-  ninja_points     Float?                @map("ninja-points") @db.Float
-  ninja_level      Float                 @map("ninja-level") @db.Float
-  length           runs_length
-  fault_sponginess runs_fault_sponginess @map("fault-sponginess")
-  rating           Float?                @db.Float
-  creator          String                @db.VarChar(45)
-  id               String                @db.VarChar(29)
-  creators         creators              @relation(fields: [creator], references: [creator], onDelete: NoAction, onUpdate: NoAction, map: "creator")
-  tracks           tracks                @relation(fields: [track_name], references: [track_name], onDelete: NoAction, onUpdate: NoAction, map: "track-name")
+  rider        String           @db.VarChar(45)
+  rank         Int?
+  faults       Int
+  time         String           @db.VarChar(9)
+  track_name   String           @map("track-name") @db.VarChar(45)
+  ninja_points Float?           @map("ninja-points") @db.Float
+  ninja_level  Float            @map("ninja-level") @db.Float
+  length       runs_length
+  consistency  runs_consistency
+  rating       Float?           @db.Float
+  creator      String           @db.VarChar(45)
+  id           String           @db.VarChar(29)
+  creators     creators         @relation(fields: [creator], references: [creator], onDelete: NoAction, onUpdate: NoAction, map: "creator")
+  tracks       tracks           @relation(fields: [track_name], references: [track_name], onDelete: NoAction, onUpdate: NoAction, map: "track-name")
 
   @@id([track_name, id])
   @@index([creator], map: "creator_idx")
@@ -51,22 +51,22 @@ model runs {
 }
 
 model tracks {
-  track_name             String   @map("track-name") @db.VarChar(45)
-  creator                String   @db.VarChar(45)
-  ninja_level            Decimal? @map("ninja-level") @db.Decimal(3, 2)
-  length                 Decimal? @db.Decimal(3, 2)
-  average_faults         Decimal? @map("average-faults") @db.Decimal(5, 2)
-  fault_sponginess       Decimal? @map("fault-sponginess") @db.Decimal(3, 2)
-  rating                 Decimal? @db.Decimal(2, 1)
-  nRuns                  Int      @default(0)
-  total_rating           Decimal  @default(0.00) @map("total-rating") @db.Decimal(10, 2)
-  total_fault_sponginess Decimal  @default(0.00) @map("total-fault-sponginess") @db.Decimal(10, 2)
-  total_length           Decimal  @default(0.00) @map("total-length") @db.Decimal(10, 2)
-  total_faults           Int      @default(0) @map("total-faults")
-  total_ninja_level      Decimal  @default(0.00) @map("total-ninja-level") @db.Decimal(10, 2)
-  average_np             Float    @default(0.00) @map("average-np") @db.Float
-  total_np               Float    @default(0.00) @map("total-np") @db.Float
-  runs                   runs[]
+  track_name        String   @map("track-name") @db.VarChar(45)
+  creator           String   @db.VarChar(45)
+  ninja_level       Decimal? @map("ninja-level") @db.Decimal(3, 2)
+  length            Decimal? @db.Decimal(3, 2)
+  average_faults    Decimal? @map("average-faults") @db.Decimal(5, 2)
+  consistency       Decimal? @db.Decimal(3, 2)
+  rating            Decimal? @db.Decimal(2, 1)
+  nRuns             Int      @default(0)
+  total_rating      Decimal  @default(0.00) @map("total-rating") @db.Decimal(10, 2)
+  total_consistency Decimal  @default(0.00) @map("total-consistency") @db.Decimal(10, 2)
+  total_length      Decimal  @default(0.00) @map("total-length") @db.Decimal(10, 2)
+  total_faults      Int      @default(0) @map("total-faults")
+  total_ninja_level Decimal  @default(0.00) @map("total-ninja-level") @db.Decimal(10, 2)
+  average_np        Float    @default(0.00) @map("average-np") @db.Float
+  total_np          Float    @default(0.00) @map("total-np") @db.Float
+  runs              runs[]
 
   @@id([track_name, creator])
 }
@@ -77,12 +77,10 @@ enum runs_length {
   Long
 }
 
-enum runs_fault_sponginess {
+enum runs_consistency {
   Not_At_All @map("Not At All")
   Not_Very @map("Not Very")
   Moderately
   Very
   Extremely
-
-  @@map("runs_fault-sponginess")
 }

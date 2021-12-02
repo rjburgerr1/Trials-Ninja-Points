@@ -103,19 +103,19 @@ export const TracksLeaderboard = () => {
     };
 
     const setTableHeaderInfoTip = (column: Column) => {
-        if (column.Header === "Average NP Run") {
+        if (column.Header === "Ninja Points (Avg)") {
             return infoTip(
                 "average-np-run",
                 "This column lists the ninja point averages of all runs on the given track"
             );
-        } else if (column.Header === "Avg Faults") {
+        } else if (column.Header === "Faults (Avg)") {
             return infoTip(
                 "average-faults",
                 "This column lists the average faults for a run on the given track"
             );
-        } else if (column.Header === "Fault Sponginess") {
+        } else if (column.Header === "Consistency") {
             return infoTip(
-                "fault-sponginess",
+                "consistency",
                 "This describes how consistent a track is, in other words how 'luck'-based it is"
             );
         } else {

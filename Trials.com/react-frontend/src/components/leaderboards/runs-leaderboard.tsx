@@ -95,9 +95,9 @@ export const RunsLeaderboard = (props?: any) => {
     };
 
     const setTableHeaderInfoTip = (column: Column) => {
-        if (column.Header === "Fault Sponginess") {
+        if (column.Header === "Consistency") {
             return infoTip(
-                "fault-sponginess",
+                "consistency",
                 "This describes how consistent a track is, in other words how 'luck'-based it is"
             );
         } else {

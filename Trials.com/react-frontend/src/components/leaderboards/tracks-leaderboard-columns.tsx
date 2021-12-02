@@ -16,15 +16,16 @@ export const COLUMNS = [
         accessor: "length",
     },
     {
-        Header: "Average NP Run",
+        Header: "Ninja Points (Avg)",
         accessor: "average_np",
+        width: 180,
     },
     {
-        Header: "Avg Faults",
+        Header: "Faults (Avg)",
         accessor: "average_faults",
     },
     {
-        Header: "Fault Sponginess",
-        accessor: "fault_sponginess",
+        Header: "Consistency",
+        accessor: "consistency",
     },
 ];

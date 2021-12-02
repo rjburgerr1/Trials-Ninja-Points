@@ -103,7 +103,7 @@ export const MainLeaderboard = () => {
     };
 
     const setTableHeaderInfoTip = (column: Column) => {
-        if (column.Header === "Total NP") {
+        if (column.Header === "Ninja Points (100)") {
             return infoTip(
                 "total-np",
                 "Total Ninja Points summed from the rider's top 100 runs"

@@ -18,7 +18,7 @@ interface FormValues {
     faults: number;
     time: string;
     length: string;
-    faultSponginess: string;
+    consistency: string;
     ninjaLevel: number;
     rating: number;
     rank: number;
@@ -39,7 +39,7 @@ const SubmitRun = () => {
         faults: NaN,
         time: "",
         length: "",
-        faultSponginess: "",
+        consistency: "",
         ninjaLevel: NaN,
         rating: NaN,
         rank: NaN,
@@ -93,7 +93,7 @@ const SubmitRun = () => {
             .integer("Faults are required, and must be integers"),
         time: Yup.string().required("Required"),
         length: Yup.string().required("Required"),
-        faultSponginess: Yup.string().required("Required"),
+        consistency: Yup.string().required("Required"),
         ninjaLevel: Yup.number().required("Required"),
         rating: Yup.string().required("Required"),
         rank: Yup.number().min(1, "Minimum rank is 1!").required("Required"),
@@ -281,15 +281,15 @@ const SubmitRun = () => {
                                     </div>
                                 )}
 
-                                <label>Fault Sponginess</label>
+                                <label>Consistency</label>
                                 <select
-                                    name="faultSponginess"
+                                    name="consistency"
                                     onChange={props.handleChange}
-                                    value={props.values.faultSponginess}
+                                    value={props.values.consistency}
                                 >
                                     <option
                                         value=""
-                                        label="Select Fault Sponginess of track"
+                                        label="Select Consistency of track"
                                     />
                                     <option
                                         value="Not_At_All"
@@ -306,14 +306,14 @@ const SubmitRun = () => {
                                         label="Extremely"
                                     />
                                 </select>
-                                {props.errors.faultSponginess &&
-                                props.touched.faultSponginess ? (
+                                {props.errors.consistency &&
+                                props.touched.consistency ? (
                                     <div className="field-error">
-                                        {props.errors.faultSponginess}
+                                        {props.errors.consistency}
                                     </div>
                                 ) : (
                                     <div className="field-error-invisible">
-                                        {props.errors.faultSponginess}
+                                        {props.errors.consistency}
                                     </div>
                                 )}
 

@@ -1,18 +1,6 @@
-import { SliderColumnFilter } from "./filters/slider-filter";
+import { SliderColumnFilter, filterBetween } from "./filters/slider-filter";
 import { SelectColumnFilter } from "./filters/select-filter";
 import { Cell, Row } from "react-table";
-
-// Define a custom filter function for row values in between 2 bounds
-const filterBetween = (
-    rows: Array<Row>,
-    id: any,
-    filterValue: Array<String>
-) => {
-    return rows.filter((row) => {
-        const rowValue = row.values[id];
-        return rowValue >= filterValue[0] && rowValue <= filterValue[1];
-    });
-};
 
 export const COLUMNS = [
     {

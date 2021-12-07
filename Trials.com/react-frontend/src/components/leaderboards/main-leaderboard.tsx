@@ -94,8 +94,8 @@ export const MainLeaderboard = () => {
             },
         },
 
-        useFilters, // useFilters!
-        useGlobalFilter, // useGlobalFilter!
+        useFilters,
+        useGlobalFilter,
         useSortBy,
         useBlockLayout,
         useSticky,

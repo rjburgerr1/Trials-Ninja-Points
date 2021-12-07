@@ -6,6 +6,7 @@
 .leaderboard {
     > .leaderboard-container {
         @include tables.leaderboard;
+        @include tables.filters;
     }
 
     > .leaderboard-info {

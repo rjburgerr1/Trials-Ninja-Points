@@ -4,6 +4,8 @@ import {
     Column,
     Row,
     useBlockLayout,
+    useGlobalFilter,
+    useFilters,
     usePagination,
     useSortBy,
     useTable,
@@ -13,6 +15,7 @@ import {
     faSortAmountUpAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { GlobalFilter } from "./filters/global-filter";
 import { infoTip } from "../help-info/info-tips";
 import { useEffect, useMemo, useState } from "react";
 import { useSticky } from "react-table-sticky";
@@ -73,6 +76,8 @@ export const MainLeaderboard = () => {
         setPageSize,
         state,
         prepareRow,
+        preGlobalFilteredRows,
+        setGlobalFilter,
     } = useTable(
         {
             columns,
@@ -88,6 +93,9 @@ export const MainLeaderboard = () => {
                 ],
             },
         },
+
+        useFilters, // useFilters!
+        useGlobalFilter, // useGlobalFilter!
         useSortBy,
         useBlockLayout,
         useSticky,
@@ -132,6 +140,12 @@ export const MainLeaderboard = () => {
     return (
         <div className="leaderboard">
             <div className="leaderboard-container">
+                <GlobalFilter
+                    preGlobalFilteredRows={preGlobalFilteredRows}
+                    globalFilter={state.globalFilter}
+                    setGlobalFilter={setGlobalFilter}
+                />
+
                 <div {...getTableProps()} className="leaderboard-table">
                     <div className="leaderboard-header">
                         {headerGroups.map((headerGroup) => (
@@ -151,6 +165,7 @@ export const MainLeaderboard = () => {
                                         <span className="leaderboard-header-row-value">
                                             {column.render("Header")}
                                         </span>
+
                                         <span className="column-sort-icon">
                                             {column.isSorted ? (
                                                 column.isSortedDesc ? (
@@ -177,6 +192,28 @@ export const MainLeaderboard = () => {
                             </div>
                         ))}
                     </div>
+                    <div className="leaderboard-header">
+                        {headerGroups.map((headerGroup) => (
+                            <div
+                                {...headerGroup.getHeaderGroupProps()}
+                                className="leaderboard-header-row"
+                            >
+                                {headerGroup.headers.map((column) => (
+                                    <div
+                                        {...column.getHeaderProps(
+                                            column.getSortByToggleProps()
+                                        )}
+                                        className="leaderboard-header-row-column"
+                                    >
+                                        {column.canFilter
+                                            ? column.render("Filter")
+                                            : null}
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
+                    </div>
+
                     <div {...getTableBodyProps()} className="leaderboard-body">
                         {page.map((row) => {
                             prepareRow(row);

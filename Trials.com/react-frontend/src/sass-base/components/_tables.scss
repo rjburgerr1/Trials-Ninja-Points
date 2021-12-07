@@ -1,10 +1,13 @@
 @use "../components/buttons";
+@use "../components/input";
 @use "../abstracts/colors" as *;
 
 @mixin leaderboard {
+    @include input.slider;
+
     > .leaderboard-table {
         -ms-overflow-style: none; // Hide Scrollbar Internet Explorer 10+
-        border: 1px solid $mustard;
+
         //Specifies the height of the leaderboard. the extra 1px includes the 1px border at the bottom of the lb
         height: 600px;
         overflow-y: scroll; // Hide Scrollbar for table, with browser compatibility
@@ -18,7 +21,6 @@
 
         > .leaderboard-header {
             background-color: $mustard;
-            box-shadow: 0 0.2em 8px $black;
             font-weight: bold;
             position: sticky;
             top: 0;
@@ -33,12 +35,13 @@
                 // The invisible sorting icon just matches the width of the sorting icon and makes centering the column
                 // name easy regardless of the width of sorting icon itself.
                 > .leaderboard-header-row-column {
-                    border-right: 1px solid $oxford-blue;
                     display: flex !important; // Override element.style because JS is injecting inline-block as the style
                     justify-content: center;
-                    height: 24px; // Size of table cells
                     transition: 0.4s;
-                    width: 200px;
+                    border-left: 1px solid $black;
+                    border-right: 1px solid $black;
+                    .table-header-filter {
+                    }
 
                     &:hover {
                         color: $cadet;
@@ -119,6 +122,23 @@
                     text-align: center;
                 }
             }
+        }
+    }
+}
+
+@mixin filters {
+    > .global-filter {
+        background-color: $mustard;
+        color: $black;
+        display: flex;
+        margin-bottom: 1em;
+        width: 4em;
+
+        > .label {
+            padding: 0.3em;
+        }
+
+        > .search-input {
         }
     }
 }

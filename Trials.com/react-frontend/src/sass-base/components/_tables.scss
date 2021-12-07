@@ -23,6 +23,7 @@
             background-color: $mustard;
             font-weight: bold;
             position: sticky;
+
             top: 0;
 
             > .leaderboard-header-row {
@@ -131,7 +132,7 @@
         background-color: $mustard;
         color: $black;
         display: flex;
-        margin-bottom: 1em;
+        margin-bottom: 0.8em;
         width: 4em;
 
         > .label {

@@ -34,7 +34,7 @@ export const SliderColumnFilter = ({
 
     return (
         <div className="table-header-filter">
-            <Box sx={{ width: 100 }}>
+            <Box sx={{ width: 80 }}>
                 <Slider
                     className="slider"
                     min={min}
@@ -48,4 +48,16 @@ export const SliderColumnFilter = ({
             </Box>
         </div>
     );
+};
+
+// Define a custom filter function for row values in between 2 bounds
+export const filterBetween = (
+    rows: Array<Row>,
+    id: any,
+    filterValue: Array<String>
+) => {
+    return rows.filter((row) => {
+        const rowValue = row.values[id];
+        return rowValue >= filterValue[0] && rowValue <= filterValue[1];
+    });
 };

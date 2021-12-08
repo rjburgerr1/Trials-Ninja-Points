@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import { Row } from "react-table";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
@@ -13,7 +13,6 @@ function valuetext(value: number) {
 export const SliderColumnFilter = ({
     column: { filterValue, setFilter, preFilteredRows, id },
 }: any) => {
-    const [value, setValue] = useState([0, 0]);
     // Calculate the min and max
     // using the preFilteredRows
     const [min, max] = useMemo(() => {
@@ -23,13 +22,11 @@ export const SliderColumnFilter = ({
             min = Math.min(row.values[id], min);
             max = Math.max(row.values[id], max);
         });
-        setValue([min, max]);
         return [min, max];
     }, [id, preFilteredRows]);
 
-    const handleChange = (event: any, newValue: any) => {
-        setValue(newValue);
-        setFilter(value);
+    const handleChange = (event: any) => {
+        setFilter(event.target.value);
     };
 
     return (
@@ -39,8 +36,8 @@ export const SliderColumnFilter = ({
                     className="slider"
                     min={min}
                     max={max}
-                    getAriaLabel={() => "Temperature range"}
-                    value={value}
+                    getAriaLabel={() => "column slider"}
+                    value={filterValue || [min, max]}
                     onChange={handleChange}
                     valueLabelDisplay="auto"
                     getAriaValueText={valuetext}

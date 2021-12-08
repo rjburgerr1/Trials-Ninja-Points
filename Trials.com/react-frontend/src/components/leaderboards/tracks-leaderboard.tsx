@@ -4,6 +4,8 @@ import {
     Column,
     Row,
     useBlockLayout,
+    useFilters,
+    useGlobalFilter,
     usePagination,
     useSortBy,
     useTable,
@@ -16,12 +18,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useMemo, useState } from "react";
 import { useSticky } from "react-table-sticky";
 import { getTracksLB } from "../leaderboard-requests";
-import ReactCountryFlag from "react-country-flag";
 import { infoTip } from "../help-info/info-tips";
+import { GlobalFilter } from "./filters/global-filter";
 
 const resolveData = async (setData: any) => {
     try {
-        console.log("Request Track Data");
         const data = await getTracksLB();
 
         setData(data);
@@ -36,7 +37,6 @@ export const TracksLeaderboard = () => {
 
     useEffect(() => {
         resolveData(setData);
-        console.log(data);
     }, []); // includes empty dependency array
 
     const {
@@ -54,6 +54,8 @@ export const TracksLeaderboard = () => {
         setPageSize,
         state,
         prepareRow,
+        preGlobalFilteredRows,
+        setGlobalFilter,
     } = useTable(
         {
             columns,
@@ -69,6 +71,8 @@ export const TracksLeaderboard = () => {
                 ],
             },
         },
+        useFilters,
+        useGlobalFilter,
         useSortBy,
         useBlockLayout,
         useSticky,
@@ -130,6 +134,12 @@ export const TracksLeaderboard = () => {
     return (
         <div className="leaderboard">
             <div className="leaderboard-container">
+                <GlobalFilter
+                    preGlobalFilteredRows={preGlobalFilteredRows}
+                    globalFilter={state.globalFilter}
+                    setGlobalFilter={setGlobalFilter}
+                />
+
                 <div {...getTableProps()} className="leaderboard-table">
                     <div className="leaderboard-header">
                         {headerGroups.map((headerGroup) => (
@@ -169,6 +179,27 @@ export const TracksLeaderboard = () => {
                                                 />
                                             )}
                                         </span>
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
+                    </div>
+                    <div className="leaderboard-header">
+                        {headerGroups.map((headerGroup) => (
+                            <div
+                                {...headerGroup.getHeaderGroupProps()}
+                                className="leaderboard-header-row"
+                            >
+                                {headerGroup.headers.map((column) => (
+                                    <div
+                                        {...column.getHeaderProps(
+                                            column.getSortByToggleProps()
+                                        )}
+                                        className="leaderboard-header-row-column"
+                                    >
+                                        {column.canFilter
+                                            ? column.render("Filter")
+                                            : null}
                                     </div>
                                 ))}
                             </div>

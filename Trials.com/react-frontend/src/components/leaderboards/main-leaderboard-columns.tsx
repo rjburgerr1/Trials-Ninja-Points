@@ -1,6 +1,6 @@
 import { SliderColumnFilter, filterBetween } from "./filters/slider-filter";
 import { SelectColumnFilter } from "./filters/select-filter";
-import { Cell, Row } from "react-table";
+import { Cell } from "react-table";
 
 export const COLUMNS = [
     {

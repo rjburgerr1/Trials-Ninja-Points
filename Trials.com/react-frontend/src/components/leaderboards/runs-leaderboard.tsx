@@ -15,11 +15,12 @@ import {
     faSortAmountUpAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { formatCreateDate } from "../format-dates";
 import { getRunsLB } from "../leaderboard-requests";
+import { GlobalFilter } from "./filters/global-filter";
+import { infoTip } from "../help-info/info-tips";
 import { useEffect, useMemo, useState } from "react";
 import { useSticky } from "react-table-sticky";
-import { infoTip } from "../help-info/info-tips";
-import { GlobalFilter } from "./filters/global-filter";
 
 const resolveData = async (setData: any, runs?: any) => {
     try {
@@ -96,6 +97,10 @@ export const RunsLeaderboard = (props?: any) => {
                     {cell.render("Cell")}
                 </a>
             );
+        } else if (cell.column.Header === "Date") {
+            return row.values.date ? (
+                <div>{formatCreateDate(row.values.date)}</div>
+            ) : null;
         } else {
             return <div>{cell.render("Cell")}</div>;
         }

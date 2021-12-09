@@ -6,12 +6,7 @@ import axios from "axios";
 import Avatar from "@material-ui/core/Avatar";
 import { useAuth } from "../contexts/auth-context";
 import { Card } from "react-bootstrap";
-
-const formatCreateDate = (createDate: string) => {
-    // Create Dates come in the form "YYYY-MM-DDTHH:MM:SS.sssZ"
-    // We split by "T" to get only the day of the year
-    return createDate.split("T")[0];
-};
+import { formatCreateDate } from "../components/format-dates";
 
 const Profile: React.FC = (props: any) => {
     const { currentUser } = useAuth();

@@ -39,11 +39,12 @@ export const COLUMNS = [
         accessor: "faults",
         Filter: SliderColumnFilter,
         filter: filterBetween,
+        width: 110,
     },
     {
         Header: "Time",
         accessor: "time",
-        width: 120,
+        width: 115,
         Filter: SliderColumnFilter,
         filter: filterBetween,
     },
@@ -57,7 +58,7 @@ export const COLUMNS = [
     {
         Header: "Consistency",
         accessor: "consistency",
-        width: 165,
+        width: 155,
         Filter: SelectColumnFilter,
         filter: "equals",
     },
@@ -67,5 +68,11 @@ export const COLUMNS = [
         width: 110,
         Filter: SliderColumnFilter,
         filter: filterBetween,
+    },
+    {
+        Header: "Date",
+        accessor: "date",
+        width: 110,
+        disableFilters: true,
     },
 ];

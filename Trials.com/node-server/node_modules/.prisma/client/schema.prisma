@@ -41,6 +41,7 @@ model runs {
   rating       Float?           @db.Float
   creator      String           @db.VarChar(45)
   id           String           @db.VarChar(29)
+  date         DateTime         @default(now()) @db.DateTime(0)
   creators     creators         @relation(fields: [creator], references: [creator], onDelete: NoAction, onUpdate: NoAction, map: "creator")
   tracks       tracks           @relation(fields: [track_name], references: [track_name], onDelete: NoAction, onUpdate: NoAction, map: "track-name")
 

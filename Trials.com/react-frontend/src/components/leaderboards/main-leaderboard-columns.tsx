@@ -1,8 +1,13 @@
 import { SliderColumnFilter, filterBetween } from "./filters/slider-filter";
 import { SelectColumnFilter } from "./filters/select-filter";
-import { Cell } from "react-table";
+import { Cell, Column, Row } from "react-table";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSortAmountDown } from "@fortawesome/free-solid-svg-icons";
+import { infoTip } from "../help-info/info-tips";
+import ReactCountryFlag from "react-country-flag";
+import { getMainLB } from "../leaderboard-requests";
 
-export const COLUMNS = [
+export const MainLeaderboardColumns = [
     {
         Header: "Rank",
         accessor: "rank",
@@ -48,3 +53,65 @@ export const COLUMNS = [
         filter: "equals",
     },
 ];
+
+export const setTableBodyCell = (cell: Cell, row: Row) => {
+    if (cell.column.Header === "Username") {
+        return (
+            <a href={"profile/" + row.values.username}>{cell.render("Cell")}</a>
+        );
+    } else if (cell.column.Header === "Origin") {
+        return cell.value !== "N/A" ? (
+            <ReactCountryFlag
+                className="country-flag"
+                countryCode={cell.value}
+                svg
+                title={cell.value}
+            />
+        ) : (
+            "N/A"
+        );
+    } else {
+        return <div>{cell.render("Cell")}</div>;
+    }
+};
+
+export const setTableHeaderInfoTip = (column: Column) => {
+    if (column.Header === "Ninja Points (100)") {
+        return infoTip(
+            "total-np",
+            "Total Ninja Points summed from the rider's top 100 runs"
+        );
+    } else if (column.Header === "Origin") {
+        return infoTip(
+            "origin",
+            "Country from which the rider is originally from"
+        );
+    } else if (column.Header === "Best Run (NP)") {
+        return infoTip(
+            "best-run",
+            "Ninja points for the rider's best run they have submitted"
+        );
+    } else if (column.Header === "Highest Level Pass") {
+        return infoTip("highest-level", "The rider's highest level passed");
+    } else {
+        return (
+            <span className="invisible-element">
+                <FontAwesomeIcon icon={faSortAmountDown} size="1x" />
+            </span>
+        );
+    }
+};
+
+const resolveData = async (setData: any, date?: Date) => {
+    try {
+        const data = await getMainLB(date ? date : undefined);
+
+        setData(data);
+    } catch (error: any) {
+        console.error(error.message);
+    }
+};
+
+export const mainLBEffect = (setData: any, date?: Date) => {
+    resolveData(setData, date);
+};

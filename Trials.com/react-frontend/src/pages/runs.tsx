@@ -1,5 +1,11 @@
 import { Chat } from "../components/General-Chat/chat";
-import { RunsLeaderboard } from "../components/leaderboards/runs-leaderboard";
+import { Leaderboard } from "../components/leaderboards/leaderboard";
+import {
+    runsLBEffect,
+    RunsLeaderboardColumns,
+    setTableBodyCell,
+    setTableHeaderInfoTip,
+} from "../components/leaderboards/runs-leaderboard-columns";
 import NavBar from "../components/navbar";
 
 export default function Runs(props: any) {
@@ -13,7 +19,13 @@ export default function Runs(props: any) {
                     <Chat />
                 </div>
                 <div className="runs-leaderboard">
-                    <RunsLeaderboard />
+                    <Leaderboard
+                        columns={RunsLeaderboardColumns}
+                        effect={runsLBEffect}
+                        sortBy="ninja_points"
+                        setTableBodyCell={setTableBodyCell}
+                        setTableHeaderInfoTip={setTableHeaderInfoTip}
+                    />
                 </div>
 
                 <div className="runs-space-element"></div>

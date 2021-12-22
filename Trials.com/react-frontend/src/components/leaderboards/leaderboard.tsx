@@ -1,11 +1,8 @@
-import { COLUMNS } from "./tracks-leaderboard-columns";
 import {
-    Cell,
     Column,
-    Row,
     useBlockLayout,
-    useFilters,
     useGlobalFilter,
+    useFilters,
     usePagination,
     useSortBy,
     useTable,
@@ -15,31 +12,21 @@ import {
     faSortAmountUpAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { GlobalFilter } from "./filters/global-filter";
 import { useEffect, useMemo, useState } from "react";
 import { useSticky } from "react-table-sticky";
-import { getTracksLB } from "../leaderboard-requests";
-import { infoTip } from "../help-info/info-tips";
-import { GlobalFilter } from "./filters/global-filter";
-
 import DatePicker from "react-datepicker";
+import { LeaderboardNavigation } from "./leaderboard-navigation";
+import "react-datepicker/dist/react-datepicker.css";
 
-const resolveData = async (setData: any, date?: Date) => {
-    try {
-        const data = await getTracksLB(date ? date : undefined);
-
-        setData(data);
-    } catch (err) {
-        console.error(err);
-    }
-};
-
-export const TracksLeaderboard = () => {
+export const Leaderboard = (props: any) => {
     let [data, setData] = useState([{}]);
     const [date, setDate] = useState(new Date());
-    const columns: Array<Column> = useMemo(() => COLUMNS, []);
+    const columns: Array<Column> = useMemo(() => props.columns, []);
 
     useEffect(() => {
-        resolveData(setData, date);
+        console.log(props.runs);
+        props.effect(setData, date, props.runs ? props.runs : undefined);
     }, [date]); // includes empty dependency array
 
     const {
@@ -68,12 +55,13 @@ export const TracksLeaderboard = () => {
                 pageSize: 50,
                 sortBy: [
                     {
-                        id: "total_ninja_points",
+                        id: props.sortBy,
                         desc: true,
                     },
                 ],
             },
         },
+
         useFilters,
         useGlobalFilter,
         useSortBy,
@@ -81,58 +69,6 @@ export const TracksLeaderboard = () => {
         useSticky,
         usePagination
     );
-
-    const { pageIndex, pageSize } = state;
-
-    const validatePageNumber = (pageNumber: number, maxPageNumber: number) => {
-        if (pageNumber <= maxPageNumber && pageNumber >= 0) {
-            gotoPage(pageNumber);
-        }
-    };
-
-    const setTableBodyCell = (cell: Cell, row: Row) => {
-        if (cell.column.Header === "Track") {
-            return (
-                <a
-                    href={
-                        "track/name=" +
-                        row.values.track_name +
-                        "&creator=" +
-                        row.values.creator
-                    }
-                >
-                    {cell.render("Cell")}
-                </a>
-            );
-        } else {
-            return <div>{cell.render("Cell")}</div>;
-        }
-    };
-
-    const setTableHeaderInfoTip = (column: Column) => {
-        if (column.Header === "Ninja Points (Avg)") {
-            return infoTip(
-                "average-np-run",
-                "This column lists the ninja point averages of all runs on the given track"
-            );
-        } else if (column.Header === "Faults (Avg)") {
-            return infoTip(
-                "average-faults",
-                "This column lists the average faults for a run on the given track"
-            );
-        } else if (column.Header === "Consistency") {
-            return infoTip(
-                "consistency",
-                "This describes how consistent a track is, in other words how 'luck'-based it is"
-            );
-        } else {
-            return (
-                <span className="invisible-element">
-                    <FontAwesomeIcon icon={faSortAmountDown} size="1x" />
-                </span>
-            );
-        }
-    };
 
     return (
         <div className="leaderboard">
@@ -163,10 +99,12 @@ export const TracksLeaderboard = () => {
                                         )}
                                         className="leaderboard-header-row-column"
                                     >
-                                        {setTableHeaderInfoTip(column)}
+                                        {props.setTableHeaderInfoTip(column)}
+
                                         <span className="leaderboard-header-row-value">
                                             {column.render("Header")}
                                         </span>
+
                                         <span className="column-sort-icon">
                                             {column.isSorted ? (
                                                 column.isSortedDesc ? (
@@ -214,6 +152,7 @@ export const TracksLeaderboard = () => {
                             </div>
                         ))}
                     </div>
+
                     <div {...getTableBodyProps()} className="leaderboard-body">
                         {page.map((row) => {
                             prepareRow(row);
@@ -228,7 +167,7 @@ export const TracksLeaderboard = () => {
                                             {...cell.getCellProps()}
                                             className="leaderboard-body-row-value"
                                         >
-                                            {setTableBodyCell(cell, row)}
+                                            {props.setTableBodyCell(cell, row)}
                                         </div>
                                     ))}
                                 </div>
@@ -237,81 +176,18 @@ export const TracksLeaderboard = () => {
                     </div>
                 </div>
             </div>
-            <div className="leaderboard-info">
-                <span className="page-number-nav">
-                    <button
-                        className="first-page"
-                        onClick={() => gotoPage(0)}
-                        disabled={!canPreviousPage}
-                    >
-                        {"<<"}
-                    </button>
-                    <button
-                        className="previous-page"
-                        onClick={() => previousPage()}
-                        disabled={!canPreviousPage}
-                    >
-                        Previous
-                    </button>
-                </span>
 
-                <div className="page-info">
-                    <span className="page-number-input-container">
-                        <label className="page-label">Page</label>
-                        <input
-                            className="page-number-input"
-                            defaultValue={pageIndex + 1}
-                            max={pageOptions.length}
-                            min="1"
-                            onChange={(e) => {
-                                validatePageNumber(
-                                    Number(e.target.value) - 1,
-                                    pageOptions.length
-                                );
-                            }}
-                            type="number"
-                        />
-                    </span>
-
-                    <span className="page-number-container">
-                        Page{" "}
-                        <strong className="page-number">{pageIndex + 1}</strong>{" "}
-                        -
-                        <strong className="page-number">
-                            {" "}
-                            {pageOptions.length}
-                        </strong>
-                    </span>
-
-                    <select
-                        className="show-page-size"
-                        value={pageSize}
-                        onChange={(e) => setPageSize(Number(e.target.value))}
-                    >
-                        {[50, 100, 250].map((pageSize) => (
-                            <option key={pageSize} value={pageSize}>
-                                Show {pageSize}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <span className="page-number-nav">
-                    <button
-                        className="next-page"
-                        onClick={() => nextPage()}
-                        disabled={!canNextPage}
-                    >
-                        Next
-                    </button>
-                    <button
-                        className="last-page"
-                        onClick={() => gotoPage(pageCount - 1)}
-                        disabled={!canNextPage}
-                    >
-                        {">>"}
-                    </button>
-                </span>
-            </div>
+            <LeaderboardNavigation
+                state={state}
+                nextPage={nextPage}
+                previousPage={previousPage}
+                canNextPage={canNextPage}
+                canPreviousPage={canPreviousPage}
+                pageOptions={pageOptions}
+                gotoPage={gotoPage}
+                pageCount={pageCount}
+                setPageSize={setPageSize}
+            />
         </div>
     );
 };

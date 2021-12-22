@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../components/navbar";
-import axios from "axios";
-import img from "../images/Fusion Title Screen.jpg";
 import { getRunsLB } from "../components/leaderboard-requests";
 import { TrackInfo } from "../components/track-info";
-
-import { RunsLeaderboard } from "../components/leaderboards/runs-leaderboard";
+import { Leaderboard } from "../components/leaderboards/leaderboard";
+import {
+    runsLBEffect,
+    RunsLeaderboardColumns,
+    setTableBodyCell,
+    setTableHeaderInfoTip,
+} from "../components/leaderboards/runs-leaderboard-columns";
+import axios from "axios";
+import img from "../images/Fusion Title Screen.jpg"; // This will be replaced with the tracks image later on
+import NavBar from "../components/navbar";
 
 const resolveData = async (
     trackName: string,
@@ -85,7 +90,14 @@ const Track: React.FC = (props: any) => {
                     <p>Loading Please wait...</p>
                 ) : (
                     <div className="runs-leaderboard">
-                        <RunsLeaderboard runs={data} />
+                        <Leaderboard
+                            columns={RunsLeaderboardColumns}
+                            effect={runsLBEffect}
+                            sortBy="total_ninja_points"
+                            setTableBodyCell={setTableBodyCell}
+                            setTableHeaderInfoTip={setTableHeaderInfoTip}
+                            runs={data}
+                        />
                     </div>
                 )}
 

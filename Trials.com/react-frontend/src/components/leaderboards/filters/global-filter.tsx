@@ -1,11 +1,6 @@
 import React, { useState } from "react";
-import {
-    useTable,
-    useFilters,
-    useGlobalFilter,
-    useAsyncDebounce,
-    Row,
-} from "react-table";
+import { useAsyncDebounce } from "react-table";
+
 // Define a default UI for filtering
 export const GlobalFilter = ({
     preGlobalFilteredRows,

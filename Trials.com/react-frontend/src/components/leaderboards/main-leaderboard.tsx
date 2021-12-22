@@ -19,12 +19,14 @@ import { GlobalFilter } from "./filters/global-filter";
 import { infoTip } from "../help-info/info-tips";
 import { useEffect, useMemo, useState } from "react";
 import { useSticky } from "react-table-sticky";
-import getData from "../leaderboard-requests";
+import DatePicker from "react-datepicker";
+import { getMainLB } from "../leaderboard-requests";
 import ReactCountryFlag from "react-country-flag";
+import "react-datepicker/dist/react-datepicker.css";
 
-const resolveData = async (setData: any) => {
+const resolveData = async (setData: any, date?: Date) => {
     try {
-        const data = await getData();
+        const data = await getMainLB(date ? date : undefined);
 
         setData(data);
     } catch (error: any) {
@@ -55,11 +57,12 @@ const setTableBodyCell = (cell: Cell, row: Row) => {
 
 export const MainLeaderboard = () => {
     let [data, setData] = useState([{}]);
+    const [date, setDate] = useState(new Date());
     const columns: Array<Column> = useMemo(() => COLUMNS, []);
 
     useEffect(() => {
-        resolveData(setData);
-    }, []); // includes empty dependency array
+        resolveData(setData, date);
+    }, [date]); // includes empty dependency array
 
     const {
         getTableProps,
@@ -144,6 +147,12 @@ export const MainLeaderboard = () => {
                     preGlobalFilteredRows={preGlobalFilteredRows}
                     globalFilter={state.globalFilter}
                     setGlobalFilter={setGlobalFilter}
+                />
+
+                <DatePicker
+                    locale="es"
+                    selected={date}
+                    onChange={(date: Date) => setDate(date)}
                 />
 
                 <div {...getTableProps()} className="leaderboard-table">

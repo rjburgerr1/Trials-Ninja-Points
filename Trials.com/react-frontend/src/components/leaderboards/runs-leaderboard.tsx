@@ -49,6 +49,7 @@ export const RunsLeaderboard = (props?: any) => {
     useEffect(() => {
         // Check if there are already runs provided to fill the leaderboard component, if so,
         // use those in place of getting all runs
+
         props.runs !== 0
             ? resolveData(setData, props.runs, date)
             : resolveData(setData, date);

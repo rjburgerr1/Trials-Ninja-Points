@@ -11,11 +11,12 @@ const resolveData = async (
     trackName: string,
     creator: string,
     setData: any,
-    setLoadingData: any
+    setLoadingData: any,
+    date: Date
 ) => {
     try {
         setLoadingData(true);
-        const data = await getRunsLB(trackName, creator);
+        const data = await getRunsLB(trackName, creator, date);
 
         setData(data);
         setLoadingData(false);
@@ -27,6 +28,7 @@ const resolveData = async (
 const Track: React.FC = (props: any) => {
     const [loadingData, setLoadingData] = useState(true);
     let [data, setData] = useState([{}]);
+    const [date, setDate] = useState(new Date());
     const [trackName, setTrackName] = useState(
         props.match.params.name ? props.match.params.name : ""
     );
@@ -64,7 +66,7 @@ const Track: React.FC = (props: any) => {
                 setRating(track.data.rating);
                 setNRuns(track.data.nRuns);
                 setAverageNP(track.data.average_np);
-                resolveData(trackName, creator, setData, setLoadingData);
+                resolveData(trackName, creator, setData, setLoadingData, date);
             } catch (error) {
                 console.error(error);
             }

@@ -21,9 +21,11 @@ import { getTracksLB } from "../leaderboard-requests";
 import { infoTip } from "../help-info/info-tips";
 import { GlobalFilter } from "./filters/global-filter";
 
-const resolveData = async (setData: any) => {
+import DatePicker from "react-datepicker";
+
+const resolveData = async (setData: any, date?: Date) => {
     try {
-        const data = await getTracksLB();
+        const data = await getTracksLB(date ? date : undefined);
 
         setData(data);
     } catch (err) {
@@ -33,11 +35,12 @@ const resolveData = async (setData: any) => {
 
 export const TracksLeaderboard = () => {
     let [data, setData] = useState([{}]);
+    const [date, setDate] = useState(new Date());
     const columns: Array<Column> = useMemo(() => COLUMNS, []);
 
     useEffect(() => {
-        resolveData(setData);
-    }, []); // includes empty dependency array
+        resolveData(setData, date);
+    }, [date]); // includes empty dependency array
 
     const {
         getTableProps,
@@ -138,6 +141,12 @@ export const TracksLeaderboard = () => {
                     preGlobalFilteredRows={preGlobalFilteredRows}
                     globalFilter={state.globalFilter}
                     setGlobalFilter={setGlobalFilter}
+                />
+
+                <DatePicker
+                    locale="es"
+                    selected={date}
+                    onChange={(date: Date) => setDate(date)}
                 />
 
                 <div {...getTableProps()} className="leaderboard-table">

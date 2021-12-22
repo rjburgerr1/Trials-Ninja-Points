@@ -11,6 +11,7 @@ const TrackRoute = require("./routes/track");
 const port = 3002;
 const ProfileRoute = require("./routes/profile");
 const synthesizeTrackData = require("./routes/synthesize-collective-opinions");
+const backupLeaderboard = require("./routes/backup-leaderboards");
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.use(function (req, res, next) {
     next();
 });
 
+backupLeaderboard();
 synthesizeTrackData();
 DataRoute(app);
 SubmitRoute(app);

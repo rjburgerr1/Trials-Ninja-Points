@@ -21,14 +21,19 @@ import { GlobalFilter } from "./filters/global-filter";
 import { infoTip } from "../help-info/info-tips";
 import { useEffect, useMemo, useState } from "react";
 import { useSticky } from "react-table-sticky";
+import DatePicker from "react-datepicker";
 
-const resolveData = async (setData: any, runs?: any) => {
+const resolveData = async (setData: any, runs?: any, date?: Date) => {
     try {
         // If runs argument is provided, use that instead
         if (runs) {
             setData(runs);
         } else {
-            const data = await getRunsLB();
+            const data = await getRunsLB(
+                undefined,
+                undefined,
+                date ? date : undefined
+            );
             setData(data);
         }
     } catch (error: any) {
@@ -38,15 +43,16 @@ const resolveData = async (setData: any, runs?: any) => {
 
 export const RunsLeaderboard = (props?: any) => {
     let [data, setData] = useState([{}]);
+    const [date, setDate] = useState(new Date());
     const columns: Array<Column> = useMemo(() => COLUMNS, []);
 
     useEffect(() => {
         // Check if there are already runs provided to fill the leaderboard component, if so,
         // use those in place of getting all runs
         props.runs !== 0
-            ? resolveData(setData, props.runs)
-            : resolveData(setData);
-    }, []); // includes empty dependency array
+            ? resolveData(setData, props.runs, date)
+            : resolveData(setData, date);
+    }, [date]); // includes empty dependency array
 
     const {
         getTableProps,
@@ -134,6 +140,11 @@ export const RunsLeaderboard = (props?: any) => {
                     preGlobalFilteredRows={preGlobalFilteredRows}
                     globalFilter={state.globalFilter}
                     setGlobalFilter={setGlobalFilter}
+                />
+
+                <DatePicker
+                    selected={date}
+                    onChange={(date: Date) => setDate(date)}
                 />
                 <div {...getTableProps()} className="leaderboard-table">
                     <div className="leaderboard-header">

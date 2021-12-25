@@ -86,73 +86,80 @@ export const Leaderboard = (props: any) => {
                 />
 
                 <div {...getTableProps()} className="leaderboard-table">
-                    <div className="leaderboard-header">
-                        {headerGroups.map((headerGroup) => (
-                            <div
-                                {...headerGroup.getHeaderGroupProps()}
-                                className="leaderboard-header-row"
-                            >
-                                {headerGroup.headers.map((column) => (
-                                    <div
-                                        {...column.getHeaderProps(
-                                            column.getSortByToggleProps()
-                                        )}
-                                        className="leaderboard-header-row-column"
-                                    >
-                                        {props.setTableHeaderInfoTip(column)}
+                    <div className="leaderboard-header-container">
+                        <div className="leaderboard-header">
+                            {headerGroups.map((headerGroup) => (
+                                <div
+                                    {...headerGroup.getHeaderGroupProps()}
+                                    className="leaderboard-header-row"
+                                >
+                                    {headerGroup.headers.map((column) => (
+                                        <div
+                                            {...column.getHeaderProps(
+                                                column.getSortByToggleProps()
+                                            )}
+                                            className="leaderboard-header-row-column"
+                                        >
+                                            {props.setTableHeaderInfoTip(
+                                                column
+                                            )}
 
-                                        <span className="leaderboard-header-row-value">
-                                            {column.render("Header")}
-                                        </span>
+                                            <span className="leaderboard-header-row-value">
+                                                {column.render("Header")}
+                                            </span>
 
-                                        <span className="column-sort-icon">
-                                            {column.isSorted ? (
-                                                column.isSortedDesc ? (
-                                                    <FontAwesomeIcon
-                                                        icon={faSortAmountDown}
-                                                        size="1x"
-                                                    />
+                                            <span className="column-sort-icon">
+                                                {column.isSorted ? (
+                                                    column.isSortedDesc ? (
+                                                        <FontAwesomeIcon
+                                                            icon={
+                                                                faSortAmountDown
+                                                            }
+                                                            size="1x"
+                                                        />
+                                                    ) : (
+                                                        <FontAwesomeIcon
+                                                            icon={
+                                                                faSortAmountUpAlt
+                                                            }
+                                                            size="1x"
+                                                        />
+                                                    )
                                                 ) : (
                                                     <FontAwesomeIcon
                                                         icon={faSortAmountUpAlt}
                                                         size="1x"
+                                                        className="column-sort-icon-invisible"
                                                     />
-                                                )
-                                            ) : (
-                                                <FontAwesomeIcon
-                                                    icon={faSortAmountUpAlt}
-                                                    size="1x"
-                                                    className="column-sort-icon-invisible"
-                                                />
+                                                )}
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+                        <div className="leaderboard-header">
+                            {headerGroups.map((headerGroup) => (
+                                <div
+                                    {...headerGroup.getHeaderGroupProps()}
+                                    className="leaderboard-header-row"
+                                >
+                                    {headerGroup.headers.map((column) => (
+                                        <div
+                                            {...column.getHeaderProps(
+                                                column.getSortByToggleProps()
                                             )}
-                                        </span>
-                                    </div>
-                                ))}
-                            </div>
-                        ))}
+                                            className="leaderboard-header-row-column"
+                                        >
+                                            {column.canFilter
+                                                ? column.render("Filter")
+                                                : null}
+                                        </div>
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                    <div className="leaderboard-header">
-                        {headerGroups.map((headerGroup) => (
-                            <div
-                                {...headerGroup.getHeaderGroupProps()}
-                                className="leaderboard-header-row"
-                            >
-                                {headerGroup.headers.map((column) => (
-                                    <div
-                                        {...column.getHeaderProps(
-                                            column.getSortByToggleProps()
-                                        )}
-                                        className="leaderboard-header-row-column"
-                                    >
-                                        {column.canFilter
-                                            ? column.render("Filter")
-                                            : null}
-                                    </div>
-                                ))}
-                            </div>
-                        ))}
-                    </div>
-
                     <div {...getTableBodyProps()} className="leaderboard-body">
                         {page.map((row) => {
                             prepareRow(row);

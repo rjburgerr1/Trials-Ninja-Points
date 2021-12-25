@@ -120,7 +120,7 @@ const SubmitRun = () => {
             .required("Time cannot be empty")
             .test(
                 "is-greater",
-                "Time should be in mm:ss.SSS format",
+                "Time should be in mm:ss.SSS format & <= 29:59.999",
                 function (value) {
                     return moment(value, "mm:ss.SSS", true).isValid(); // Make sure time is fully filled out in the
                 }

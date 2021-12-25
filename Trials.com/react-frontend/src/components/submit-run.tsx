@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import axios from "axios";
 import InputMask from "react-input-mask";
+import moment from "moment";
 import Ratings from "react-ratings-declarative";
 
 import Slider from "@material-ui/core/Slider";
@@ -56,6 +57,29 @@ const SubmitRun = () => {
         }
     };
 
+    const restrictTime = (props: any, value: any) => {
+        // Max time as an int is 2959999
+        // RegEx to match only numbers from the time mask input element
+
+        if (value.match(/\d/g)) {
+            // Join numbers into one int value
+            var time = value.match(/\d/g).join("");
+            if (
+                (time.length === 1 && time <= 2) ||
+                (time.length === 2 && time <= 29) ||
+                (time.length === 3 && time <= 295) ||
+                (time.length === 4 && time <= 2959) ||
+                (time.length === 5 && time <= 29599) ||
+                (time.length === 6 && time <= 295999) ||
+                (time.length === 7 && time <= 2959999)
+            ) {
+                props.setFieldValue("time", value);
+            }
+        } else {
+            props.setFieldValue("time", value);
+        }
+    };
+
     // Submit handler for submit-run form. Handles POST request and calculating NP for each run
     const handleOnSubmit = async (values: object, actions: any) => {
         // Calculate Ninja Points for run
@@ -91,7 +115,16 @@ const SubmitRun = () => {
             .min(0, "Minimum number of faults is 0!")
             .max(499, "Maximum number of faults is 499!")
             .integer("Faults are required, and must be integers"),
-        time: Yup.string().required("Required"),
+
+        time: Yup.string()
+            .required("Time cannot be empty")
+            .test(
+                "is-greater",
+                "Time should be in mm:ss.SSS format",
+                function (value) {
+                    return moment(value, "mm:ss.SSS", true).isValid(); // Make sure time is fully filled out in the
+                }
+            ),
         length: Yup.string().required("Required"),
         consistency: Yup.string().required("Required"),
         ninjaLevel: Yup.number().required("Required"),
@@ -244,7 +277,11 @@ const SubmitRun = () => {
                                     mask="99:99.999"
                                     name="time"
                                     type="text"
-                                    onChange={props.handleChange}
+                                    onChange={(event: any) => {
+                                        event.preventDefault();
+                                        const { value } = event.target;
+                                        restrictTime(props, value);
+                                    }}
                                     value={props.values.time}
                                 ></InputMask>
                                 {props.errors.time && props.touched.time ? (

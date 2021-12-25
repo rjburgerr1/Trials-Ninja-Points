@@ -19,63 +19,63 @@
             width: 0;
         }
 
-        > .leaderboard-header {
-            background-color: $mustard;
-            font-weight: bold;
+        > .leaderboard-header-container {
             position: sticky;
-
             top: 0;
 
-            > .leaderboard-header-row {
-                position: sticky;
+            > .leaderboard-header {
+                background-color: $mustard;
+                font-weight: bold;
 
-                // These columns are weird. Here is the layout for each:
-                // For every header column value, like "Username", there are three elements within that column area.
-                // The three items consist of the column name value, the sorting icon, and an invisible sorting icon.
-                // The point of the three elements is to center the column name in the middle of the parent container.
-                // The invisible sorting icon just matches the width of the sorting icon and makes centering the column
-                // name easy regardless of the width of sorting icon itself.
-                > .leaderboard-header-row-column {
-                    display: flex !important; // Override element.style because JS is injecting inline-block as the style
-                    justify-content: center;
-                    transition: 0.4s;
-                    border-left: 1px solid $black;
-                    border-right: 1px solid $black;
-                    .table-header-filter {
-                    }
-
-                    &:hover {
-                        color: $cadet;
-                    }
-
-                    > .column-sort-icon {
-                        margin-left: auto;
-                        margin-right: 2%; // These margins must match .invisible-element
-
-                        > .column-sort-icon-invisible {
-                            visibility: hidden; // When no sorting is active
+                > .leaderboard-header-row {
+                    // These columns are weird. Here is the layout for each:
+                    // For every header column value, like "Username", there are three elements within that column area.
+                    // The three items consist of the column name value, the sorting icon, and an invisible sorting icon.
+                    // The point of the three elements is to center the column name in the middle of the parent container.
+                    // The invisible sorting icon just matches the width of the sorting icon and makes centering the column
+                    // name easy regardless of the width of sorting icon itself.
+                    > .leaderboard-header-row-column {
+                        display: flex !important; // Override element.style because JS is injecting inline-block as the style
+                        justify-content: center;
+                        transition: 0.4s;
+                        border-left: 1px solid $black;
+                        border-right: 1px solid $black;
+                        .table-header-filter {
                         }
-                    }
 
-                    > .invisible-element {
-                        margin-left: 2%;
-                        margin-right: auto; // These margins must match .column-sort-icon
-                        visibility: hidden;
-                    }
-
-                    > .table-header-info-tip {
-                        margin-left: 2%;
-                        margin-right: auto; // These margins must match .column-sort-icon
-
-                        > .info-tip {
-                            background-color: $oxford-blue-accent-light;
-                            color: $black;
+                        &:hover {
+                            color: $cadet;
                         }
-                    }
 
-                    > .leaderboard-header-row-value {
-                        text-align: center;
-                        white-space: nowrap;
+                        > .column-sort-icon {
+                            margin-left: auto;
+                            margin-right: 2%; // These margins must match .invisible-element
+
+                            > .column-sort-icon-invisible {
+                                visibility: hidden; // When no sorting is active
+                            }
+                        }
+
+                        > .invisible-element {
+                            margin-left: 2%;
+                            margin-right: auto; // These margins must match .column-sort-icon
+                            visibility: hidden;
+                        }
+
+                        > .table-header-info-tip {
+                            margin-left: 2%;
+                            margin-right: auto; // These margins must match .column-sort-icon
+
+                            > .info-tip {
+                                background-color: $oxford-blue-accent-light;
+                                color: $black;
+                            }
+                        }
+
+                        > .leaderboard-header-row-value {
+                            text-align: center;
+                            white-space: nowrap;
+                        }
                     }
                 }
             }

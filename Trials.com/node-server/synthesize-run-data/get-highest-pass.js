@@ -13,6 +13,6 @@ const getHighestLevelPass = async (rider) => {
         },
     });
 
-    return Math.round(highestLevelPasses._max.ninja_level);
+    return highestLevelPasses._max.ninja_level;
 };
 module.exports = getHighestLevelPass;

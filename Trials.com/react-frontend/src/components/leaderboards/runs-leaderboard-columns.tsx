@@ -92,6 +92,19 @@ export const setTableBodyCell = (cell: Cell, row: Row) => {
         return row.values.date ? (
             <div>{formatCreateDate(row.values.date)}</div>
         ) : null;
+    } else if (cell.column.Header === "Track") {
+        return (
+            <a
+                href={
+                    "track/name=" +
+                    row.values.track_name +
+                    "&creator=" +
+                    row.values.creator
+                }
+            >
+                {cell.render("Cell")}
+            </a>
+        );
     } else {
         return <div>{cell.render("Cell")}</div>;
     }

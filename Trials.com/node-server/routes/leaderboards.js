@@ -124,6 +124,7 @@ const router = (app) => {
             return response.status(400).send("BAD REQUEST");
         }
     });
+
     app.get("/tracks-leaderboard", async (request, response) => {
         try {
             let result = !isToday(request.query.date)
@@ -138,6 +139,28 @@ const router = (app) => {
                       },
                   })
                 : await prisma.tracks.findMany({});
+
+            return response.status(200).send(result);
+        } catch (error) {
+            console.log(error.message);
+            return response.status(400).send("BAD REQUEST");
+        }
+    });
+
+    app.get("/creators-leaderboard", async (request, response) => {
+        try {
+            let result = !isToday(request.query.date)
+                ? await prisma.creatorshistory.findMany({
+                      where: {
+                          history_dates: {
+                              gte: subtractDayFromDate(
+                                  formatDate(request.query.date)
+                              ),
+                              lt: new Date(formatDate(request.query.date)),
+                          },
+                      },
+                  })
+                : await prisma.creators.findMany({});
 
             return response.status(200).send(result);
         } catch (error) {

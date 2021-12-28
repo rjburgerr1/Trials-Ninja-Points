@@ -9,6 +9,7 @@ import Runs from "./pages/runs";
 import PrivateRoute from "./components/private-route";
 import Profile from "./pages/profile";
 import Track from "./pages/track";
+import Creators from "./pages/creators";
 import SignInSignUp from "./pages/signin-signup";
 import SubmitRun from "./pages/submit-run";
 import SubmittedRun from "./pages/submitted-run";
@@ -38,6 +39,7 @@ function App() {
                         />
                         <Route path="/runs" component={Runs} />
                         <Route path="/tracks" component={Tracks} />
+                        <Route path="/creators" component={Creators} />
                         <PrivateRoute
                             path="/track/name=:name?&creator=:creator?"
                             component={Track}

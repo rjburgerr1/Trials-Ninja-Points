@@ -31,3 +31,11 @@ export async function getTracksLB(date?: Date) {
     //result returns object with all relevant track(s) info fields
     return result.data;
 }
+
+export async function getCreatorsLB(date?: Date) {
+    const result = await axios.get("/creators-leaderboard", {
+        params: { ...(date ? { date: date } : {}) },
+    });
+    //result returns object with all relevant track(s) info fields
+    return result.data;
+}

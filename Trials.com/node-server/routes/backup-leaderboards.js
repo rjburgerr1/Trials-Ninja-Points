@@ -23,6 +23,12 @@ const BackupLeaderboards = async () => {
             await prisma.trackshistory.createMany({
                 data: copyTable,
             });
+
+            copyTable = await prisma.creators.findMany();
+
+            await prisma.creatorshistory.createMany({
+                data: copyTable,
+            });
         },
         null,
         true,

@@ -8,8 +8,15 @@ datasource db {
 }
 
 model creators {
-  creator String @id @db.VarChar(45)
-  runs    runs[]
+  creator                    String @id @default("N/A") @db.VarChar(45)
+  nOfTracks                  Int    @default(0)
+  average_track_rating       Float  @default(0.00) @map("average-track-rating") @db.Float
+  average_track_length       Float  @default(0.00) @map("average-track-length") @db.Float
+  average_track_consistency  Float  @default(0.00) @map("average-track-consistency") @db.Float
+  average_track_ninja_level  Float  @default(0.00) @map("average-track-ninja-level") @db.Float
+  average_track_ninja_points Float  @default(0.00) @map("average-track-ninja-points") @db.Float
+  average_track_faults       Float  @default(0.00) @map("average-track-faults") @db.Float
+  runs                       runs[]
 }
 
 model profiles {
@@ -126,6 +133,20 @@ model trackshistory {
   total_np          Float    @default(0.00) @map("total-np") @db.Float
   history_dates     DateTime @default(now()) @map("history-dates") @db.DateTime(0)
   index             Int      @id @default(autoincrement())
+}
+
+model creatorshistory {
+  creator                    String   @default("N/A") @db.VarChar(45)
+  nOfTracks                  Int      @default(0)
+  average_track_rating       Float    @default(0.00) @map("average-track-rating") @db.Float
+  average_track_length       Float    @default(0.00) @map("average-track-length") @db.Float
+  average_track_consistency  Float    @default(0.00) @map("average-track-consistency") @db.Float
+  average_track_ninja_level  Float    @default(0.00) @map("average-track-ninja-level") @db.Float
+  average_track_ninja_points Float    @default(0.00) @map("average-track-ninja-points") @db.Float
+  average_track_faults       Float    @default(0.00) @map("average-track-faults") @db.Float
+  history_dates              DateTime @default(now()) @map("history-dates") @db.DateTime(0)
+
+  @@id([creator, history_dates])
 }
 
 enum runs_length {

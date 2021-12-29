@@ -1,14 +1,9 @@
 import { Chat } from "../components/General-Chat/chat";
 import { Leaderboard } from "../components/leaderboards/leaderboard";
-import {
-    TracksLeaderboardColumns,
-    setTableBodyCell,
-    setTableHeaderInfoTip,
-    tracksLBEffect,
-} from "../components/leaderboards/tracks-leaderboard-columns";
+
 import NavBar from "../components/navbar";
 
-export default function Tracks(props: any) {
+export default function LeaderboardPage(props: any) {
     return (
         <div className="tracks-container">
             <div className="tracks-header">
@@ -20,11 +15,11 @@ export default function Tracks(props: any) {
                 </div>
                 <div className="tracks-leaderboard">
                     <Leaderboard
-                        columns={TracksLeaderboardColumns}
-                        effect={tracksLBEffect}
-                        sortBy="total_ninja_points"
-                        setTableBodyCell={setTableBodyCell}
-                        setTableHeaderInfoTip={setTableHeaderInfoTip}
+                        columns={props.columns}
+                        effect={props.effect}
+                        sortBy={props.sortBy}
+                        setTableBodyCell={props.setTableBodyCell}
+                        setTableHeaderInfoTip={props.setTableHeaderInfoTip}
                     />
                 </div>
 

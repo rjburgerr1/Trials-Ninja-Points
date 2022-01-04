@@ -28,10 +28,10 @@ model profiles {
   gamertag           String?  @db.VarChar(25)
   aliases            String?  @db.VarChar(150)
   username           String   @unique(map: "username_UNIQUE") @db.VarChar(25)
-  highest_np_run     Int      @default(0) @map("highest-np-run")
+  highest_np_run     Float    @default(0.00) @map("highest-np-run") @db.Float
   runs               Int      @default(0)
   total_ninja_points Int      @default(0) @map("total-ninja-points")
-  highest_level_pass Int      @default(0) @map("highest-level-pass")
+  highest_level_pass Float    @default(0.00) @map("highest-level-pass") @db.Float
   bio                String?  @db.VarChar(300)
 }
 

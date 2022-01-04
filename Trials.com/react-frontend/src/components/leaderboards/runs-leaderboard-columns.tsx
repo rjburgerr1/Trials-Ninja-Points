@@ -6,6 +6,7 @@ import { formatCreateDate } from "../format-dates";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortAmountDown } from "@fortawesome/free-solid-svg-icons";
 import { getRunsLB } from "../leaderboard-requests";
+import { Link } from "react-router-dom";
 
 export const RunsLeaderboardColumns = [
     {
@@ -83,10 +84,16 @@ export const RunsLeaderboardColumns = [
     },
 ];
 
-export const setTableBodyCell = (cell: Cell, row: Row) => {
+export const setRunsTableBodyCell = (cell: Cell, row: Row) => {
     if (cell.column.Header === "Rider") {
         return (
-            <a href={"profile/" + row.values.rider}>{cell.render("Cell")}</a>
+            <Link
+                to={"/profile/" + row.values.username}
+                state={{ user: row.values.username }}
+                replace={true}
+            >
+                {cell.render("Cell")}
+            </Link>
         );
     } else if (cell.column.Header === "Date") {
         return row.values.date ? (
@@ -94,23 +101,28 @@ export const setTableBodyCell = (cell: Cell, row: Row) => {
         ) : null;
     } else if (cell.column.Header === "Track") {
         return (
-            <a
-                href={
-                    "track/name=" +
+            <Link
+                to={
+                    "/track/track=" +
                     row.values.track_name +
-                    "&creator=" +
+                    "&creatorName=" +
                     row.values.creator
                 }
+                state={{
+                    track: row.values.track_name,
+                    creatorName: row.values.creator,
+                }}
+                replace={true}
             >
                 {cell.render("Cell")}
-            </a>
+            </Link>
         );
     } else {
         return <div>{cell.render("Cell")}</div>;
     }
 };
 
-export const setTableHeaderInfoTip = (column: Column) => {
+export const setRunsTableHeaderInfoTip = (column: Column) => {
     if (column.Header === "Consistency") {
         return infoTip(
             "consistency",

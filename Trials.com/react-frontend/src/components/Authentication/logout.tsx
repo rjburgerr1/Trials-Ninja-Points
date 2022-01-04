@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { useAuth } from "../../contexts/auth-context";
 import { Button } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Logout() {
     const [error, setError] = useState("");
     const { logout } = useAuth();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     async function handleLogout() {
         setError("");
 
         try {
             await logout();
-            history.push("/signin");
+            navigate("/signin");
         } catch {
             setError("Failed to log out" + error);
         }

@@ -5,12 +5,18 @@ import { Leaderboard } from "../components/leaderboards/leaderboard";
 import {
     runsLBEffect,
     RunsLeaderboardColumns,
-    setTableBodyCell,
-    setTableHeaderInfoTip,
+    setRunsTableBodyCell,
+    setRunsTableHeaderInfoTip,
 } from "../components/leaderboards/runs-leaderboard-columns";
 import axios from "axios";
 import img from "../images/Fusion Title Screen.jpg"; // This will be replaced with the tracks image later on
 import NavBar from "../components/navbar";
+import { useLocation } from "react-router-dom";
+
+interface LocationState {
+    track: string;
+    creatorName: string;
+}
 
 const resolveData = async (
     trackName: string,
@@ -32,14 +38,13 @@ const resolveData = async (
 
 const Track: React.FC = (props: any) => {
     const [loadingData, setLoadingData] = useState(true);
+    const location = useLocation();
+    const state = location.state as LocationState; // Type Casting, then you can get the params passed via router
+    const { track, creatorName } = state;
     let [data, setData] = useState([{}]);
     const [date, setDate] = useState(new Date());
-    const [trackName, setTrackName] = useState(
-        props.match.params.name ? props.match.params.name : ""
-    );
-    const [creator, setCreator] = useState(
-        props.match.params.creator ? props.match.params.creator : ""
-    );
+    const [trackName, setTrackName] = useState(track ? track : "");
+    const [creator, setCreator] = useState(creatorName ? creatorName : "");
     const [ninjaLevel, setNinjaLevel] = useState(0);
     const [length, setLength] = useState("");
     const [averageFaults, setAverageFaults] = useState(0);
@@ -94,8 +99,8 @@ const Track: React.FC = (props: any) => {
                             columns={RunsLeaderboardColumns}
                             effect={runsLBEffect}
                             sortBy="total_ninja_points"
-                            setTableBodyCell={setTableBodyCell}
-                            setTableHeaderInfoTip={setTableHeaderInfoTip}
+                            setTableBodyCell={setRunsTableBodyCell}
+                            setTableHeaderInfoTip={setRunsTableHeaderInfoTip}
                             runs={data}
                         />
                     </div>

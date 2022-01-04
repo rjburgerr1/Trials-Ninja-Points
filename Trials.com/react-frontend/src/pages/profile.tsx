@@ -7,12 +7,18 @@ import Avatar from "@material-ui/core/Avatar";
 import { useAuth } from "../contexts/auth-context";
 import { Card } from "react-bootstrap";
 import { formatCreateDate } from "../components/format-dates";
+import { useLocation } from "react-router-dom";
+
+interface LocationState {
+    user: string;
+}
 
 const Profile: React.FC = (props: any) => {
     const { currentUser } = useAuth();
-    const [username, setUsername] = useState(
-        props.match.params.user ? props.match.params.user : ""
-    );
+    const location = useLocation();
+    const state = location.state as LocationState; // Type Casting, then you can get the params passed via router
+
+    const [username, setUsername] = useState(state ? state.user : "");
     const [bio, setBio] = useState("");
     const [country, setCountry] = useState("");
     const [runs, setRuns] = useState(0);

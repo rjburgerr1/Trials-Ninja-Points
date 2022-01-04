@@ -16,7 +16,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@prisma/client": "^3.6.0",
+        "@prisma/client": "^3.7.0",
         "cors": "^2.8.5",
         "cron": "^1.8.2",
         "dotenv-cli": "^4.1.0",
@@ -25,6 +25,6 @@
         "socket.io": "^4.2.0"
     },
     "devDependencies": {
-        "prisma": "^3.6.0"
+        "prisma": "^3.7.0"
     }
 }

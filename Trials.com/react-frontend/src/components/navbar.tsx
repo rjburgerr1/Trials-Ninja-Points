@@ -3,8 +3,10 @@ import { faUserNinja } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import Logout from "./Authentication/logout";
+import { useLocation } from "react-router-dom";
 
-export default function NavBar(props: any) {
+export default function NavBar() {
+    const location = useLocation();
     return (
         <div className="appbar">
             <Navbar className="navbar">
@@ -16,7 +18,7 @@ export default function NavBar(props: any) {
                     className="navbar-toggle"
                 />
 
-                <Nav activeKey={props.location.pathname} className="nav">
+                <Nav activeKey={location.pathname} className="nav">
                     <Nav.Link href="/" className="navbar-link">
                         Home
                     </Nav.Link>

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../../contexts/auth-context";
 import { Alert } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import signupPrisma from "./prisma-signup";
 
 const SignupComponent = () => {
@@ -12,7 +12,7 @@ const SignupComponent = () => {
     const { signup } = useAuth();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleSubmit = async (event: any) => {
         event.preventDefault();
@@ -38,7 +38,7 @@ const SignupComponent = () => {
                 );
             }
 
-            history.push("/");
+            navigate("/");
         } catch (error: any) {
             console.log(error);
             setError(error.message);

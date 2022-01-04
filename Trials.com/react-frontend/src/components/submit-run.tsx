@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import { CalcNP } from "./calculate-ninja-points";
 import { Form, Field, Formik } from "formik";
 import { useAuth } from "../contexts/auth-context";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import SubmittedRun from "./submitted-run";
 import * as Yup from "yup";
 import axios from "axios";
 import InputMask from "react-input-mask";
@@ -29,7 +30,7 @@ interface FormValues {
 
 const SubmitRun = () => {
     const { currentUser } = useAuth();
-    const history = useHistory();
+    const navigate = useNavigate();
     const [rating, setRating] = useState();
 
     // According to formik documentation, use formik values in place of props to prevent bugs with formik and also prevent having two versions of the same prop
@@ -100,10 +101,8 @@ const SubmitRun = () => {
         } catch (error: any) {
             console.log(error);
         }
-        history.push({
-            pathname: "/submitted-run",
-            state: { np: ninjaPoints },
-        });
+
+        navigate("/submitted-run", { state: { ninjaPoints: ninjaPoints } });
     };
 
     const SubmitRunSchema = Yup.object({

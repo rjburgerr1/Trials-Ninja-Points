@@ -1,14 +1,12 @@
 import { Card } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-interface LocationState {
-    np: number;
-}
+const SubmittedRun = () => {
+    const navigate = useNavigate();
 
-const SubmittedRun = (props: any) => {
-    const location = useLocation<LocationState>();
-    const history = useHistory();
+    // Ideally I would set this type to {state: { ninjaPoints: number/string}} but the useLocation hook
+    // strictly disallows all other types besides unknown for the Location type
+    const { state }: any = useLocation();
 
     return (
         <div className="submitted-run-container">
@@ -22,14 +20,14 @@ const SubmittedRun = (props: any) => {
                     Ninja Points Rewarded
                 </Card.Header>
                 <Card.Text id="calculated-ninja-points-text">
-                    {location.state.np}
+                    {state.ninjaPoints}
                 </Card.Text>
             </Card>
             <button
                 id="submit-another-run-button"
                 type="button"
                 onClick={() => {
-                    history.push("/submit-run");
+                    navigate("/submit-run");
                 }}
             >
                 Submit another run!

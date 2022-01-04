@@ -1,5 +1,6 @@
 import { faSortAmountDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 import { Cell, Column, Row } from "react-table";
 import { infoTip } from "../help-info/info-tips";
 import { getTracksLB } from "../leaderboard-requests";
@@ -50,26 +51,31 @@ export const TracksLeaderboardColumns = [
     },
 ];
 
-export const setTableBodyCell = (cell: Cell, row: Row) => {
+export const setTracksTableBodyCell = (cell: Cell, row: Row) => {
     if (cell.column.Header === "Track") {
         return (
-            <a
-                href={
-                    "track/name=" +
+            <Link
+                to={
+                    "/track/track=" +
                     row.values.track_name +
-                    "&creator=" +
+                    "&creatorName=" +
                     row.values.creator
                 }
+                state={{
+                    track: row.values.track_name,
+                    creatorName: row.values.creator,
+                }}
+                replace
             >
                 {cell.render("Cell")}
-            </a>
+            </Link>
         );
     } else {
         return <div>{cell.render("Cell")}</div>;
     }
 };
 
-export const setTableHeaderInfoTip = (column: Column) => {
+export const setTracksTableHeaderInfoTip = (column: Column) => {
     if (column.Header === "Ninja Points (Avg)") {
         return infoTip(
             "average-np-run",

@@ -1,23 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { AuthProvider } from "./contexts/auth-context";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { SocketProvider, socket } from "./contexts/socket-context";
-import Dashboard from "./pages/dashboard";
+import {
+    setRunsTableBodyCell,
+    setRunsTableHeaderInfoTip,
+    runsLBEffect,
+    RunsLeaderboardColumns,
+} from "./components/leaderboards/runs-leaderboard-columns";
+import {
+    TracksLeaderboardColumns,
+    setTracksTableBodyCell,
+    setTracksTableHeaderInfoTip,
+    tracksLBEffect,
+} from "./components/leaderboards/tracks-leaderboard-columns";
+import {
+    MainLeaderboardColumns,
+    setMainTableBodyCell,
+    setMainTableHeaderInfoTip,
+    mainLBEffect,
+} from "./components/leaderboards/main-leaderboard-columns";
 import Loading from "./components/loading";
 import ResetPassword from "./components/Authentication/reset-password";
-import Runs from "./pages/runs";
 import PrivateRoute from "./components/private-route";
 import Profile from "./pages/profile";
-import Track from "./pages/track";
 import Creators from "./pages/creators";
 import SignInSignUp from "./pages/signin-signup";
 import SubmitRun from "./pages/submit-run";
 import SubmittedRun from "./pages/submitted-run";
-import Tracks from "./pages/tracks";
+import LeaderboardPage from "./pages/leaderboard-page";
 import UpdateProfile from "./components/update-profile";
 import "./sass-base/main.scss";
+import Track from "./pages/track";
 
-function App() {
+function App(props: any) {
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
@@ -30,37 +46,112 @@ function App() {
         <Router>
             <AuthProvider>
                 <SocketProvider.Provider value={socket}>
-                    <Switch>
-                        <PrivateRoute exact path="/" component={Dashboard} />
-                        <Route path="/signin" component={SignInSignUp} />
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={
+                                <PrivateRoute>
+                                    <LeaderboardPage
+                                        columns={MainLeaderboardColumns}
+                                        effect={mainLBEffect}
+                                        sortBy="total_ninja_points"
+                                        setTableBodyCell={setMainTableBodyCell}
+                                        setTableHeaderInfoTip={
+                                            setMainTableHeaderInfoTip
+                                        }
+                                    />
+                                </PrivateRoute>
+                            }
+                        />
+                        <Route
+                            path="/tracks"
+                            element={
+                                <LeaderboardPage
+                                    columns={TracksLeaderboardColumns}
+                                    effect={tracksLBEffect}
+                                    sortBy="total_ninja_points"
+                                    setTableBodyCell={setTracksTableBodyCell}
+                                    setTableHeaderInfoTip={
+                                        setTracksTableHeaderInfoTip
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="/signin"
+                            element={<SignInSignUp container={null} />}
+                        />
+
                         <Route
                             path="/forgot-password"
-                            component={ResetPassword}
+                            element={<ResetPassword />}
                         />
-                        <Route path="/runs" component={Runs} />
-                        <Route path="/tracks" component={Tracks} />
-                        <Route path="/creators" component={Creators} />
-                        <PrivateRoute
-                            path="/track/name=:name?&creator=:creator?"
-                            component={Track}
+                        <Route
+                            path="/runs"
+                            element={
+                                <LeaderboardPage
+                                    columns={RunsLeaderboardColumns}
+                                    effect={runsLBEffect}
+                                    sortBy="total_ninja_points"
+                                    setTableBodyCell={setRunsTableBodyCell}
+                                    setTableHeaderInfoTip={
+                                        setRunsTableHeaderInfoTip
+                                    }
+                                />
+                            }
                         />
-                        <PrivateRoute
+
+                        <Route path="/creators" element={<Creators />} />
+
+                        <Route
+                            path="/track/track=:name&creatorName=:creator"
+                            element={
+                                <PrivateRoute>
+                                    <Track />
+                                </PrivateRoute>
+                            }
+                        />
+                        <Route
                             path="/update-profile"
-                            component={UpdateProfile}
+                            element={
+                                <PrivateRoute>
+                                    <UpdateProfile />
+                                </PrivateRoute>
+                            }
                         />
-                        <PrivateRoute
+                        <Route
                             path="/submit-run"
-                            component={SubmitRun}
+                            element={
+                                <PrivateRoute>
+                                    <SubmitRun />
+                                </PrivateRoute>
+                            }
                         />
-                        <PrivateRoute
+                        <Route
                             path="/submitted-run"
-                            component={SubmittedRun}
+                            element={
+                                <PrivateRoute>
+                                    <SubmittedRun />
+                                </PrivateRoute>
+                            }
                         />
-                        <PrivateRoute
-                            path="/profile/:user?"
-                            component={Profile}
+                        <Route
+                            path="/profile/:user"
+                            element={
+                                <PrivateRoute>
+                                    <Profile />
+                                </PrivateRoute>
+                            }
                         />
-                    </Switch>
+                        <Route
+                            path="/profile"
+                            element={
+                                <PrivateRoute>
+                                    <Profile />
+                                </PrivateRoute>
+                            }
+                        />
+                    </Routes>
                 </SocketProvider.Provider>
             </AuthProvider>
         </Router>

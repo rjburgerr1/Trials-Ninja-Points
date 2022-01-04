@@ -6,6 +6,7 @@ import { faSortAmountDown } from "@fortawesome/free-solid-svg-icons";
 import { infoTip } from "../help-info/info-tips";
 import ReactCountryFlag from "react-country-flag";
 import { getMainLB } from "../leaderboard-requests";
+import { Link } from "react-router-dom";
 
 export const MainLeaderboardColumns = [
     {
@@ -54,10 +55,16 @@ export const MainLeaderboardColumns = [
     },
 ];
 
-export const setTableBodyCell = (cell: Cell, row: Row) => {
+export const setMainTableBodyCell = (cell: Cell, row: Row) => {
     if (cell.column.Header === "Username") {
         return (
-            <a href={"profile/" + row.values.username}>{cell.render("Cell")}</a>
+            <Link
+                to={"profile/" + row.values.username}
+                state={{ user: row.values.username }}
+            >
+                {cell.render("Cell")}
+            </Link>
+            //<a href={"profile/" + row.values.username}>{cell.render("Cell")}</a>
         );
     } else if (cell.column.Header === "Origin") {
         return cell.value !== "N/A" ? (
@@ -75,7 +82,7 @@ export const setTableBodyCell = (cell: Cell, row: Row) => {
     }
 };
 
-export const setTableHeaderInfoTip = (column: Column) => {
+export const setMainTableHeaderInfoTip = (column: Column) => {
     if (column.Header === "Ninja Points (100)") {
         return infoTip(
             "total-np",

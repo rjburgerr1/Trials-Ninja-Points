@@ -69,7 +69,7 @@ function App(props: any) {
                                 <LeaderboardPage
                                     columns={TracksLeaderboardColumns}
                                     effect={tracksLBEffect}
-                                    sortBy="total_ninja_points"
+                                    sortBy="average_np"
                                     setTableBodyCell={setTracksTableBodyCell}
                                     setTableHeaderInfoTip={
                                         setTracksTableHeaderInfoTip
@@ -92,7 +92,7 @@ function App(props: any) {
                                 <LeaderboardPage
                                     columns={RunsLeaderboardColumns}
                                     effect={runsLBEffect}
-                                    sortBy="total_ninja_points"
+                                    sortBy="ninja_points"
                                     setTableBodyCell={setRunsTableBodyCell}
                                     setTableHeaderInfoTip={
                                         setRunsTableHeaderInfoTip

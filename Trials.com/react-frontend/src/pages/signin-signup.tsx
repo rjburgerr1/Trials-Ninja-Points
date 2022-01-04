@@ -3,7 +3,7 @@ import Login from "../components/Authentication/login";
 import Signup from "../components/Authentication/signup";
 
 interface SigninSignupProps {
-    container: HTMLElement;
+    container: HTMLElement | null;
 }
 
 const SigninSignup: React.FC<SigninSignupProps> = () => {

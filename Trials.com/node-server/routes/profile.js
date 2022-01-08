@@ -2,12 +2,48 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 const router = (app) => {
+    app.put("/email", async (request, response) => {
+        try {
+            const result = await prisma.profiles.update({
+                where: {
+                    id: request.body.id,
+                },
+                data: {
+                    email: request.body.email,
+                },
+            });
+
+            return response.status(200).send(result);
+        } catch (error) {
+            console.log(error);
+            return response.status(400).send("BAD REQUEST");
+        }
+    });
+
     app.get("/username", async (request, response) => {
         try {
             let result = await prisma.profiles.findUnique({
                 select: { username: true },
                 where: {
                     id: request.query.id,
+                },
+            });
+
+            return response.status(200).send(result);
+        } catch (error) {
+            console.log(error);
+            return response.status(400).send("BAD REQUEST");
+        }
+    });
+
+    app.put("/username", async (request, response) => {
+        try {
+            const result = await prisma.profiles.update({
+                where: {
+                    id: request.body.id,
+                },
+                data: {
+                    username: request.body.username,
                 },
             });
 
@@ -34,12 +70,67 @@ const router = (app) => {
         }
     });
 
+    app.put("/bio", async (request, response) => {
+        try {
+            const result = await prisma.profiles.update({
+                where: {
+                    id: request.body.id,
+                },
+                data: {
+                    bio: request.body.bio,
+                },
+            });
+
+            return response.status(200).send(result);
+        } catch (error) {
+            console.log(error);
+            return response.status(400).send("BAD REQUEST");
+        }
+    });
+
     app.get("/country", async (request, response) => {
         try {
             let result = await prisma.profiles.findUnique({
                 select: { country: true },
                 where: {
                     id: request.query.uid,
+                },
+            });
+
+            return response.status(200).send(result);
+        } catch (error) {
+            console.log(error);
+            return response.status(400).send("BAD REQUEST");
+        }
+    });
+
+    app.put("/country", async (request, response) => {
+        try {
+            const result = await prisma.profiles.update({
+                where: {
+                    id: request.body.id,
+                },
+                data: {
+                    country: request.body.country,
+                },
+            });
+
+            return response.status(200).send(result);
+        } catch (error) {
+            console.log(error);
+            return response.status(400).send("BAD REQUEST");
+        }
+    });
+
+    app.put("/country-region", async (request, response) => {
+        try {
+            const result = await prisma.profiles.update({
+                where: {
+                    id: request.body.id,
+                },
+                data: {
+                    country: request.body.country,
+                    region: request.body.region,
                 },
             });
 
@@ -149,6 +240,24 @@ const router = (app) => {
                     id: request.query.uid,
                 },
             });
+            return response.status(200).send(result);
+        } catch (error) {
+            console.log(error);
+            return response.status(400).send("BAD REQUEST");
+        }
+    });
+
+    app.put("/aliases", async (request, response) => {
+        try {
+            const result = await prisma.profiles.update({
+                where: {
+                    id: request.body.id,
+                },
+                data: {
+                    aliases: request.body.aliases,
+                },
+            });
+
             return response.status(200).send(result);
         } catch (error) {
             console.log(error);

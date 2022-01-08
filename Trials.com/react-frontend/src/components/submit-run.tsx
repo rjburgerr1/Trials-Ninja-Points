@@ -4,7 +4,7 @@ import { CalcNP } from "./calculate-ninja-points";
 import { Form, Field, Formik } from "formik";
 import { useAuth } from "../contexts/auth-context";
 import { useNavigate } from "react-router-dom";
-import SubmittedRun from "./submitted-run";
+import { FieldError } from "./field-error";
 import * as Yup from "yup";
 import axios from "axios";
 import InputMask from "react-input-mask";
@@ -154,16 +154,10 @@ const SubmitRun = () => {
                                     type="text"
                                     value={props.values.trackName}
                                 />
-                                {props.errors.trackName &&
-                                props.touched.trackName ? (
-                                    <div className="field-error">
-                                        {props.errors.trackName}
-                                    </div>
-                                ) : (
-                                    <div className="field-error-invisible">
-                                        {props.errors.trackName}
-                                    </div>
-                                )}
+                                <FieldError
+                                    error={props.errors.trackName}
+                                    touched={props.touched.trackName}
+                                />
 
                                 <label>Creator</label>
                                 <Field
@@ -174,16 +168,10 @@ const SubmitRun = () => {
                                     type="text"
                                     value={props.values.creator}
                                 />
-                                {props.errors.creator &&
-                                props.touched.creator ? (
-                                    <div className="field-error">
-                                        {props.errors.creator}
-                                    </div>
-                                ) : (
-                                    <div className="field-error-invisible">
-                                        {props.errors.creator}
-                                    </div>
-                                )}
+                                <FieldError
+                                    error={props.errors.creator}
+                                    touched={props.touched.creator}
+                                />
 
                                 <label>Rank</label>
                                 <Field
@@ -202,15 +190,10 @@ const SubmitRun = () => {
                                     type="number"
                                     value={props.values.rank}
                                 />
-                                {props.errors.rank && props.touched.rank ? (
-                                    <div className="field-error">
-                                        {props.errors.rank}
-                                    </div>
-                                ) : (
-                                    <div className="field-error-invisible">
-                                        {props.errors.rank}
-                                    </div>
-                                )}
+                                <FieldError
+                                    error={props.errors.rank}
+                                    touched={props.touched.rank}
+                                />
 
                                 <label>Ninja Level</label>
                                 <Slider
@@ -228,16 +211,10 @@ const SubmitRun = () => {
                                         props.setFieldValue("ninjaLevel", value)
                                     }
                                 />
-                                {props.errors.ninjaLevel &&
-                                props.touched.ninjaLevel ? (
-                                    <div className="field-error">
-                                        {props.errors.ninjaLevel}
-                                    </div>
-                                ) : (
-                                    <div className="field-error-invisible">
-                                        {props.errors.ninjaLevel}
-                                    </div>
-                                )}
+                                <FieldError
+                                    error={props.errors.ninjaLevel}
+                                    touched={props.touched.ninjaLevel}
+                                />
 
                                 <label>Faults</label>
                                 <Field
@@ -260,15 +237,10 @@ const SubmitRun = () => {
                                     }}
                                     value={props.values.faults}
                                 />
-                                {props.errors.faults && props.touched.faults ? (
-                                    <div className="field-error">
-                                        {props.errors.faults}
-                                    </div>
-                                ) : (
-                                    <div className="field-error-invisible">
-                                        {props.errors.faults}
-                                    </div>
-                                )}
+                                <FieldError
+                                    error={props.errors.faults}
+                                    touched={props.touched.faults}
+                                />
 
                                 <label>Time</label>
                                 <InputMask
@@ -283,15 +255,10 @@ const SubmitRun = () => {
                                     }}
                                     value={props.values.time}
                                 ></InputMask>
-                                {props.errors.time && props.touched.time ? (
-                                    <div className="field-error">
-                                        {props.errors.time}
-                                    </div>
-                                ) : (
-                                    <div className="field-error-invisible">
-                                        {props.errors.time}
-                                    </div>
-                                )}
+                                <FieldError
+                                    error={props.errors.time}
+                                    touched={props.touched.time}
+                                />
 
                                 <label>Length</label>
                                 <select
@@ -307,15 +274,10 @@ const SubmitRun = () => {
                                     <option value="Medium" label="Medium" />
                                     <option value="Long" label="Long" />
                                 </select>
-                                {props.errors.length && props.touched.length ? (
-                                    <div className="field-error">
-                                        {props.errors.length}
-                                    </div>
-                                ) : (
-                                    <div className="field-error-invisible">
-                                        {props.errors.length}
-                                    </div>
-                                )}
+                                <FieldError
+                                    error={props.errors.length}
+                                    touched={props.touched.length}
+                                />
 
                                 <label>Consistency</label>
                                 <select
@@ -342,16 +304,10 @@ const SubmitRun = () => {
                                         label="Extremely"
                                     />
                                 </select>
-                                {props.errors.consistency &&
-                                props.touched.consistency ? (
-                                    <div className="field-error">
-                                        {props.errors.consistency}
-                                    </div>
-                                ) : (
-                                    <div className="field-error-invisible">
-                                        {props.errors.consistency}
-                                    </div>
-                                )}
+                                <FieldError
+                                    error={props.errors.consistency}
+                                    touched={props.touched.consistency}
+                                />
 
                                 <label id="star-rating">
                                     How much did you like the track?
@@ -372,15 +328,10 @@ const SubmitRun = () => {
                                     </Ratings>
                                 </div>
                             </div>
-                            {props.errors.rating && props.touched.rating ? (
-                                <div className="field-error">
-                                    {props.errors.rating}
-                                </div>
-                            ) : (
-                                <div className="field-error-invisible">
-                                    {props.errors.rating}
-                                </div>
-                            )}
+                            <FieldError
+                                error={props.errors.rating}
+                                touched={props.touched.rating}
+                            />
 
                             <Field
                                 type="hidden"

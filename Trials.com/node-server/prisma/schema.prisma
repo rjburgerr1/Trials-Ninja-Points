@@ -20,11 +20,11 @@ model creators {
 }
 
 model profiles {
-  email              String   @db.VarChar(255)
+  email              String   @db.VarChar(320)
   id                 String   @id @db.VarChar(29)
   create_date        DateTime @default(now()) @db.DateTime(0)
-  country            String   @default("N/A") @db.VarChar(45)
-  state              String   @default("N/A") @db.VarChar(30)
+  country            String   @default("N/A") @db.VarChar(3)
+  region             String   @default("N/A") @db.VarChar(100)
   gamertag           String?  @db.VarChar(25)
   aliases            String?  @db.VarChar(150)
   username           String   @unique(map: "username_UNIQUE") @db.VarChar(25)
@@ -83,8 +83,8 @@ model profileshistory {
   email              String   @db.VarChar(255)
   id                 String   @db.VarChar(29)
   create_date        DateTime @default(now()) @db.DateTime(0)
-  country            String   @default("N/A") @db.VarChar(45)
-  state              String   @default("N/A") @db.VarChar(30)
+  country            String   @default("N/A") @db.VarChar(3)
+  region             String   @default("N/A") @db.VarChar(100)
   gamertag           String?  @db.VarChar(25)
   aliases            String?  @db.VarChar(150)
   username           String   @db.VarChar(25)

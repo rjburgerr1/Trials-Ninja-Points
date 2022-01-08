@@ -1,7 +1,17 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const AWS = require("aws-sdk");
 
 const router = (app) => {
+    app.get("/profile-banner", async (request, response) => {
+        try {
+            return response.status(200).send(result);
+        } catch (error) {
+            console.log(error);
+            return response.status(400).send("BAD REQUEST");
+        }
+    });
+
     app.put("/email", async (request, response) => {
         try {
             const result = await prisma.profiles.update({

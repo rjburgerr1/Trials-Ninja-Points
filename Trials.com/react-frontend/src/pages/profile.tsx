@@ -8,6 +8,7 @@ import { useAuth } from "../contexts/auth-context";
 import { Card } from "react-bootstrap";
 import { formatCreateDate } from "../components/format-dates";
 import { useLocation } from "react-router-dom";
+import background from "../images/defaultProfileBanner.png";
 
 interface LocationState {
     user: string;
@@ -28,6 +29,9 @@ const Profile: React.FC = (props: any) => {
     const [createDate, setCreateDate] = useState("");
     const [highestLevelPass, setHighestLevelPass] = useState(0);
     const [aliases, setAliases] = useState("");
+    const [bannerURL, setBannerURL] = useState(
+        "https://trials-np-images.s3.amazonaws.com//uploads/defaultProfileBanner.png"
+    );
 
     useEffect(() => {
         const getProfileInfo = async (user: string, currentUser: any) => {
@@ -68,7 +72,12 @@ const Profile: React.FC = (props: any) => {
         <div className="profile">
             <NavBar {...props} />
             <div className="profile-info">
-                <div className="profileicon">
+                <div
+                    className="profileicon"
+                    style={{
+                        backgroundImage: `url(${bannerURL})`,
+                    }}
+                >
                     <Avatar className="iconavatar">
                         <FontAwesomeIcon
                             icon={faUserNinja}

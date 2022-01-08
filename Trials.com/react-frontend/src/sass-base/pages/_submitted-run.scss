@@ -1,9 +1,7 @@
 @use "../abstracts/colors" as *;
 
 .submitted-run-page-container {
-    height: 100vh;
     background-color: $oxford-blue;
-    overflow: hidden;
 
     > .submitted-run-header {
     }

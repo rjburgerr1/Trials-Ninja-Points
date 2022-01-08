@@ -5,7 +5,7 @@
     -ms-overflow-style: none; // Hide Scrollbar Internet Explorer 10+
     border: 1px solid $mustard;
     height: 600px;
-    overflow-y: scroll; // Hide Scrollbar for table, with browser compatibility
+    overflow-y: scroll;
     scrollbar-width: none; // Hide Scrollbar Firefox
 
     &::-webkit-scrollbar {

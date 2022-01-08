@@ -64,7 +64,21 @@ export function AuthProvider({ children }: ChildrenProps) {
     };
 
     const updatePassword = (password: string) => {
-        return currentUser.updatePassword(password);
+        try {
+            return currentUser.updatePassword(password);
+        } catch (error: any) {
+            console.log(error);
+        }
+    };
+
+    const updateUsername = (username: string) => {
+        try {
+            return currentUser.updateProfile({
+                displayName: username,
+            });
+        } catch (error: any) {
+            console.log(error);
+        }
     };
 
     useEffect(() => {
@@ -77,6 +91,7 @@ export function AuthProvider({ children }: ChildrenProps) {
     }, []);
 
     const value = {
+        firebase,
         currentUser,
         login,
         googleLogin,
@@ -85,6 +100,7 @@ export function AuthProvider({ children }: ChildrenProps) {
         resetPassword,
         updateEmail,
         updatePassword,
+        updateUsername,
     };
 
     return (

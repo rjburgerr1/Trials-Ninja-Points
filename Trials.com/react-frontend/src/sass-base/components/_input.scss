@@ -1,5 +1,19 @@
 @use "../abstracts/colors" as *;
 
+@mixin text-input {
+    label {
+        margin-top: 1rem;
+    }
+
+    label.checkbox {
+        font-weight: normal;
+    }
+
+    button[type="submit"] {
+        margin-top: 1rem;
+    }
+}
+
 @mixin slider {
     [type="range"] {
         -webkit-appearance: none;

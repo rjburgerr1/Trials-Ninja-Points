@@ -1,7 +1,6 @@
 @use "../abstracts/colors" as *;
 
 .dashboard-container {
-    height: 100vh;
     background-color: $oxford-blue;
     > .dashboard-header {
     }

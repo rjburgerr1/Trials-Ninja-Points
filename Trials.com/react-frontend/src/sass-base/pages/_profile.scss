@@ -1,8 +1,12 @@
 @use "../abstracts/colors" as *;
 
+#updated-profile {
+    color: $mustard;
+    font-size: 3em;
+}
+
 .profile > .profile-info {
     background-color: $oxford-blue;
-    height: 100%;
 
     // Overline from Left Effect on Profile-Info Card
     .id-card {
@@ -57,7 +61,7 @@
     }
 
     > .profileicon {
-        background-image: url("../../images/defaultProfileBanner.png");
+        //background-image: url("../../images/defaultProfileBanner.png");
         background-position: center;
         border-bottom: 1px solid $cadet;
         display: flex;

@@ -1,9 +1,7 @@
 @use "../abstracts/colors" as *;
 
 .submit-run-container {
-    height: 100vh;
     background-color: $oxford-blue;
-    overflow: hidden;
 
     > .submit-run-header {
     }

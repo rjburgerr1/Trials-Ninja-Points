@@ -46,6 +46,12 @@ export default function NavBar() {
                     >
                         <Button>View Profile</Button>
                     </NavDropdown.Item>
+                    <NavDropdown.Item
+                        href="/update-profile"
+                        className="navbar-dropdown-item"
+                    >
+                        <Button>Update Profile</Button>
+                    </NavDropdown.Item>
                     <NavDropdown.Item className="navbar-dropdown-item">
                         <Logout />
                     </NavDropdown.Item>

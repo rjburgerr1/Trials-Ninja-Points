@@ -29,7 +29,7 @@ import SignInSignUp from "./pages/signin-signup";
 import SubmitRun from "./pages/submit-run";
 import SubmittedRun from "./pages/submitted-run";
 import LeaderboardPage from "./pages/leaderboard-page";
-import UpdateProfile from "./components/update-profile";
+import UpdateProfile from "./pages/update-profile";
 import "./sass-base/main.scss";
 import Track from "./pages/track";
 

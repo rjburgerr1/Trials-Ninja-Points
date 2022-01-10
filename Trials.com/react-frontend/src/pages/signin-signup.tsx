@@ -41,7 +41,7 @@ const SigninSignup: React.FC<SigninSignupProps> = () => {
                         </div>
 
                         <div className="overlay-panel overlay-right">
-                            <h1>Hi, gamer!</h1>
+                            <h1>Hi, Rider!</h1>
                             <p>
                                 Enter your personal details and start your ninja
                                 journey with us

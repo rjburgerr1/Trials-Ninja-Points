@@ -1,5 +1,5 @@
 import { Chat } from "../components/chat/chat";
-import { Leaderboard } from "../components/leaderboards/leaderboard";
+import { Leaderboard } from "../components/leaderboard/leaderboard";
 
 import NavBar from "../components/helpers/navbar";
 

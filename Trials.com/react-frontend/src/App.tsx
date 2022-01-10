@@ -8,19 +8,19 @@ import {
     setTracksTableBodyCell,
     setTracksTableHeaderInfoTip,
     tracksLBEffect,
-} from "./components/leaderboards/tracks-leaderboard-columns";
+} from "./components/leaderboard/tracks-leaderboard-columns";
 import {
     setRunsTableBodyCell,
     setRunsTableHeaderInfoTip,
     runsLBEffect,
     RunsLeaderboardColumns,
-} from "./components/leaderboards/runs-leaderboard-columns";
+} from "./components/leaderboard/runs-leaderboard-columns";
 import {
     MainLeaderboardColumns,
     setMainTableBodyCell,
     setMainTableHeaderInfoTip,
     mainLBEffect,
-} from "./components/leaderboards/main-leaderboard-columns";
+} from "./components/leaderboard/main-leaderboard-columns";
 import Loading from "./components/helpers/loading";
 import ResetPassword from "./components/auth/reset-password";
 import PrivateRoute from "./components/helpers/private-route";

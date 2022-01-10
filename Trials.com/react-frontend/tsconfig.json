@@ -7,7 +7,7 @@
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true,
+        "forceConsistentCasingInFileNames": false,
         "lib": ["dom", "dom.iterable", "esnext"],
         "allowJs": true,
         "allowSyntheticDefaultImports": true,

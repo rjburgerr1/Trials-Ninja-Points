@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 import axios from "axios";
-import Loading from "../helper-components/loading";
-import { ImageUpload } from "../helper-components/image-upload";
+import Loading from "../Helper-components/loading";
+import { ImageUpload } from "../Helper-components/image-upload";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import { useRef, useState, useEffect } from "react";
 import { useAuth } from "../../contexts/auth-context";

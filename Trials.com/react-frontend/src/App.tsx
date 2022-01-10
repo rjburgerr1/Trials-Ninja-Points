@@ -21,9 +21,9 @@ import {
     setMainTableHeaderInfoTip,
     mainLBEffect,
 } from "./components/leaderboards/main-leaderboard-columns";
-import Loading from "./components/helper-components/loading";
-import ResetPassword from "./components/authentication/reset-password";
-import PrivateRoute from "./components/helper-components/private-route";
+import Loading from "./components/Helper-components/loading";
+import ResetPassword from "./components/Authentication/reset-password";
+import PrivateRoute from "./components/Helper-components/private-route";
 import Profile from "./pages/profile";
 import Creators from "./pages/creators";
 import SignInSignUp from "./pages/signin-signup";

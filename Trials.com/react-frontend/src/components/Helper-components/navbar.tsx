@@ -2,7 +2,7 @@ import { Button } from "react-bootstrap";
 import { faUserNinja } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
-import Logout from "./Authentication/logout";
+import Logout from "../Authentication/logout";
 import { useLocation } from "react-router-dom";
 
 export default function NavBar() {

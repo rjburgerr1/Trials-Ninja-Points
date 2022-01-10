@@ -92,7 +92,7 @@ model profileshistory {
   highest_np_run     Int      @default(0) @map("highest-np-run")
   runs               Int      @default(0)
   total_ninja_points Int      @default(0) @map("total-ninja-points")
-  highest_level_pass Int      @default(0) @map("highest-level-pass")
+  highest_level_pass Float    @default(0.00) @map("highest-level-pass") @db.Float
   bio                String?  @db.VarChar(300)
   history_dates      DateTime @default(now()) @map("history-dates") @db.DateTime(0)
   index              Int      @id @default(autoincrement())

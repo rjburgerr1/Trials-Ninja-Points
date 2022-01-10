@@ -1,6 +1,6 @@
 import { Chat } from "../components/General-Chat/chat";
-import NavBar from "../components/navbar";
-import UpdateProfile from "../components/update-profile";
+import NavBar from "../components/Helper-components/navbar";
+import UpdateProfile from "../components/Profiles/update-profile";
 
 export default function UpdateProfiles(props: any) {
     return (

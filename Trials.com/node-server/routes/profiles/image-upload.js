@@ -1,7 +1,7 @@
 const router = (app) => {
     app.use(
         "/s3",
-        require("../node_modules/react-s3-uploader/s3router")({
+        require("react-s3-uploader/s3router")({
             bucket: "trials-np-images",
             region: "us-east-1", //optional
             signatureVersion: "v4", //optional (use for some amazon regions: frankfurt and others)

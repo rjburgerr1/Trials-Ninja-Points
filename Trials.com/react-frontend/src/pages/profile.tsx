@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../components/navbar";
+import NavBar from "../components/Helper-components/navbar";
 import { faUserNinja } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import Avatar from "@material-ui/core/Avatar";
 import { useAuth } from "../contexts/auth-context";
 import { Card } from "react-bootstrap";
-import { formatCreateDate } from "../components/format-dates";
+import { formatCreateDate } from "../components/Helper-components/format-dates";
 import { useLocation } from "react-router-dom";
 import background from "../images/defaultProfileBanner.png";
 

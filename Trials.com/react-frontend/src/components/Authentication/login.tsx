@@ -36,7 +36,7 @@ export default function LoginComponent() {
                 onSubmit={handleSubmit}
                 // method="POST"
             >
-                <h1>Sign In</h1>
+                <h1 id="sign-in-header">Sign In</h1>
 
                 <div className="social-container"></div>
                 <input

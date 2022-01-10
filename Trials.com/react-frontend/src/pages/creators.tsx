@@ -1,12 +1,12 @@
 import { Chat } from "../components/General-Chat/chat";
-import { Leaderboard } from "../components/leaderboards/leaderboard";
+import { Leaderboard } from "../components/Leaderboards/leaderboard";
 import {
     CreatorsLeaderboardColumns,
     setTableBodyCell,
     setTableHeaderInfoTip,
     creatorsLBEffect,
-} from "../components/leaderboards/creators-leaderboard-columns";
-import NavBar from "../components/navbar";
+} from "../components/Leaderboards/creators-leaderboard-columns";
+import NavBar from "../components/Helper-components/navbar";
 
 export default function Creators(props: any) {
     return (

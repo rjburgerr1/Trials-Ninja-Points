@@ -6,7 +6,7 @@ import {
     setTableHeaderInfoTip,
     creatorsLBEffect,
 } from "../components/leaderboards/creators-leaderboard-columns";
-import NavBar from "../components/Helper-components/navbar";
+import NavBar from "../components/helpers/navbar";
 
 export default function Creators(props: any) {
     return (

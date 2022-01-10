@@ -10,7 +10,7 @@ import {
 } from "../components/leaderboards/runs-leaderboard-columns";
 import axios from "axios";
 import img from "../images/Fusion Title Screen.jpg"; // This will be replaced with the tracks image later on
-import NavBar from "../components/Helper-components/navbar";
+import NavBar from "../components/helpers/navbar";
 import { useLocation } from "react-router-dom";
 
 interface LocationState {

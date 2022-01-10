@@ -65,6 +65,7 @@ const router = (app) => {
                           highest_level_pass: true,
                           highest_np_run: true,
                           total_ninja_points: true,
+                          runs: true,
                       },
                       distinct: ["username"],
                       orderBy: {
@@ -78,6 +79,7 @@ const router = (app) => {
                           highest_level_pass: true,
                           highest_np_run: true,
                           total_ninja_points: true,
+                          runs: true,
                       },
                       orderBy: {
                           total_ninja_points: "desc",

@@ -2,28 +2,35 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
 
 .signin-signup-outer {
-    background-image: url("../../images/Fusion\ Title\ Screen.jpg");
+    background: url("../../images/Fusion\ Title\ Screen.jpg") no-repeat center
+        center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    min-height: 100vh;
+    padding-top: 10rem;
+
     * {
         box-sizing: border-box;
     }
 
+    #sign-in-header,
+    #create-account-header {
+        color: $mustard;
+    }
+
     body {
-        /*background: #f6f5f7;*/
-        background-repeat: no-repeat;
-        background-size: cover;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
         font-family: "Montserrat", sans-serif;
-
-        margin: -20px 0 50px;
     }
 
     h1 {
         font-weight: bold;
         margin: 0;
-        color: $mustard;
     }
 
     h2 {
@@ -51,9 +58,9 @@
 
     button {
         border-radius: 20px;
-        border: 1px solid $cadet;
-        background-color: $cadet;
-        color: #ffffff;
+        border: 1px solid $black;
+        background-color: $mustard;
+        color: $black;
         font-size: 12px;
         font-weight: bold;
         padding: 12px 45px;
@@ -72,10 +79,17 @@
 
     button.ghost {
         background-color: transparent;
-        border-color: #ffffff;
+        border-color: $black;
+    }
+
+    button:hover {
+        background-color: lighten($mustard, 10%);
+
+        border-color: $black;
     }
 
     form {
+        background-color: $oxford-blue;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -86,12 +100,11 @@
     }
 
     input {
-        background-color: #eee;
+        background-color: $oxford-blue;
         border: none;
         padding: 12px 15px;
         margin: 8px 0;
         width: 100%;
-        border-radius: 4px;
     }
 
     .container {
@@ -100,21 +113,10 @@
         box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
             0 10px 10px rgba(0, 0, 0, 0.22);
         position: relative;
-
+        overflow: hidden;
+        width: 768px;
         max-width: 100%;
         min-height: 480px;
-        &.signin-signup {
-            width: 768px;
-        }
-    }
-
-    //Card
-    .card-body {
-        margin: 40px;
-    }
-
-    .card-footer {
-        background-color: none;
     }
 
     .form-container {
@@ -168,7 +170,7 @@
         left: 50%;
         width: 50%;
         height: 100%;
-
+        overflow: hidden;
         transition: transform 0.6s ease-in-out;
         z-index: 100;
     }
@@ -178,17 +180,17 @@
     }
 
     .overlay {
-        background: $cadet;
+        //background: #148600;
         background: -webkit-linear-gradient(
             to right,
-            $cadet,
-            lighten($cadet, 10%)
+            $mustard,
+            lighten($mustard, 20%)
         );
-        background: linear-gradient(to right, $cadet, lighten($cadet, 10%));
+        background: linear-gradient(to right, $mustard, lighten($mustard, 10%));
         background-repeat: no-repeat;
         background-size: cover;
         background-position: 0 0;
-        color: #ffffff;
+        color: $black;
         position: relative;
         left: -100%;
         height: 100%;
@@ -234,7 +236,7 @@
     }
 
     .social-container {
-        margin: 15px 0;
+        margin: 20px 0;
     }
 
     .social-container a {
@@ -269,18 +271,7 @@
     }
 
     footer a {
-        color: $cadet;
+        color: #3c97bf;
         text-decoration: none;
-    }
-
-    .alert {
-        position: absolute;
-        width: 100%;
-        float: top;
-        text-align: center;
-    }
-
-    .text-center {
-        color: $mustard;
     }
 }

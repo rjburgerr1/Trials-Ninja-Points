@@ -7,6 +7,7 @@ import { infoTip } from "../help-info/info-tips";
 import ReactCountryFlag from "react-country-flag";
 import { getMainLB } from "./leaderboard-requests";
 import { Link } from "react-router-dom";
+import { Fragment } from "react";
 
 export const MainLeaderboardColumns = [
     {
@@ -39,6 +40,13 @@ export const MainLeaderboardColumns = [
         Filter: SliderColumnFilter,
         filter: filterBetween,
         width: 180,
+    },
+    {
+        Header: "#Runs",
+        accessor: "runs",
+        Filter: SliderColumnFilter,
+        filter: filterBetween,
+        width: 120,
     },
     {
         Header: "Best Run (NP)",

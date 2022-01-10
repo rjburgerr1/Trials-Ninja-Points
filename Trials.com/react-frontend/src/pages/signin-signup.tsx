@@ -1,6 +1,6 @@
 import React from "react";
-import Login from "../components/Authentication/login";
-import Signup from "../components/Authentication/signup";
+import Login from "../components/auth/login";
+import Signup from "../components/auth/signup";
 
 interface SigninSignupProps {
     container: HTMLElement | null;

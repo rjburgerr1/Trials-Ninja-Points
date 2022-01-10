@@ -22,7 +22,7 @@ import {
     mainLBEffect,
 } from "./components/leaderboards/main-leaderboard-columns";
 import Loading from "./components/helpers/loading";
-import ResetPassword from "./components/Authentication/reset-password";
+import ResetPassword from "./components/auth/reset-password";
 import PrivateRoute from "./components/helpers/private-route";
 import Profile from "./pages/profile";
 import Creators from "./pages/creators";

@@ -8,7 +8,7 @@ import { useAuth } from "../../contexts/auth-context";
 import { Link } from "react-router-dom";
 import { Form, Formik } from "formik";
 import { Alert } from "react-bootstrap";
-import { CustomTextField, CustomTextArea } from "../Forms/text-inputs";
+import { CustomTextField, CustomTextArea } from "../data-entry/text-inputs";
 
 interface FormValues {
     email: string;

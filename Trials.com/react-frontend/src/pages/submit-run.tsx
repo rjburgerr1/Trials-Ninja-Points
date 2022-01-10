@@ -1,4 +1,4 @@
-import { Chat } from "../components/General-Chat/chat";
+import { Chat } from "../components/chat/chat";
 import NavBar from "../components/helpers/navbar";
 import SubmitRun from "../components/submit-run";
 

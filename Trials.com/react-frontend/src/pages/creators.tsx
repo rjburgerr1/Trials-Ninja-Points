@@ -1,4 +1,4 @@
-import { Chat } from "../components/General-Chat/chat";
+import { Chat } from "../components/chat/chat";
 import { Leaderboard } from "../components/leaderboards/leaderboard";
 import {
     CreatorsLeaderboardColumns,

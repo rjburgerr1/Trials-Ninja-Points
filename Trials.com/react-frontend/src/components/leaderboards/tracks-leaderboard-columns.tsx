@@ -2,7 +2,7 @@ import { faSortAmountDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { Cell, Column, Row } from "react-table";
-import { infoTip } from "../Help-info/info-tips";
+import { infoTip } from "../help-info/info-tips";
 import { getTracksLB } from "./leaderboard-requests";
 import { SelectColumnFilter } from "./filters/select-filter";
 import { filterBetween, SliderColumnFilter } from "./filters/slider-filter";

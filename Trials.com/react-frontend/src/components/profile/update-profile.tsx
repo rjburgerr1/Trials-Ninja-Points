@@ -1,14 +1,14 @@
 import * as Yup from "yup";
 import axios from "axios";
-import Loading from "../helper-components/loading";
-import { ImageUpload } from "../helper-components/image-upload";
+import Loading from "../helpers/loading";
+import { ImageUpload } from "../helpers/image-upload";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import { useRef, useState, useEffect } from "react";
 import { useAuth } from "../../contexts/auth-context";
 import { Link } from "react-router-dom";
 import { Form, Formik } from "formik";
 import { Alert } from "react-bootstrap";
-import { CustomTextField, CustomTextArea } from "../Forms/text-inputs";
+import { CustomTextField, CustomTextArea } from "../data-entry/text-inputs";
 
 interface FormValues {
     email: string;

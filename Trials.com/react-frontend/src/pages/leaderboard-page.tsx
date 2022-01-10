@@ -1,7 +1,7 @@
-import { Chat } from "../components/general-chat/chat";
-import { Leaderboard } from "../components/leaderboards/leaderboard";
+import { Chat } from "../components/chat/chat";
+import { Leaderboard } from "../components/leaderboard/leaderboard";
 
-import NavBar from "../components/helper-components/navbar";
+import NavBar from "../components/helpers/navbar";
 
 export default function LeaderboardPage(props: any) {
     return (

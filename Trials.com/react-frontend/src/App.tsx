@@ -2,27 +2,28 @@ import React, { useEffect, useState } from "react";
 import { AuthProvider } from "./contexts/auth-context";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { SocketProvider, socket } from "./contexts/socket-context";
-import {
-    setRunsTableBodyCell,
-    setRunsTableHeaderInfoTip,
-    runsLBEffect,
-    RunsLeaderboardColumns,
-} from "./components/Leaderboards/runs-leaderboard-columns";
+
 import {
     TracksLeaderboardColumns,
     setTracksTableBodyCell,
     setTracksTableHeaderInfoTip,
     tracksLBEffect,
-} from "./components/Leaderboards/tracks-leaderboard-columns";
+} from "./components/leaderboards/tracks-leaderboard-columns";
+import {
+    setRunsTableBodyCell,
+    setRunsTableHeaderInfoTip,
+    runsLBEffect,
+    RunsLeaderboardColumns,
+} from "./components/leaderboards/runs-leaderboard-columns";
 import {
     MainLeaderboardColumns,
     setMainTableBodyCell,
     setMainTableHeaderInfoTip,
     mainLBEffect,
-} from "./components/Leaderboards/main-leaderboard-columns";
-import Loading from "./components/Helper-components/loading";
-import ResetPassword from "./components/Authentication/reset-password";
-import PrivateRoute from "./components/Helper-components/private-route";
+} from "./components/leaderboards/main-leaderboard-columns";
+import Loading from "./components/helper-components/loading";
+import ResetPassword from "./components/authentication/reset-password";
+import PrivateRoute from "./components/helper-components/private-route";
 import Profile from "./pages/profile";
 import Creators from "./pages/creators";
 import SignInSignUp from "./pages/signin-signup";

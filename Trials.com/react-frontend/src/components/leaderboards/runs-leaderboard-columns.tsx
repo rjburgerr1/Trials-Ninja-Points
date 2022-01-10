@@ -1,8 +1,8 @@
 import { Cell, Column, Row } from "react-table";
 import { SelectColumnFilter } from "./filters/select-filter";
 import { SliderColumnFilter, filterBetween } from "./filters/slider-filter";
-import { infoTip } from "../Help-info/info-tips";
-import { formatCreateDate } from "../Helper-components/format-dates";
+import { infoTip } from "../help-info/info-tips";
+import { formatCreateDate } from "../helper-components/format-dates";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortAmountDown } from "@fortawesome/free-solid-svg-icons";
 import { getRunsLB } from "./leaderboard-requests";

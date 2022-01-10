@@ -1,5 +1,5 @@
-import { Chat } from "../components/General-Chat/chat";
-import NavBar from "../components/Helper-components/navbar";
+import { Chat } from "../components/general-chat/chat";
+import NavBar from "../components/helper-components/navbar";
 import SubmittedRun from "../components/submitted-run";
 
 export default function SubmittedRuns(props: any) {

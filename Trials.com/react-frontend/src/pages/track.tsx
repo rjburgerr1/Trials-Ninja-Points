@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { getRunsLB } from "../components/Leaderboards/leaderboard-requests";
+import { getRunsLB } from "../components/leaderboards/leaderboard-requests";
 import { TrackInfo } from "../components/track-info";
-import { Leaderboard } from "../components/Leaderboards/leaderboard";
+import { Leaderboard } from "../components/leaderboards/leaderboard";
 import {
     runsLBEffect,
     RunsLeaderboardColumns,
     setRunsTableBodyCell,
     setRunsTableHeaderInfoTip,
-} from "../components/Leaderboards/runs-leaderboard-columns";
+} from "../components/leaderboards/runs-leaderboard-columns";
 import axios from "axios";
 import img from "../images/Fusion Title Screen.jpg"; // This will be replaced with the tracks image later on
-import NavBar from "../components/Helper-components/navbar";
+import NavBar from "../components/helper-components/navbar";
 import { useLocation } from "react-router-dom";
 
 interface LocationState {

@@ -3,7 +3,7 @@ import { SelectColumnFilter } from "./filters/select-filter";
 import { Cell, Column, Row } from "react-table";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortAmountDown } from "@fortawesome/free-solid-svg-icons";
-import { infoTip } from "../Help-info/info-tips";
+import { infoTip } from "../help-info/info-tips";
 import ReactCountryFlag from "react-country-flag";
 import { getMainLB } from "./leaderboard-requests";
 import { Link } from "react-router-dom";

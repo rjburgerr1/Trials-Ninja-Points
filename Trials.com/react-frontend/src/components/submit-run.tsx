@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-import { CalcNP } from "./Helper-components/calculate-ninja-points";
+import { CalcNP } from "./helper-components/calculate-ninja-points";
 import { Form, Field, Formik } from "formik";
 import { useAuth } from "../contexts/auth-context";
 import { useNavigate } from "react-router-dom";
-import { FieldError } from "./Helper-components/field-error";
+import { FieldError } from "./helper-components/field-error";
 import * as Yup from "yup";
 import axios from "axios";
 import InputMask from "react-input-mask";

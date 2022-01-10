@@ -1,14 +1,14 @@
 import * as Yup from "yup";
 import axios from "axios";
-import Loading from "./loading";
-import { ImageUpload } from "./image-upload";
+import Loading from "../Helper-components/loading";
+import { ImageUpload } from "../Helper-components/image-upload";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import { useRef, useState, useEffect } from "react";
-import { useAuth } from "../contexts/auth-context";
+import { useAuth } from "../../contexts/auth-context";
 import { Link } from "react-router-dom";
 import { Form, Formik } from "formik";
 import { Alert } from "react-bootstrap";
-import { CustomTextField, CustomTextArea } from "./Forms/text-inputs";
+import { CustomTextField, CustomTextArea } from "../Forms/text-inputs";
 import { buttonGroupClasses } from "@mui/material";
 
 interface FormValues {

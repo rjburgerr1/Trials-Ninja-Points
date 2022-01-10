@@ -7,22 +7,22 @@ import {
     setRunsTableHeaderInfoTip,
     runsLBEffect,
     RunsLeaderboardColumns,
-} from "./components/leaderboards/runs-leaderboard-columns";
+} from "./components/Leaderboards/runs-leaderboard-columns";
 import {
     TracksLeaderboardColumns,
     setTracksTableBodyCell,
     setTracksTableHeaderInfoTip,
     tracksLBEffect,
-} from "./components/leaderboards/tracks-leaderboard-columns";
+} from "./components/Leaderboards/tracks-leaderboard-columns";
 import {
     MainLeaderboardColumns,
     setMainTableBodyCell,
     setMainTableHeaderInfoTip,
     mainLBEffect,
-} from "./components/leaderboards/main-leaderboard-columns";
-import Loading from "./components/loading";
+} from "./components/Leaderboards/main-leaderboard-columns";
+import Loading from "./components/Helper-components/loading";
 import ResetPassword from "./components/Authentication/reset-password";
-import PrivateRoute from "./components/private-route";
+import PrivateRoute from "./components/Helper-components/private-route";
 import Profile from "./pages/profile";
 import Creators from "./pages/creators";
 import SignInSignUp from "./pages/signin-signup";

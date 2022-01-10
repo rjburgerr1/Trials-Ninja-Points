@@ -51,33 +51,32 @@ const SignupComponent = () => {
         <div className="form-container sign-up-container">
             {error && <Alert variant="danger">{error}</Alert>}
 
-            <form
-                //action="http://localhost:3002/sign-up-complete"
-                onSubmit={handleSubmit}
-                // method="POST"
-            >
-                <h1>Create Account</h1>
+            <form onSubmit={handleSubmit}>
+                <h1 id="create-account-header">Create Account</h1>
 
                 <div className="social-container"></div>
-
+                <input
+                    type="text"
+                    placeholder="Username"
+                    name="username"
+                    ref={usernameRef}
+                    autoComplete="false"
+                />
                 <input
                     type="email"
                     placeholder="Email"
                     name="email"
                     ref={emailRef}
+                    autoComplete="false"
                 />
                 <input
                     type="password"
                     placeholder="Password"
                     name="password"
                     ref={passwordRef}
+                    autoComplete="new-password"
                 />
-                <input
-                    type="text"
-                    placeholder="Username"
-                    name="username"
-                    ref={usernameRef}
-                />
+
                 <button disabled={loading} type="submit">
                     Sign Up
                 </button>

@@ -2,16 +2,16 @@
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const ChatRoute = require("./routes/chat");
-const DataRoute = require("./routes/leaderboards");
+const DataRoute = require("./routes/leaderboards/leaderboards.js");
 const express = require("./node_modules/express");
-const ImageUpload = require("./routes/image-upload");
+const ImageUpload = require("./routes/profiles/image-upload");
 const SignupRoute = require("./routes/signup");
 const SubmitRoute = require("./routes/submit");
 const TrackRoute = require("./routes/track");
 const port = 3002;
-const ProfileRoute = require("./routes/profile");
+const ProfileRoute = require("./routes/profiles/profile");
 const synthesizeTrackData = require("./routes/synthesize-collective-opinions");
-const backupLeaderboard = require("./routes/backup-leaderboards");
+const backupLeaderboard = require("./routes/leaderboards/backup-leaderboards");
 
 const app = express();
 

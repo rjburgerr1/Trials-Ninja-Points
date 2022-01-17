@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { CalcNP } from "./helpers/calculate-ninja-points";
+import { CustomSelect } from "./data-entry/text-inputs";
 import { Form, Field, Formik } from "formik";
 import { useAuth } from "../contexts/auth-context";
 import { useNavigate } from "react-router-dom";
@@ -10,20 +11,19 @@ import axios from "axios";
 import InputMask from "react-input-mask";
 import moment from "moment";
 import Ratings from "react-ratings-declarative";
-
 import Slider from "@material-ui/core/Slider";
 
 // Shape of form values
 interface FormValues {
     trackName: string;
     creator: string;
-    faults: number;
+    faults: string;
     time: string;
     length: string;
     consistency: string;
-    ninjaLevel: number;
-    rating: number;
-    rank: number;
+    ninjaLevel: string;
+    rating: string;
+    rank: string;
     rider: string;
     ninjaPoints: number;
 }
@@ -38,13 +38,13 @@ const SubmitRun = () => {
     const initialValues: FormValues = {
         trackName: "",
         creator: "",
-        faults: NaN,
+        faults: "",
         time: "",
         length: "",
         consistency: "",
-        ninjaLevel: NaN,
-        rating: NaN,
-        rank: NaN,
+        ninjaLevel: "",
+        rating: "",
+        rank: "",
         rider: currentUser,
         ninjaPoints: 0, // NinjaPoints are not inside the form but these initial values act as props for this component so storing ninjapoints here feels right
     };
@@ -91,7 +91,6 @@ const SubmitRun = () => {
         const payload = {
             ...values,
             ninjaPoints: ninjaPoints,
-            rating: rating,
         }; // Construct the new payload, inject ninjaPoints that have just been calculated
 
         try {
@@ -113,7 +112,8 @@ const SubmitRun = () => {
         faults: Yup.number()
             .min(0, "Minimum number of faults is 0!")
             .max(499, "Maximum number of faults is 499!")
-            .integer("Faults are required, and must be integers"),
+            .integer("Faults are required, and must be integers")
+            .required("Required"),
 
         time: Yup.string()
             .required("Time cannot be empty")
@@ -144,7 +144,13 @@ const SubmitRun = () => {
                             <div className="form-inline-group">
                                 <Field id="rider" name="rider" type="hidden" />
 
-                                <label>Track Name</label>
+                                <label className="form-label">
+                                    Track Name
+                                    <FieldError
+                                        error={props.errors.trackName}
+                                        touched={props.touched.trackName}
+                                    />
+                                </label>
                                 <Field
                                     autoFocus
                                     id="trackName"
@@ -154,12 +160,13 @@ const SubmitRun = () => {
                                     type="text"
                                     value={props.values.trackName}
                                 />
-                                <FieldError
-                                    error={props.errors.trackName}
-                                    touched={props.touched.trackName}
-                                />
-
-                                <label>Creator</label>
+                                <label className="form-label">
+                                    Creator
+                                    <FieldError
+                                        error={props.errors.creator}
+                                        touched={props.touched.creator}
+                                    />
+                                </label>
                                 <Field
                                     id="creator"
                                     name="creator"
@@ -168,12 +175,13 @@ const SubmitRun = () => {
                                     type="text"
                                     value={props.values.creator}
                                 />
-                                <FieldError
-                                    error={props.errors.creator}
-                                    touched={props.touched.creator}
-                                />
-
-                                <label>Rank</label>
+                                <label className="form-label">
+                                    Rank
+                                    <FieldError
+                                        error={props.errors.rank}
+                                        touched={props.touched.rank}
+                                    />
+                                </label>
                                 <Field
                                     id="rank"
                                     name="rank"
@@ -190,18 +198,19 @@ const SubmitRun = () => {
                                     type="number"
                                     value={props.values.rank}
                                 />
-                                <FieldError
-                                    error={props.errors.rank}
-                                    touched={props.touched.rank}
-                                />
-
-                                <label>Ninja Level</label>
+                                <label className="form-label">
+                                    Ninja Level{" "}
+                                    <FieldError
+                                        error={props.errors.ninjaLevel}
+                                        touched={props.touched.ninjaLevel}
+                                    />
+                                </label>
                                 <Slider
                                     id="slider"
                                     defaultValue={0.5}
                                     getAriaValueText={valuetext}
                                     aria-labelledby="discrete-slider-custom"
-                                    step={0.5}
+                                    step={0.1}
                                     min={0.5}
                                     max={9.5}
                                     valueLabelDisplay="auto"
@@ -211,12 +220,13 @@ const SubmitRun = () => {
                                         props.setFieldValue("ninjaLevel", value)
                                     }
                                 />
-                                <FieldError
-                                    error={props.errors.ninjaLevel}
-                                    touched={props.touched.ninjaLevel}
-                                />
-
-                                <label>Faults</label>
+                                <label className="form-label">
+                                    Faults{" "}
+                                    <FieldError
+                                        error={props.errors.faults}
+                                        touched={props.touched.faults}
+                                    />
+                                </label>
                                 <Field
                                     placeholder="241"
                                     id="faults"
@@ -237,13 +247,15 @@ const SubmitRun = () => {
                                     }}
                                     value={props.values.faults}
                                 />
-                                <FieldError
-                                    error={props.errors.faults}
-                                    touched={props.touched.faults}
-                                />
-
-                                <label>Time</label>
+                                <label className="form-label">
+                                    Time
+                                    <FieldError
+                                        error={props.errors.time}
+                                        touched={props.touched.time}
+                                    />
+                                </label>
                                 <InputMask
+                                    id="time-mask-field"
                                     placeholder="12:33.677"
                                     mask="99:99.999"
                                     name="time"
@@ -255,15 +267,18 @@ const SubmitRun = () => {
                                     }}
                                     value={props.values.time}
                                 ></InputMask>
-                                <FieldError
-                                    error={props.errors.time}
-                                    touched={props.touched.time}
-                                />
-
-                                <label>Length</label>
-                                <select
+                                <label className="form-label">
+                                    Length
+                                    <FieldError
+                                        error={props.errors.length}
+                                        touched={props.touched.length}
+                                    />
+                                </label>
+                                <CustomSelect
+                                    id="length-field"
+                                    className="formik-field"
                                     name="length"
-                                    onChange={props.handleChange}
+                                    autoComplete="off"
                                     value={props.values.length}
                                 >
                                     <option
@@ -273,15 +288,20 @@ const SubmitRun = () => {
                                     <option value="Short" label="Short" />
                                     <option value="Medium" label="Medium" />
                                     <option value="Long" label="Long" />
-                                </select>
-                                <FieldError
-                                    error={props.errors.length}
-                                    touched={props.touched.length}
-                                />
+                                </CustomSelect>
 
-                                <label>Consistency</label>
-                                <select
+                                <label className="form-label">
+                                    Consistency
+                                    <FieldError
+                                        error={props.errors.consistency}
+                                        touched={props.touched.consistency}
+                                    />
+                                </label>
+                                <CustomSelect
+                                    id="consistency-field"
+                                    className="formik-field"
                                     name="consistency"
+                                    autoComplete="off"
                                     onChange={props.handleChange}
                                     value={props.values.consistency}
                                 >
@@ -303,14 +323,14 @@ const SubmitRun = () => {
                                         value="Extremely"
                                         label="Extremely"
                                     />
-                                </select>
-                                <FieldError
-                                    error={props.errors.consistency}
-                                    touched={props.touched.consistency}
-                                />
+                                </CustomSelect>
 
-                                <label id="star-rating">
+                                <label className="form-label" id="star-rating">
                                     How much did you like the track?
+                                    <FieldError
+                                        error={props.errors.rating}
+                                        touched={props.touched.rating}
+                                    />
                                 </label>
                                 <div id="star-rating">
                                     <Ratings
@@ -318,7 +338,13 @@ const SubmitRun = () => {
                                         widgetRatedColors="yellow"
                                         widgetHoverColors="green"
                                         widgetEmptyColors="red"
-                                        changeRating={setRating}
+                                        changeRating={(event: any) => {
+                                            props.setFieldValue(
+                                                "rating",
+                                                event
+                                            );
+                                            setRating(event);
+                                        }}
                                     >
                                         <Ratings.Widget />
                                         <Ratings.Widget />
@@ -328,9 +354,12 @@ const SubmitRun = () => {
                                     </Ratings>
                                 </div>
                             </div>
-                            <FieldError
-                                error={props.errors.rating}
-                                touched={props.touched.rating}
+
+                            <Field
+                                type="hidden"
+                                name="rating"
+                                id="rating-field"
+                                value={rating}
                             />
 
                             <Field
@@ -341,7 +370,7 @@ const SubmitRun = () => {
                             />
 
                             <div className="submit-button">
-                                <button id="form-button" type="submit">
+                                <button className="form-button" type="submit">
                                     Submit
                                 </button>
                             </div>

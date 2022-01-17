@@ -56,11 +56,17 @@ export const CustomSelect = ({ label, ...props }: any) => {
     const [field, meta] = useField(props);
     return (
         <>
-            <StyledLabel htmlFor={props.id || props.name}>{label}</StyledLabel>
-            <StyledSelect {...field} {...props} />
-            {meta.touched && meta.error ? (
+            <label
+                className="form-label"
+                id={props.id}
+                htmlFor={props.id || props.name}
+            >
+                {label}
+            </label>
+            <select {...field} {...props} />
+            {/* {meta.touched && meta.error ? (
                 <StyledErrorMessage>{meta.error}</StyledErrorMessage>
-            ) : null}
+            ) : null} */}
         </>
     );
 };

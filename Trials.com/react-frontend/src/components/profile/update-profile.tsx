@@ -331,7 +331,7 @@ export default function UpdateProfile() {
                             <div className="submit-button">
                                 <button
                                     disabled={loading}
-                                    id="form-button"
+                                    className="form-button"
                                     type="submit"
                                 >
                                     Update Profile

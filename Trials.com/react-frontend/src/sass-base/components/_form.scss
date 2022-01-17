@@ -3,17 +3,19 @@
 form {
     background-color: $oxford-blue;
 
+    .form-label {
+        display: flex;
+        justify-content: space-between;
+    }
+
     .field-error {
         color: $error;
 
+        transition: opacity 0.5s ease-in;
         -webkit-transition: opacity 0.5s ease-in;
         -moz-transition: opacity 0.5s ease-in;
         -o-transition: opacity 0.5s ease-in;
         -ms-transition: opacity 0.5s ease-in;
-    }
-
-    .field-error-invisible {
-        opacity: 0;
     }
 
     /* Form
@@ -41,9 +43,9 @@ form {
         background-color: $oxford-blue;
         color: $white;
         border-radius: 10px;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
+        // -webkit-appearance: none;
+        // -moz-appearance: none;
+        // appearance: none;
         margin-bottom: 1.5em;
     }
 
@@ -88,6 +90,36 @@ form {
     #country-select,
     #region-select {
         width: 12rem;
+    }
+
+    input,
+    select {
+        text-align: center;
+    }
+
+    .MuiSlider-thumbColorPrimary,
+    .MuiSlider-track,
+    .MuiSlider-colorPrimary {
+        color: $oxford-blue-accent;
+    }
+    .MuiSlider-markLabel {
+        color: $cadet;
+    }
+    .MuiSlider-markLabelActive {
+        color: $mustard;
+        & * {
+            background-color: $mustard;
+        }
+    }
+
+    .MuiSlider-valueLabel {
+        color: $mustard;
+        & * {
+            font-size: 15px;
+            font-weight: bold;
+            background-color: $mustard;
+            color: black;
+        }
     }
 
     textarea {
@@ -301,85 +333,10 @@ form {
 .submit-button {
     display: flex;
     justify-content: center;
-    #form-button {
+    .form-button {
         background-color: $mustard;
         &:hover {
             background-color: lighten($mustard, 10%);
         }
-    }
-}
-
-#submit-run-form {
-    .MuiSlider-thumbColorPrimary,
-    .MuiSlider-track,
-    .MuiSlider-colorPrimary {
-        color: $oxford-blue-accent;
-    }
-    .MuiSlider-markLabel {
-        color: $cadet;
-    }
-    .MuiSlider-markLabelActive {
-        color: $mustard;
-        & * {
-            background-color: $mustard;
-        }
-    }
-
-    .MuiSlider-valueLabel {
-        color: $mustard;
-        & * {
-            font-size: 15px;
-            font-weight: bold;
-            background-color: $mustard;
-            color: black;
-        }
-    }
-
-    input::placeholder {
-        opacity: 40%;
-        color: white;
-        text-align: center;
-    }
-    form {
-        margin-bottom: 150px;
-        height: 60%;
-    }
-
-    input,
-    select {
-        height: 25px;
-        border-radius: 10px;
-        width: 100%;
-        color: $mustard;
-        background-color: $cadet;
-        text-align: center;
-    }
-    input:hover,
-    select:hover {
-        background-color: lighten($cadet, 10%);
-    }
-    input:focus,
-    select:focus {
-        background-color: $oxford-blue;
-        outline-width: 0;
-        box-shadow: 0 0 0 2px lighten($oxford-blue-accent, 20%);
-    }
-
-    .form-inline-group {
-        display: grid;
-        grid-template-columns: max-content max-content 25em;
-        column-gap: 3em;
-        row-gap: 25px;
-        margin-bottom: 10px;
-        align-content: start;
-    }
-
-    #star-rating {
-        display: flex;
-        justify-content: center;
-    }
-
-    input[type="number"]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
     }
 }

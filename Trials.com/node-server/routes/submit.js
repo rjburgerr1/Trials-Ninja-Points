@@ -109,6 +109,35 @@ const router = (app) => {
                 },
             });
 
+            await prisma.creators.update({
+                where: {
+                    creator: run.creator,
+                },
+                data: {
+                    nTracks: {
+                        increment: 1,
+                    },
+                    total_track_rating: {
+                        increment: run.rating,
+                    },
+                    total_track_consistency: {
+                        increment: consistency,
+                    },
+                    total_track_length: {
+                        increment: length,
+                    },
+                    total_track_faults: {
+                        increment: run.faults,
+                    },
+                    total_track_ninja_level: {
+                        increment: run.ninjaLevel,
+                    },
+                    total_track_ninja_points: {
+                        increment: run.ninjaPoints,
+                    },
+                },
+            });
+
             synthesizeData(run);
 
             return response.sendStatus(200);

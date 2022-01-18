@@ -24,68 +24,181 @@ const synthesizeData = async (newRun) => {
     });
 
     // Update Rating
-    mergeNewRunData(
-        newRun,
-        currentTrackData,
+    averageNewRunData(
+        currentTrackData.nRuns,
         "rating",
-        currentTrackData.total_rating
-    );
-    // Update Consistency
-    mergeNewRunData(
-        newRun,
-        currentTrackData,
-        "consistency",
-        currentTrackData.total_consistency
-    );
-    // Update Length
-    mergeNewRunData(
-        newRun,
-        currentTrackData,
-        "length",
-        currentTrackData.total_length
-    );
-    // Update Ninja Level
-    mergeNewRunData(
-        newRun,
-        currentTrackData,
-        "ninja_level",
-        currentTrackData.total_ninja_level
-    );
-    // Update Average Faults
-    mergeNewRunData(
-        newRun,
-        currentTrackData,
-        "average_faults",
-        currentTrackData.total_faults
-    );
-    // Update Average NP
-    mergeNewRunData(
-        newRun,
-        currentTrackData,
-        "average_np",
-        currentTrackData.total_np
-    );
-};
-
-const mergeNewRunData = async (
-    newRun,
-    currentTrackData,
-    fieldToUpdate,
-    fieldToUpdatesTotal
-) => {
-    let updatedValue =
-        Number(fieldToUpdatesTotal) / Number(currentTrackData.nRuns);
-
-    let updatedObj = {};
-    updatedObj[fieldToUpdate] = updatedValue;
-
-    await prisma.tracks.update({
-        where: {
+        currentTrackData.total_rating,
+        prisma.tracks,
+        {
             track_name_creator: {
                 track_name: newRun.trackName,
                 creator: newRun.creator,
             },
+        }
+    );
+    // Update Consistency
+    averageNewRunData(
+        currentTrackData.nRuns,
+        "consistency",
+        currentTrackData.total_consistency,
+        prisma.tracks,
+        {
+            track_name_creator: {
+                track_name: newRun.trackName,
+                creator: newRun.creator,
+            },
+        }
+    );
+    // Update Length
+    averageNewRunData(
+        currentTrackData.nRuns,
+        "length",
+        currentTrackData.total_length,
+        prisma.tracks,
+        {
+            track_name_creator: {
+                track_name: newRun.trackName,
+                creator: newRun.creator,
+            },
+        }
+    );
+    // Update Ninja Level
+    averageNewRunData(
+        currentTrackData.nRuns,
+        "ninja_level",
+        currentTrackData.total_ninja_level,
+        prisma.tracks,
+        {
+            track_name_creator: {
+                track_name: newRun.trackName,
+                creator: newRun.creator,
+            },
+        }
+    );
+    // Update Average Faults
+    averageNewRunData(
+        currentTrackData.nRuns,
+        "average_faults",
+        currentTrackData.total_faults,
+        prisma.tracks,
+        {
+            track_name_creator: {
+                track_name: newRun.trackName,
+                creator: newRun.creator,
+            },
+        }
+    );
+    // Update Average NP
+    averageNewRunData(
+        currentTrackData.nRuns,
+        "average_np",
+        currentTrackData.total_np,
+        prisma.tracks,
+        {
+            track_name_creator: {
+                track_name: newRun.trackName,
+                creator: newRun.creator,
+            },
+        }
+    );
+
+    let currentCreatorData = await prisma.creators.findFirst({
+        where: {
+            creator: newRun.creator,
         },
+        select: {
+            average_track_ninja_level: true,
+            average_track_length: true,
+            average_track_faults: true,
+            average_track_rating: true,
+            average_track_consistency: true,
+            average_track_ninja_points: true,
+            total_track_ninja_level: true,
+            total_track_length: true,
+            total_track_faults: true,
+            total_track_rating: true,
+            total_track_consistency: true,
+            total_track_ninja_points: true,
+            nTracks: true,
+        },
+    });
+
+    // Update Rating
+    averageNewRunData(
+        currentCreatorData.nTracks,
+        "average_track_rating",
+        currentCreatorData.total_track_rating,
+        prisma.creators,
+        {
+            creator: newRun.creator,
+        }
+    );
+    // Update Consistency
+    averageNewRunData(
+        currentCreatorData.nTracks,
+        "average_track_length",
+        currentCreatorData.total_track_length,
+        prisma.creators,
+        {
+            creator: newRun.creator,
+        }
+    );
+    // Update Length
+    averageNewRunData(
+        currentCreatorData.nTracks,
+        "average_track_consistency",
+        currentCreatorData.total_track_consistency,
+        prisma.creators,
+        {
+            creator: newRun.creator,
+        }
+    );
+    // Update Ninja Level
+    averageNewRunData(
+        currentCreatorData.nTracks,
+        "average_track_ninja_level",
+        currentCreatorData.total_track_ninja_level,
+        prisma.creators,
+        {
+            creator: newRun.creator,
+        }
+    );
+    // Update Average Faults
+    averageNewRunData(
+        currentCreatorData.nTracks,
+        "average_track_ninja_points",
+        currentCreatorData.total_track_ninja_points,
+        prisma.creators,
+        {
+            creator: newRun.creator,
+        }
+    );
+    // Update Average NP
+    averageNewRunData(
+        currentCreatorData.nTracks,
+        "average_track_faults",
+        currentCreatorData.total_track_faults,
+        prisma.creators,
+        {
+            creator: newRun.creator,
+        }
+    );
+};
+
+const averageNewRunData = async (
+    nField,
+    fieldToUpdate,
+    fieldToUpdatesTotal,
+    tableToUpdate,
+    whereCondition
+) => {
+    let updatedValue = Number(fieldToUpdatesTotal) / Number(nField);
+
+    let updatedObj = {};
+    updatedObj[fieldToUpdate] = updatedValue;
+
+    await tableToUpdate.update({
+        where: whereCondition,
         data: updatedObj,
     });
 };

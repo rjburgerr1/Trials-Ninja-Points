@@ -2,7 +2,7 @@ import { faSortAmountDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { Cell, Column, Row } from "react-table";
-import { infoTip } from "../help-info/info-tips";
+import { InfoTip } from "../help-info/info-tips";
 import { getTracksLB } from "./leaderboard-requests";
 import { SelectColumnFilter } from "./filters/select-filter";
 import { filterBetween, SliderColumnFilter } from "./filters/slider-filter";
@@ -77,17 +77,17 @@ export const setTracksTableBodyCell = (cell: Cell, row: Row) => {
 
 export const setTracksTableHeaderInfoTip = (column: Column) => {
     if (column.Header === "Ninja Points (Avg)") {
-        return infoTip(
+        return InfoTip(
             "average-np-run",
             "This column lists the ninja point averages of all runs on the given track"
         );
     } else if (column.Header === "Faults (Avg)") {
-        return infoTip(
+        return InfoTip(
             "average-faults",
             "This column lists the average faults for a run on the given track"
         );
     } else if (column.Header === "Consistency") {
-        return infoTip(
+        return InfoTip(
             "consistency",
             "This describes how consistent a track is, in other words how 'luck'-based it is"
         );

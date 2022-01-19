@@ -16,7 +16,7 @@ export default function UpdateProfiles(props: any) {
                     <UpdateProfile />
                 </div>
 
-                <div className="submit-run-space-element"></div>
+                <div className="space-element"></div>
             </div>
         </div>
     );

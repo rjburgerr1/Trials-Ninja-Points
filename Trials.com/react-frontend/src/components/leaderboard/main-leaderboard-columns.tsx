@@ -3,7 +3,7 @@ import { SelectColumnFilter } from "./filters/select-filter";
 import { Cell, Column, Row } from "react-table";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortAmountDown } from "@fortawesome/free-solid-svg-icons";
-import { infoTip } from "../help-info/info-tips";
+import { InfoTip } from "../help-info/info-tips";
 import ReactCountryFlag from "react-country-flag";
 import { getMainLB } from "./leaderboard-requests";
 import { Link } from "react-router-dom";
@@ -92,22 +92,22 @@ export const setMainTableBodyCell = (cell: Cell, row: Row) => {
 
 export const setMainTableHeaderInfoTip = (column: Column) => {
     if (column.Header === "Ninja Points (100)") {
-        return infoTip(
+        return InfoTip(
             "total-np",
             "Total Ninja Points summed from the rider's top 100 runs"
         );
     } else if (column.Header === "Origin") {
-        return infoTip(
+        return InfoTip(
             "origin",
             "Country from which the rider is originally from"
         );
     } else if (column.Header === "Best Run (NP)") {
-        return infoTip(
+        return InfoTip(
             "best-run",
             "Ninja points for the rider's best run they have submitted"
         );
     } else if (column.Header === "Highest Level Pass") {
-        return infoTip("highest-level", "The rider's highest level passed");
+        return InfoTip("highest-level", "The rider's highest level passed");
     } else {
         return (
             <span className="invisible-element">

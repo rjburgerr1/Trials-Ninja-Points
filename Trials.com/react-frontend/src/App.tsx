@@ -4,6 +4,12 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { SocketProvider, socket } from "./contexts/socket-context";
 
 import {
+    NinjaLevelHelp,
+    LengthHelp,
+    ConsistencyHelp,
+} from "./components/help-info/run-submission-help";
+
+import {
     TracksLeaderboardColumns,
     setTracksTableBodyCell,
     setTracksTableHeaderInfoTip,
@@ -49,20 +55,13 @@ function App(props: any) {
                 <SocketProvider.Provider value={socket}>
                     <Routes>
                         <Route
-                            path="/"
-                            element={
-                                <PrivateRoute>
-                                    <LeaderboardPage
-                                        columns={MainLeaderboardColumns}
-                                        effect={mainLBEffect}
-                                        sortBy="total_ninja_points"
-                                        setTableBodyCell={setMainTableBodyCell}
-                                        setTableHeaderInfoTip={
-                                            setMainTableHeaderInfoTip
-                                        }
-                                    />
-                                </PrivateRoute>
-                            }
+                            path="/signin"
+                            element={<SignInSignUp container={null} />}
+                        />
+
+                        <Route
+                            path="/forgot-password"
+                            element={<ResetPassword />}
                         />
                         <Route
                             path="/tracks"
@@ -78,15 +77,7 @@ function App(props: any) {
                                 />
                             }
                         />
-                        <Route
-                            path="/signin"
-                            element={<SignInSignUp container={null} />}
-                        />
 
-                        <Route
-                            path="/forgot-password"
-                            element={<ResetPassword />}
-                        />
                         <Route
                             path="/runs"
                             element={
@@ -105,6 +96,22 @@ function App(props: any) {
                         <Route path="/creators" element={<Creators />} />
 
                         <Route
+                            path="/"
+                            element={
+                                <PrivateRoute>
+                                    <LeaderboardPage
+                                        columns={MainLeaderboardColumns}
+                                        effect={mainLBEffect}
+                                        sortBy="total_ninja_points"
+                                        setTableBodyCell={setMainTableBodyCell}
+                                        setTableHeaderInfoTip={
+                                            setMainTableHeaderInfoTip
+                                        }
+                                    />
+                                </PrivateRoute>
+                            }
+                        />
+                        <Route
                             path="/track/track=:name&creatorName=:creator"
                             element={
                                 <PrivateRoute>
@@ -112,6 +119,7 @@ function App(props: any) {
                                 </PrivateRoute>
                             }
                         />
+
                         <Route
                             path="/update-profile"
                             element={
@@ -120,14 +128,7 @@ function App(props: any) {
                                 </PrivateRoute>
                             }
                         />
-                        <Route
-                            path="/submit-run"
-                            element={
-                                <PrivateRoute>
-                                    <SubmitRun />
-                                </PrivateRoute>
-                            }
-                        />
+
                         <Route
                             path="/submitted-run"
                             element={
@@ -152,6 +153,43 @@ function App(props: any) {
                                 </PrivateRoute>
                             }
                         />
+                        {/* This is an example of nested routes in react router v6.0. 
+                                You provide an index (default element) if no child routes are matched
+                         */}
+                        <Route path="/submit-run">
+                            <Route
+                                index={true}
+                                element={
+                                    <PrivateRoute>
+                                        <SubmitRun />
+                                    </PrivateRoute>
+                                }
+                            />
+                            <Route
+                                path="ninja-level-help"
+                                element={
+                                    <PrivateRoute>
+                                        <SubmitRun help={<NinjaLevelHelp />} />
+                                    </PrivateRoute>
+                                }
+                            />
+                            <Route
+                                path="length-help"
+                                element={
+                                    <PrivateRoute>
+                                        <SubmitRun help={<LengthHelp />} />
+                                    </PrivateRoute>
+                                }
+                            />
+                            <Route
+                                path="consistency-help"
+                                element={
+                                    <PrivateRoute>
+                                        <SubmitRun help={<ConsistencyHelp />} />
+                                    </PrivateRoute>
+                                }
+                            />
+                        </Route>
                     </Routes>
                 </SocketProvider.Provider>
             </AuthProvider>

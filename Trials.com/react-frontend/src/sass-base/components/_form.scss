@@ -3,6 +3,14 @@
 form {
     background-color: $oxford-blue;
 
+    .form-link {
+        color: $mustard;
+
+        &:hover {
+            color: $mustard-accent;
+        }
+    }
+
     .form-label {
         display: flex;
         justify-content: space-between;
@@ -17,9 +25,6 @@ form {
         -o-transition: opacity 0.5s ease-in;
         -ms-transition: opacity 0.5s ease-in;
     }
-
-    /* Form
-––––––––––––––––––––––––––––––––– */
 
     #region-select:disabled {
         color: $disabled;

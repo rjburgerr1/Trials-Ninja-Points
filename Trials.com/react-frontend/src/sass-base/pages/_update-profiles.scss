@@ -1,2 +1,9 @@
 @use "../abstracts/colors" as *;
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+
+.space-element {
+    width: 35em;
+    margin-left: auto;
+    margin-right: 1%;
+    visibility: hidden;
+}

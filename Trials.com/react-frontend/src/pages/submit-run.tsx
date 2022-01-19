@@ -16,7 +16,7 @@ export default function SubmitRuns(props: any) {
                     <SubmitRun />
                 </div>
 
-                <div className="submit-run-space-element"></div>
+                <div className="submit-run-help-element">{props.help}</div>
             </div>
         </div>
     );

@@ -2,7 +2,7 @@ import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactTooltip from "react-tooltip";
 
-export const infoTip = (fieldName: string, infoMessage: string) => {
+export const InfoTip = (fieldName: string, infoMessage: string) => {
     return (
         <span className="table-header-info-tip">
             <FontAwesomeIcon

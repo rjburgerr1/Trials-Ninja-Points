@@ -1,7 +1,7 @@
 import { faSortAmountDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Cell, Column, Row } from "react-table";
-import { infoTip } from "../help-info/info-tips";
+import { InfoTip } from "../help-info/info-tips";
 import { getCreatorsLB } from "./leaderboard-requests";
 import { SelectColumnFilter } from "./filters/select-filter";
 import { filterBetween, SliderColumnFilter } from "./filters/slider-filter";
@@ -60,32 +60,32 @@ export const setTableBodyCell = (cell: Cell, row: Row) => {
 
 export const setTableHeaderInfoTip = (column: Column) => {
     if (column.Header === "Ninja Points (Avg)") {
-        return infoTip(
+        return InfoTip(
             "average-track-np",
             "This column lists the average amount of ninja points a rider gets across all tracks made by a creator"
         );
     } else if (column.Header === "Faults (Avg)") {
-        return infoTip(
+        return InfoTip(
             "average-track-faults",
             "This column lists the average amount of faults across all tracks made by a creator"
         );
     } else if (column.Header === "Length (Avg)") {
-        return infoTip(
+        return InfoTip(
             "average-track-length",
             "This column lists the average length across all tracks made by a creator"
         );
     } else if (column.Header === "Consistency (Avg)") {
-        return infoTip(
+        return InfoTip(
             "average-track-consistency",
             "This column lists the average consistency across all tracks made by a creator"
         );
     } else if (column.Header === "Ninja Level (Avg)") {
-        return infoTip(
+        return InfoTip(
             "average-track-ninja-level",
             "This column lists the average ninja level across all tracks made by a creator"
         );
     } else if (column.Header === "Rating (Avg)") {
-        return infoTip(
+        return InfoTip(
             "average-track-rating",
             "This column lists the average rating across all tracks made by a creator"
         );

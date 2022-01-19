@@ -1,7 +1,7 @@
 import { Cell, Column, Row } from "react-table";
 import { SelectColumnFilter } from "./filters/select-filter";
 import { SliderColumnFilter, filterBetween } from "./filters/slider-filter";
-import { infoTip } from "../help-info/info-tips";
+import { InfoTip } from "../help-info/info-tips";
 import { formatCreateDate } from "../helpers/format-dates";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortAmountDown } from "@fortawesome/free-solid-svg-icons";
@@ -124,7 +124,7 @@ export const setRunsTableBodyCell = (cell: Cell, row: Row) => {
 
 export const setRunsTableHeaderInfoTip = (column: Column) => {
     if (column.Header === "Consistency") {
-        return infoTip(
+        return InfoTip(
             "consistency",
             "This describes how consistent a track is, in other words how 'luck'-based it is"
         );

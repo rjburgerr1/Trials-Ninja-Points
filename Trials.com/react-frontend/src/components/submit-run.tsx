@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import { CalcNP } from "./helpers/calculate-ninja-points";
 import { CustomSelect } from "./data-entry/text-inputs";
 import { Form, Field, Formik } from "formik";
+
 import { useAuth } from "../contexts/auth-context";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FieldError } from "./helpers/field-error";
+import { InfoTip } from "./help-info/info-tips";
 import * as Yup from "yup";
 import axios from "axios";
 import InputMask from "react-input-mask";
@@ -146,6 +148,10 @@ const SubmitRun = () => {
 
                                 <label className="form-label">
                                     Track Name
+                                    {InfoTip(
+                                        "track-name",
+                                        "The name of a track you want to submit a run for"
+                                    )}
                                     <FieldError
                                         error={props.errors.trackName}
                                         touched={props.touched.trackName}
@@ -160,8 +166,13 @@ const SubmitRun = () => {
                                     type="text"
                                     value={props.values.trackName}
                                 />
+
                                 <label className="form-label">
                                     Creator
+                                    {InfoTip(
+                                        "creator",
+                                        "The name of the creator of the track"
+                                    )}
                                     <FieldError
                                         error={props.errors.creator}
                                         touched={props.touched.creator}
@@ -177,6 +188,10 @@ const SubmitRun = () => {
                                 />
                                 <label className="form-label">
                                     Rank
+                                    {InfoTip(
+                                        "rank",
+                                        "The rank for the run on the platform you got the run on"
+                                    )}
                                     <FieldError
                                         error={props.errors.rank}
                                         touched={props.touched.rank}
@@ -198,30 +213,13 @@ const SubmitRun = () => {
                                     type="number"
                                     value={props.values.rank}
                                 />
+
                                 <label className="form-label">
-                                    Ninja Level{" "}
-                                    <FieldError
-                                        error={props.errors.ninjaLevel}
-                                        touched={props.touched.ninjaLevel}
-                                    />
-                                </label>
-                                <Slider
-                                    id="slider"
-                                    defaultValue={0.5}
-                                    getAriaValueText={valuetext}
-                                    aria-labelledby="discrete-slider-custom"
-                                    step={0.1}
-                                    min={0.5}
-                                    max={9.5}
-                                    valueLabelDisplay="auto"
-                                    marks={marks}
-                                    name="ninjaLevel"
-                                    onChange={(event, value) =>
-                                        props.setFieldValue("ninjaLevel", value)
-                                    }
-                                />
-                                <label className="form-label">
-                                    Faults{" "}
+                                    Faults
+                                    {InfoTip(
+                                        "faults",
+                                        "The amount of faults for your run on the track"
+                                    )}
                                     <FieldError
                                         error={props.errors.faults}
                                         touched={props.touched.faults}
@@ -249,6 +247,10 @@ const SubmitRun = () => {
                                 />
                                 <label className="form-label">
                                     Time
+                                    {InfoTip(
+                                        "time",
+                                        "The time for your run on the track"
+                                    )}
                                     <FieldError
                                         error={props.errors.time}
                                         touched={props.touched.time}
@@ -268,7 +270,49 @@ const SubmitRun = () => {
                                     value={props.values.time}
                                 ></InputMask>
                                 <label className="form-label">
-                                    Length
+                                    <Link
+                                        className="form-link"
+                                        to={"/submit-run/ninja-level-help"}
+                                        replace={false}
+                                    >
+                                        Ninja Level?
+                                    </Link>
+                                    {InfoTip(
+                                        "ninja-level",
+                                        "Your opinion of the ninja level for the track you passed"
+                                    )}
+                                    <FieldError
+                                        error={props.errors.ninjaLevel}
+                                        touched={props.touched.ninjaLevel}
+                                    />
+                                </label>
+                                <Slider
+                                    id="slider"
+                                    defaultValue={0.5}
+                                    getAriaValueText={valuetext}
+                                    aria-labelledby="discrete-slider-custom"
+                                    step={0.1}
+                                    min={0.5}
+                                    max={9.5}
+                                    valueLabelDisplay="auto"
+                                    marks={marks}
+                                    name="ninjaLevel"
+                                    onChange={(event, value) =>
+                                        props.setFieldValue("ninjaLevel", value)
+                                    }
+                                />
+                                <label className="form-label">
+                                    <Link
+                                        className="form-link"
+                                        to={"/submit-run/length-help"}
+                                        replace={false}
+                                    >
+                                        Length?
+                                    </Link>
+                                    {InfoTip(
+                                        "length",
+                                        "Your opinion of the length of the track you passed"
+                                    )}
                                     <FieldError
                                         error={props.errors.length}
                                         touched={props.touched.length}
@@ -291,7 +335,17 @@ const SubmitRun = () => {
                                 </CustomSelect>
 
                                 <label className="form-label">
-                                    Consistency
+                                    <Link
+                                        className="form-link"
+                                        to={"/submit-run/consistency-help"}
+                                        replace={false}
+                                    >
+                                        Consistency?
+                                    </Link>
+                                    {InfoTip(
+                                        "length",
+                                        "Your opinion of the consistency of the track you passed"
+                                    )}
                                     <FieldError
                                         error={props.errors.consistency}
                                         touched={props.touched.consistency}
@@ -327,6 +381,10 @@ const SubmitRun = () => {
 
                                 <label className="form-label" id="star-rating">
                                     How much did you like the track?
+                                    {InfoTip(
+                                        "length",
+                                        "Your overall opinion of the track you passed"
+                                    )}
                                     <FieldError
                                         error={props.errors.rating}
                                         touched={props.touched.rating}

@@ -1,6 +1,9 @@
 @use "../abstracts/colors" as *;
 
 .submit-run-container {
+    h4 {
+        text-align: center;
+    }
     background-color: $oxford-blue;
 
     > .submit-run-header {
@@ -11,19 +14,40 @@
         justify-content: space-between;
 
         > .submit-run-chat {
-            width: 26em;
-            margin-left: 1%;
+            width: 35em;
+            margin-left: 3em;
             margin-right: auto;
         }
 
         > .submit-run-form {
         }
 
-        > .submit-run-space-element {
-            width: 26em;
+        > .submit-run-help-element {
+            color: $mustard;
+            width: 35em;
             margin-left: auto;
-            margin-right: 1%;
-            visibility: hidden;
+            margin-right: 3em;
+
+            > .help-panel-container {
+                > .help-panel {
+                    > .help-header {
+                        text-align: center;
+                        padding: 0.3em;
+                        color: $mustard;
+                        border-bottom: 2px solid $oxford-blue-accent;
+                        border-radius: 10px;
+                        margin-bottom: 1em;
+                    }
+                    > .help-info-header {
+                        color: $oxford-blue-accent;
+                    }
+                    > .help-info-paragraph {
+                        margin-bottom: 1.5em;
+                        width: 35em;
+                        color: $mustard-accent;
+                    }
+                }
+            }
         }
     }
 }

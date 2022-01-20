@@ -145,7 +145,7 @@ model trackshistory {
 
 model creatorshistory {
   creator                    String   @default("N/A") @db.VarChar(45)
-  nOfTracks                  Int      @default(0)
+  nTracks                    Int      @default(0)
   average_track_rating       Float    @default(0.00) @map("average-track-rating") @db.Float
   average_track_length       Float    @default(0.00) @map("average-track-length") @db.Float
   average_track_consistency  Float    @default(0.00) @map("average-track-consistency") @db.Float
@@ -153,6 +153,12 @@ model creatorshistory {
   average_track_ninja_points Float    @default(0.00) @map("average-track-ninja-points") @db.Float
   average_track_faults       Float    @default(0.00) @map("average-track-faults") @db.Float
   history_dates              DateTime @default(now()) @map("history-dates") @db.DateTime(0)
+  total_track_rating         Float    @default(0.00) @map("total-track-rating") @db.Float
+  total_track_length         Float    @default(0.00) @map("total-track-length") @db.Float
+  total_track_consistency    Float    @default(0.00) @map("total-track-consistency") @db.Float
+  total_track_ninja_level    Float    @default(0.00) @map("total-track-ninja-level") @db.Float
+  total_track_ninja_points   Float    @default(0.00) @map("total-track-ninja-points") @db.Float
+  total_track_faults         Float    @default(0.00) @map("total-track-faults") @db.Float
 
   @@id([creator, history_dates])
 }

@@ -4,7 +4,6 @@ const synthesizeData = require("../synthesize-run-data/synthesize-data");
 const getTopRuns = require("../synthesize-run-data/get-top-runs");
 const getBestRuns = require("../synthesize-run-data/get-best-runs");
 const getHighestLevelPass = require("../synthesize-run-data/get-highest-pass");
-// const { request } = require("express"); Keep for now, might need later
 
 const router = (app) => {
     app.post("/submitted-run", async (request, response) => {

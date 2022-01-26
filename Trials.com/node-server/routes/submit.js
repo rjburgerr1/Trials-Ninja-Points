@@ -4,20 +4,15 @@ const synthesizeData = require("../synthesize-run-data/synthesize-data");
 const getTopRuns = require("../synthesize-run-data/get-top-runs");
 const getBestRuns = require("../synthesize-run-data/get-best-runs");
 const getHighestLevelPass = require("../synthesize-run-data/get-highest-pass");
-// const { request } = require("express"); Keep for now, might need later
 
 const router = (app) => {
-    app.post("/submitted-run", async (request, response) => {
-        // For some reason that I cannot seem to figure out. request.body returns an object with key value pairs from the submit form
-        // and all of the values are strings even if they were not strings in the form
-
+    app.post("/submit-run", async (request, response) => {
         // Convert specific fields to number, before insertion in db
         request.body.faults = Number(request.body.faults);
         request.body.rank = Number(request.body.rank);
         request.body.ninjaLevel = Number(request.body.ninjaLevel);
         request.body.rating = Number(request.body.rating);
         request.body.ninjaPoints = Number(request.body.ninjaPoints);
-
         const run = { ...request.body };
 
         try {
@@ -26,7 +21,7 @@ const router = (app) => {
                     rank: run.rank,
                     faults: run.faults,
                     time: run.time,
-                    ninja_points: run.ninjaPoints,
+
                     ninja_level: run.ninjaLevel,
                     length: run.length,
                     consistency: run.consistency,
@@ -84,9 +79,6 @@ const router = (app) => {
                     },
                     total_ninja_level: {
                         increment: run.ninjaLevel,
-                    },
-                    total_np: {
-                        increment: run.ninjaPoints,
                     },
                 },
             });

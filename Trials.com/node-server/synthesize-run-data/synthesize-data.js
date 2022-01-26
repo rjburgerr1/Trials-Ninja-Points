@@ -1,25 +1,17 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
+/**
+ * This function merges new run data with existing track data
+ * Updating values by averaging existing run data with the new run given
+ * and spitting out a track's newly averaged fields like length, ninjaLevel
+ * @param {*} newRun
+ */
 const synthesizeData = async (newRun) => {
     let currentTrackData = await prisma.tracks.findFirst({
         where: {
             track_name: newRun.trackName,
             creator: newRun.creator,
-        },
-        select: {
-            ninja_level: true,
-            length: true,
-            average_faults: true,
-            consistency: true,
-            rating: true,
-            total_rating: true,
-            total_consistency: true,
-            total_faults: true,
-            total_length: true,
-            total_ninja_level: true,
-            total_np: true,
-            nRuns: true,
         },
     });
 

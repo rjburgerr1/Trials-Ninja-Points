@@ -12,6 +12,8 @@ const port = 3002;
 const ProfileRoute = require("./routes/profiles/profile");
 const synthesizeTrackData = require("./routes/synthesize-collective-opinions");
 const backupLeaderboard = require("./routes/leaderboards/backup-leaderboards");
+const CalcNP = require("./routes/calculate-ninja-points");
+const UpdateRuns = require("./synthesize-run-data/update-runs");
 
 const app = express();
 
@@ -49,8 +51,10 @@ app.use(function (req, res, next) {
     next();
 });
 
+UpdateRuns();
 backupLeaderboard();
 synthesizeTrackData();
+CalcNP(app);
 DataRoute(app);
 SubmitRoute(app);
 SignupRoute(app);

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-import { CalcNP } from "./helpers/calculate-ninja-points";
 import { CustomSelect } from "./data-entry/text-inputs";
 import { Form, Field, Formik } from "formik";
 
@@ -85,25 +84,27 @@ const SubmitRun = () => {
 
     // Submit handler for submit-run form. Handles POST request and calculating NP for each run
     const handleOnSubmit = async (values: object, actions: any) => {
-        // Calculate Ninja Points for run
-        const ninjaPoints = await CalcNP({
-            ...values,
-        });
-
-        const payload = {
-            ...values,
-            ninjaPoints: ninjaPoints,
-        }; // Construct the new payload, inject ninjaPoints that have just been calculated
-
         try {
-            await axios.post("/submitted-run", {
-                ...payload,
+            // Upload run (necessary to include it in np calculation for truest/ideal np value)
+            // I suppose this could be reduced by removing a few prisma
+            // invokations if we just send the run data to the
+            // calculate-ninja-points route and then merge it with Javascript
+            await axios.post("/submit-run", {
+                ...values,
+            });
+
+            // Calculate Ninja Points for run (+update run/tracks row with np value)
+            const response = await axios.post("/calculate-ninja-points", {
+                ...values,
+            });
+
+            // Show page with end result
+            navigate("/submitted-run", {
+                state: { ninjaPoints: response.data.ninjaPoints },
             });
         } catch (error: any) {
             console.log(error);
         }
-
-        navigate("/submitted-run", { state: { ninjaPoints: ninjaPoints } });
     };
 
     const SubmitRunSchema = Yup.object({

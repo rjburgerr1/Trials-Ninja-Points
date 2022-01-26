@@ -48,7 +48,7 @@ model runs {
   faults       Int
   time         String           @db.VarChar(9)
   track_name   String           @map("track-name") @db.VarChar(45)
-  ninja_points Float?           @map("ninja-points") @db.Float
+  ninja_points Float            @default(0.00) @map("ninja-points") @db.Float
   ninja_level  Float            @map("ninja-level") @db.Float
   length       runs_length
   consistency  runs_consistency
@@ -59,7 +59,7 @@ model runs {
   creators     creators         @relation(fields: [creator], references: [creator], onDelete: NoAction, onUpdate: NoAction, map: "creator")
   tracks       tracks           @relation(fields: [track_name], references: [track_name], onDelete: NoAction, onUpdate: NoAction, map: "track-name")
 
-  @@id([track_name, id])
+  @@id([track_name, id, creator])
   @@index([creator], map: "creator_idx")
   @@index([rider], map: "rider_idx")
   @@index([track_name], map: "track-name_idx")

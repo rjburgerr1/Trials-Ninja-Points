@@ -5,6 +5,18 @@
 @mixin leaderboard {
     @include input.slider;
 
+    .row-cell {
+        color: $white;
+    }
+
+    .current-user-row-cell {
+        color: $mustard;
+    }
+    .user-row-cell {
+        // color: darken($mustard, 21%);
+        color: $white;
+    }
+
     > .leaderboard-table {
         -ms-overflow-style: none; // Hide Scrollbar Internet Explorer 10+
 
@@ -110,10 +122,6 @@
 
                     > .country-flag {
                         font-size: 2em;
-                    }
-
-                    > a {
-                        color: $mustard;
                     }
 
                     &:hover {

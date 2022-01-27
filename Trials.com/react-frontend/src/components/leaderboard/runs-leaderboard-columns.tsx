@@ -84,12 +84,22 @@ export const RunsLeaderboardColumns = [
     },
 ];
 
-export const setRunsTableBodyCell = (cell: Cell, row: Row) => {
+export const setRunsTableBodyCell = (
+    cell: Cell,
+    row: Row,
+    currentUsername: any
+) => {
     if (cell.column.Header === "Rider") {
+        const riderClass =
+            row.values.rider === currentUsername
+                ? "current-user-row-cell"
+                : "user-row-cell";
+
         return (
             <Link
-                to={"/profile/" + row.values.username}
-                state={{ user: row.values.username }}
+                className={riderClass}
+                to={"/profile/" + row.values.rider}
+                state={{ user: row.values.rider }}
                 replace={true}
             >
                 {cell.render("Cell")}
@@ -102,6 +112,7 @@ export const setRunsTableBodyCell = (cell: Cell, row: Row) => {
     } else if (cell.column.Header === "Track") {
         return (
             <Link
+                className="row-cell"
                 to={
                     "/track/track=" +
                     row.values.track_name +

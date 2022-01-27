@@ -63,10 +63,19 @@ export const MainLeaderboardColumns = [
     },
 ];
 
-export const setMainTableBodyCell = (cell: Cell, row: Row) => {
+export const setMainTableBodyCell = (
+    cell: Cell,
+    row: Row,
+    currentUsername: any
+) => {
     if (cell.column.Header === "Username") {
+        const riderClass =
+            row.values.username === currentUsername
+                ? "current-user-row-cell"
+                : "user-row-cell";
         return (
             <Link
+                className={riderClass}
                 to={"profile/" + row.values.username}
                 state={{ user: row.values.username }}
             >

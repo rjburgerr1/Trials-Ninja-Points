@@ -55,6 +55,7 @@ export const setTracksTableBodyCell = (cell: Cell, row: Row) => {
     if (cell.column.Header === "Track") {
         return (
             <Link
+                className="row-cell"
                 to={
                     "/track/track=" +
                     row.values.track_name +

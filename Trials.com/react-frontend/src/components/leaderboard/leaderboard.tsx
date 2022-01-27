@@ -18,14 +18,15 @@ import { useSticky } from "react-table-sticky";
 import DatePicker from "react-datepicker";
 import { LeaderboardNavigation } from "./leaderboard-navigation";
 import "react-datepicker/dist/react-datepicker.css";
+import { useAuth } from "../../contexts/auth-context";
 
 export const Leaderboard = (props: any) => {
     let [data, setData] = useState([{}]);
     const [date, setDate] = useState(new Date());
+    const { currentUser } = useAuth();
     const columns: Array<Column> = useMemo(() => props.columns, []);
 
     useEffect(() => {
-        console.log(props.runs);
         props.effect(setData, date, props.runs ? props.runs : undefined);
     }, [date]); // includes empty dependency array
 
@@ -174,7 +175,11 @@ export const Leaderboard = (props: any) => {
                                             {...cell.getCellProps()}
                                             className="leaderboard-body-row-value"
                                         >
-                                            {props.setTableBodyCell(cell, row)}
+                                            {props.setTableBodyCell(
+                                                cell,
+                                                row,
+                                                currentUser.displayName
+                                            )}
                                         </div>
                                     ))}
                                 </div>

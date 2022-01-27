@@ -86,10 +86,12 @@ export const RunsLeaderboardColumns = [
 
 export const setRunsTableBodyCell = (cell: Cell, row: Row) => {
     if (cell.column.Header === "Rider") {
+        console.log(row.values.username);
+        console.log(row.values);
         return (
             <Link
-                to={"/profile/" + row.values.username}
-                state={{ user: row.values.username }}
+                to={"/profile/" + row.values.rider}
+                state={{ user: row.values.rider }}
                 replace={true}
             >
                 {cell.render("Cell")}

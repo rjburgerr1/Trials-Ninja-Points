@@ -48,12 +48,21 @@ const router = (app) => {
 
     app.put("/username", async (request, response) => {
         try {
-            const result = await prisma.profiles.update({
+            let result = await prisma.profiles.update({
                 where: {
                     id: request.body.id,
                 },
                 data: {
                     username: request.body.username,
+                },
+            });
+
+            result = await prisma.runs.updateMany({
+                where: {
+                    id: request.body.id,
+                },
+                data: {
+                    rider: request.body.username,
                 },
             });
 

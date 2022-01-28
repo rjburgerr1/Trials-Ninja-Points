@@ -6,6 +6,7 @@ import { InfoTip } from "../help-info/info-tips";
 import { getTracksLB } from "./leaderboard-requests";
 import { SelectColumnFilter } from "./filters/select-filter";
 import { filterBetween, SliderColumnFilter } from "./filters/slider-filter";
+import { convertConsistency, convertLength } from "../helpers/convert-fields";
 
 export const TracksLeaderboardColumns = [
     {
@@ -71,6 +72,10 @@ export const setTracksTableBodyCell = (cell: Cell, row: Row) => {
                 {cell.render("Cell")}
             </Link>
         );
+    } else if (cell.column.Header === "Length") {
+        return <div>{convertLength(row.values.length)}</div>;
+    } else if (cell.column.Header === "Consistency") {
+        return <div>{convertConsistency(row.values.consistency)}</div>;
     } else {
         return <div>{cell.render("Cell")}</div>;
     }

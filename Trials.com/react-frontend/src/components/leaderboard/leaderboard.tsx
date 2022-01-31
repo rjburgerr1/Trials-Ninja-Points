@@ -190,6 +190,7 @@ export const Leaderboard = (props: any) => {
             </div>
 
             <LeaderboardNavigation
+                id="leaderboard-nav"
                 state={state}
                 nextPage={nextPage}
                 previousPage={previousPage}

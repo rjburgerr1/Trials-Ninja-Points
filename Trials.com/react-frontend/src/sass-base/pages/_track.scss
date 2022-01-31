@@ -3,16 +3,11 @@
 
 .runs-container {
     > .track-body {
-        > .runs-leaderboard {
+        > .track-specific-leaderboard {
             position: absolute;
-            top: 30em;
-            left: 80em;
-            transform: translate(
-                -50%,
-                -50%
-            ); /* This is a shorthand of
-			translateX(-50%) and translateY(-50%) */
+            left: 28em;
             background-color: $oxford-blue;
+            opacity: 0.8;
         }
 
         .track-info {

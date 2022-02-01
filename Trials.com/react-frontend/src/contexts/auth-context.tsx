@@ -33,6 +33,7 @@ export function AuthProvider({ children }: ChildrenProps) {
             return user;
         } catch (error: any) {
             console.log(error.message);
+            throw error;
         }
     };
 

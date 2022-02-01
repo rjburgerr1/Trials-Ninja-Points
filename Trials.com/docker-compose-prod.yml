@@ -37,7 +37,7 @@ services:
         image: rjbradach/trialsnp-node
         ports:
             - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
-        restart: unless-stopped
+        restart: always
         depends_on:
             - mysql-db
         env_file:

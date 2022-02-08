@@ -9,9 +9,7 @@ export default function SubmittedRuns(props: any) {
                 <NavBar {...props} />
             </div>
             <div className="submitted-run-body">
-                <div className="submitted-run-chat">
-                    <Chat />
-                </div>
+                <div className="submitted-run-chat"></div>
                 <div className="submitted-run-content">
                     <SubmittedRun />
                 </div>

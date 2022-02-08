@@ -63,7 +63,7 @@
         "start": "SET NODE_ENV=development && react-scripts --openssl-legacy-provider start",
         "start-prod": "SET NODE_ENV=production & react-scripts start",
         "build-dev": "SET NODE_ENV=development & react-scripts build",
-        "build-prod": "SET NODE_ENV=production & react-scripts build",
+        "build-prod": "react-scripts build",
         "build": "react-scripts build",
         "test": "react-scripts test --passWithNoTests",
         "eject": "react-scripts eject",

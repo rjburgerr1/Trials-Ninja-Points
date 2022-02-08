@@ -343,5 +343,8 @@ form {
         &:hover {
             background-color: lighten($mustard, 10%);
         }
+        &:focus {
+            border: solid 2px $oxford-blue-accent-light;
+        }
     }
 }

@@ -1,8 +1,10 @@
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect } from "react";
 import ReactTooltip from "react-tooltip";
 
 export const InfoTip = (fieldName: string, infoMessage: string) => {
+    useEffect(() => {}, []);
     return (
         <span className="table-header-info-tip">
             <FontAwesomeIcon
@@ -10,6 +12,7 @@ export const InfoTip = (fieldName: string, infoMessage: string) => {
                 data-for={fieldName + "-info-tip"}
                 icon={faQuestionCircle}
                 size="1x"
+                tabIndex={-1}
             />
 
             <ReactTooltip

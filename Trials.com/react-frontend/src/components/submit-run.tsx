@@ -275,6 +275,7 @@ const SubmitRun = () => {
                                         className="form-link"
                                         to={"/submit-run/ninja-level-help"}
                                         replace={false}
+                                        tabIndex={-1}
                                     >
                                         Ninja Level?
                                     </Link>
@@ -307,6 +308,7 @@ const SubmitRun = () => {
                                         className="form-link"
                                         to={"/submit-run/length-help"}
                                         replace={false}
+                                        tabIndex={-1}
                                     >
                                         Length?
                                     </Link>
@@ -340,6 +342,7 @@ const SubmitRun = () => {
                                         className="form-link"
                                         to={"/submit-run/consistency-help"}
                                         replace={false}
+                                        tabIndex={-1}
                                     >
                                         Consistency?
                                     </Link>
@@ -429,7 +432,11 @@ const SubmitRun = () => {
                             />
 
                             <div className="submit-button">
-                                <button className="form-button" type="submit">
+                                <button
+                                    className="form-button"
+                                    type="submit"
+                                    tabIndex={0}
+                                >
                                     Submit
                                 </button>
                             </div>

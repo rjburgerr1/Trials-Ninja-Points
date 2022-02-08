@@ -15,9 +15,7 @@ export default function Creators(props: any) {
                 <NavBar {...props} />
             </div>
             <div className="creators-body">
-                <div className="creators-chat">
-                    <Chat />
-                </div>
+                <div className="creators-chat"></div>
                 <div className="creators-leaderboard">
                     <Leaderboard
                         columns={CreatorsLeaderboardColumns}

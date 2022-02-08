@@ -26,7 +26,7 @@ services:
         volumes:
             - mysql:/var/lib/mysql
             - type: bind
-              source: ./database/structure-diff.sql
+              source: ./database
               target: /mysql-diff
         healthcheck:
             test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]

@@ -10,9 +10,7 @@ export default function LeaderboardPage(props: any) {
                 <NavBar {...props} />
             </div>
             <div className="tracks-body">
-                <div className="tracks-chat">
-                    <Chat />
-                </div>
+                <div className="tracks-chat"></div>
                 <div className="tracks-leaderboard">
                     <Leaderboard
                         columns={props.columns}

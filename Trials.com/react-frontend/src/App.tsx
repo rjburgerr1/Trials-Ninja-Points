@@ -39,7 +39,6 @@ import LeaderboardPage from "./pages/leaderboard-page";
 import UpdateProfile from "./pages/update-profile";
 import "./sass-base/main.scss";
 import Track from "./pages/track";
-// Test
 
 function App(props: any) {
     const [isLoaded, setIsLoaded] = useState(false);

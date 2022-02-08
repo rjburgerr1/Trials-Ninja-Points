@@ -163,10 +163,6 @@ model creatorshistory {
   @@id([creator, history_dates])
 }
 
-model test {
-  test Int @id
-}
-
 enum runs_length {
   Short
   Medium

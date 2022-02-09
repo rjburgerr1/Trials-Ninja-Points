@@ -1,0 +1,30 @@
+@use "../components/tables";
+@use "../abstracts/colors" as *;
+.page-container {
+    background-color: $oxford-blue;
+    > .page-header {
+    }
+    > .page-body {
+        margin-top: 2%;
+        display: flex;
+        justify-content: space-between;
+
+        > .page-chat {
+            width: 26em;
+
+            margin-left: 1%;
+            margin-right: auto;
+        }
+
+        > .page-leaderboard {
+            margin-left: 2em;
+        }
+
+        > .page-space-element {
+            width: 26em;
+            margin-left: auto;
+            margin-right: 1%;
+            visibility: hidden;
+        }
+    }
+}

@@ -1,7 +1,21 @@
 @use "../abstracts/colors" as *;
 
-form {
+form,
+Form {
     background-color: $oxford-blue;
+
+    .form-button {
+        color: $black;
+        background-color: $mustard;
+
+        &:hover {
+            background-color: $mustard-accent;
+        }
+    }
+
+    .form-container {
+        background-color: $oxford-blue;
+    }
 
     .form-link {
         color: $mustard;

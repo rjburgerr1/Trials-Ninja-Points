@@ -29,37 +29,43 @@ export default function ResetPassword() {
     }
 
     return (
-        <Card className="container px-0">
-            {error && <Alert variant="danger">{error}</Alert>}
-            {message && <Alert variant="success">{message}</Alert>}
-            <Card.Body className="mx-5">
-                <h1 className="text-center my-4">Password Reset</h1>
-                <Form onSubmit={handleSubmit} className="px-4">
-                    <input
-                        id="email"
-                        type="email"
-                        ref={emailRef}
-                        placeholder="Enter your email..."
-                        required
-                        onSubmit={handleSubmit}
-                        className="my-3"
-                    />
-                    <button disabled={loading} className="w-100" type="submit">
-                        Reset Password
-                    </button>
-                </Form>
-                <div className="w-100 text-center mt-3">
-                    <Link className="btn-link" to="/signin">
+        <div id="forgot-password-page">
+            <Form
+                onSubmit={handleSubmit}
+                className="form-container"
+                id="reset-password-form-container"
+            >
+                {error && <Alert variant="danger">{error}</Alert>}
+                {message && <Alert variant="success">{message}</Alert>}
+                <h1 className="form-label" id="password-reset-header">
+                    Password Reset
+                </h1>
+                <input
+                    id="email"
+                    type="email"
+                    ref={emailRef}
+                    placeholder="Enter your email..."
+                    required
+                    onSubmit={handleSubmit}
+                    className="my-3"
+                />
+                <button
+                    disabled={loading}
+                    className="form-button"
+                    id="reset-password-button"
+                    type="submit"
+                >
+                    Reset Password
+                </button>
+                <div
+                    className="form-footer-links"
+                    id="reset-password-form-footer-links"
+                >
+                    <Link className="form-link" to="/signin">
                         Sign In
                     </Link>
                 </div>
-            </Card.Body>
-            <Card.Footer className="text-center">
-                Need an account?{" "}
-                <Link className="btn-link" to="/signin">
-                    Sign Up
-                </Link>
-            </Card.Footer>
-        </Card>
+            </Form>
+        </div>
     );
 }

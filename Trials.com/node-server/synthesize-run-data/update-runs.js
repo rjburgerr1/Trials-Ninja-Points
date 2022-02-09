@@ -16,7 +16,7 @@ const UpdateRuns = () => {
         var CronJob = require("cron").CronJob;
 
         var job = new CronJob(
-            "0 0 * * * *", // Hourly CRON job
+            "0-59/30 * * * * *", // Hourly CRON job
             async function () {
                 // Get all runs and select fields that are used in calculating NP
                 const runs = await prisma.runs.findMany({
@@ -42,6 +42,7 @@ const UpdateRuns = () => {
 
                 // Merge these two arrays, track metrics overwrites overlapping fields in runs array
                 let result = await mergeRunsWTrackMetrics(runs, tracksMetrics);
+                console.log(result);
 
                 // Recalculate ninja points for each run
                 result.forEach((run) => {
@@ -124,7 +125,7 @@ function mergeRunsWTrackMetrics(arr1, arr2) {
                 object = Object.assign({}, item, element);
             }
         });
-        return object;
+        return !object.empty ? object : null;
     });
 
     result = result.filter((element) => element !== undefined);

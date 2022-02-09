@@ -320,7 +320,7 @@ const SubmitRun = () => {
                                         Consistency?
                                     </Link>
                                     {InfoTip(
-                                        "length",
+                                        "consistency",
                                         "Your opinion of the consistency of the track you passed"
                                     )}
                                     <FieldError
@@ -359,7 +359,7 @@ const SubmitRun = () => {
                                 <label className="form-label" id="star-rating">
                                     How much did you like the track?
                                     {InfoTip(
-                                        "length",
+                                        "rating",
                                         "Your overall opinion of the track you passed"
                                     )}
                                     <FieldError

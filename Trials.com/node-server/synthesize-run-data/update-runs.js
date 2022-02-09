@@ -43,16 +43,10 @@ const UpdateRuns = () => {
                 // Merge these two arrays, track metrics overwrites overlapping fields in runs array
                 let result = await mergeRunsWTrackMetrics(runs, tracksMetrics);
 
-                console.log("First RESULT");
-                console.log(result);
-
                 // Recalculate ninja points for each run
                 result.forEach((run) => {
                     run["ninjaPoints"] = CalcNP(run);
                 });
-
-                console.log("END RESULT");
-                console.log(result);
 
                 // Update runs with new values
                 result.forEach(async (run) => {

@@ -27,6 +27,20 @@ function CalcNP(props) {
 
         const faultWeight = CalcFaultWeight(props.faults);
 
+        // console.log(
+        //     "consistency: " +
+        //         consistencyWeight +
+        //         " \ntime: " +
+        //         timeWeight +
+        //         " \n ninjalevel: " +
+        //         ninjaLevelWeight +
+        //         " \n  length: " +
+        //         lengthWeight +
+        //         " \n fault: " +
+        //         faultWeight +
+        //         "\n \n"
+        // );
+
         const ninjaPoints =
             consistencyWeight *
             timeWeight *

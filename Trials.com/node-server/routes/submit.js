@@ -121,25 +121,25 @@ const router = (app) => {
 
 const calcLength = (runLength) => {
     if (runLength == "Medium") {
-        return 2;
+        return 1.75;
     } else if (runLength == "Long") {
-        return 3;
+        return 1.4;
     } else {
-        return 1;
+        return 1.1;
     }
 };
 
 const calcConsistency = (runConsistency) => {
     if (runConsistency == "Not_At_All") {
-        return 1;
+        return 0.9;
     } else if (runConsistency == "Not_Very") {
-        return 2;
+        return 1.2;
     } else if (runConsistency == "Moderately") {
-        return 3;
+        return 1.6;
     } else if (runConsistency == "Very") {
-        return 4;
+        return 2;
     } else {
-        return 5;
+        return 2.3;
     }
 };
 

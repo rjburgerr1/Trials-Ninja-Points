@@ -87,7 +87,7 @@ const SubmitRun = () => {
         try {
             // Upload run (necessary to include it in np calculation for truest/ideal np value)
             // I suppose this could be reduced by removing a few prisma
-            // invokations if we just send the run data to the
+            // invocations if we just send the run data to the
             // calculate-ninja-points route and then merge it with Javascript
             await axios.post("/submit-run", {
                 ...values,

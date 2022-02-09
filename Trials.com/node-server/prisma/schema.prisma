@@ -40,6 +40,7 @@ model profiles {
   highest_level_pass Float    @default(0.00) @map("highest-level-pass") @db.Float
   bio                String?  @db.VarChar(300)
   banner_url         String   @default("https://trials-np-images.s3.amazonaws.com//uploads/defaultProfileBanner.png") @map("banner-url") @db.VarChar(1100)
+  top_100_runs       Int      @default(0) @map("top-100-runs")
 }
 
 model runs {
@@ -103,6 +104,7 @@ model profileshistory {
   history_dates      DateTime @default(now()) @map("history-dates") @db.DateTime(0)
   index              Int      @id @default(autoincrement())
   banner_url         String   @default("https://trials-np-images.s3.amazonaws.com//uploads/defaultProfileBanner.png") @map("banner-url") @db.VarChar(1100)
+  top_100_runs       Int      @default(0) @map("top-100-runs")
 }
 
 model runshistory {

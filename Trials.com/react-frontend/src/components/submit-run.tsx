@@ -131,7 +131,7 @@ const SubmitRun = () => {
         consistency: Yup.string().required("Required"),
         ninjaLevel: Yup.number().required("Required"),
         rating: Yup.string().required("Required"),
-        rank: Yup.number().min(1, "Minimum rank is 1!").required("Required"),
+        rank: Yup.number().min(1, "Minimum rank is 1!"),
     });
 
     return (
@@ -186,33 +186,6 @@ const SubmitRun = () => {
                                     placeholder="Slikscythez"
                                     type="text"
                                     value={props.values.creator}
-                                />
-                                <label className="form-label">
-                                    Rank
-                                    {InfoTip(
-                                        "rank",
-                                        "The rank for the run on the platform you got the run on"
-                                    )}
-                                    <FieldError
-                                        error={props.errors.rank}
-                                        touched={props.touched.rank}
-                                    />
-                                </label>
-                                <Field
-                                    id="rank"
-                                    name="rank"
-                                    onChange={props.handleChange}
-                                    onKeyDown={(event: any) =>
-                                        (event.key === "e" ||
-                                            event.key === "E" ||
-                                            event.key === "-" ||
-                                            event.key === "+" ||
-                                            event.key === ".") &&
-                                        event.preventDefault()
-                                    }
-                                    placeholder="7"
-                                    type="number"
-                                    value={props.values.rank}
                                 />
 
                                 <label className="form-label">

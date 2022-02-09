@@ -73,7 +73,7 @@ const router = (app) => {
                     total_ninja_points: {
                         increment: run.ninjaPoints,
                     },
-                    top100Runs: top100Runs,
+                    top_100_Runs: top100Runs,
                     highest_np_run: bestNP,
                     highest_level_pass: highestLevelPass,
                 },

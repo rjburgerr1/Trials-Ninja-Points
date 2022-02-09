@@ -16,7 +16,7 @@ const UpdateRuns = () => {
         var CronJob = require("cron").CronJob;
 
         var job = new CronJob(
-            "0-59/15 * * * * *", // Hourly CRON job
+            "0-59/11 * * * * *", // Hourly CRON job
             async function () {
                 // Get all runs and select fields that are used in calculating NP
                 const runs = await prisma.runs.findMany({
@@ -52,6 +52,7 @@ const UpdateRuns = () => {
                 result.forEach(async (run) => {
                     await prisma.runs.updateMany({
                         where: {
+                            id: run.id,
                             creator: run.creator,
                             track_name: run.track_name,
                         },

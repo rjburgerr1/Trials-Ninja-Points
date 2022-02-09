@@ -125,12 +125,12 @@ function mergeRunsWTrackMetrics(arr1, arr2) {
                 object = Object.assign({}, item, element);
             }
         });
-        if (!Object.keys(object).length === 0) {
-            return object;
-        }
+
+        return object;
     });
 
     result = result.filter((element) => element !== undefined);
+    result = result.filter((element) => !Object.keys(element).length === 0);
 
     return result;
 }

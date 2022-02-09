@@ -48,6 +48,8 @@ const UpdateRuns = () => {
                     run["ninjaPoints"] = CalcNP(run);
                 });
 
+                console.log(result);
+
                 // Update runs with new values
                 result.forEach(async (run) => {
                     await prisma.runs.updateMany({

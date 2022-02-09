@@ -7,7 +7,6 @@ import { InfoTip } from "../help-info/info-tips";
 import ReactCountryFlag from "react-country-flag";
 import { getMainLB } from "./leaderboard-requests";
 import { Link } from "react-router-dom";
-import { Fragment } from "react";
 
 export const MainLeaderboardColumns = [
     {
@@ -36,7 +35,7 @@ export const MainLeaderboardColumns = [
     },
     {
         Header: "Ninja Points (100)",
-        accessor: "total_ninja_points",
+        accessor: "top_100_runs",
         Filter: SliderColumnFilter,
         filter: filterBetween,
         width: 180,

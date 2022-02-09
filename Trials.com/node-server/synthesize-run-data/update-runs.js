@@ -1,10 +1,13 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const CalcNP = require("./calculate-ninja-points");
+const getBestRun = require("./get-best-run");
+const getHighestLevelPass = require("./get-highest-pass");
+const getTopRuns = require("./get-top-runs");
 
 /**
  * This function creates and starts a cron job that will run every hour.
- * This cron job grabs all existing runs & runs. Next, it combines the tracks' real metrics
+ * This cron job grabs all existing runs & tracks. Next, it combines the tracks' real metrics
  * with each runs data. After that it will calculate new ninja point values for each
  * existing run and finally updates each run
  */
@@ -13,8 +16,9 @@ const UpdateRuns = () => {
         var CronJob = require("cron").CronJob;
 
         var job = new CronJob(
-            "0 0 * * * *",
+            "0 0 * * * *", // Hourly CRON job
             async function () {
+                // Get all runs and select fields that are used in calculating NP
                 const runs = await prisma.runs.findMany({
                     select: {
                         id: true,
@@ -25,6 +29,7 @@ const UpdateRuns = () => {
                     },
                 });
 
+                // Get all tracks and select fields that are used in calculting NP
                 const tracksMetrics = await prisma.tracks.findMany({
                     select: {
                         track_name: true,
@@ -35,6 +40,7 @@ const UpdateRuns = () => {
                     },
                 });
 
+                // Merge these two arrays, track metrics overwrites overlapping fields in runs array
                 let result = await mergeRunsWTrackMetrics(runs, tracksMetrics);
 
                 // Recalculate ninja points for each run
@@ -42,6 +48,7 @@ const UpdateRuns = () => {
                     run["ninjaPoints"] = CalcNP(run);
                 });
 
+                // Update runs with new values
                 result.forEach(async (run) => {
                     await prisma.runs.updateMany({
                         where: {
@@ -52,6 +59,33 @@ const UpdateRuns = () => {
                             ninja_points: run.ninjaPoints,
                         },
                     });
+                });
+
+                const riders = await prisma.profiles.findMany({
+                    select: {
+                        id: true,
+                        runs: true,
+                    },
+                });
+
+                riders.forEach(async (rider) => {
+                    if (rider.runs > 0) {
+                        const bestRun = await getBestRun(rider.id);
+
+                        const highestPass = await getHighestLevelPass(rider.id);
+
+                        const top100Runs = await getTopRuns(rider.id);
+                        await prisma.profiles.update({
+                            where: {
+                                id: rider.id,
+                            },
+                            data: {
+                                highest_np_run: bestRun,
+                                highest_level_pass: highestPass,
+                                top_100_runs: top100Runs,
+                            },
+                        });
+                    }
                 });
             },
             null,

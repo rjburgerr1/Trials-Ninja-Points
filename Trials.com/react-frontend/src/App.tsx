@@ -28,7 +28,7 @@ import {
     mainLBEffect,
 } from "./components/leaderboard/main-leaderboard-columns";
 import Loading from "./components/helpers/loading";
-import ResetPassword from "./components/auth/reset-password";
+import ForgotPassword from "./pages/forgot-password";
 import PrivateRoute from "./components/helpers/private-route";
 import Profile from "./pages/profile";
 import Creators from "./pages/creators";
@@ -61,7 +61,7 @@ function App(props: any) {
 
                         <Route
                             path="/forgot-password"
-                            element={<ResetPassword />}
+                            element={<ForgotPassword />}
                         />
                         <Route
                             path="/tracks"

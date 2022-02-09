@@ -1,9 +1,9 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
-const getHighestLevelPass = async (rider) => {
+const getHighestLevelPass = async (riderID) => {
     const highestLevelPasses = await prisma.runs.aggregate({
         where: {
-            id: rider.uid,
+            id: riderID,
         },
         orderBy: {
             ninja_points: "desc",

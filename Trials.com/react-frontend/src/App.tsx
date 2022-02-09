@@ -102,7 +102,7 @@ function App(props: any) {
                                     <LeaderboardPage
                                         columns={MainLeaderboardColumns}
                                         effect={mainLBEffect}
-                                        sortBy="total_ninja_points"
+                                        sortBy="top_100_runs"
                                         setTableBodyCell={setMainTableBodyCell}
                                         setTableHeaderInfoTip={
                                             setMainTableHeaderInfoTip

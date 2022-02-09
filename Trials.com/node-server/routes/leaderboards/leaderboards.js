@@ -64,12 +64,12 @@ const router = (app) => {
                           country: true,
                           highest_level_pass: true,
                           highest_np_run: true,
-                          total_ninja_points: true,
+                          top_100_runs: true,
                           runs: true,
                       },
                       distinct: ["username"],
                       orderBy: {
-                          total_ninja_points: "desc",
+                          top_100_runs: "desc",
                       },
                   })
                 : await prisma.profiles.findMany({
@@ -78,11 +78,11 @@ const router = (app) => {
                           country: true,
                           highest_level_pass: true,
                           highest_np_run: true,
-                          total_ninja_points: true,
+                          top_100_runs: true,
                           runs: true,
                       },
                       orderBy: {
-                          total_ninja_points: "desc",
+                          top_100_runs: "desc",
                       },
                   });
 

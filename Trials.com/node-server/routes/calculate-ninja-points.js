@@ -4,7 +4,7 @@ const CalcNP = require("../synthesize-run-data/calculate-ninja-points");
 const synthesizeData = require("../synthesize-run-data/synthesize-data");
 
 const getTopRuns = require("../synthesize-run-data/get-top-runs");
-const getBestRuns = require("../synthesize-run-data/get-best-runs");
+const getBestRuns = require("../synthesize-run-data/get-best-run");
 const getHighestLevelPass = require("../synthesize-run-data/get-highest-pass");
 
 const router = (app) => {
@@ -58,7 +58,7 @@ const router = (app) => {
                 }, // map run fields over data property
             });
 
-            const totalNP = await getTopRuns(run.rider.uid);
+            const top100Runs = await getTopRuns(run.rider.uid);
             const bestNP = await getBestRuns(run.rider.uid);
             const highestLevelPass = await getHighestLevelPass(run.rider.uid);
 
@@ -70,7 +70,10 @@ const router = (app) => {
                     runs: {
                         increment: 1,
                     },
-                    total_ninja_points: totalNP,
+                    total_ninja_points: {
+                        increment: run.ninjaPoints,
+                    },
+                    top100Runs: top100Runs,
                     highest_np_run: bestNP,
                     highest_level_pass: highestLevelPass,
                 },

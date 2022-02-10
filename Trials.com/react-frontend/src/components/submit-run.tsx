@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { CustomSelect } from "./data-entry/text-inputs";
 import { Form, Field, Formik } from "formik";
 
@@ -7,7 +6,8 @@ import { useAuth } from "../contexts/auth-context";
 import { Link, useNavigate } from "react-router-dom";
 import { FieldError } from "./helpers/field-error";
 import { InfoTip } from "./help-info/info-tips";
-import * as Yup from "yup";
+import Yup from "../components/helpers/yup-extended"; // I think `import * as yup from "yup"` also works
+
 import axios from "axios";
 import InputMask from "react-input-mask";
 import moment from "moment";
@@ -26,10 +26,13 @@ interface FormValues {
     rating: string;
     rank: string;
     rider: string;
+    video: string;
     ninjaPoints: number;
 }
 
 const SubmitRun = () => {
+    const ytVideoRegEx =
+        /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
     const { currentUser } = useAuth();
     const navigate = useNavigate();
     const [rating, setRating] = useState();
@@ -46,6 +49,7 @@ const SubmitRun = () => {
         ninjaLevel: "",
         rating: "",
         rank: "",
+        video: "",
         rider: currentUser,
         ninjaPoints: 0, // NinjaPoints are not inside the form but these initial values act as props for this component so storing ninjapoints here feels right
     };
@@ -83,7 +87,7 @@ const SubmitRun = () => {
     };
 
     // Submit handler for submit-run form. Handles POST request and calculating NP for each run
-    const handleOnSubmit = async (values: object, actions: any) => {
+    const handleOnSubmit = async (values: FormValues, actions: any) => {
         try {
             // Upload run (necessary to include it in np calculation for truest/ideal np value)
             // I suppose this could be reduced by removing a few prisma
@@ -132,6 +136,7 @@ const SubmitRun = () => {
         ninjaLevel: Yup.number().required("Required"),
         rating: Yup.string().required("Required"),
         rank: Yup.number().min(1, "Minimum rank is 1!"),
+        video: Yup.string().isValidYoutubeURL().nullable(),
     });
 
     return (
@@ -355,6 +360,25 @@ const SubmitRun = () => {
                                         label="Extremely"
                                     />
                                 </CustomSelect>
+                                <label className="form-label">
+                                    Video
+                                    {InfoTip(
+                                        "video",
+                                        "The link to a youtube video of your run"
+                                    )}
+                                    <FieldError
+                                        error={props.errors.video}
+                                        touched={props.touched.video}
+                                    />
+                                </label>
+                                <Field
+                                    id="video"
+                                    name="video"
+                                    onChange={props.handleChange}
+                                    placeholder="https://www.youtube.com/watch?v=xxxxxxxx"
+                                    type="text"
+                                    value={props.values.video}
+                                />
 
                                 <label className="form-label" id="star-rating">
                                     How much did you like the track?

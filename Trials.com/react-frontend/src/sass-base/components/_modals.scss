@@ -1,0 +1,9 @@
+@use "../abstracts/colors" as *;
+
+@mixin modal {
+    border: 0;
+}
+
+.embedded-video {
+    @include modal;
+}

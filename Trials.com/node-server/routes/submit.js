@@ -18,7 +18,7 @@ const router = (app) => {
                     rank: run.rank,
                     faults: run.faults,
                     time: run.time,
-
+                    video: run.video,
                     ninja_level: run.ninjaLevel,
                     length: run.length,
                     consistency: run.consistency,

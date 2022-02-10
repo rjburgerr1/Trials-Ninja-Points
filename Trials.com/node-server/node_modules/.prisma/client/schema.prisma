@@ -57,6 +57,7 @@ model runs {
   creator      String           @db.VarChar(45)
   id           String           @db.VarChar(29)
   date         DateTime         @default(now()) @db.DateTime(0)
+  video        String?          @db.VarChar(100)
   creators     creators         @relation(fields: [creator], references: [creator], onDelete: NoAction, onUpdate: NoAction, map: "creator")
   tracks       tracks           @relation(fields: [track_name], references: [track_name], onDelete: NoAction, onUpdate: NoAction, map: "track-name")
 
@@ -121,6 +122,7 @@ model runshistory {
   creator       String                  @db.VarChar(45)
   id            String                  @db.VarChar(29)
   date          DateTime                @default(now()) @db.DateTime(0)
+  video         String?                 @db.VarChar(100)
   history_dates DateTime                @default(now()) @map("history-dates") @db.DateTime(0)
   index         Int                     @id @default(autoincrement())
 }

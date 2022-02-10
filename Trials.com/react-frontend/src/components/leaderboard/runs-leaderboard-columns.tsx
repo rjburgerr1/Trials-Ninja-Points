@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortAmountDown } from "@fortawesome/free-solid-svg-icons";
 import { getRunsLB } from "./leaderboard-requests";
 import { Link } from "react-router-dom";
+import { CenteredModal } from "../leaderboard/centered-modal";
 
 export const RunsLeaderboardColumns = [
     {
@@ -77,6 +78,12 @@ export const RunsLeaderboardColumns = [
         filter: filterBetween,
     },
     {
+        Header: "Video",
+        accessor: "video",
+        width: 110,
+        disableFilters: true,
+    },
+    {
         Header: "Date",
         accessor: "date",
         width: 110,
@@ -128,6 +135,8 @@ export const setRunsTableBodyCell = (
                 {cell.render("Cell")}
             </Link>
         );
+    } else if (cell.column.Header === "Video") {
+        return cell.value !== null ? <CenteredModal url={cell.value} /> : "N/A";
     } else {
         return <div>{cell.render("Cell")}</div>;
     }

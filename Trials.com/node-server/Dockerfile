@@ -22,7 +22,6 @@ RUN npm install --only=production
 
 COPY . .
 
-RUN cd node-server
 
 # Start the node server
 CMD  [ "npm", "run","start-prod"]

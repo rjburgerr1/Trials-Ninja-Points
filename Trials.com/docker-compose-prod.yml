@@ -11,10 +11,10 @@ services:
             dockerfile: Dockerfile
         image: rjbradach/trialsnp-sqldb
         environment:
-            - MYSQL_ROOT_PASSWORD=$MYSQL_DATABASE_ROOT_PASSWORD
-            - MYSQL_DATABASE=$MYSQL_DATABASE_NAME
-            - MYSQL_USER=$MYSQL_DATABASE_USER
-            - MYSQL_PASSWORD=MYSQL_DATABASE_PASSWORD
+            - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+            - MYSQL_DATABASE=$MYSQL_DATABASE
+            - MYSQL_USER=$MYSQL_USER
+            - MYSQL_PASSWORD=MYSQL_PASSWORD
         command:
             [
                 mysqld,

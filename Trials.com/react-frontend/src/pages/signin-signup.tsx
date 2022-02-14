@@ -1,6 +1,7 @@
 import React from "react";
 import Login from "../components/auth/login";
 import Signup from "../components/auth/signup";
+import { CAPTCHA } from "../components/helpers/captcha";
 
 interface SigninSignupProps {
     container: HTMLElement | null;
@@ -20,6 +21,7 @@ const SigninSignup: React.FC<SigninSignupProps> = () => {
         //  it'd be nice if we could end up changing this outside div to Card to be consistent, but it breaks right now
         //  if not, thats fine, since this is a special case we will probably only use once
         <div className="signin-signup-outer">
+            <CAPTCHA />
             <div className="container signin-signup" id="container">
                 <Signup />
                 <Login />

@@ -3,6 +3,7 @@ const prisma = new PrismaClient();
 const CalcNP = require("../synthesize-run-data/calculate-ninja-points");
 const synthesizeData = require("../synthesize-run-data/synthesize-data");
 
+const averageNewRunData = require("../synthesize-run-data/average-new-run-data");
 const getTopRuns = require("../synthesize-run-data/get-top-runs");
 const getBestRuns = require("../synthesize-run-data/get-best-run");
 const getHighestLevelPass = require("../synthesize-run-data/get-highest-pass");
@@ -10,26 +11,10 @@ const getHighestLevelPass = require("../synthesize-run-data/get-highest-pass");
 const router = (app) => {
     app.post("/calculate-ninja-points", async (request, response) => {
         try {
-            const run = { ...request.body };
+            let run = { ...request.body };
             await synthesizeData(run); // Update track data before calculating true ninja points
 
-            let trackMetric = await prisma.tracks.findUnique({
-                where: {
-                    track_name_creator: {
-                        track_name: request.body.trackName,
-                        creator: request.body.creator,
-                    },
-                },
-                select: {
-                    creator: true,
-                    track_name: true,
-                    length: true,
-                    consistency: true,
-                    ninja_level: true,
-                },
-            });
-
-            let result = await CalcNP(request.body);
+            run.ninjaPoints = await CalcNP(request.body);
 
             await prisma.tracks.update({
                 where: {
@@ -45,6 +30,17 @@ const router = (app) => {
                 },
             });
 
+            await prisma.creators.update({
+                where: {
+                    creator: run.creator,
+                },
+                data: {
+                    total_track_ninja_points: {
+                        increment: run.ninjaPoints,
+                    },
+                },
+            });
+
             await prisma.runs.update({
                 where: {
                     track_name_id_creator: {
@@ -54,7 +50,7 @@ const router = (app) => {
                     },
                 },
                 data: {
-                    ninja_points: result,
+                    ninja_points: run.ninjaPoints,
                 }, // map run fields over data property
             });
 
@@ -71,7 +67,7 @@ const router = (app) => {
                         increment: 1,
                     },
                     total_ninja_points: {
-                        increment: run.ninjaPoints,
+                        increment: Math.round(run.ninjaPoints),
                     },
                     top_100_runs: top100Runs,
                     highest_np_run: bestNP,
@@ -79,7 +75,49 @@ const router = (app) => {
                 },
             });
 
-            return response.json({ ninjaPoints: result });
+            let currentTrackData = await prisma.tracks.findFirst({
+                where: {
+                    track_name: run.trackName,
+                    creator: run.creator,
+                },
+            });
+
+            // Update Average NP
+            averageNewRunData(
+                currentTrackData.nRuns,
+                "average_np",
+                currentTrackData.total_np,
+                prisma.tracks,
+                {
+                    track_name_creator: {
+                        track_name: run.trackName,
+                        creator: run.creator,
+                    },
+                }
+            );
+
+            let currentCreatorData = await prisma.creators.findFirst({
+                where: {
+                    creator: run.creator,
+                },
+                select: {
+                    total_track_ninja_points: true,
+                    nTracks: true,
+                },
+            });
+
+            // Update Average Track NP
+            averageNewRunData(
+                currentCreatorData.nTracks,
+                "average_track_ninja_points",
+                currentCreatorData.total_track_ninja_points,
+                prisma.creators,
+                {
+                    creator: run.creator,
+                }
+            );
+
+            return response.json({ ninjaPoints: run.ninjaPoints });
         } catch (error) {
             console.log(error);
             return response.status(400).send("BAD REQUEST");

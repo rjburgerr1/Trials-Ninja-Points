@@ -1,5 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const averageNewRunData = require("./average-new-run-data");
 
 /**
  * This function merges new run data with existing track data
@@ -80,19 +81,6 @@ const synthesizeData = async (newRun) => {
             },
         }
     );
-    // Update Average NP
-    averageNewRunData(
-        currentTrackData.nRuns,
-        "average_np",
-        currentTrackData.total_np,
-        prisma.tracks,
-        {
-            track_name_creator: {
-                track_name: newRun.trackName,
-                creator: newRun.creator,
-            },
-        }
-    );
 
     let currentCreatorData = await prisma.creators.findFirst({
         where: {
@@ -155,16 +143,7 @@ const synthesizeData = async (newRun) => {
             creator: newRun.creator,
         }
     );
-    // Update Average Faults
-    averageNewRunData(
-        currentCreatorData.nTracks,
-        "average_track_ninja_points",
-        currentCreatorData.total_track_ninja_points,
-        prisma.creators,
-        {
-            creator: newRun.creator,
-        }
-    );
+
     // Update Average NP
     averageNewRunData(
         currentCreatorData.nTracks,
@@ -175,24 +154,6 @@ const synthesizeData = async (newRun) => {
             creator: newRun.creator,
         }
     );
-};
-
-const averageNewRunData = async (
-    nField,
-    fieldToUpdate,
-    fieldToUpdatesTotal,
-    tableToUpdate,
-    whereCondition
-) => {
-    let updatedValue = Number(fieldToUpdatesTotal) / Number(nField);
-
-    let updatedObj = {};
-    updatedObj[fieldToUpdate] = updatedValue;
-
-    await tableToUpdate.update({
-        where: whereCondition,
-        data: updatedObj,
-    });
 };
 
 module.exports = synthesizeData;

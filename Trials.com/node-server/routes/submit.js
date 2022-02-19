@@ -120,9 +120,9 @@ const router = (app) => {
 };
 
 const calcLength = (runLength) => {
-    if (runLength == "Medium") {
+    if (runLength == "Long") {
         return 1.75;
-    } else if (runLength == "Long") {
+    } else if (runLength == "Medium") {
         return 1.4;
     } else {
         return 1.1;

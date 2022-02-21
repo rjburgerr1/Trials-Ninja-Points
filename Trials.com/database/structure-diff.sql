@@ -11,3 +11,9 @@ ADD COLUMN `video` VARCHAR(100) NULL DEFAULT NULL AFTER `date`;
 
 ALTER TABLE `trialsnp`.`runshistory` 
 ADD COLUMN `video` VARCHAR(100) NULL DEFAULT NULL AFTER `date`;
+
+ALTER TABLE `trialsnp`.`profiles` 
+CHANGE COLUMN `banner-url` `banner-url` VARCHAR(1100) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL DEFAULT 'https://trialsnp-photos.s3.amazonaws.com/profiles/banners/defaultProfileBanner.png' ;
+
+ALTER TABLE `trialsnp`.`profileshistory` 
+CHANGE COLUMN `banner-url` `banner-url` VARCHAR(1100) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL DEFAULT 'https://trialsnp-photos.s3.amazonaws.com/profiles/banners/defaultProfileBanner.png' ;

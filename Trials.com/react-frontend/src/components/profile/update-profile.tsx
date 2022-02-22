@@ -1,51 +1,49 @@
 import * as Yup from "yup";
+import { Alert } from "react-bootstrap";
+import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
+import { CustomTextField, CustomTextArea } from "../data-entry/text-inputs";
+import { fileUpload } from "../helpers/file-upload";
+import { Form, Formik } from "formik";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../contexts/auth-context";
+import { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import Loading from "../helpers/loading";
-import { ImageUpload } from "../helpers/image-upload";
-import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
-import { useRef, useState, useEffect } from "react";
-import { useAuth } from "../../contexts/auth-context";
-import { Link } from "react-router-dom";
-import { Form, Formik } from "formik";
-import { Alert } from "react-bootstrap";
-import { CustomTextField, CustomTextArea } from "../data-entry/text-inputs";
 
 interface FormValues {
+    aliases: string;
+    banner: string;
+    bio: string;
+    confirmPassword: string;
+    country: string;
     email: string;
     password: string;
-    confirmPassword: string;
-    bio: string;
-    country: string;
     region: string;
-    aliases: string;
     username: string;
-    bannerURL: string;
 }
 
 export default function UpdateProfile() {
     const {
         currentUser,
+        firebase,
         updatePassword,
         updateEmail,
         updateUsername,
-        firebase,
     } = useAuth();
+
     const [initialValues, setInitialValues] = useState<FormValues | null>(null);
 
-    const fileInput = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(currentUser.email);
     const passwordRef = useRef<HTMLInputElement>(null);
     const passwordConfirmRef = useRef<HTMLInputElement>(null);
     const usernameRef = useRef<HTMLInputElement>(currentUser.displayName);
 
     // These are used as values to check against if the original value has changed when updating a profile
+    const [aliases, setAliases] = useState(null);
     const [bio, setBio] = useState(null);
     const [country, setCountry] = useState(null);
+    const [file, setFile] = useState<File | null>();
     const [region, setRegion] = useState(null);
-    const [aliases, setAliases] = useState(null);
-    const [bannerURL, setBannerURL] = useState(
-        "https://trials-np-images.s3.amazonaws.com//uploads/defaultProfileBanner.png"
-    );
 
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
@@ -75,7 +73,7 @@ export default function UpdateProfile() {
                 region: profile.data.region || "",
                 aliases: profile.data.aliases || "",
                 username: currentUser.displayName,
-                bannerURL: profile.data.bannerURL || "",
+                banner: "",
             });
         };
         getProfile();
@@ -83,7 +81,6 @@ export default function UpdateProfile() {
 
     // Formik onSubmit handler
     const handleOnSubmit = async (values: any) => {
-        console.log(values);
         if (
             passwordRef.current &&
             passwordConfirmRef.current &&
@@ -171,6 +168,10 @@ export default function UpdateProfile() {
             );
         }
 
+        if (file) {
+            promises.push(fileUpload(file, currentUser));
+        }
+
         // Stack all pending updates to be called
         if (promises.length !== 0) {
             Promise.all(promises)
@@ -211,7 +212,6 @@ export default function UpdateProfile() {
         country: Yup.string().max(3).nullable(),
         aliases: Yup.string().max(150).nullable(),
         username: Yup.string().max(25),
-        bannerURL: Yup.string().nullable(),
     });
 
     return confirmation === true ? ( // Update view to show the profile is updated if it has been
@@ -257,7 +257,7 @@ export default function UpdateProfile() {
                                 label="Password"
                                 id="password-field"
                                 className="formik-field"
-                                name="updaste-password"
+                                name="update-password"
                                 onChange={props.handleChange}
                                 placeholder="adl12=da0q-12lpf'a"
                                 type="password"
@@ -326,7 +326,17 @@ export default function UpdateProfile() {
 
                             <label className="form-label">Profile Banner</label>
                             <div id="image-upload-input">
-                                <ImageUpload />
+                                <input
+                                    type="file"
+                                    name="banner"
+                                    onChange={(e) => {
+                                        e.target.files
+                                            ? setFile(e.target.files[0])
+                                            : setFile(null);
+                                    }}
+                                    onSubmit={handleOnSubmit}
+                                    accept="image/*"
+                                />
                             </div>
                             <div className="submit-button">
                                 <button

@@ -30,7 +30,7 @@ const Profile: React.FC = (props: any) => {
     const [highestLevelPass, setHighestLevelPass] = useState(0);
     const [aliases, setAliases] = useState("");
     const [bannerURL, setBannerURL] = useState(
-        "https://trials-np-images.s3.amazonaws.com//uploads/defaultProfileBanner.png"
+        "https://trialsnp-photos.s3.amazonaws.com/profiles/banners/defaultProfileBanner.png"
     );
 
     useEffect(() => {
@@ -52,6 +52,7 @@ const Profile: React.FC = (props: any) => {
                     });
                 }
                 setAliases(profile.data.aliases);
+                setBannerURL(profile.data.banner_url);
                 setBio(profile.data.bio);
                 setCountry(profile.data.country);
                 setCreateDate(formatCreateDate(profile.data.create_date));

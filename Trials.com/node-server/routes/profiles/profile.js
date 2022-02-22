@@ -1,6 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
-const AWS = require("aws-sdk");
 
 const router = (app) => {
     app.get("/profile-banner", async (request, response) => {

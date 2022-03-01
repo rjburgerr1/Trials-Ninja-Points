@@ -10,14 +10,14 @@ export const convertLength = (length: number) => {
 
 export const convertConsistency = (consistency: number) => {
     if (consistency <= 0.9) {
-        return "Not At All";
+        return "Extremely";
     } else if (consistency > 0.9 && consistency <= 1.2) {
-        return "Not Very";
+        return "Very";
     } else if (consistency > 1.2 && consistency <= 1.6) {
         return "Moderately";
     } else if (consistency > 1.6 && consistency <= 2) {
-        return "Very";
+        return "Not Very";
     } else {
-        return "Extremely";
+        return "Not At All";
     }
 };

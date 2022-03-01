@@ -95,15 +95,15 @@ const CalcConsistencyWeight = (consistency) => {
     // consistency is garnered from calculate-ninja-points props
     switch (consistency) {
         case "Not_At_All":
-            return 0.9;
+            return 2.3;
         case "Not_Very":
-            return 1.2;
+            return 2;
         case "Moderately":
             return 1.6;
         case "Very":
-            return 2;
+            return 1.2;
         case "Extremely":
-            return 2.3;
+            return 0.9;
         default:
             return 0;
     }

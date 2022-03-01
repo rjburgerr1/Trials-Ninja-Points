@@ -131,15 +131,15 @@ const calcLength = (runLength) => {
 
 const calcConsistency = (runConsistency) => {
     if (runConsistency == "Not_At_All") {
-        return 0.9;
+        return 2.3;
     } else if (runConsistency == "Not_Very") {
-        return 1.2;
+        return 2;
     } else if (runConsistency == "Moderately") {
         return 1.6;
     } else if (runConsistency == "Very") {
-        return 2;
+        return 1.2;
     } else {
-        return 2.3;
+        return 0.9;
     }
 };
 

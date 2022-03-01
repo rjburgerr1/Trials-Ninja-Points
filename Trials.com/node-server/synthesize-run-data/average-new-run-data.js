@@ -8,7 +8,7 @@ const averageNewRunData = async (
     let updatedValue = Number(fieldToUpdatesTotal) / Number(nField);
 
     let updatedObj = {};
-    updatedObj[fieldToUpdate] = updatedValue;
+    updatedObj[fieldToUpdate] = Number(updatedValue);
 
     await tableToUpdate.update({
         where: whereCondition,

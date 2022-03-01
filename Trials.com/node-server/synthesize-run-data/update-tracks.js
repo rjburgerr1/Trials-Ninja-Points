@@ -13,7 +13,7 @@ const UpdateTracks = () => {
         var CronJob = require("cron").CronJob;
 
         var job = new CronJob(
-            "0 0 * * * *", // Hourly CRON job
+            "0 30 * * * *", // Hourly CRON job
             async function () {
                 // Get all runs and select fields that are used in calculating NP
                 const runs = await prisma.runs.findMany({

@@ -136,7 +136,15 @@ export const setRunsTableBodyCell = (
             </Link>
         );
     } else if (cell.column.Header === "Video") {
-        return cell.value !== null ? <CenteredModal url={cell.value} /> : "N/A";
+        if (
+            cell.value === "" ||
+            cell.value === null ||
+            cell.value === undefined
+        ) {
+            return "N/A";
+        } else {
+            return <CenteredModal url={cell.value} />;
+        }
     } else {
         return <div>{cell.render("Cell")}</div>;
     }

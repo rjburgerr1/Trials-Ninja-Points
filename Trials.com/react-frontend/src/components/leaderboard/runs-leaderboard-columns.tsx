@@ -145,7 +145,10 @@ export const setRunsTableBodyCell = (
         } else {
             return <CenteredModal url={cell.value} />;
         }
-    } else {
+    } else if (cell.column.Header === "Consistency") {
+        return cell.value?.replace('_', ' ');
+    } 
+    else {
         return <div>{cell.render("Cell")}</div>;
     }
 };

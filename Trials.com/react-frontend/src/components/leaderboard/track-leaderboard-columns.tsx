@@ -10,6 +10,13 @@ import { Link } from "react-router-dom";
 
 export const TrackLeaderboardColumns = [
     {
+        Header: "Rank",
+        accessor: "rank",
+        width: 110,
+        Filter: SliderColumnFilter,
+        filter: filterBetween,
+    },
+    {
         Header: "Rider", // Header is the title for the column being displayed (can be anything)
         accessor: "rider", // accessor is based off of the prisma schemas name mapped for the database column you want
         disableFilters: true,
@@ -25,13 +32,6 @@ export const TrackLeaderboardColumns = [
         Header: "Ninja Level",
         accessor: "ninja_level",
         width: 125,
-        Filter: SliderColumnFilter,
-        filter: filterBetween,
-    },
-    {
-        Header: "Rank",
-        accessor: "rank",
-        width: 110,
         Filter: SliderColumnFilter,
         filter: filterBetween,
     },

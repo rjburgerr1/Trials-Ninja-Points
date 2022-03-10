@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from "react";
+import "./sass-base/main.scss";
 import { AuthProvider } from "./contexts/auth-context";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { SocketProvider, socket } from "./contexts/socket-context";
+import {
+    CreatorsLeaderboardColumns,
+    setCreatorsTableBodyCell,
+    setCreatorsTableHeaderInfoTip,
+    creatorsLBEffect,
+} from "./components/leaderboard/creators-leaderboard-columns";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+import { Leaderboard } from "./components/leaderboard/leaderboard";
+import {
+    MainLeaderboardColumns,
+    setMainTableBodyCell,
+    setMainTableHeaderInfoTip,
+    mainLBEffect,
+} from "./components/leaderboard/main-leaderboard-columns";
 import {
     NinjaLevelHelp,
     LengthHelp,
     ConsistencyHelp,
 } from "./components/help-info/run-submission-help";
-
-import {
-    TracksLeaderboardColumns,
-    setTracksTableBodyCell,
-    setTracksTableHeaderInfoTip,
-    tracksLBEffect,
-} from "./components/leaderboard/tracks-leaderboard-columns";
+import { Profile } from "./components/profile/profile";
+import { SocketProvider, socket } from "./contexts/socket-context";
 import {
     setRunsTableBodyCell,
     setRunsTableHeaderInfoTip,
@@ -22,23 +30,20 @@ import {
     RunsLeaderboardColumns,
 } from "./components/leaderboard/runs-leaderboard-columns";
 import {
-    MainLeaderboardColumns,
-    setMainTableBodyCell,
-    setMainTableHeaderInfoTip,
-    mainLBEffect,
-} from "./components/leaderboard/main-leaderboard-columns";
-import Loading from "./components/helpers/loading";
+    TracksLeaderboardColumns,
+    setTracksTableBodyCell,
+    setTracksTableHeaderInfoTip,
+    tracksLBEffect,
+} from "./components/leaderboard/tracks-leaderboard-columns";
 import ForgotPassword from "./pages/forgot-password";
+import GenericPage from "./pages/generic-page";
+import Loading from "./components/helpers/loading";
 import PrivateRoute from "./components/helpers/private-route";
-import Profile from "./pages/profile";
-import Creators from "./pages/creators";
 import SignInSignUp from "./pages/signin-signup";
-import SubmitRun from "./pages/submit-run";
-import SubmittedRun from "./pages/submitted-run";
-import LeaderboardPage from "./pages/leaderboard-page";
-import UpdateProfile from "./pages/update-profile";
-import "./sass-base/main.scss";
+import SubmitRun from "./components/submit-run";
+import SubmittedRun from "./components/submitted-run";
 import Track from "./pages/track";
+import UpdateProfile from "./components/profile/update-profile";
 
 function App(props: any) {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -76,55 +81,99 @@ function App(props: any) {
                             <Route
                                 path="/tracks"
                                 element={
-                                    <LeaderboardPage
-                                        columns={TracksLeaderboardColumns}
-                                        effect={tracksLBEffect}
-                                        sortBy="average_np"
-                                        setTableBodyCell={
-                                            setTracksTableBodyCell
-                                        }
-                                        setTableHeaderInfoTip={
-                                            setTracksTableHeaderInfoTip
+                                    <GenericPage
+                                        component={
+                                            <Leaderboard
+                                                columns={
+                                                    TracksLeaderboardColumns
+                                                }
+                                                effect={tracksLBEffect}
+                                                sortBy="average_np"
+                                                setTableBodyCell={
+                                                    setTracksTableBodyCell
+                                                }
+                                                setTableHeaderInfoTip={
+                                                    setTracksTableHeaderInfoTip
+                                                }
+                                            />
                                         }
                                     />
+                                }
+                            />
+
+                            <Route
+                                path="/creators"
+                                element={
+                                    <GenericPage
+                                        component={
+                                            <Leaderboard
+                                                columns={
+                                                    CreatorsLeaderboardColumns
+                                                }
+                                                effect={creatorsLBEffect}
+                                                sortBy="average_track_ninja_points"
+                                                setTableBodyCell={
+                                                    setCreatorsTableBodyCell
+                                                }
+                                                setTableHeaderInfoTip={
+                                                    setCreatorsTableHeaderInfoTip
+                                                }
+                                            />
+                                        }
+                                    />
+                                }
+                            />
+
+                            <Route
+                                path="/"
+                                element={
+                                    <PrivateRoute>
+                                        <GenericPage
+                                            component={
+                                                <Leaderboard
+                                                    columns={
+                                                        MainLeaderboardColumns
+                                                    }
+                                                    effect={mainLBEffect}
+                                                    sortBy="top_100_runs"
+                                                    setTableBodyCell={
+                                                        setMainTableBodyCell
+                                                    }
+                                                    setTableHeaderInfoTip={
+                                                        setMainTableHeaderInfoTip
+                                                    }
+                                                />
+                                            }
+                                        />
+                                    </PrivateRoute>
                                 }
                             />
 
                             <Route
                                 path="/runs"
                                 element={
-                                    <LeaderboardPage
-                                        columns={RunsLeaderboardColumns}
-                                        effect={runsLBEffect}
-                                        sortBy="ninja_points"
-                                        setTableBodyCell={setRunsTableBodyCell}
-                                        setTableHeaderInfoTip={
-                                            setRunsTableHeaderInfoTip
-                                        }
-                                    />
-                                }
-                            />
-
-                            <Route path="/creators" element={<Creators />} />
-
-                            <Route
-                                path="/"
-                                element={
                                     <PrivateRoute>
-                                        <LeaderboardPage
-                                            columns={MainLeaderboardColumns}
-                                            effect={mainLBEffect}
-                                            sortBy="top_100_runs"
-                                            setTableBodyCell={
-                                                setMainTableBodyCell
-                                            }
-                                            setTableHeaderInfoTip={
-                                                setMainTableHeaderInfoTip
+                                        <GenericPage
+                                            component={
+                                                <Leaderboard
+                                                    columns={
+                                                        RunsLeaderboardColumns
+                                                    }
+                                                    effect={runsLBEffect}
+                                                    sortBy="ninja_points"
+                                                    setTableBodyCell={
+                                                        setRunsTableBodyCell
+                                                    }
+                                                    setTableHeaderInfoTip={
+                                                        setRunsTableHeaderInfoTip
+                                                    }
+                                                />
                                             }
                                         />
                                     </PrivateRoute>
                                 }
                             />
+
                             <Route
                                 path="/track/track=:name&creatorName=:creator"
                                 element={
@@ -138,7 +187,9 @@ function App(props: any) {
                                 path="/update-profile"
                                 element={
                                     <PrivateRoute>
-                                        <UpdateProfile />
+                                        <GenericPage
+                                            component={<UpdateProfile />}
+                                        />
                                     </PrivateRoute>
                                 }
                             />
@@ -147,15 +198,18 @@ function App(props: any) {
                                 path="/submitted-run"
                                 element={
                                     <PrivateRoute>
-                                        <SubmittedRun />
+                                        <GenericPage
+                                            component={<SubmittedRun />}
+                                        />
                                     </PrivateRoute>
                                 }
                             />
+
                             <Route
                                 path="/profile/:user"
                                 element={
                                     <PrivateRoute>
-                                        <Profile />
+                                        <GenericPage component={<Profile />} />
                                     </PrivateRoute>
                                 }
                             />
@@ -163,7 +217,7 @@ function App(props: any) {
                                 path="/profile"
                                 element={
                                     <PrivateRoute>
-                                        <Profile />
+                                        <GenericPage component={<Profile />} />
                                     </PrivateRoute>
                                 }
                             />
@@ -175,7 +229,9 @@ function App(props: any) {
                                     index={true}
                                     element={
                                         <PrivateRoute>
-                                            <SubmitRun />
+                                            <GenericPage
+                                                component={<SubmitRun />}
+                                            />
                                         </PrivateRoute>
                                     }
                                 />
@@ -183,8 +239,14 @@ function App(props: any) {
                                     path="ninja-level-help"
                                     element={
                                         <PrivateRoute>
-                                            <SubmitRun
-                                                help={<NinjaLevelHelp />}
+                                            <GenericPage
+                                                component={
+                                                    <SubmitRun
+                                                        help={
+                                                            <NinjaLevelHelp />
+                                                        }
+                                                    />
+                                                }
                                             />
                                         </PrivateRoute>
                                     }
@@ -193,7 +255,13 @@ function App(props: any) {
                                     path="length-help"
                                     element={
                                         <PrivateRoute>
-                                            <SubmitRun help={<LengthHelp />} />
+                                            <GenericPage
+                                                component={
+                                                    <SubmitRun
+                                                        help={<LengthHelp />}
+                                                    />
+                                                }
+                                            />
                                         </PrivateRoute>
                                     }
                                 />
@@ -201,8 +269,14 @@ function App(props: any) {
                                     path="consistency-help"
                                     element={
                                         <PrivateRoute>
-                                            <SubmitRun
-                                                help={<ConsistencyHelp />}
+                                            <GenericPage
+                                                component={
+                                                    <SubmitRun
+                                                        help={
+                                                            <ConsistencyHelp />
+                                                        }
+                                                    />
+                                                }
                                             />
                                         </PrivateRoute>
                                     }

@@ -44,7 +44,8 @@ Form {
         color: $disabled;
     }
 
-    label {
+    label,
+    a {
         color: $mustard;
         font-weight: bold;
         display: flex;

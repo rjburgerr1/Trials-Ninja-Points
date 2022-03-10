@@ -30,7 +30,7 @@ interface FormValues {
     ninjaPoints: number;
 }
 
-const SubmitRun = () => {
+const SubmitRun = (props: any) => {
     const ytVideoRegEx =
         /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
     const { currentUser } = useAuth();
@@ -141,6 +141,7 @@ const SubmitRun = () => {
 
     return (
         <div className="submit-run-form-container">
+            <div className="space-element" />
             <div className="submit-run-form" id="submit-run-form">
                 <Formik
                     initialValues={initialValues}
@@ -441,6 +442,7 @@ const SubmitRun = () => {
                     )}
                 </Formik>
             </div>
+            <div className="submit-run-help-element">{props.help}</div>
         </div>
     );
 };

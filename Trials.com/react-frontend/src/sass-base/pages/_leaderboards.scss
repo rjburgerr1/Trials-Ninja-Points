@@ -1,0 +1,9 @@
+@use "../abstracts/colors" as *;
+
+.leaderboard-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background-color: $oxford-blue;
+}

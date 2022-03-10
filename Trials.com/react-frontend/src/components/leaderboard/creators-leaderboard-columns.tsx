@@ -54,11 +54,11 @@ export const CreatorsLeaderboardColumns = [
     },
 ];
 
-export const setTableBodyCell = (cell: Cell, row: Row) => {
+export const setCreatorsTableBodyCell = (cell: Cell, row: Row) => {
     return <div>{cell.render("Cell")}</div>;
 };
 
-export const setTableHeaderInfoTip = (column: Column) => {
+export const setCreatorsTableHeaderInfoTip = (column: Column) => {
     if (column.Header === "Ninja Points (Avg)") {
         return InfoTip(
             "average-track-np",

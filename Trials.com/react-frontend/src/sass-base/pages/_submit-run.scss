@@ -1,51 +1,41 @@
 @use "../abstracts/colors" as *;
 
-.submit-run-container {
-    h4 {
-        text-align: center;
+.submit-run-form-container {
+    display: flex;
+    justify-content: space-between;
+    > .space-element {
+        width: 35em;
     }
-    background-color: $oxford-blue;
-
-    > .submit-run-header {
+    > .submit-run-form {
+        margin: 0 4em 0 4em; // This spaces out the elements on the side of the center form on the page
     }
-    > .submit-run-body {
-        margin-top: 2%;
-        display: flex;
-        justify-content: space-between;
+    > .submit-run-help-element {
+        color: $mustard;
+        width: 35em;
+        > .help-panel-container {
+            > .help-panel {
+                display: inline-block;
+                h4,
+                p {
+                    text-align: center;
+                    margin: 0;
+                }
 
-        > .submit-run-chat {
-            width: 35em;
-            margin-left: 3em;
-            margin-right: auto;
-        }
+                > .help-header {
+                    text-align: center;
+                    padding: 0.3em;
+                    color: $mustard;
+                    border-bottom: 2px solid $oxford-blue-accent;
+                    border-radius: 10px;
+                    margin-bottom: 1em;
+                }
+                > .help-info-header {
+                    color: $oxford-blue-accent;
+                }
+                > .help-info-paragraph {
+                    margin-bottom: 1.5em;
 
-        > .submit-run-form {
-        }
-
-        > .submit-run-help-element {
-            color: $mustard;
-            width: 35em;
-            margin-left: auto;
-            margin-right: 3em;
-
-            > .help-panel-container {
-                > .help-panel {
-                    > .help-header {
-                        text-align: center;
-                        padding: 0.3em;
-                        color: $mustard;
-                        border-bottom: 2px solid $oxford-blue-accent;
-                        border-radius: 10px;
-                        margin-bottom: 1em;
-                    }
-                    > .help-info-header {
-                        color: $oxford-blue-accent;
-                    }
-                    > .help-info-paragraph {
-                        margin-bottom: 1.5em;
-                        width: 35em;
-                        color: $mustard-accent;
-                    }
+                    color: $mustard-accent;
                 }
             }
         }

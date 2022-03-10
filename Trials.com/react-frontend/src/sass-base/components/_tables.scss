@@ -52,6 +52,7 @@
                         transition: 0.4s;
                         border-left: 1px solid $black;
                         border-right: 1px solid $black;
+
                         .table-header-filter {
                         }
 
@@ -62,6 +63,7 @@
                         > .column-sort-icon {
                             margin-left: auto;
                             margin-right: 2%; // These margins must match .invisible-element
+                            color: $black;
 
                             > .column-sort-icon-invisible {
                                 visibility: hidden; // When no sorting is active
@@ -77,6 +79,7 @@
                         > .table-header-info-tip {
                             margin-left: 2%;
                             margin-right: auto; // These margins must match .column-sort-icon
+                            color: $black;
 
                             > .info-tip {
                                 background-color: $oxford-blue-accent-light;
@@ -87,6 +90,7 @@
                         > .leaderboard-header-row-value {
                             text-align: center;
                             white-space: nowrap;
+                            color: $black;
                         }
                     }
                 }
@@ -119,6 +123,8 @@
                     color: $white;
                     height: 100%;
                     transition: 0.4s;
+                    display: flex !important;
+                    justify-content: center;
 
                     > .country-flag {
                         font-size: 2em;
@@ -127,8 +133,6 @@
                     &:hover {
                         color: $mustard;
                     }
-
-                    text-align: center;
                 }
             }
         }
@@ -144,10 +148,8 @@
         width: 4em;
 
         > .label {
+            color: $black;
             padding: 0.3em;
-        }
-
-        > .search-input {
         }
     }
 }

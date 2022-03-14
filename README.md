@@ -48,14 +48,12 @@ TNP is a website where ninja riders from the game franchise [Trials](https://en.
       <br>
       
       ```html
-      cd Trials.com/react-frontend/
-      npm install
-      npm start
-      ```
-      ```html
-      cd Trials.com/node-server/
-      npm install
-      npm start
+      cd Trials.com/
+      npm install --workspaces
+
+      (open two terminals for this)
+      npm start --workspace=node-server
+      npm start --workspace=react-frontend
       ```
     
   - Setup MySQL Database

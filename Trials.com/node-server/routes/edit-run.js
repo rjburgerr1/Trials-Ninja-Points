@@ -71,6 +71,33 @@ const router = (app) => {
             const ninjaLevelOffset = run.ninjaLevel - run.state.ninjaLevel;
             const faultsOffset = run.faults - run.state.faults;
 
+            let nRunsOffset;
+            if (
+                run.state.track === run.trackName &&
+                run.state.creator === run.creator
+            ) {
+                nRunsOffset = 0;
+            } else {
+                nRunsOffset = 1;
+
+                // If the track name and/or creator changes,
+                // that means that the number of runs for the old run's track
+                // needs to be reduced by 1
+                await prisma.tracks.update({
+                    where: {
+                        track_name_creator: {
+                            track_name: run.state.track,
+                            creator: run.state.creator,
+                        },
+                    },
+                    data: {
+                        nRuns: {
+                            increment: -nRunsOffset,
+                        },
+                    },
+                });
+            }
+
             await prisma.tracks.update({
                 where: {
                     track_name_creator: {
@@ -79,6 +106,9 @@ const router = (app) => {
                     },
                 },
                 data: {
+                    nRuns: {
+                        increment: nRunsOffset,
+                    },
                     total_rating: {
                         increment: ratingOffset,
                     },
@@ -102,6 +132,9 @@ const router = (app) => {
                     creator: run.creator,
                 },
                 data: {
+                    nTracks: {
+                        increment: nRunsOffset,
+                    },
                     total_track_rating: {
                         increment: ratingOffset,
                     },

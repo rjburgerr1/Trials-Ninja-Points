@@ -142,7 +142,6 @@ export const setRunsTableBodyCell = (
                     className={"current-user-row-cell"}
                     to={"/profile/" + row.values.rider}
                     state={{ user: row.values.rider }}
-                    replace={true}
                 >
                     {cell.render("Cell")}
                 </Link>
@@ -158,7 +157,6 @@ export const setRunsTableBodyCell = (
                 className={"user-row-cell"}
                 to={"/profile/" + row.values.rider}
                 state={{ user: row.values.rider }}
-                replace={true}
             >
                 {cell.render("Cell")}
             </Link>
@@ -181,7 +179,6 @@ export const setRunsTableBodyCell = (
                     track: row.values.track_name,
                     creator: row.values.creator,
                 }}
-                replace={true}
             >
                 {cell.render("Cell")}
             </Link>

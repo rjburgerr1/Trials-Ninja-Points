@@ -94,7 +94,6 @@ export const setTrackTableBodyCell = (
                 className={riderClass}
                 to={"/profile/" + row.values.rider}
                 state={{ user: row.values.rider }}
-                replace={true}
             >
                 {cell.render("Cell")}
             </Link>
@@ -117,7 +116,6 @@ export const setTrackTableBodyCell = (
                     track: row.values.track_name,
                     creatorName: row.values.creator,
                 }}
-                replace={true}
             >
                 {cell.render("Cell")}
             </Link>

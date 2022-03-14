@@ -1,0 +1,7 @@
+{
+    "name": "trials-ninja-points",
+    "workspaces": [
+        "node-server",
+        "react-frontend"
+    ]
+}

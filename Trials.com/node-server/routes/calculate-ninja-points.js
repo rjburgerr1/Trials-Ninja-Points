@@ -2,7 +2,6 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const CalcNP = require("../synthesize-run-data/calculate-ninja-points");
 const synthesizeData = require("../synthesize-run-data/synthesize-data");
-
 const averageNewRunData = require("../synthesize-run-data/average-new-run-data");
 const getTopRuns = require("../synthesize-run-data/get-top-runs");
 const getBestRuns = require("../synthesize-run-data/get-best-run");
@@ -12,6 +11,7 @@ const router = (app) => {
     app.post("/calculate-ninja-points", async (request, response) => {
         try {
             let run = { ...request.body };
+
             await synthesizeData(run); // Update track data before calculating true ninja points
 
             run.ninjaPoints = await CalcNP(request.body);
@@ -44,7 +44,7 @@ const router = (app) => {
             await prisma.runs.update({
                 where: {
                     track_name_id_creator: {
-                        id: run.rider.uid,
+                        id: run.rider.uid || run.id,
                         creator: run.creator,
                         track_name: run.trackName,
                     },
@@ -54,18 +54,17 @@ const router = (app) => {
                 }, // map run fields over data property
             });
 
-            const top100Runs = await getTopRuns(run.rider.uid);
-            const bestNP = await getBestRuns(run.rider.uid);
-            const highestLevelPass = await getHighestLevelPass(run.rider.uid);
+            const top100Runs = await getTopRuns(run.rider.uid || run.id);
+            const bestNP = await getBestRuns(run.rider.uid || run.id);
+            const highestLevelPass = await getHighestLevelPass(
+                run.rider.uid || run.id
+            );
 
             await prisma.profiles.update({
                 where: {
-                    id: run.rider.uid,
+                    id: run.rider.uid || run.id,
                 },
                 data: {
-                    runs: {
-                        increment: 1,
-                    },
                     total_ninja_points: {
                         increment: Math.round(run.ninjaPoints),
                     },

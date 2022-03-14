@@ -5,15 +5,22 @@ const averageNewRunData = async (
     tableToUpdate,
     whereCondition
 ) => {
-    let updatedValue = Number(fieldToUpdatesTotal) / Number(nField);
+    try {
+        let updatedValue =
+            nField > 0
+                ? Number(fieldToUpdatesTotal) / Number(nField)
+                : Number(fieldToUpdatesTotal);
 
-    let updatedObj = {};
-    updatedObj[fieldToUpdate] = Number(updatedValue);
+        let updatedObj = {};
+        updatedObj[fieldToUpdate] = Number(updatedValue);
 
-    await tableToUpdate.update({
-        where: whereCondition,
-        data: updatedObj,
-    });
+        await tableToUpdate.update({
+            where: whereCondition,
+            data: updatedObj,
+        });
+    } catch (error) {
+        console.error(error);
+    }
 };
 
 module.exports = averageNewRunData;

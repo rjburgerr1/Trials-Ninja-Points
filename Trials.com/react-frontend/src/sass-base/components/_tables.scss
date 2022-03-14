@@ -126,6 +126,13 @@
                     display: flex !important;
                     justify-content: center;
 
+                    #edit-run-link-container {
+                        display: flex;
+                        justify-content: space-evenly;
+                        flex-grow: 3;
+                        align-items: center;
+                    }
+
                     > .country-flag {
                         font-size: 2em;
                     }

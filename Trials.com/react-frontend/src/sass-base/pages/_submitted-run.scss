@@ -1,60 +1,43 @@
 @use "../abstracts/colors" as *;
 
-.submitted-run-page-container {
-    background-color: $oxford-blue;
+.submitted-run-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    > .submitted-run-header {
+    #complete-submission-dialogue {
+        color: $mustard;
     }
 
-    > .submitted-run-body {
-        margin-top: 2%;
-        display: flex;
-        justify-content: space-between;
+    .calculated-ninja-points-card {
+        background-color: $mustard;
 
-        > .submitted-run-chat {
-            width: 26em;
-            margin-left: 1%;
-            margin-right: auto;
+        width: 12em;
+
+        #calculated-ninja-points-header {
+            color: $black;
+            font-weight: bold;
+            text-align: center;
         }
 
-        > .submitted-run-content {
-            margin-left: 1em;
-            color: $mustard;
-            .submitted-run-container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                .calculated-ninja-points-card {
-                    background-color: $mustard;
-                    width: 12em;
-
-                    #calculated-ninja-points-header {
-                        color: $black;
-                        font-weight: bold;
-                        text-align: center;
-                    }
-
-                    #calculated-ninja-points-text {
-                        color: $black;
-                        text-align: center;
-                    }
-                }
-                #submit-another-run-button {
-                    background-color: $oxford-blue-accent;
-                    margin-top: 2em;
-                    padding: 1em;
-                    &:hover {
-                        background-color: lighten($oxford-blue-accent, 10%);
-                    }
-                }
-            }
-        }
-
-        > .submitted-run-space-element {
-            width: 26em;
-            margin-left: auto;
-            margin-right: 1%;
-            visibility: hidden;
+        #calculated-ninja-points-text {
+            color: $black;
+            text-align: center;
         }
     }
+    #submit-another-run-button {
+        background-color: $oxford-blue-accent;
+        margin-top: 2em;
+        padding: 1em;
+        &:hover {
+            background-color: lighten($oxford-blue-accent, 10%);
+        }
+    }
+}
+
+> .submitted-run-space-element {
+    width: 26em;
+    margin-left: auto;
+    margin-right: 1%;
+    visibility: hidden;
 }

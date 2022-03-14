@@ -1,4 +1,3 @@
-import * as Yup from "yup";
 import { Alert } from "react-bootstrap";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import { CustomTextField, CustomTextArea } from "../data-entry/text-inputs";
@@ -9,6 +8,7 @@ import { useAuth } from "../../contexts/auth-context";
 import { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import Loading from "../helpers/loading";
+import { UpdateProfileSchema } from "../yup-schemas/update-profile-schema";
 
 interface FormValues {
     aliases: string;
@@ -203,16 +203,6 @@ export default function UpdateProfile() {
             setLoading(false);
         }
     };
-
-    const UpdateProfileSchema = Yup.object({
-        email: Yup.string().max(320, "Email is too long"),
-        password: Yup.string().min(6).max(60),
-        bio: Yup.string().max(300, "Bio is too long").nullable(),
-        region: Yup.string().max(100).nullable(),
-        country: Yup.string().max(3).nullable(),
-        aliases: Yup.string().max(150).nullable(),
-        username: Yup.string().max(25),
-    });
 
     return confirmation === true ? ( // Update view to show the profile is updated if it has been
         <div id="updated-profile">Updated Profile!</div>

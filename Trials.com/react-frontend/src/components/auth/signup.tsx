@@ -6,6 +6,7 @@ import { signupPrisma, checkIfUserExists } from "./prisma-signup";
 import * as Yup from "yup";
 import { Field, Form, Formik } from "formik";
 import { FieldError } from "../helpers/field-error";
+import { SignupSchema } from "../yup-schemas/signup-schema";
 
 interface FormValues {
     username: string;
@@ -51,20 +52,6 @@ const SignupComponent = () => {
         email: "",
         password: "",
     };
-
-    const SignupSchema = Yup.object({
-        username: Yup.string()
-            .max(25, "Username is too long")
-            .required("Username is Required"),
-        email: Yup.string()
-            .email("Must be a valid email")
-            .max(255)
-            .required("Email is required"),
-
-        password: Yup.string()
-            .min(6, "Password is too short")
-            .required("Required"),
-    });
 
     return (
         <div className="form-container sign-up-container">

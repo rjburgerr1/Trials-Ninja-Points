@@ -17,7 +17,7 @@ const synthesizeData = async (newRun) => {
     });
 
     // Update Rating
-    averageNewRunData(
+    await averageNewRunData(
         currentTrackData.nRuns,
         "rating",
         currentTrackData.total_rating,
@@ -30,7 +30,7 @@ const synthesizeData = async (newRun) => {
         }
     );
     // Update Consistency
-    averageNewRunData(
+    await averageNewRunData(
         currentTrackData.nRuns,
         "consistency",
         currentTrackData.total_consistency,
@@ -43,7 +43,7 @@ const synthesizeData = async (newRun) => {
         }
     );
     // Update Length
-    averageNewRunData(
+    await averageNewRunData(
         currentTrackData.nRuns,
         "length",
         currentTrackData.total_length,
@@ -56,7 +56,7 @@ const synthesizeData = async (newRun) => {
         }
     );
     // Update Ninja Level
-    averageNewRunData(
+    await averageNewRunData(
         currentTrackData.nRuns,
         "ninja_level",
         currentTrackData.total_ninja_level,
@@ -68,8 +68,9 @@ const synthesizeData = async (newRun) => {
             },
         }
     );
+
     // Update Average Faults
-    averageNewRunData(
+    await averageNewRunData(
         currentTrackData.nRuns,
         "average_faults",
         currentTrackData.total_faults,
@@ -104,7 +105,7 @@ const synthesizeData = async (newRun) => {
     });
 
     // Update Rating
-    averageNewRunData(
+    await averageNewRunData(
         currentCreatorData.nTracks,
         "average_track_rating",
         currentCreatorData.total_track_rating,
@@ -114,7 +115,7 @@ const synthesizeData = async (newRun) => {
         }
     );
     // Update Consistency
-    averageNewRunData(
+    await averageNewRunData(
         currentCreatorData.nTracks,
         "average_track_length",
         currentCreatorData.total_track_length,
@@ -124,7 +125,7 @@ const synthesizeData = async (newRun) => {
         }
     );
     // Update Length
-    averageNewRunData(
+    await averageNewRunData(
         currentCreatorData.nTracks,
         "average_track_consistency",
         currentCreatorData.total_track_consistency,
@@ -134,7 +135,7 @@ const synthesizeData = async (newRun) => {
         }
     );
     // Update Ninja Level
-    averageNewRunData(
+    await averageNewRunData(
         currentCreatorData.nTracks,
         "average_track_ninja_level",
         currentCreatorData.total_track_ninja_level,
@@ -145,7 +146,7 @@ const synthesizeData = async (newRun) => {
     );
 
     // Update Average NP
-    averageNewRunData(
+    await averageNewRunData(
         currentCreatorData.nTracks,
         "average_track_faults",
         currentCreatorData.total_track_faults,

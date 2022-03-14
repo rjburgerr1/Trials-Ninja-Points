@@ -44,6 +44,8 @@ import SubmitRun from "./components/submit-run";
 import SubmittedRun from "./components/submitted-run";
 import Track from "./pages/track";
 import UpdateProfile from "./components/profile/update-profile";
+import { EditRun } from "./components/edit-run";
+import { ConfirmEdit } from "./components/confirm-edit";
 
 function App(props: any) {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -221,6 +223,30 @@ function App(props: any) {
                                     </PrivateRoute>
                                 }
                             />
+
+                            <Route path="/edit-run">
+                                <Route
+                                    path="confirm"
+                                    element={
+                                        <PrivateRoute>
+                                            <GenericPage
+                                                component={<ConfirmEdit />}
+                                            />
+                                        </PrivateRoute>
+                                    }
+                                />
+                                <Route
+                                    path=":run"
+                                    element={
+                                        <PrivateRoute>
+                                            <GenericPage
+                                                component={<EditRun />}
+                                            />
+                                        </PrivateRoute>
+                                    }
+                                />
+                            </Route>
+
                             {/* This is an example of nested routes in react router v6.0. 
                                 You provide an index (default element) if no child routes are matched
                          */}

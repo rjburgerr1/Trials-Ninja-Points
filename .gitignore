@@ -14,3 +14,4 @@ Trials.com/dockerhub_credentials.txt
 Trials.com/database/.env*
 .env*
 Trials.com/node-server/.env*
+node_modules

@@ -1,0 +1,63 @@
+@use "../abstracts/colors" as *;
+.runs-cards {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    /*Vertical center alignment:*/
+    align-items: center;
+
+    #confirm-edit-run {
+        padding: 0.5em;
+        margin: 3em;
+    }
+
+    #old-run,
+    #new-run {
+        text-align: center;
+        color: $oxford-blue-accent-light;
+        font-size: 2em;
+    }
+
+    #track-thumbnail {
+        position: relative;
+        z-index: -10;
+    }
+
+    #kitchen-sink-card {
+        text-align: center;
+        background-color: $mustard;
+        color: $black;
+        width: 28em;
+
+        .edit {
+            color: green;
+        }
+        .stale {
+            color: red;
+        }
+
+        #track-creator {
+            color: $black;
+        }
+        .list-groups {
+            .kitchen-sink-group-item {
+                background-color: $oxford-blue-accent-light;
+                display: flex;
+                justify-content: space-between;
+                color: black;
+                flex-wrap: wrap;
+                .kitchen-sink-label {
+                    padding: 0.3em;
+                    color: $oxford-blue;
+                }
+                .kitchen-sink-value {
+                    align-self: center;
+                }
+
+                #video-url {
+                    width: 13em;
+                }
+            }
+        }
+    }
+}

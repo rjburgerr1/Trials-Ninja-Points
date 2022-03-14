@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import { CustomSelect } from "./data-entry/text-inputs";
 import { Form, Field, Formik } from "formik";
-import { useAuth } from "../contexts/auth-context";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FieldError } from "./helpers/field-error";
 import { InfoTip } from "./help-info/info-tips";
-import axios from "axios";
 import InputMask from "react-input-mask";
 import Ratings from "react-ratings-declarative";
 import Slider from "@material-ui/core/Slider";
-import { SubmitRunSchema } from "./yup-schemas/submit-run-schemas";
+import { EditRunSchema } from "./yup-schemas/edit-run-schema";
 
 // Shape of form values
 interface FormValues {
@@ -27,27 +25,41 @@ interface FormValues {
     ninjaPoints: number;
 }
 
-const SubmitRun = (props: any) => {
-    const ytVideoRegEx =
-        /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
-    const { currentUser } = useAuth();
+interface LocationState {
+    rider: string;
+    track: string;
+    creator: string;
+    time: string;
+    faults: string;
+    ninjaLevel: string;
+    consistency: string;
+    video: string;
+    rating: string;
+    rank: string;
+    length: string;
+    row: any;
+}
+
+export const EditRun = () => {
     const navigate = useNavigate();
-    const [rating, setRating] = useState();
+    const location = useLocation();
+    const state = location.state as LocationState; // Type Casting, then you can get the params passed via router
+    const [rating, setRating] = useState(state ? state.rating : "");
 
     // According to formik documentation, use formik values in place of props to prevent bugs with formik and also prevent having two versions of the same prop
     // needing to be maintained inside props and formik values
     const initialValues: FormValues = {
-        trackName: "",
-        creator: "",
-        faults: "",
-        time: "",
-        length: "",
-        consistency: "",
-        ninjaLevel: "",
-        rating: "",
-        rank: "",
-        video: "",
-        rider: currentUser,
+        trackName: state.track,
+        creator: state.creator,
+        faults: state.faults,
+        time: state.time,
+        length: state.length,
+        consistency: state.consistency,
+        ninjaLevel: state.ninjaLevel,
+        rating: state.rating,
+        rank: state.rank,
+        video: state.video,
+        rider: state.rider,
         ninjaPoints: 0, // NinjaPoints are not inside the form but these initial values act as props for this component so storing ninjapoints here feels right
     };
 
@@ -86,22 +98,9 @@ const SubmitRun = (props: any) => {
     // Submit handler for submit-run form. Handles POST request and calculating NP for each run
     const handleOnSubmit = async (values: FormValues, actions: any) => {
         try {
-            // Upload run (necessary to include it in np calculation for truest/ideal np value)
-            // I suppose this could be reduced by removing a few prisma
-            // invocations if we just send the run data to the
-            // calculate-ninja-points route and then merge it with Javascript
-            await axios.post("/submit-run", {
-                ...values,
-            });
-
-            // Calculate Ninja Points for run (+update run/tracks row with np value)
-            const response = await axios.post("/calculate-ninja-points", {
-                ...values,
-            });
-
             // Show page with end result
-            navigate("/submitted-run", {
-                state: { ninjaPoints: response.data.ninjaPoints },
+            navigate("/edit-run/confirm?", {
+                state: { ...values, state },
             });
         } catch (error: any) {
             console.log(error);
@@ -110,11 +109,10 @@ const SubmitRun = (props: any) => {
 
     return (
         <div className="submit-run-form-container">
-            <div className="space-element" />
             <div className="submit-run-form" id="submit-run-form">
                 <Formik
                     initialValues={initialValues}
-                    validationSchema={SubmitRunSchema}
+                    validationSchema={EditRunSchema}
                     onSubmit={handleOnSubmit}
                 >
                     {(props) => (
@@ -250,6 +248,7 @@ const SubmitRun = (props: any) => {
                                     onChange={(event, value) =>
                                         props.setFieldValue("ninjaLevel", value)
                                     }
+                                    value={Number(props.values.ninjaLevel)}
                                 />
                                 <label className="form-label">
                                     <Link
@@ -411,37 +410,9 @@ const SubmitRun = (props: any) => {
                     )}
                 </Formik>
             </div>
-            <div className="submit-run-help-element">{props.help}</div>
         </div>
     );
 };
-
-/* Save
- validateForm().then((errors) => {
-                                            if (
-                                                Object.entries(errors)
-                                                    .length === 0
-                                            ) {
-                                                // verify if errors object is equals to '{}' an empty object
-                                                console.log("valid");
-                                            } else {
-                                                console.log("errors: ", errors);
-                                                console.log(props.values);
-                                            }
-                                        });
-*/
-
-/* Save this for later in case we can allow people to submit runs for others in the future
- {props.errors.rider && props.touched.rider ? (
-                                    <div className="field-error">
-                                        {props.errors.rider}
-                                    </div>
-                                ) : (
-                                    <div className="field-error-invisible">
-                                        {props.errors.rider}
-                                    </div>
-                                )}
-*/
 
 const marks = [
     {
@@ -492,5 +463,3 @@ const marks = [
 function valuetext(value: number) {
     return `${value}`;
 }
-
-export default SubmitRun;

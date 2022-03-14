@@ -1,0 +1,16 @@
+@use "../abstracts/colors" as *;
+
+@mixin icons {
+    transition: 0.3s;
+    #edit-run-icon {
+        color: $mustard;
+
+        &:hover {
+            color: lighten($mustard, 20%);
+        }
+    }
+}
+
+.icon {
+    @include icons;
+}

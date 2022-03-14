@@ -1,9 +1,10 @@
 import { Cell, Column, Row } from "react-table";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { SelectColumnFilter } from "./filters/select-filter";
 import { SliderColumnFilter, filterBetween } from "./filters/slider-filter";
 import { InfoTip } from "../help-info/info-tips";
 import { formatCreateDate } from "../helpers/format-dates";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortAmountDown } from "@fortawesome/free-solid-svg-icons";
 import { getRunsLB } from "./leaderboard-requests";
 import { Link } from "react-router-dom";
@@ -19,6 +20,12 @@ export const RunsLeaderboardColumns = [
         Header: "Track",
         accessor: "track_name",
         width: 210,
+        disableFilters: true,
+    },
+    {
+        Header: "Creator",
+        accessor: "creator",
+        width: 190,
         disableFilters: true,
     },
     {
@@ -97,14 +104,58 @@ export const setRunsTableBodyCell = (
     currentUsername: any
 ) => {
     if (cell.column.Header === "Rider") {
-        const riderClass =
-            row.values.rider === currentUsername
-                ? "current-user-row-cell"
-                : "user-row-cell";
-
-        return (
+        return row.values.rider === currentUsername ? (
+            <div id="edit-run-link-container">
+                <Link
+                    className={"edit-run link icon"}
+                    to={
+                        "/edit-run/" +
+                        row.values.rider +
+                        "?track=" +
+                        row.values.track_name +
+                        "&creator=" +
+                        row.values.creator
+                    }
+                    state={{
+                        rider: row.values.rider,
+                        track: row.values.track_name,
+                        creator: row.values.creator,
+                        rank: row.values.rank,
+                        faults: row.values.faults,
+                        time: row.values.time,
+                        ninjaLevel: row.values.ninja_level,
+                        length: row.values.length,
+                        consistency: row.values.consistency,
+                        video: row.values.video,
+                        rating: row.values.rating,
+                        ninjaPoints: row.values.ninja_points,
+                    }}
+                >
+                    <FontAwesomeIcon
+                        id="edit-run-icon"
+                        icon={faEdit}
+                        size="2x"
+                        tabIndex={-1}
+                    />
+                </Link>
+                <Link
+                    className={"current-user-row-cell"}
+                    to={"/profile/" + row.values.rider}
+                    state={{ user: row.values.rider }}
+                    replace={true}
+                >
+                    {cell.render("Cell")}
+                </Link>
+                <FontAwesomeIcon
+                    className="invisible-element"
+                    icon={faEdit}
+                    size="2x"
+                    tabIndex={-1}
+                />
+            </div>
+        ) : (
             <Link
-                className={riderClass}
+                className={"user-row-cell"}
                 to={"/profile/" + row.values.rider}
                 state={{ user: row.values.rider }}
                 replace={true}
@@ -128,7 +179,7 @@ export const setRunsTableBodyCell = (
                 }
                 state={{
                     track: row.values.track_name,
-                    creatorName: row.values.creator,
+                    creator: row.values.creator,
                 }}
                 replace={true}
             >
@@ -146,9 +197,8 @@ export const setRunsTableBodyCell = (
             return <CenteredModal url={cell.value} />;
         }
     } else if (cell.column.Header === "Consistency") {
-        return cell.value?.replace('_', ' ');
-    } 
-    else {
+        return cell.value?.replace("_", " ");
+    } else {
         return <div>{cell.render("Cell")}</div>;
     }
 };
@@ -181,9 +231,7 @@ const resolveData = async (setData: any, runs?: any, date?: Date) => {
             );
             setData(data);
         }
-    } catch (error: any) {
-        console.error(error.message);
-    }
+    } catch (error: any) {}
 };
 
 export const runsLBEffect = (setData: any, date?: Date, runs?: any) => {

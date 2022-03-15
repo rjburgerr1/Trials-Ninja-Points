@@ -12,7 +12,7 @@ TNP is a website where ninja riders from the game franchise [Trials](https://en.
 
 | Metric | Type | Description |
 | --- | --- | --- |
-| Faults  | Objective | The amount of times a player resets to a checkpoint during a run on a track in game. (1-499 faults possible) |
+| Faults  | Objective | The amount of times a player resets to a checkpoint during a run on a track in game. (1-499 faults possible per run) |
 | Time | Objective | The amount of time a player took to pass a track in game. (<29:59.999 minutes possible) |
 | Ninja Level | Subjective |  The rider's own opinion of how difficult a track feels to them, relative to other tracks that they've played (rated on a scale of {0.5 > x < 9.5}) | 
 | Length | Subjective |  The rider's own opinion of how long a track feels to them, relative to other tracks they've played. Thought of based on number of obstacles. (Rated on a [likert scale](https://en.wikipedia.org/wiki/Likert_scale)) | 
@@ -37,7 +37,7 @@ TNP is a website where ninja riders from the game franchise [Trials](https://en.
 
 ## Quick-start for Development
 ### 1. Install [Node.js](https://nodejs.org/en/download/) (npm -v to check version)
-### 2. Clone Repo `git clone https://github.com/rjburgerr1/Trials-Ninja-Points.git`
+### 2. Fork & Clone Repo `git clone https://github.com/rjburgerr1/Trials-Ninja-Points.git`
 
  
   - Setup for React Frontend App & Node Backend Server

@@ -33,29 +33,43 @@ TNP is a website where ninja riders from the game franchise [Trials](https://en.
 
 <br>
 
-<br><br>
+<br>
 
-## Quick-start for Development
+## Quick-start for Contributing
 ### 1. Install [Node.js](https://nodejs.org/en/download/) (npm -v to check version)
 ### 2. Fork & Clone Repo `git clone https://github.com/rjburgerr1/Trials-Ninja-Points.git`
 
  
   - Setup for React Frontend App & Node Backend Server
-      1. Change directory into base directory
-      1. Install Node Modules
-      1. Run start script
+      1. Change directory into base directory `cd Trials.com/`
+      1. Install Node Modules `npm install --workspaces`
+      1. Setup .env files using .env.development.sample files    
+          1. edit `~Trials.com/react-frontend/.env.development.sample` & `~Trials.com/node-server/.env.development.sample` by filling out required environment variables
+          1. rename .env.development.sample to .env.development
+      
+      
+      1. Run start scripts for node backend & react frontend `npm start --workspace=node-server && npm start --workspace=react-frontend`
       
       <br>
       
       ```html
+      # All commands for above steps, to start.
+      
+      # Change directory into base directory
       cd Trials.com/
+
+      # Install node_modules
       npm install --workspaces
 
-      (open two terminals for this)
+      # Setup .env files
+      nano node-server/.env.development.sample
+      nano react-frontend/.env.development.sample
+
+      # Run start scripts for node-server & react-frontend (open two terminals for this)
       npm start --workspace=node-server
       npm start --workspace=react-frontend
       ```
     
   - Setup MySQL Database
     1. Install MySQL workbench (optional) & MySQL Server (If on windows, this can be done with the [MySQL installer](https://dev.mysql.com/downloads/installer/))
-    2. Run [init.sql](https://github.com/rjburgerr1/Trials-Ninja-Points/blob/master/Trials.com/database/init.sql) + [structure-diff.sql](https://github.com/rjburgerr1/Trials-Ninja-Points/blob/master/Trials.com/database/structure-diff.sql) scriptsi in order
+    2. Run [init.sql](https://github.com/rjburgerr1/Trials-Ninja-Points/blob/master/Trials.com/database/init.sql) + [structure-diff.sql](https://github.com/rjburgerr1/Trials-Ninja-Points/blob/master/Trials.com/database/structure-diff.sql) scripts in order

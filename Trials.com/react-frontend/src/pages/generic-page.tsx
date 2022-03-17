@@ -16,7 +16,9 @@ export default function GenericPage(props: any) {
             <div className="page-header">
                 <NavBar {...props} />
             </div>
-            <div className="page-body">{props.component}</div>
+            <div className="page-body" id={props.bodyID}>
+                {props.component}
+            </div>
         </div>
     );
 }

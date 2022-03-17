@@ -156,6 +156,7 @@ function App(props: any) {
                                 element={
                                     <PrivateRoute>
                                         <GenericPage
+                                            bodyID="runs-leaderboard"
                                             component={
                                                 <Leaderboard
                                                     columns={

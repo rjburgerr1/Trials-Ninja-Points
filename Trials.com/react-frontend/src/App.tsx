@@ -44,14 +44,25 @@ import SubmitRun from "./components/submit-run";
 import SubmittedRun from "./components/submitted-run";
 import Track from "./pages/track";
 import UpdateProfile from "./components/profile/update-profile";
+import axios from "axios";
 import { EditRun } from "./components/edit-run";
 import { ConfirmEdit } from "./components/confirm-edit";
 
 function App(props: any) {
     const [isLoaded, setIsLoaded] = useState(false);
 
+    const instance = axios.create({
+        baseURL: "http://localhost:5000",
+    });
+
     useEffect(() => {
         setIsLoaded(true);
+
+        const test = async () => {
+            const response = await instance.get("/flask/read-lb", {});
+            console.log(response);
+        };
+        test();
     }, []); // here
 
     return !isLoaded ? (

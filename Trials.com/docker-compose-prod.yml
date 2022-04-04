@@ -50,6 +50,14 @@ services:
             - mysql-db
         env_file:
             - "./node-server/.env.production"
+
+    flask-server:
+        build:
+            context: ./flask-backend
+            dockerfile: Dockerfile
+        ports:
+            - $FLASK_LOCAL_PORT:$FLASK_DOCKER_PORT
+        restart: always
 volumes:
     mysql: ~
 

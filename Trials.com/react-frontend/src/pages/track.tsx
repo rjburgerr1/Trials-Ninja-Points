@@ -97,7 +97,7 @@ const Track: React.FC = (props: any) => {
             </div>
         </div>
     ) : (
-        <Loading type="spokes" color="green" />
+        <Loading type="spokes" color="green" height={500} width={500} />
     );
 };
 

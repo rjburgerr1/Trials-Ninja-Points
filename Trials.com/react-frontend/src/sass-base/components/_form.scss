@@ -51,6 +51,15 @@ Form {
         display: flex;
     }
 
+    #image-upload-input {
+        display: flex;
+    }
+
+    #scan-lb-input,
+    .loading {
+        display: inline-block;
+    }
+
     input[type="email"],
     input[type="text"],
     input[type="number"],

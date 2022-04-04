@@ -85,6 +85,14 @@ services:
         env_file:
             - "./react-frontend/.env.development"
 
+    flask-server:
+        build:
+            context: ./flask-backend
+            dockerfile: Dockerfile
+        ports:
+            - $FLASK_LOCAL_PORT:$FLASK_DOCKER_PORT
+        restart: always
+
     nginx:
         depends_on:
             - node-server

@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { CustomSelect } from "./data-entry/text-inputs";
-import { Form, Field, Formik } from "formik";
-import { useAuth } from "../contexts/auth-context";
-import { Link, useNavigate } from "react-router-dom";
-import { FieldError } from "./helpers/field-error";
 import { InfoTip } from "./help-info/info-tips";
+import { Field, Form, Formik } from "formik";
+import { FieldError } from "./helpers/field-error";
+import { Link, useNavigate } from "react-router-dom";
+import { List } from "./helpers/lists";
+import { SubmitRunSchema } from "./yup-schemas/submit-run-schemas";
+import { useAuth } from "../contexts/auth-context";
 import axios from "axios";
 import InputMask from "react-input-mask";
+import Loading from "../components/helpers/loading";
 import Ratings from "react-ratings-declarative";
 import Slider from "@material-ui/core/Slider";
-import { SubmitRunSchema } from "./yup-schemas/submit-run-schemas";
 
 // Shape of form values
 interface FormValues {
@@ -28,11 +30,18 @@ interface FormValues {
 }
 
 const SubmitRun = (props: any) => {
-    const ytVideoRegEx =
-        /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+    const instance = axios.create({
+        baseURL: process.env.REACT_APP_AXIOS_FLASK_URL,
+    });
     const { currentUser } = useAuth();
     const navigate = useNavigate();
     const [rating, setRating] = useState();
+    const [runs, setRuns] = useState([]);
+    const [trackName, setTrackName] = useState();
+    const [creator, setCreator] = useState();
+    const [time, setTime] = useState();
+    const [faults, setFaults] = useState();
+    const [isLoading, setIsLoading] = useState(false);
 
     // According to formik documentation, use formik values in place of props to prevent bugs with formik and also prevent having two versions of the same prop
     // needing to be maintained inside props and formik values
@@ -58,6 +67,26 @@ const SubmitRun = (props: any) => {
         ) {
             props.setFieldValue("faults", value);
         }
+    };
+
+    const scanLB = async (file: File, filename: string, props: any) => {
+        setIsLoading(true);
+
+        const response = await instance.get("/flask/read-lb", {
+            params: { file: file, filename: filename },
+        });
+
+        let runsStr = response.data[0].match(/(?<="data":)(.*)(?=})/g);
+        let runsArr = JSON.parse(runsStr);
+
+        setTrackName(response.data[1]);
+        setCreator(response.data[2]);
+        await props.setFieldValue("trackName", response.data[1]);
+        await props.setFieldValue("creator", response.data[2]);
+
+        setRuns(runsArr);
+
+        setIsLoading(false);
     };
 
     const restrictTime = (props: any, value: any) => {
@@ -110,7 +139,16 @@ const SubmitRun = (props: any) => {
 
     return (
         <div className="submit-run-form-container">
-            <div className="space-element" />
+            <div className="submit-run-autofill-element">
+                <List
+                    items={runs}
+                    title={trackName}
+                    creator={creator}
+                    setTime={setTime}
+                    setFaults={setFaults}
+                />
+            </div>
+
             <div className="submit-run-form" id="submit-run-form">
                 <Formik
                     initialValues={initialValues}
@@ -119,6 +157,48 @@ const SubmitRun = (props: any) => {
                 >
                     {(props) => (
                         <Form>
+                            <label className="form-label">
+                                <Link
+                                    className="form-link"
+                                    to={"/submit-run/scan-lb-help"}
+                                    replace={false}
+                                    tabIndex={-1}
+                                >
+                                    Scan Leaderboard?
+                                </Link>
+                                {InfoTip(
+                                    "scan-leaderboard",
+                                    "This will take an image of an in-game leaderboard to scan. It will then autofill parts of this submission form with your run info."
+                                )}
+                            </label>
+
+                            <div id="image-upload-input">
+                                <input
+                                    id="scan-lb-input"
+                                    type="file"
+                                    name="banner"
+                                    onChange={(e) => {
+                                        try {
+                                            if (e.target.files) {
+                                                scanLB(
+                                                    e.target.files[0],
+                                                    e.target.files[0].name,
+                                                    props
+                                                );
+                                            }
+                                        } catch (error: any) {}
+                                    }}
+                                    accept="image/*"
+                                />
+                                <Loading
+                                    className="loading"
+                                    type="spokes"
+                                    color="green"
+                                    height={20}
+                                    width={20}
+                                    isLoading={isLoading}
+                                />
+                            </div>
                             <div className="form-inline-group">
                                 <Field id="rider" name="rider" type="hidden" />
 
@@ -134,13 +214,12 @@ const SubmitRun = (props: any) => {
                                     />
                                 </label>
                                 <Field
-                                    autoFocus
                                     id="trackName"
                                     name="trackName"
                                     onChange={props.handleChange}
                                     placeholder="Turbine Terror"
                                     type="text"
-                                    value={props.values.trackName}
+                                    value={props.values.trackName || trackName}
                                 />
 
                                 <label className="form-label">
@@ -192,7 +271,7 @@ const SubmitRun = (props: any) => {
                                         const { value } = event.target;
                                         restrictFaults(props, value);
                                     }}
-                                    value={props.values.faults}
+                                    value={props.values.faults || faults}
                                 />
                                 <label className="form-label">
                                     Time
@@ -216,7 +295,7 @@ const SubmitRun = (props: any) => {
                                         const { value } = event.target;
                                         restrictTime(props, value);
                                     }}
-                                    value={props.values.time}
+                                    value={props.values.time || time}
                                 ></InputMask>
                                 <label className="form-label">
                                     <Link
@@ -415,33 +494,6 @@ const SubmitRun = (props: any) => {
         </div>
     );
 };
-
-/* Save
- validateForm().then((errors) => {
-                                            if (
-                                                Object.entries(errors)
-                                                    .length === 0
-                                            ) {
-                                                // verify if errors object is equals to '{}' an empty object
-                                                console.log("valid");
-                                            } else {
-                                                console.log("errors: ", errors);
-                                                console.log(props.values);
-                                            }
-                                        });
-*/
-
-/* Save this for later in case we can allow people to submit runs for others in the future
- {props.errors.rider && props.touched.rider ? (
-                                    <div className="field-error">
-                                        {props.errors.rider}
-                                    </div>
-                                ) : (
-                                    <div className="field-error-invisible">
-                                        {props.errors.rider}
-                                    </div>
-                                )}
-*/
 
 const marks = [
     {

@@ -1,4 +1,6 @@
 import ExampleTrack from "../../images/ExampleTrackHelp.png";
+import Leaderboard from "../../images/Leaderboard.png";
+import RunInfo from "../../images/Run-Info.jpg";
 
 export const NinjaLevelHelp = () => {
     return (
@@ -134,6 +136,50 @@ export const ConsistencyHelp = () => {
                     pick the option 'Not Very', you are saying it is "not very
                     consistent of a track".
                 </p>
+            </div>
+        </div>
+    );
+};
+
+export const ScanLBHelp = () => {
+    return (
+        <div className="help-panel-container">
+            <div className="help-panel">
+                <h1 className="help-header">Scanning your runs</h1>
+
+                <h4 className="help-info-header">How do we scan runs?</h4>
+                <p className="help-info-paragraph">
+                    To scan your runs from Trials Fusion, we use a technology
+                    known as Optical Character Recognition (OCR). This
+                    technology scans images for light and dark patterns that
+                    make up letters/numbers. For our purposes, we take an image
+                    from you of an in-game screen with run information displayed
+                    in it. We then scan it using OCR. We receive a large list of
+                    words/letters/digits to parse from the image, and then
+                    return a list of runs for you to choose yours from.
+                </p>
+                <h4 className="help-info-header">
+                    Images we expect/allow to scan
+                </h4>
+                <p className="help-info-paragraph">
+                    If you scan an image of a leaderboard, there is a better
+                    chance that your run info will be correct, but will not
+                    include the creators name. If you scan an image from the
+                    "select track" screen. The results might be less accurate,
+                    but should include the creators name.
+                </p>
+                <img
+                    src={Leaderboard}
+                    alt="Leaderboard"
+                    width={600}
+                    height={338}
+                />
+                <img
+                    src={RunInfo}
+                    alt="Run-Info-Screen"
+                    width={600}
+                    height={338}
+                />
             </div>
         </div>
     );

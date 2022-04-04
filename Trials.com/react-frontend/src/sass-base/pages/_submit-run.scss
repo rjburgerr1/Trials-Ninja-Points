@@ -2,9 +2,36 @@
 
 .submit-run-form-container {
     display: flex;
-    justify-content: space-between;
-    > .space-element {
+
+    #pick-your-run-header {
+        color: $mustard;
+        text-align: center;
+    }
+
+    #list-time,
+    #list-faults {
+        display: inline-block;
+    }
+
+    .list-group {
+        justify-content: center;
+        width: 20em;
+        text-align: center;
+    }
+
+    .list-group-item {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    > .submit-run-autofill-element {
         width: 35em;
+        margin-top: 0.5em;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        text-align: center;
+        justify-content: flex-start;
     }
     > .submit-run-form {
         margin: 0 4em 0 4em; // This spaces out the elements on the side of the center form on the page

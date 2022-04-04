@@ -346,6 +346,6 @@ export default function UpdateProfile() {
             </div>
         </div>
     ) : (
-        <Loading type="spokes" color="green" />
+        <Loading type="spokes" color="green" height={500} width={500} />
     );
 }

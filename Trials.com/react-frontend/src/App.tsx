@@ -20,6 +20,7 @@ import {
     NinjaLevelHelp,
     LengthHelp,
     ConsistencyHelp,
+    ScanLBHelp,
 } from "./components/help-info/run-submission-help";
 import { Profile } from "./components/profile/profile";
 import { SocketProvider, socket } from "./contexts/socket-context";
@@ -51,22 +52,12 @@ import { ConfirmEdit } from "./components/confirm-edit";
 function App(props: any) {
     const [isLoaded, setIsLoaded] = useState(false);
 
-    const instance = axios.create({
-        baseURL: "http://localhost:5000",
-    });
-
     useEffect(() => {
         setIsLoaded(true);
-
-        const test = async () => {
-            const response = await instance.get("/flask/read-lb", {});
-            console.log(response);
-        };
-        test();
     }, []); // here
 
     return !isLoaded ? (
-        <Loading type="spokes" color="green" />
+        <Loading type="spokes" color="green" height={500} width={500} />
     ) : (
         <GoogleReCaptchaProvider
             reCaptchaKey="6LcvoXgeAAAAAFHe14yElMsWcxjrsV7pmMW_Q8z6"
@@ -313,6 +304,20 @@ function App(props: any) {
                                                         help={
                                                             <ConsistencyHelp />
                                                         }
+                                                    />
+                                                }
+                                            />
+                                        </PrivateRoute>
+                                    }
+                                />
+                                <Route
+                                    path="scan-lb-help"
+                                    element={
+                                        <PrivateRoute>
+                                            <GenericPage
+                                                component={
+                                                    <SubmitRun
+                                                        help={<ScanLBHelp />}
                                                     />
                                                 }
                                             />

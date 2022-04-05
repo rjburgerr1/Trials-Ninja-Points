@@ -11,4 +11,4 @@ RUN pip install -r requirements.txt
 
 COPY . /app
 
-CMD ["waitress-serve", "--listen=0.0.0.0:5000", "app:app"]
+CMD ["waitress-serve", "--listen=0.0.0.0:5000", "--url-scheme=https", "app:app"]

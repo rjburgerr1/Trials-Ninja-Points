@@ -6,7 +6,7 @@ from api.LeaderboardReader import LeaderboardReader
 from waitress import serve
 
 app = Flask(__name__, static_url_path='', static_folder='../react-frontend/build')
-#CORS(app) #comment this on deployment
+CORS(app) #comment this on deployment
 api = Api(app)
 
 

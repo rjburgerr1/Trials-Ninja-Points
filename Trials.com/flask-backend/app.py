@@ -4,6 +4,10 @@ from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS #comment this on deployment
 from api.LeaderboardReader import LeaderboardReader
 from waitress import serve
+from dotenv import load_dotenv
+
+load_dotenv()  # take environment variables from .env.
+
 
 app = Flask(__name__, static_url_path='', static_folder='../react-frontend/build')
 CORS(app) #comment this on deployment

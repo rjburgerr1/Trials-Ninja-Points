@@ -12,6 +12,7 @@ import InputMask from "react-input-mask";
 import Loading from "../components/helpers/loading";
 import Ratings from "react-ratings-declarative";
 import Slider from "@material-ui/core/Slider";
+import { fileUpload } from "./helpers/file-upload";
 
 // Shape of form values
 interface FormValues {
@@ -72,8 +73,11 @@ const SubmitRun = (props: any) => {
     const scanLB = async (file: File, filename: string, props: any) => {
         setIsLoading(true);
 
+        // Upload leaderboard/select track screen to
+        const s3File = await fileUpload(file, currentUser, "leaderboards");
+
         const response = await instance.get("/flask/read-lb", {
-            params: { file: file, filename: filename },
+            params: { fileURL: s3File.data.banner_url },
         });
 
         let runsStr = response.data[0].match(/(?<="data":)(.*)(?=})/g);

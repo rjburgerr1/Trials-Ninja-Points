@@ -169,7 +169,7 @@ export default function UpdateProfile() {
         }
 
         if (file) {
-            promises.push(fileUpload(file, currentUser));
+            promises.push(fileUpload(file, currentUser, "profiles/banners"));
         }
 
         // Stack all pending updates to be called

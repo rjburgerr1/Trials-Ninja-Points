@@ -1,16 +1,24 @@
 
 from argparse import FileType
+import os
 import easyocr
 import numpy as np
 import re
 import pandas as pd
 from flask_restful import Api, Resource, reqparse
+import matplotlib.image as mpimg
+import boto3
+import tempfile
+from io import BytesIO
 
 # Use this if you need to debug easyocr. This will plot bounding boxes on the image 
 # being scanned, making for easier deciphering of OCR results 
 # from flask import request
 # import cv2
 # import matplotlib.pyplot as plt
+
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 
 class LeaderboardReader(Resource):
   def get(self):
@@ -21,12 +29,18 @@ class LeaderboardReader(Resource):
 # Scan a leaderboard screen. Which contains a user's run, track name, BUT not the track creator
 def scanLB(self):
     parser = reqparse.RequestParser()
-    parser.add_argument('file', type=FileType)
-    parser.add_argument('filename', type=str)
+    parser.add_argument('fileURL', type=str)
     args = parser.parse_args()
-    reader = easyocr.Reader(['en'])
-    result = reader.readtext(args.filename,detail=0, decoder="greedy" )
 
+    #fileURL needs to split into just the portion with the s3 object key
+    s3ObjKey = args.fileURL.split("https://trialsnp-photos.s3.amazonaws.com/")[1]
+
+    s3 = boto3.client('s3', region_name='us-east-1', aws_access_key_id=AWS_ACCESS_KEY_ID,aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
+    s3_response_object = s3.get_object(Bucket="trialsnp-photos", Key=s3ObjKey)
+    imgBytes = s3_response_object['Body'].read()
+
+    reader = easyocr.Reader(['en'])
+    result = reader.readtext(imgBytes,detail=0, decoder="greedy",text_threshold=0.5,low_text=0.2 )
     
     # insert 0 faults for a run since the easyocr model doesn't pick up 0 
     # fault runs for the base trials fusion font
@@ -54,8 +68,6 @@ def scanLB(self):
     # Reshape array in 4 by x shape
     runs = np.reshape(result, (-1, 4))
    
-
-
     trackName = runs[0, 0]
     # In case these strings might appear alongside a track name, remove them
     trackName = trackName.replace('CLASSEMENT', '') 
@@ -78,27 +90,28 @@ def scanLB(self):
     # then the image might be outside of the leaderboard ("select track" screen). Try our other image scanning method
     for i in range(0, len(runTuples), 2):
       if (not runTuples[i+1].isdigit() or not re.search("([0-2][0-9][:|.][0-5][0-9][.][0-9][0-9][0-9])",runTuples[i])):
-        result = scanInfo(args.filename)
+        result = scanInfo(imgBytes)
         break
     
     return result
 
 
 # Scan the "select track" screen. Which contains a user's run, track name, and track creator
-def scanInfo(filename):
+def scanInfo(fileObj):
     
   reader = easyocr.Reader(['en'])
-  result = reader.readtext(filename, detail=0,decoder="greedy", text_threshold=0.3,low_text=0.1) 
-
+  result = reader.readtext(fileObj, detail=0,decoder="greedy", text_threshold=0.3,low_text=0.1) 
 
   for i in range(0, len(result)):
     if (result[i].strip() == "Track Creator"):
       creator = (result[i+1])
+      break;
 
 
   for i in range(0, len(result)):
-    if (result[i].strip() == "TRIALS"  ):
+    if (result[i].strip() == "TRIALS"):
       trackName = (result[i-1])
+      break;
 
 
   # Replace a period in the times with a colon if it got mistaken in the minutes:seconds portion
@@ -122,6 +135,7 @@ def scanInfo(filename):
   result = [jsonTuples, trackName, creator]
 
   return result
+
 
 # Use this if you want to debug bounding boxes, 
 # this will plot all easyocr read text over top the original image

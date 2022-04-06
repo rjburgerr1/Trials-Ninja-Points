@@ -24,7 +24,7 @@
         justify-content: space-around;
     }
 
-    > .submit-run-autofill-element {
+    .submit-run-autofill-element {
         width: 35em;
         margin-top: 0.5em;
         display: flex;
@@ -32,6 +32,9 @@
         align-items: flex-end;
         text-align: center;
         justify-content: flex-start;
+        button:hover {
+            background-color: $oxford-blue-accent-light;
+        }
     }
     > .submit-run-form {
         margin: 0 4em 0 4em; // This spaces out the elements on the side of the center form on the page

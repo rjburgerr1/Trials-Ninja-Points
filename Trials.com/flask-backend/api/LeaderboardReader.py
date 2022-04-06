@@ -45,7 +45,10 @@ def scanLB(self):
     # insert 0 faults for a run since the easyocr model doesn't pick up 0 
     # fault runs for the base trials fusion font
     for i in range(0, len(result)):
-        if (re.search( "([0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])",result[i])):
+        if (re.search( "([0-2][0-9][:|.][0-5][0-9][.][0-9][0-9][0-9])",result[i])):
+            # Sometimes time values are read as mm.ss.SSS instead of mm:ss.SSS, so we want to replace the period for a colon
+            if (re.search("([0-2][0-9][.])",result[i].strip())):
+                result[i] = result[i][:3].replace(".",":") + result[i][3:]
             if not (result[i-1].isdigit()):
                 result.insert(i, "0")
           

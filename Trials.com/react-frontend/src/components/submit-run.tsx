@@ -34,6 +34,7 @@ const SubmitRun = (props: any) => {
     const instance = axios.create({
         baseURL: process.env.REACT_APP_AXIOS_FLASK_URL,
     });
+    const help = props.help;
     const { currentUser } = useAuth();
     const navigate = useNavigate();
     const [rating, setRating] = useState();
@@ -142,25 +143,25 @@ const SubmitRun = (props: any) => {
     };
 
     return (
-        <div className="submit-run-form-container">
-            <div className="submit-run-autofill-element">
-                <List
-                    items={runs}
-                    title={trackName}
-                    creator={creator}
-                    setTime={setTime}
-                    setFaults={setFaults}
-                />
-            </div>
-
-            <div className="submit-run-form" id="submit-run-form">
-                <Formik
-                    initialValues={initialValues}
-                    validationSchema={SubmitRunSchema}
-                    onSubmit={handleOnSubmit}
-                >
-                    {(props) => (
-                        <Form>
+        <Formik
+            initialValues={initialValues}
+            validationSchema={SubmitRunSchema}
+            onSubmit={handleOnSubmit}
+        >
+            {(props: any) => (
+                <Form>
+                    <div className="submit-run-form-container">
+                        <div className="submit-run-autofill-element">
+                            <List
+                                items={runs}
+                                title={trackName}
+                                creator={creator}
+                                setTime={setTime}
+                                setFaults={setFaults}
+                                setFieldValue={props.setFieldValue}
+                            />
+                        </div>
+                        <div className="submit-run-form" id="submit-run-form">
                             <label className="form-label">
                                 <Link
                                     className="form-link"
@@ -490,12 +491,13 @@ const SubmitRun = (props: any) => {
                                     Submit
                                 </button>
                             </div>
-                        </Form>
-                    )}
-                </Formik>
-            </div>
-            <div className="submit-run-help-element">{props.help}</div>
-        </div>
+                        </div>
+
+                        <div className="submit-run-help-element">{help}</div>
+                    </div>
+                </Form>
+            )}
+        </Formik>
     );
 };
 

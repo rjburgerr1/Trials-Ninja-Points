@@ -30,6 +30,7 @@ TNP is a website where ninja riders from the game franchise [Trials](https://en.
 - [React](https://reactjs.org/) Frontend App
 - [Node.js](https://nodejs.org/en/) Backend Server
 - [Prisma](https://www.prisma.io/) object-relational mapper
+- [Flask](https://flask.palletsprojects.com/en/2.1.x/) micro web framework written in Python
 
 <br>
 
@@ -40,7 +41,7 @@ TNP is a website where ninja riders from the game franchise [Trials](https://en.
 ### 2. Fork & Clone Repo `git clone https://github.com/rjburgerr1/Trials-Ninja-Points.git`
 
  
-  - Setup for React Frontend App & Node Backend Server
+  - Setup for React Frontend App, Node Backend Server & Flask Backend Server
       1. Change directory into base directory `cd Trials.com/`
       1. Install Node Modules `npm install --workspaces`
       1. Setup .env files using .env.development.sample files    
@@ -49,6 +50,9 @@ TNP is a website where ninja riders from the game franchise [Trials](https://en.
       
       
       1. Run start scripts for node backend & react frontend `npm start --workspace=node-server && npm start --workspace=react-frontend`
+      
+      1. Change directory into flask directory `cd flask-backend`
+      1. Run development/debug script for flask (Python) `./server-debug.sh`
       
       <br>
       
@@ -65,11 +69,15 @@ TNP is a website where ninja riders from the game franchise [Trials](https://en.
       nano node-server/.env.development.sample
       nano react-frontend/.env.development.sample
 
-      # Run start scripts for node-server & react-frontend (open two terminals for this)
+      # Run start scripts for node-server & react-frontend (open two new terminals for this)
       npm start --workspace=node-server
       npm start --workspace=react-frontend
+
+      # Run start script for flask development server
+      cd flask-backend
+      ./server-debug.sh
       ```
     
   - Setup MySQL Database
     1. Install MySQL workbench (optional) & MySQL Server (If on windows, this can be done with the [MySQL installer](https://dev.mysql.com/downloads/installer/))
-    2. Run [init.sql](https://github.com/rjburgerr1/Trials-Ninja-Points/blob/master/Trials.com/database/init.sql) + [structure-diff.sql](https://github.com/rjburgerr1/Trials-Ninja-Points/blob/master/Trials.com/database/structure-diff.sql) scripts in order
+    2. Run [init.sql](https://github.com/rjburgerr1/Trials-Ninja-Points/blob/master/Trials.com/database/init.sql)

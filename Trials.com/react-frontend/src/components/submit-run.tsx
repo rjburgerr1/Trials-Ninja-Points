@@ -41,8 +41,6 @@ const SubmitRun = (props: any) => {
     const [runs, setRuns] = useState([]);
     const [trackName, setTrackName] = useState();
     const [creator, setCreator] = useState();
-    const [time, setTime] = useState();
-    const [faults, setFaults] = useState();
     const [isLoading, setIsLoading] = useState(false);
 
     // According to formik documentation, use formik values in place of props to prevent bugs with formik and also prevent having two versions of the same prop
@@ -113,6 +111,7 @@ const SubmitRun = (props: any) => {
                 props.setFieldValue("time", value);
             }
         } else {
+            // When Time is empty, set to empty
             props.setFieldValue("time", value);
         }
     };
@@ -156,8 +155,6 @@ const SubmitRun = (props: any) => {
                                 items={runs}
                                 title={trackName}
                                 creator={creator}
-                                setTime={setTime}
-                                setFaults={setFaults}
                                 setFieldValue={props.setFieldValue}
                             />
                         </div>
@@ -224,7 +221,7 @@ const SubmitRun = (props: any) => {
                                     onChange={props.handleChange}
                                     placeholder="Turbine Terror"
                                     type="text"
-                                    value={props.values.trackName || trackName}
+                                    value={props.values.trackName}
                                 />
 
                                 <label className="form-label">
@@ -276,7 +273,7 @@ const SubmitRun = (props: any) => {
                                         const { value } = event.target;
                                         restrictFaults(props, value);
                                     }}
-                                    value={props.values.faults || faults}
+                                    value={props.values.faults}
                                 />
                                 <label className="form-label">
                                     Time
@@ -300,7 +297,7 @@ const SubmitRun = (props: any) => {
                                         const { value } = event.target;
                                         restrictTime(props, value);
                                     }}
-                                    value={props.values.time || time}
+                                    value={props.values.time}
                                 ></InputMask>
                                 <label className="form-label">
                                     <Link

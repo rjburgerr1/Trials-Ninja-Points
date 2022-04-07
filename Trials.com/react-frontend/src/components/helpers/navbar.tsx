@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import Logout from "../auth/logout";
 import { useLocation } from "react-router-dom";
+import logo from "../../images/TNP-logo.png";
 
 export default function NavBar() {
     const location = useLocation();
@@ -11,7 +12,7 @@ export default function NavBar() {
         <div className="appbar">
             <Navbar className="navbar">
                 <Navbar.Brand href="/" className="navbar-brand">
-                    TNP
+                    <img className="logo" src={logo} alt="logo" />
                 </Navbar.Brand>
                 <Navbar.Toggle
                     aria-controls="basic-navbar-nav"

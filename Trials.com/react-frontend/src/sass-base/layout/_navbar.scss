@@ -6,6 +6,12 @@
 
     border-bottom: 1px solid $mustard;
     // React Bootstraps class for dropdown menus
+
+    .logo {
+        width: 40px;
+        height: 40px;
+    }
+
     .dropdown-menu {
         background-color: $oxford-blue;
         border: 1px solid $mustard;

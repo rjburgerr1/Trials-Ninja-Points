@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { YoutubeEmbed } from "./video-embed";
 
-export const CenteredModal = (props: any) => {
+export const YoutubeModal = (props: any) => {
     const [modalShow, setModalShow] = useState(false);
     return (
         <div>

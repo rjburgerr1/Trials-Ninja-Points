@@ -1,5 +1,6 @@
 import { Cell, Column, Row } from "react-table";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faMinusSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { SelectColumnFilter } from "./filters/select-filter";
 import { SliderColumnFilter, filterBetween } from "./filters/slider-filter";
@@ -8,7 +9,7 @@ import { formatCreateDate } from "../helpers/format-dates";
 import { faSortAmountDown } from "@fortawesome/free-solid-svg-icons";
 import { getRunsLB } from "./leaderboard-requests";
 import { Link } from "react-router-dom";
-import { CenteredModal } from "../leaderboard/centered-modal";
+import { YoutubeModal } from "../leaderboard/centered-modal";
 
 export const RunsLeaderboardColumns = [
     {
@@ -137,12 +138,39 @@ export const setRunsTableBodyCell = (
                 >
                     {cell.render("Cell")}
                 </Link>
-                <FontAwesomeIcon
-                    className="invisible-element"
-                    icon={faEdit}
-                    size="2x"
-                    tabIndex={-1}
-                />
+                <div className="icon">
+                    <Link
+                        id="delete-run-icon"
+                        to={
+                            "/delete-run/" +
+                            row.values.rider +
+                            "?track=" +
+                            row.values.track_name +
+                            "&creator=" +
+                            row.values.creator
+                        }
+                        state={{
+                            rider: row.values.rider,
+                            track: row.values.track_name,
+                            creator: row.values.creator,
+                            rank: row.values.rank,
+                            faults: row.values.faults,
+                            time: row.values.time,
+                            ninjaLevel: row.values.ninja_level,
+                            length: row.values.length,
+                            consistency: row.values.consistency,
+                            video: row.values.video,
+                            rating: row.values.rating,
+                            ninjaPoints: row.values.ninja_points,
+                        }}
+                    >
+                        <FontAwesomeIcon
+                            icon={faMinusSquare}
+                            size="2x"
+                            tabIndex={-1}
+                        />
+                    </Link>
+                </div>
             </div>
         ) : (
             <Link
@@ -183,7 +211,7 @@ export const setRunsTableBodyCell = (
         ) {
             return "N/A";
         } else {
-            return <CenteredModal url={cell.value} />;
+            return <YoutubeModal url={cell.value} />;
         }
     } else if (cell.column.Header === "Consistency") {
         return cell.value?.replace("_", " ");

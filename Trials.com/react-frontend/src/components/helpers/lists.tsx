@@ -28,9 +28,7 @@ export const List = (props: any) => {
                         key={i}
                         action
                         onClick={async () => {
-                            await props.setTime(row[0]);
                             await props.setFieldValue("time", row[0]);
-                            await props.setFaults(row[1]);
                             await props.setFieldValue("faults", row[1]);
                         }}
                     >

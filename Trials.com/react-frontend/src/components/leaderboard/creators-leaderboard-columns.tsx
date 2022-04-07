@@ -5,6 +5,7 @@ import { InfoTip } from "../help-info/info-tips";
 import { getCreatorsLB } from "./leaderboard-requests";
 import { SelectColumnFilter } from "./filters/select-filter";
 import { filterBetween, SliderColumnFilter } from "./filters/slider-filter";
+import { convertConsistency, convertLength } from "../helpers/convert-fields";
 
 export const CreatorsLeaderboardColumns = [
     {
@@ -19,12 +20,7 @@ export const CreatorsLeaderboardColumns = [
         filter: filterBetween,
         width: 180,
     },
-    {
-        Header: "Length (Avg)",
-        accessor: "average_track_length",
-        Filter: SelectColumnFilter,
-        filter: "equals",
-    },
+
     {
         Header: "Ninja Points (Avg)",
         accessor: "average_track_ninja_points",
@@ -45,6 +41,12 @@ export const CreatorsLeaderboardColumns = [
         filter: "equals",
         width: 180,
     },
+    {
+        Header: "Length (Avg)",
+        accessor: "average_track_length",
+        Filter: SelectColumnFilter,
+        filter: "equals",
+    },
 
     {
         Header: "Rating (Avg)",
@@ -55,7 +57,19 @@ export const CreatorsLeaderboardColumns = [
 ];
 
 export const setCreatorsTableBodyCell = (cell: Cell, row: Row) => {
-    return <div>{cell.render("Cell")}</div>;
+    if (cell.column.Header === "Length (Avg)") {
+        return row.values.average_track_length ? (
+            <div>{convertLength(row.values.average_track_length)}</div>
+        ) : null;
+    } else if (cell.column.Header === "Consistency (Avg)") {
+        return row.values.average_track_consistency ? (
+            <div>
+                {convertConsistency(row.values.average_track_consistency)}
+            </div>
+        ) : null;
+    } else {
+        return <div>{cell.render("Cell")}</div>;
+    }
 };
 
 export const setCreatorsTableHeaderInfoTip = (column: Column) => {

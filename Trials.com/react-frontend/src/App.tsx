@@ -48,6 +48,7 @@ import UpdateProfile from "./components/profile/update-profile";
 import axios from "axios";
 import { EditRun } from "./components/edit-run";
 import { ConfirmEdit } from "./components/confirm-edit";
+import { DeleteRun } from "./components/delete-run";
 
 function App(props: any) {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -158,7 +159,6 @@ function App(props: any) {
                                 element={
                                     <PrivateRoute>
                                         <GenericPage
-                                            bodyID="runs-leaderboard"
                                             component={
                                                 <Leaderboard
                                                     columns={
@@ -244,6 +244,19 @@ function App(props: any) {
                                         <PrivateRoute>
                                             <GenericPage
                                                 component={<EditRun />}
+                                            />
+                                        </PrivateRoute>
+                                    }
+                                />
+                            </Route>
+
+                            <Route path="/delete-run">
+                                <Route
+                                    path=":run"
+                                    element={
+                                        <PrivateRoute>
+                                            <GenericPage
+                                                component={<DeleteRun />}
                                             />
                                         </PrivateRoute>
                                     }

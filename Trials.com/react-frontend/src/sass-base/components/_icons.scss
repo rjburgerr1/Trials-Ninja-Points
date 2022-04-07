@@ -2,11 +2,21 @@
 
 @mixin icons {
     transition: 0.3s;
+
     #edit-run-icon {
         color: $mustard;
-
+        background-color: transparent;
+        border-color: transparent;
         &:hover {
             color: lighten($mustard, 20%);
+        }
+    }
+    #delete-run-icon {
+        color: red;
+        background-color: transparent;
+        border-color: transparent;
+        &:hover {
+            color: lighten(red, 20%);
         }
     }
 }

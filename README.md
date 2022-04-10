@@ -65,9 +65,10 @@ TNP is a website where ninja riders from the game franchise [Trials](https://en.
       # Install node_modules
       npm install --workspaces
 
-      # Setup .env files
+      # Setup .env files (using nano if on linux)
       nano node-server/.env.development.sample
       nano react-frontend/.env.development.sample
+      nano flask-server/.env.sample
 
       # Run start scripts for node-server & react-frontend (open two new terminals for this)
       npm start --workspace=node-server

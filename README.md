@@ -1,7 +1,7 @@
 # Repository for [Trials Ninja Points](https://trialsnp.netlify.app/ "Compete with other Riders now!")
 
 ## What is Trials Ninja Points?
-TNP is a website where ninja riders from the game franchise [Trials](https://en.wikipedia.org/wiki/Trials_(series)) compete based on in-game, as well as, opinion-based metrics.
+TNP is a website where ninja riders from the game franchise [Trials](https://en.wikipedia.org/wiki/Trials_(series)) compete based on in-game & opinion-based metrics.
 <br><br>
 ## How are Ninja Points Defined?
 

@@ -33,7 +33,6 @@ export const NinjaLevelSlider = (props: any) => {
                 name="ninjaLevel"
                 value={props.value}
                 onChange={(event, value) => {
-                    console.log(value);
                     props.setFieldValue("ninjaLevel", value);
                 }}
             />

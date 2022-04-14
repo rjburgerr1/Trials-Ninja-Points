@@ -3,6 +3,7 @@ import json
 import re
 import numpy as np
 import pandas as pd
+import time
 from flask_restful import Api, Resource, reqparse
 
 class ImportRuns(Resource):
@@ -12,6 +13,10 @@ class ImportRuns(Resource):
 
 def scrapeBot( self):
 	channelId =500030071818551317 # Ninja Reporter channel id for scanning reporter bot msgs
+	
+	msgRegex = r'(?:[[]\d+[]]\s\")('+re.escape(user)+r')(?:\".*)' # Regex to identify newly submitted run announcements in the ninja-reporter channel
+	runRegex = r"(?:[0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])(?:.+?)([0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])(?:\s+(?:and|&)\s+)(\d*)(?:.+?\")(.+?)(?:\"\s+by\s+\")(.+?)(?:\"\s.*)|(zero)(?:.+\")(.+)(?:\"\s+by\s+\")(.+?)(?:\"\s.+?)([0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])|(?:.+\")(.+)(?:\"\s+by\s+\")(.+?)(?:\"\s.*?)([0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])(?:\s+and\s+)(\d*)"
+	
 
 	parser = reqparse.RequestParser()
 	parser.add_argument('user', type=str) # Add discord user to scan msgs from
@@ -27,16 +32,8 @@ def scrapeBot( self):
 
 	offsetMsgId = msgObj[len(msgObj)-1]["id"] # Earliest message in returned message list to offset next request by
 
-	msgRegex = r'(?:[[]\d+[]]\s\")('+re.escape(user)+r')(?:\".*)' # Regex to identify newly submitted run announcements in the ninja-reporter channel
-
-	
-
-	#runRegex =  r"(zero)(?:.+\")(.+)(?:\"\s+by\s+\")(\w+)(?:\".*)([0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])|(?:.+\")(.+)(?:\"\s+by\s+\")(\w+)(?:\".*)([0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])(?:\s+and\s+)(\d*)"
-	runRegex = r"(?:[0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])(?:.+?)([0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])(?:\s+(?:and|&)\s+)(\d*)(?:.+?\")(.+?)(?:\"\s+by\s+\")(.+?)(?:\"\s.*)|(zero)(?:.+\")(.+)(?:\"\s+by\s+\")(.+?)(?:\"\s.+?)([0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])|(?:.+\")(.+)(?:\"\s+by\s+\")(.+?)(?:\"\s.*?)([0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])(?:\s+and\s+)(\d*)"
-	
 	runs = []
-
-
+	
 	while True:
 		r = requests.get(f"https://discord.com/api/v9/channels/{channelId}/messages?limit=100&before={offsetMsgId}", headers=headers )
 		msgObj = json.loads(r.text)
@@ -44,24 +41,45 @@ def scrapeBot( self):
 		if (len(msgObj) == 0): 
 			break
 
-		for value in msgObj:
-			matches = re.search(msgRegex, value['content'])
-			if matches:
-				if (user == matches.group(1)):
-					match = re.search(runRegex, value["content"].strip(), re.DOTALL)
-					if match:
-						for groupNum in range(1, len(match.groups())+1):
-							if (not match.group(groupNum) == None):
-								runs.append(match.group(groupNum))
+		# msgObj = {'global': False, 'message': 'The resource is being rate limited.', 'retry_after': 0.656}
 
-		offsetMsgId = msgObj[len(msgObj)-1]["id"] # Earliest message in returned message list to offset next request by
+		for attempt in range(10):
+			try:
+				print(attempt)
+				for value in msgObj:
+					matches = re.search(msgRegex, value['content'])
+					if matches:
+						if (user == matches.group(1)):
+							match = re.search(runRegex, value["content"].strip(), re.DOTALL)
+							if match:
+								for groupNum in range(1, len(match.groups())+1):
+									if (not match.group(groupNum) == None):
+										runs.append(match.group(groupNum))
 
-					
-	
-		
- 	# Reshape array in 4 by x shape
+				offsetMsgId = msgObj[len(msgObj)-1]["id"] # Earliest message in returned message list to offset next request by
+			except:
+				time.sleep(msgObj["retry_after"]+0.01)
+				continue
+			else:
+				break
+		else:
+			break
+
+	# Reshape array in 4 by x shape
 	runs = np.reshape(runs, (-1, 4))
 	jsonResult = pd.DataFrame(runs).to_json(orient='split')
 
 	return jsonResult
 
+			
+
+	
+
+	
+	
+
+		
+					
+	
+		
+ 

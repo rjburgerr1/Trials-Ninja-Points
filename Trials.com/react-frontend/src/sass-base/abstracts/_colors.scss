@@ -14,18 +14,20 @@
 --white: hsla(330, 50%, 99%, 1);
 --cadet: hsla(200, 15%, 43%, 1);
 */
-/* SCSS HEX */
-$oxford-blue: #001025ff;
-$blast-off-bronze: #af7a6dff;
-$mustard: #fdd643ff;
-$white: #fefcfdff;
-$cadet: #5d737eff;
-$oxford-blue-monochromatic: #001025;
-$oxford-blue-complement: #250f00;
+
+$oxford-blue: hsl(214, 100%, 7%);
+$blast-off-bronze: hsl(12, 29%, 56%);
+$mustard: hsl(47, 98%, 63%);
+$white: hsl(330, 50%, 99%);
+$cadet: hsl(200, 15%, 43%);
+$valid: hsl(141, 61%, 63%);
+$invalid: hsl(0, 69%, 62%);
+$oxford-blue-monochromatic: hsl(214, 100%, 7%);
+$oxford-blue-complement: hsl(24, 100%, 7%);
 $oxford-blue-accent: lighten($oxford-blue, 70%);
 $oxford-blue-accent-light: lighten($oxford-blue-accent, 10%);
 $oxford-blue-accent-lighter: lighten($oxford-blue-accent, 20%);
-$black: black;
+$black: hsl(0, 0%, 0%);
 
 /* SCSS HSL */
 $oxford-blue: hsla(214, 100%, 7%, 1);
@@ -37,12 +39,12 @@ $cadet: hsla(200, 15%, 43%, 1);
 $error: hsla(2, 97%, 48%, 1);
 $disabled: hsla(0, 0%, 55%, 1);
 
-/* SCSS RGB */
-$oxford-blue: rgba(0, 16, 37, 1);
-$blast-off-bronze: rgba(175, 122, 109, 1);
-$mustard: rgba(253, 214, 67, 1);
-$white: rgba(254, 252, 253, 1);
-$cadet: rgba(93, 115, 126, 1);
+// /* SCSS RGB */
+// $oxford-blue: rgba(0, 16, 37, 1);
+// $blast-off-bronze: rgba(175, 122, 109, 1);
+// $mustard: rgba(253, 214, 67, 1);
+// $white: rgba(254, 252, 253, 1);
+// $cadet: rgba(93, 115, 126, 1);
 
 $oxford-blue-gradient: linear-gradient(
     160deg,

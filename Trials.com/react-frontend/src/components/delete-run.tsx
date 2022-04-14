@@ -47,7 +47,7 @@ export const DeleteRun = () => {
         navigate("/runs");
     };
 
-    const test = () => {
+    const deleteRunBody = () => {
         return (
             <div id="delete-run-container">
                 <Card id="delete-run-card" style={{ width: "18rem" }}>
@@ -84,7 +84,7 @@ export const DeleteRun = () => {
             <SimpleModal
                 show={true}
                 heading="Are you sure you want to delete this run?"
-                body={test()}
+                body={deleteRunBody()}
                 footer="Delete"
                 handleClose={handleClose}
                 handleAction={handleAction}

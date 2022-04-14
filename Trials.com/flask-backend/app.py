@@ -3,6 +3,7 @@ from flask import Flask, send_from_directory
 from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS #comment this on deployment
 from api.LeaderboardReader import LeaderboardReader
+from api.ImportRuns import ImportRuns
 from waitress import serve
 from dotenv import load_dotenv
 
@@ -21,6 +22,7 @@ def serve(path):
 
 
 api.add_resource(LeaderboardReader, "/flask/read-lb")
+api.add_resource(ImportRuns, "/flask/import-runs")
 
 
 if __name__ == "__main__":

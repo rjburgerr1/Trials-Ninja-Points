@@ -1,5 +1,4 @@
 
-from argparse import FileType
 import os
 import easyocr
 import numpy as np
@@ -8,8 +7,6 @@ import pandas as pd
 from flask_restful import Api, Resource, reqparse
 import matplotlib.image as mpimg
 import boto3
-import tempfile
-from io import BytesIO
 
 # Use this if you need to debug easyocr. This will plot bounding boxes on the image 
 # being scanned, making for easier deciphering of OCR results 

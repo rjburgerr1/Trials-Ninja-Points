@@ -31,7 +31,7 @@ Form {
     }
 
     .field-error {
-        color: $error;
+        color: $invalid;
 
         transition: opacity 0.5s ease-in;
         -webkit-transition: opacity 0.5s ease-in;
@@ -76,6 +76,17 @@ Form {
         // -moz-appearance: none;
         // appearance: none;
         margin-bottom: 1.5em;
+    }
+
+    .valid {
+        border-color: $valid !important;
+        .MuiSlider-track {
+            color: $valid !important;
+        }
+    }
+
+    .invalid {
+        border-color: $invalid !important;
     }
 
     #region-select,
@@ -302,9 +313,8 @@ Form {
         padding: 0.5rem 1.25rem;
         font-size: 1rem;
         border-radius: 10px;
-        background-color: var(--gray-700);
         border: 2px solid var(--gray-700);
-        color: white;
+
         text-decoration: none;
         font-weight: bold;
         margin-bottom: 1rem;
@@ -320,21 +330,10 @@ Form {
         user-select: none;
     }
 
-    @media (prefers-color-scheme: dark) {
-        input[type="submit"],
-        input[type="reset"],
-        input[type="button"],
-        button {
-            background-color: white;
-            color: var(--gray-800);
-        }
-    }
-
     @media (hover: hover) {
         input[type="submit"]:hover,
         input[type="reset"]:hover,
-        input[type="button"]:hover,
-        button:hover {
+        input[type="button"]:hover {
             cursor: pointer;
             background-color: var(--gray-800);
         }
@@ -343,8 +342,7 @@ Form {
     @media (hover: hover) and (prefers-color-scheme: dark) {
         input[type="submit"]:hover,
         input[type="reset"]:hover,
-        input[type="button"]:hover,
-        button:hover {
+        input[type="button"]:hover {
             cursor: pointer;
             background-color: var(--gray-300);
         }
@@ -364,7 +362,8 @@ Form {
     justify-content: center;
     .form-button {
         background-color: $mustard;
-        &:hover {
+        &:hover,
+        #import-runs-button:hover {
             background-color: lighten($mustard, 10%);
         }
         &:focus {

@@ -1,71 +1,107 @@
 @use "../abstracts/colors" as *;
-
-.submit-run-form-container {
+#submit-page-container {
     display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    #pick-your-run-header {
+    input:invalid {
+        border-color: $invalid;
+    }
+
+    #ninja-points {
+        color: green;
+        font-size: 1.5em;
+    }
+
+    #next-run-button,
+    #previous-run-button {
+        margin-top: 17em;
+        background-color: transparent;
         color: $mustard;
-        text-align: center;
-    }
+        flex-shrink: 3;
+        height: 0px;
+        width: 7em;
 
-    #list-time,
-    #list-faults {
-        display: inline-block;
-    }
+        &:hover {
+            color: lighten($mustard, 10%);
+        }
 
-    .list-group {
-        justify-content: center;
-        width: 20em;
-        text-align: center;
-    }
-
-    .list-group-item {
-        display: flex;
-        justify-content: space-around;
-    }
-
-    .submit-run-autofill-element {
-        width: 35em;
-        margin-top: 0.5em;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        text-align: center;
-        justify-content: flex-start;
-        button:hover {
-            background-color: $oxford-blue-accent-light;
+        &:active {
+            color: lighten($mustard, 70%);
         }
     }
-    > .submit-run-form {
-        margin: 0 4em 0 4em; // This spaces out the elements on the side of the center form on the page
+
+    #import-runs-button-container {
+        text-align: center;
     }
-    > .submit-run-help-element {
-        color: $mustard;
-        width: 35em;
-        > .help-panel-container {
-            > .help-panel {
-                display: inline-block;
-                h4,
-                p {
-                    text-align: center;
-                    margin: 0;
-                }
 
-                > .help-header {
-                    text-align: center;
-                    padding: 0.3em;
-                    color: $mustard;
-                    border-bottom: 2px solid $oxford-blue-accent;
-                    border-radius: 10px;
-                    margin-bottom: 1em;
-                }
-                > .help-info-header {
-                    color: $oxford-blue-accent;
-                }
-                > .help-info-paragraph {
-                    margin-bottom: 1.5em;
+    .submit-run-form-container {
+        display: flex;
+        flex-direction: row;
+        #pick-your-run-header {
+            color: $mustard;
+            text-align: center;
+        }
 
-                    color: $mustard-accent;
+        #list-time,
+        #list-faults {
+            display: inline-block;
+        }
+
+        .list-group {
+            justify-content: center;
+            width: 20em;
+            text-align: center;
+        }
+
+        .list-group-item {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .submit-run-autofill-element {
+            width: 35em;
+            margin-top: 0.5em;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            text-align: center;
+            justify-content: flex-start;
+            button:hover {
+                background-color: $oxford-blue-accent-light;
+            }
+        }
+        > .submit-run-form {
+            margin: 0 4em 0 4em; // This spaces out the elements on the side of the center form on the page
+        }
+        > .submit-run-help-element {
+            color: $mustard;
+            width: 35em;
+            > .help-panel-container {
+                > .help-panel {
+                    display: inline-block;
+                    h4,
+                    p {
+                        text-align: center;
+                        margin: 0;
+                    }
+
+                    > .help-header {
+                        text-align: center;
+                        padding: 0.3em;
+                        color: $mustard;
+                        border-bottom: 2px solid $oxford-blue-accent;
+                        border-radius: 10px;
+                        margin-bottom: 1em;
+                    }
+                    > .help-info-header {
+                        color: $oxford-blue-accent;
+                    }
+                    > .help-info-paragraph {
+                        margin-bottom: 1.5em;
+
+                        color: $mustard-accent;
+                    }
                 }
             }
         }

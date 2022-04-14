@@ -1,8 +1,8 @@
 import moment from "moment";
 import Yup from "../helpers/yup-extended"; // I think `import * as yup from "yup"` also works
 export const SubmitRunSchema = Yup.object({
-    trackName: Yup.string().max(30, "Name is too long").required("Required"),
-    creator: Yup.string().max(15, "Name is too long").required("Required"),
+    trackName: Yup.string().max(45, "Name is too long").required("Required"),
+    creator: Yup.string().max(45, "Name is too long").required("Required"),
     faults: Yup.number()
         .min(0, "Minimum number of faults is 0!")
         .max(499, "Maximum number of faults is 499!")
@@ -13,7 +13,7 @@ export const SubmitRunSchema = Yup.object({
         .required("Time cannot be empty")
         .test(
             "is-greater",
-            "Time should be in mm:ss.SSS format & <= 29:59.999",
+            "Time must be mm:ss.SSS format <30:00.000",
             function (value) {
                 return moment(value, "mm:ss.SSS", true).isValid(); // Make sure time is fully filled out in the
             }

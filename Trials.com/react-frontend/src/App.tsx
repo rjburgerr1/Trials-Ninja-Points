@@ -48,6 +48,11 @@ import UpdateProfile from "./components/profile/update-profile";
 import { EditRun } from "./components/edit-run";
 import { ConfirmEdit } from "./components/confirm-edit";
 import { DeleteRun } from "./components/delete-run";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faArrowCircleLeft,
+    faArrowCircleRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 function App(props: any) {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -277,6 +282,51 @@ function App(props: any) {
                                     }
                                 />
                                 <Route
+                                    path="import-runs"
+                                    element={
+                                        <PrivateRoute>
+                                            <GenericPage
+                                                component={
+                                                    <SubmitRun
+                                                        previousRun={
+                                                            <div id="previous-run-arrow">
+                                                                <FontAwesomeIcon
+                                                                    icon={
+                                                                        faArrowCircleLeft
+                                                                    }
+                                                                    size="3x"
+                                                                    tabIndex={
+                                                                        -1
+                                                                    }
+                                                                />
+                                                                <div>
+                                                                    Previous Run
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                        nextRun={
+                                                            <div id="next-run-arrow">
+                                                                <FontAwesomeIcon
+                                                                    icon={
+                                                                        faArrowCircleRight
+                                                                    }
+                                                                    size="3x"
+                                                                    tabIndex={
+                                                                        -1
+                                                                    }
+                                                                />
+                                                                <div>
+                                                                    Next Run
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    />
+                                                }
+                                            />
+                                        </PrivateRoute>
+                                    }
+                                />
+                                <Route
                                     path="ninja-level-help"
                                     element={
                                         <PrivateRoute>
@@ -292,6 +342,7 @@ function App(props: any) {
                                         </PrivateRoute>
                                     }
                                 />
+
                                 <Route
                                     path="length-help"
                                     element={

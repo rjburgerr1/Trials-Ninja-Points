@@ -33,7 +33,7 @@ def scrapeBot( self):
 	offsetMsgId = msgObj[len(msgObj)-1]["id"] # Earliest message in returned message list to offset next request by
 
 	runs = []
-	
+
 	while True:
 		r = requests.get(f"https://discord.com/api/v9/channels/{channelId}/messages?limit=100&before={offsetMsgId}", headers=headers )
 		msgObj = json.loads(r.text)
@@ -45,7 +45,6 @@ def scrapeBot( self):
 
 		for attempt in range(10):
 			try:
-				print(attempt)
 				for value in msgObj:
 					matches = re.search(msgRegex, value['content'])
 					if matches:

@@ -24,6 +24,11 @@ export const TracksLeaderboardColumns = [
         accessor: "ninja_level",
         Filter: SliderColumnFilter,
         filter: filterBetween,
+        sortType: (rowA: any, rowB: any) => {
+            if (rowA.original.ninja_level > rowB.original.ninja_level)
+                return -1;
+            if (rowB.original.ninja_level > rowA.original.ninja_level) return 1;
+        },
     },
     {
         Header: "Length",

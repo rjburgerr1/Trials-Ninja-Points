@@ -34,6 +34,11 @@ export const TrackLeaderboardColumns = [
         width: 125,
         Filter: SliderColumnFilter,
         filter: filterBetween,
+        sortType: (rowA: any, rowB: any) => {
+            if (rowA.original.ninja_level > rowB.original.ninja_level)
+                return -1;
+            if (rowB.original.ninja_level > rowA.original.ninja_level) return 1;
+        },
     },
     {
         Header: "Faults",

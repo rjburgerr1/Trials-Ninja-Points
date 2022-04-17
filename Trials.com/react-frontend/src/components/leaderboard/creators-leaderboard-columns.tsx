@@ -19,6 +19,18 @@ export const CreatorsLeaderboardColumns = [
         Filter: SliderColumnFilter,
         filter: filterBetween,
         width: 180,
+        sortType: (rowA: any, rowB: any) => {
+            if (
+                rowA.original.average_track_ninja_level >
+                rowB.original.average_track_ninja_level
+            )
+                return -1;
+            if (
+                rowB.original.average_track_ninja_level >
+                rowA.original.average_track_ninja_level
+            )
+                return 1;
+        },
     },
 
     {

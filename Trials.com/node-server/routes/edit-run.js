@@ -7,7 +7,7 @@ const router = (app) => {
     app.post("/edit-run", async (request, response) => {
         // Convert specific fields to number, before insertion in db
         request.body.faults = Number(request.body.faults);
-        request.body.rank = Number(request.body.rank);
+        request.body.rank = 0; // 0 because rank is not currently supported on the site. This may change
         request.body.ninjaLevel = Number(request.body.ninjaLevel);
         request.body.rating = Number(request.body.rating);
         request.body.ninjaPoints = Number(request.body.ninjaPoints);

@@ -5,6 +5,8 @@ FROM mysql:latest
 # ENV MYSQL_USER=$MYSQL_DATABASE_USER
 # ENV MYSQL_ROOT_PASSWORD=$MYSQL_DATABASE_PASSWORD
 
+# test
+
 ADD init.sql /docker-entrypoint-initdb.d
 
 

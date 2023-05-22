@@ -23,8 +23,8 @@ def scrapeBot( self):
 	msgRegex = r'(?:[[]\d+[]]\s\")('+re.escape(user)+r')(?:\".*)' # Regex to identify newly submitted run announcements in the ninja-reporter channel
 	runRegex = r"(?:[0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])(?:.+?)([0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])(?:\s+(?:and|&)\s+)(\d*)(?:.+?\")(.+?)(?:\"\s+by\s+\")(.+?)(?:\"\s.*)|(zero)(?:.+\")(.+)(?:\"\s+by\s+\")(.+?)(?:\"\s.+?)([0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])|(?:.+\")(.+)(?:\"\s+by\s+\")(.+?)(?:\"\s.*?)([0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])(?:\s+and\s+)(\d*)"
 	
-
-	headers = {'authorization': 'mfa.vr2dwU6F7ew5urnOw2jxF0aq_flA-s0wAQR19VoxvPM_sVYtXjzTnu4plQRzHn0c8ZrperrOY73km-6K4cGZ'}
+#mfa.vr2dwU6F7ew5urnOw2jxF0aq_flA-s0wAQR19VoxvPM_sVYtXjzTnu4plQRzHn0c8ZrperrOY73km-6K4cGZ
+	headers = {'authorization': 'Bot OTY0MjgyMTU2OTMzMzI0ODIw.GuHZUo.2ZVvz2hdqLXP3aBRWFBDaro0L47Zvspl_UD-oM'}
 
 	# Send first request to base rolling requests on
 	r = requests.get(f"https://discord.com/api/v9/channels/{channelId}/messages?limit=100", headers=headers )

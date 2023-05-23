@@ -1,7 +1,9 @@
+# Environment files
 .env
 .env.production
 .env.development
 
+# React Frontend
 Trials.com/react-frontend/.eslintcache
 Trials.com/.vscode/launch.json
 Trials.com/debug.log
@@ -11,7 +13,7 @@ Trials.com/react-frontend/build
 .netlify
 *.node
 
-
+# Node Server
 node_modules
 Trials.com/node-server/node_modules/.prisma/client/index-browser.js
 Trials.com/node-server/node_modules/.prisma/client/index.d.ts
@@ -19,3 +21,10 @@ Trials.com/node-server/node_modules/.prisma/client/index.js
 Trials.com/node-server/node_modules/.prisma/client/package.json
 Trials.com/node-server/node_modules/.prisma/client/schema.prisma
 Trials.com/node-server/prisma/schema.prisma
+
+
+# Python
+*.pyc
+*/*/*/__pycache__/
+*/*/__pycache__/
+*/__pycache__/

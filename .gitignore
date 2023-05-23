@@ -11,6 +11,17 @@ Trials.com/react-frontend/build
 .netlify
 *.node
 
+*.log
+
+*.pot
+
+*.pyc
+
+*/*/*/__pycache__/
+
+*/*/__pycache__/
+
+*/__pycache__/
 
 node_modules
 Trials.com/node-server/node_modules/.prisma/client/index-browser.js

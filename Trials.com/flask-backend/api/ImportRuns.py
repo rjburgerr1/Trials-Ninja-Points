@@ -23,8 +23,7 @@ def scrapeBot( self):
 	msgRegex = r'(?:[[]\d+[]]\s\")('+re.escape(user)+r')(?:\".*)' # Regex to identify newly submitted run announcements in the ninja-reporter channel
 	runRegex = r"(?:[0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])(?:.+?)([0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])(?:\s+(?:and|&)\s+)(\d*)(?:.+?\")(.+?)(?:\"\s+by\s+\")(.+?)(?:\"\s.*)|(zero)(?:.+\")(.+)(?:\"\s+by\s+\")(.+?)(?:\"\s.+?)([0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])|(?:.+\")(.+)(?:\"\s+by\s+\")(.+?)(?:\"\s.*?)([0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])(?:\s+and\s+)(\d*)"
 	
-#mfa.vr2dwU6F7ew5urnOw2jxF0aq_flA-s0wAQR19VoxvPM_sVYtXjzTnu4plQRzHn0c8ZrperrOY73km-6K4cGZ
-	headers = {'authorization': 'Bot OTY0MjgyMTU2OTMzMzI0ODIw.GuHZUo.2ZVvz2hdqLXP3aBRWFBDaro0L47Zvspl_UD-oM'}
+	headers = {'authorization': 'Bot OTY0MjgyMTU2OTMzMzI0ODIw.GWFDhe.z89JqiatR_TaQ-N3pf9rd05IXYvznwUdiNxLBA'}
 
 	# Send first request to base rolling requests on
 	r = requests.get(f"https://discord.com/api/v9/channels/{channelId}/messages?limit=100", headers=headers )
@@ -57,7 +56,7 @@ def scrapeBot( self):
 				offsetMsgId = msgObj[len(msgObj)-1]["id"] # Earliest message in returned message list to offset next request by
 			except:
 				time.sleep(msgObj["retry_after"]+0.01)
-				continue
+				break
 			else:
 				break
 		else:

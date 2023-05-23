@@ -2,6 +2,7 @@ import requests
 import json
 import re
 import numpy as np
+import os
 import pandas as pd
 import time
 from flask_restful import Api, Resource, reqparse
@@ -13,7 +14,8 @@ class ImportRuns(Resource):
 
 def scrapeBot( self):
 	channelId =500030071818551317 # Ninja Reporter channel id for scanning reporter bot msgs
-
+    
+	DISCORD_BOT_TOKEN = os.environ.get("DISCORD_BOT_TOKEN")
 
 	parser = reqparse.RequestParser()
 	parser.add_argument('user', type=str) # Add discord user to scan msgs from
@@ -23,7 +25,7 @@ def scrapeBot( self):
 	msgRegex = r'(?:[[]\d+[]]\s\")('+re.escape(user)+r')(?:\".*)' # Regex to identify newly submitted run announcements in the ninja-reporter channel
 	runRegex = r"(?:[0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])(?:.+?)([0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])(?:\s+(?:and|&)\s+)(\d*)(?:.+?\")(.+?)(?:\"\s+by\s+\")(.+?)(?:\"\s.*)|(zero)(?:.+\")(.+)(?:\"\s+by\s+\")(.+?)(?:\"\s.+?)([0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])|(?:.+\")(.+)(?:\"\s+by\s+\")(.+?)(?:\"\s.*?)([0-2][0-9][:][0-5][0-9][.][0-9][0-9][0-9])(?:\s+and\s+)(\d*)"
 	
-	headers = {'authorization': 'Bot OTY0MjgyMTU2OTMzMzI0ODIw.GWFDhe.z89JqiatR_TaQ-N3pf9rd05IXYvznwUdiNxLBA'}
+	headers = {'authorization': f'Bot {DISCORD_BOT_TOKEN}'}
 
 	# Send first request to base rolling requests on
 	r = requests.get(f"https://discord.com/api/v9/channels/{channelId}/messages?limit=100", headers=headers )
@@ -37,7 +39,6 @@ def scrapeBot( self):
 	while True:
 		r = requests.get(f"https://discord.com/api/v9/channels/{channelId}/messages?limit=100&before={offsetMsgId}", headers=headers )
 		msgObj = json.loads(r.text)
-
 		if (len(msgObj) == 0): 
 			break
 
